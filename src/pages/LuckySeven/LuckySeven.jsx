@@ -18,6 +18,8 @@ const LuckySeven = () => {
     { eventTypeId, eventId },
     { pollingInterval: 1000 }
   );
+
+  const firstEvent = data?.result?.[0];
   // console.log(data);
 
   return (
@@ -87,24 +89,20 @@ const LuckySeven = () => {
       </div> */}
       {/* Not Using */}
       <TopHeader />
-      {data?.result?.[0]?.status !== "SUSPENDED" && (
-        <Counter timer={data?.result?.[0]?.timer} />
+      {firstEvent?.status !== "SUSPENDED" && firstEvent?.timer > 0 && (
+        <Counter timer={firstEvent?.timer} />
       )}
 
       <Video />
       <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-48 lg:left-8 lg:bottom-46">
-        {data?.result?.[0]?.status === "SUSPENDED" ? <NoCard /> : <Card />}
+        {firstEvent?.status === "SUSPENDED" ? <NoCard /> : <Card />}
       </div>
-      {data?.result?.[0]?.status === "SUSPENDED" ? (
-        <SuspendedBetSlip />
-      ) : (
-        <BetSlip />
-      )}
+      {firstEvent?.status === "SUSPENDED" ? <SuspendedBetSlip /> : <BetSlip />}
 
       <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
         <AmountSection />
-        <RecentWinner recentWinner={data?.result?.[0]?.recent_winner} />
+        <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
       {/* <Setting />; */}
       {/* <div
@@ -120,6 +118,11 @@ const LuckySeven = () => {
       <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">
         PLACE YOUR BETS
       </div> */}
+      {firstEvent?.status !== "SUSPENDED" && firstEvent?.timer > 0 && (
+        <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">
+          PLACE YOUR BETS
+        </div>
+      )}
     </main>
   );
 };

@@ -9,7 +9,7 @@ const Counter = ({ timer }) => {
   const [strokeColor, setStrokeColor] = useState("#32d74b");
 
   useEffect(() => {
-    const percentage = (timer / initialValue) * 100;
+    const percentage = (timer / initialValue.current) * 100;
     const offset = circumference - (percentage / 100) * circumference;
     setStrokeDashoffset(offset);
 
@@ -29,7 +29,7 @@ const Counter = ({ timer }) => {
 
         <svg
           className="absolute top-0 left-0 w-full h-full rounded-full -rotate-90"
-          style={{ stroke: "rgb(247, 0, 0)" }}
+          style={{ stroke: strokeColor }}
         >
           <circle
             cx={30}
