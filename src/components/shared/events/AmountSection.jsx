@@ -1,4 +1,4 @@
-const AmountSection = () => {
+const AmountSection = ({ title }) => {
   return (
     <div className="flex items-end justify-between w-full">
       <div className="z-10 flex flex-col text-xs font-normal capitalize text-text-primary">
@@ -17,7 +17,7 @@ const AmountSection = () => {
           #105605133
         </span>
         <span className="whitespace-nowrap">
-          7 up &amp; Down
+          {title}
           <span className="text-yellow">
             <span>₹100.00</span> - <span>₹2,00,000.00</span>
           </span>

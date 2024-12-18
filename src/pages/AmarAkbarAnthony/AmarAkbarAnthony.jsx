@@ -1,17 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../../redux/features/events/events";
 import RecentWinner from "../../components/modules/LuckySeven/RecentWinner";
-import ActionButton from "../../components/modules/LuckySeven/ActionButton";
-import BetSlip from "../../components/modules/LuckySeven/BetSlip";
-// import Setting from "../../components/modules/LuckySeven/Setting";
-import Card from "../../components/modules/LuckySeven/Card";
-import Video from "../../components/shared/events/Video";
-import TopHeader from "../../components/shared/events/TopHeader";
-import { Status } from "../../const";
-import Counter from "../../components/shared/events/Counter";
 import AmountSection from "../../components/shared/events/AmountSection";
 
-const LuckySeven = () => {
+// import Setting from "../../components/modules/LuckySeven/Setting";
+
+import Video from "../../components/shared/events/Video";
+import Counter from "../../components/shared/events/Counter";
+import TopHeader from "../../components/shared/events/TopHeader";
+import { Status } from "../../const";
+import Card from "../../components/modules/AmarAkbarAnthony/Card";
+import BetSlip from "../../components/modules/AmarAkbarAnthony/BetSlip";
+import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
+
+const AmarAkbarAnthony = () => {
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -95,11 +97,10 @@ const LuckySeven = () => {
       <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-48 lg:left-8 lg:bottom-46">
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
       </div>
-      {/* <SuspendedBetSlip /> */}
       <BetSlip status={firstEvent?.status} />
       <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
-        <AmountSection title="7 up &amp; Down" />
+        <AmountSection title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
       {/* <Setting />; */}
@@ -123,4 +124,4 @@ const LuckySeven = () => {
   );
 };
 
-export default LuckySeven;
+export default AmarAkbarAnthony;

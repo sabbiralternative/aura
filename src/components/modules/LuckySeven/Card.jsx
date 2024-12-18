@@ -29,6 +29,8 @@ const Card = ({ data }) => {
               ? "flip-card-up"
               : cardNumber < 7
               ? "flip-card-down"
+              : cardNumber === 7
+              ? "flip-card"
               : "cardFadeInAnimation"
           }`}
           style={{ zIndex: 999 }}

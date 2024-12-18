@@ -1662,7 +1662,9 @@ const LiveCasino = () => {
                 </div>
               </div>
             </SwiperSlide>{" "}
-            <SwiperSlide>
+            <SwiperSlide
+              onClick={() => handleNavigate("/amar-akbar-anthony/1000/10004")}
+            >
               <div className="relative cursor-pointer select-none group w-fit snap-start lg:active:scale-[94%] transition-all duration-300 ease-in-out group">
                 <div className="absolute top-0 right-0 z-20 w-20 h-20 translate-x-[30%] -translate-y-[30%]">
                   <svg
