@@ -27,6 +27,10 @@ const LiveCasino = () => {
     }
   };
 
+  const handleNavigate = (link) => {
+    navigate(link);
+  };
+
   return (
     <div className="w-full px-2 overflow-hidden text-sm lg:px-12">
       <div className="swiper swiper-container swiper-initialized swiper-horizontal swiper-ios">
@@ -35,7 +39,9 @@ const LiveCasino = () => {
             className="swiper-wrapper"
             style={{ transform: "translate3d(0px, 0px, 0px)" }}
           >
-            <SwiperSlide onClick={() => navigate("/lucky-seven")}>
+            <SwiperSlide
+              onClick={() => handleNavigate("/lucky-seven/1000/10001")}
+            >
               {" "}
               <div className="relative cursor-pointer select-none group w-fit snap-start lg:active:scale-[94%] transition-all duration-300 ease-in-out group">
                 <div className="absolute top-0 right-0 z-20 w-20 h-20 translate-x-[30%] -translate-y-[30%]">
