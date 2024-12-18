@@ -77,7 +77,7 @@
   }
 
   to {
-    transform: rotateY(180deg) translateZ(0) translateX(170%);
+    transform: rotateY(180deg) translateZ(0) translateX(160%);
   }
 }
 
@@ -99,7 +99,7 @@
   }
 
   to {
-    transform: rotateY(-180deg) translateZ(0) translateX(-170%);
+    transform: rotateY(-180deg) translateZ(0) translateX(-160%);
   }
 }
 

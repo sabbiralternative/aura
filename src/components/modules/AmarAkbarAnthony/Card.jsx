@@ -27,7 +27,8 @@ const Card = ({ data }) => {
             style={{ zIndex: 1000 }}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-              <div className="absolute top-1 right-1 w-[30%]">
+              <img src={`/src/assets/images/cards/${indexCard}.jpg`} alt="" />
+              {/* <div className="absolute top-1 right-1 w-[30%]">
                 <svg
                   width={209}
                   height={235}
@@ -42,11 +43,11 @@ const Card = ({ data }) => {
                     fill="black"
                   />
                 </svg>
-              </div>
-              <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#000] font-semibold text-xl lg:text-3xl">
+              </div> */}
+              {/* <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#000] font-semibold text-xl lg:text-3xl">
                 {indexCard}
-              </span>
-              <div className="absolute bottom-1 left-1 w-[30%]">
+              </span> */}
+              {/* <div className="absolute bottom-1 left-1 w-[30%]">
                 <svg
                   width={209}
                   height={235}
@@ -61,7 +62,7 @@ const Card = ({ data }) => {
                     fill="black"
                   />
                 </svg>
-              </div>
+              </div> */}
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-back overflow-hidden">
               <CardBack />
