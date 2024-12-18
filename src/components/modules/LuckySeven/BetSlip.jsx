@@ -1,7 +1,13 @@
-const BetSlip = () => {
+import { Status } from "../../../const";
+
+const BetSlip = ({ status }) => {
   return (
     <div className="lg:absolute flex flex-col w-full gap-2 px-1 perspective transition-all duration-1000 ease-in-out lg:bottom-32">
-      <div className="grid grid-cols-6 gap-0.5 h-fit w-full mx-auto max-w-xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm">
+      <div
+        className={`grid grid-cols-6 gap-0.5 h-fit w-full mx-auto max-w-xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm ${
+          status === Status.SUSPENDED ? "applyPerspective" : ""
+        }`}
+      >
         <div
           className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer rounded-tl-md false false false col-span-2 border-white/20 bg-white/20"
           id="even"

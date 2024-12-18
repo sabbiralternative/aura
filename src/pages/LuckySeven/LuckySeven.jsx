@@ -4,13 +4,14 @@ import RecentWinner from "../../components/modules/LuckySeven/RecentWinner";
 import AmountSection from "../../components/modules/LuckySeven/AmountSection";
 import ActionButton from "../../components/modules/LuckySeven/ActionButton";
 import BetSlip from "../../components/modules/LuckySeven/BetSlip";
-import NoCard from "../../components/modules/LuckySeven/NoCard";
-import SuspendedBetSlip from "../../components/modules/LuckySeven/SuspendedBetSlip";
+// import NoCard from "../../components/modules/LuckySeven/NoCard";
+// import SuspendedBetSlip from "../../components/modules/LuckySeven/SuspendedBetSlip";
 // import Setting from "../../components/modules/LuckySeven/Setting";
 import Card from "../../components/modules/LuckySeven/Card";
 import Video from "../../components/modules/LuckySeven/Video";
 import Counter from "../../components/modules/LuckySeven/Counter";
 import TopHeader from "../../components/modules/LuckySeven/TopHeader";
+import { Status } from "../../const";
 
 const LuckySeven = () => {
   const { eventTypeId, eventId } = useParams();
@@ -20,7 +21,6 @@ const LuckySeven = () => {
   );
 
   const firstEvent = data?.result?.[0];
-  // console.log(data);
 
   return (
     <main
@@ -89,16 +89,17 @@ const LuckySeven = () => {
       </div> */}
       {/* Not Using */}
       <TopHeader />
-      {firstEvent?.status !== "SUSPENDED" && firstEvent?.timer > 0 && (
+      {firstEvent?.status === Status.OPEN && firstEvent?.timer > 0 && (
         <Counter timer={firstEvent?.timer} />
       )}
 
       <Video />
       <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-48 lg:left-8 lg:bottom-46">
-        {firstEvent?.status === "SUSPENDED" ? <NoCard /> : <Card />}
+        {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
+        {/* <NoCard/> */}
       </div>
-      {firstEvent?.status === "SUSPENDED" ? <SuspendedBetSlip /> : <BetSlip />}
-
+      {/* <SuspendedBetSlip /> */}
+      <BetSlip status={firstEvent?.status} />
       <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
         <AmountSection />
@@ -115,10 +116,8 @@ const LuckySeven = () => {
       >
         0
       </div>
-      <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">
-        PLACE YOUR BETS
-      </div> */}
-      {firstEvent?.status !== "SUSPENDED" && firstEvent?.timer > 0 && (
+      */}
+      {firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">
           PLACE YOUR BETS
         </div>
