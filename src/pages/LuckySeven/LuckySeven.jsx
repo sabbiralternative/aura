@@ -4,7 +4,7 @@ import RecentWinner from "../../components/modules/LuckySeven/RecentWinner";
 import AmountSection from "../../components/modules/LuckySeven/AmountSection";
 import ActionButton from "../../components/modules/LuckySeven/ActionButton";
 import BetSlip from "../../components/modules/LuckySeven/BetSlip";
-// import NoCard from "../../components/modules/LuckySeven/NoCard";
+import NoCard from "../../components/modules/LuckySeven/NoCard";
 // import SuspendedBetSlip from "../../components/modules/LuckySeven/SuspendedBetSlip";
 // import Setting from "../../components/modules/LuckySeven/Setting";
 import Card from "../../components/modules/LuckySeven/Card";
@@ -96,7 +96,8 @@ const LuckySeven = () => {
       <Video />
       <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-48 lg:left-8 lg:bottom-46">
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
-        {/* <NoCard/> */}
+        {/* {firstEvent?.status === Status.SUSPENDED &&
+          firstEvent?.indexCard?.length == 0 && <NoCard />} */}
       </div>
       {/* <SuspendedBetSlip /> */}
       <BetSlip status={firstEvent?.status} />
