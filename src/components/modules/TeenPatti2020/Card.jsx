@@ -7,8 +7,6 @@ const Card = ({ data }) => {
   const playerB1 = data?.runners?.[1]?.card?.[0];
   const playerB2 = data?.runners?.[1]?.card?.[1];
   const playerB3 = data?.runners?.[1]?.card?.[2];
-  console.log({ playerB2 });
-  console.log({ playerB3 });
 
   return (
     <span className="lg:absolute transition-all duration-1000 ease-in-out translate-y-[100%] lg:translate-y-0 lg:left-12">
@@ -45,7 +43,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerA2}.jpg`} alt="" />
+              <img src={`/src/assets/images/cards/${playerA3}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />
