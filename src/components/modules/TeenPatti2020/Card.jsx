@@ -4,9 +4,11 @@ const Card = ({ data }) => {
   const playerA1 = data?.runners?.[0]?.card?.[0];
   const playerA2 = data?.runners?.[0]?.card?.[1];
   const playerA3 = data?.runners?.[0]?.card?.[2];
-  const playerB1 = data?.runners?.[0]?.card?.[0];
-  const playerB2 = data?.runners?.[0]?.card?.[1];
-  const playerB3 = data?.runners?.[0]?.card?.[2];
+  const playerB1 = data?.runners?.[1]?.card?.[0];
+  const playerB2 = data?.runners?.[1]?.card?.[1];
+  const playerB3 = data?.runners?.[1]?.card?.[2];
+  console.log({ playerB2 });
+  console.log({ playerB3 });
 
   return (
     <span className="lg:absolute transition-all duration-1000 ease-in-out translate-y-[100%] lg:translate-y-0 lg:left-12">
@@ -80,8 +82,8 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`lg:h-16 h-10 aspect-[5/7]  ${
-              playerB3 ? "flip-cart" : "cardFadeInAnimation"
+            className={`lg:h-16 h-10 aspect-[5/7] ${
+              playerB3 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
@@ -91,6 +93,7 @@ const Card = ({ data }) => {
               <CardBack />
             </div>
           </div>
+
           <div className="absolute -bottom-8 z-50 text-white text-center w-full">
             Player B
           </div>
