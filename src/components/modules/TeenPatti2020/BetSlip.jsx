@@ -3,7 +3,7 @@ import { Status } from "../../../const";
 const BetSlip = ({ data, status }) => {
   return (
     <div
-      className={`py-4 perspective transition-all duration-1000 ease-in-out mt-20 `}
+      className={`py-4 perspective transition-all duration-1000 ease-in-out `}
     >
       <div
         className={`flex flex-col gap-0.5 text-white relative justify-center h-full w-full max-w-md mx-auto transition-all ease-in-out duration-1000 p-2 rounded-lg ${

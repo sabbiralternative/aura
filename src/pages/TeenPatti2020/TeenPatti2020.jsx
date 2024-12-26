@@ -20,12 +20,12 @@ const TeenPatti2020 = () => {
   );
 
   const firstEvent = data?.result?.[0];
-
+  console.log(firstEvent);
   return (
     <main
       className="max-w-md relative flex gap-2 lg:aspect-video mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
       id="7updownParent"
-      style={{ height: "929px", width: "1023px" }}
+      style={{ height: "932px", width: "430px" }}
     >
       {/* Not Using */}
       {/* <div
