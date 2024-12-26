@@ -44,6 +44,26 @@
   animation: flipCard 1s forwards;
   -webkit-animation: flipCard 1s forwards;
 }
+.flip-card-dragon {
+  transform-style: preserve-3d;
+  transition: ease-in-out;
+  animation: flipCardDragon 1s forwards;
+  -webkit-animation: flipCardDragon 1s forwards;
+}
+
+@keyframes flipCardDragon {
+  0% {
+    transform: rotateY(0deg) translateZ(0);
+  }
+
+  50% {
+    transform: translateZ(50px);
+  }
+
+  to {
+    transform: rotateY(-360deg) translateZ(0);
+  }
+}
 
 @keyframes flipCard {
   0% {

@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import LuckySeven from "../pages/LuckySeven/LuckySeven";
 import AmarAkbarAnthony from "../pages/AmarAkbarAnthony/AmarAkbarAnthony";
 import DragonTiger from "../pages/DragonTiger/DragonTiger";
+import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
 
 export const router = createBrowserRouter(
   [
@@ -26,6 +27,10 @@ export const router = createBrowserRouter(
         {
           path: "/dragon-tiger/:eventTypeId/:eventId",
           element: <DragonTiger />,
+        },
+        {
+          path: "/teen-patti-2020/:eventTypeId/:eventId",
+          element: <TeenPatti2020 />,
         },
       ],
     },

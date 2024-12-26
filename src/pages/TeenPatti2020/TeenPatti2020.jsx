@@ -7,10 +7,12 @@ import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
 import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
-import BetSlip from "../../components/modules/DragonTiger/BetSlip";
-import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
 
-const DragonTiger = () => {
+import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
+import Card from "../../components/modules/TeenPatti2020/Card";
+import BetSlip from "../../components/modules/TeenPatti2020/BetSlip";
+
+const TeenPatti2020 = () => {
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -91,7 +93,7 @@ const DragonTiger = () => {
       )}
 
       <Video />
-
+      {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
       <BetSlip data={data?.result} status={firstEvent?.status} />
       <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
@@ -119,4 +121,4 @@ const DragonTiger = () => {
   );
 };
 
-export default DragonTiger;
+export default TeenPatti2020;
