@@ -691,7 +691,10 @@ const LiveCasino = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div className="relative cursor-pointer select-none group w-fit snap-start lg:active:scale-[94%] transition-all duration-300 ease-in-out group">
+              <div
+                onClick={() => handleNavigate("/dragon-tiger/1000/10007")}
+                className="relative cursor-pointer select-none group w-fit snap-start lg:active:scale-[94%] transition-all duration-300 ease-in-out group"
+              >
                 <div className="absolute top-0 right-0 z-20 w-20 h-20 translate-x-[30%] -translate-y-[30%]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

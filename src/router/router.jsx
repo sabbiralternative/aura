@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../pages/Home/Home";
 import LuckySeven from "../pages/LuckySeven/LuckySeven";
 import AmarAkbarAnthony from "../pages/AmarAkbarAnthony/AmarAkbarAnthony";
+import DragonTiger from "../pages/DragonTiger/DragonTiger";
 
 export const router = createBrowserRouter(
   [
@@ -21,6 +22,10 @@ export const router = createBrowserRouter(
         {
           path: "/amar-akbar-anthony/:eventTypeId/:eventId",
           element: <AmarAkbarAnthony />,
+        },
+        {
+          path: "/dragon-tiger/:eventTypeId/:eventId",
+          element: <DragonTiger />,
         },
       ],
     },
