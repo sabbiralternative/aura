@@ -9,6 +9,7 @@ const Card = ({ data }) => {
   const playerB3 = data?.runners?.[1]?.card?.[2];
 
   return (
+  
     <span className="lg:absolute transition-all duration-1000 ease-in-out translate-y-[100%] lg:translate-y-0 lg:left-12">
       <div className="perspective flex lg:flex-col lg:gap-8 mx-auto items-center w-fit gap-4 justify-center transform transition-all linear duration-1000 perspective">
         <div className="applyPerspective flex items-center justify-start gap-2 pt-6 p-1 rounded-lg border-[2px] border-white/20">
@@ -98,6 +99,7 @@ const Card = ({ data }) => {
         </div>
       </div>
     </span>
+  
   );
 };
 
