@@ -11,11 +11,11 @@ const Card = ({ data }) => {
   const isAnthonyCard = anthony.includes(cardNumber);
 
   return (
-    <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-[380px] translate-y-12 lg:translate-y-0 lg:left-2 lg:bottom-40">
+    <div className=" transition-all duration-1000 ease-in-out bottom-[380px] translate-y-12">
       <div className="perspective flex flex-col mx-auto items-center w-fit justify-center">
         <div className="absolute bottom-1.5 applyPerspective">
           <div
-            className={`lg:h-16 h-12 aspect-[5/7] flip-card ${
+            className={` h-12 aspect-[5/7] flip-card ${
               isAmarCard
                 ? "flip-card-up"
                 : isAnthonyCard
@@ -71,11 +71,11 @@ const Card = ({ data }) => {
         </div>
 
         <div
-          className="flex applyPerspective lg:gap-2 gap-1.5 items-center"
+          className="flex applyPerspective  gap-1.5 items-center"
           style={{ zIndex: -1000 }}
         >
           <div
-            className={`flex items-center justify-center gap-2 lg:h-20 lg:w-16 h-16 w-12 rounded-lg border-[1px] lg:border-[2px]  ${
+            className={`flex items-center justify-center gap-2   h-16 w-12 rounded-lg border-[1px]   ${
               isAmarCard ? "border-gold" : "border-white/20"
             }`}
           >
@@ -85,7 +85,7 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`flex items-center justify-center gap-2 lg:h-20 lg:w-16 h-16 w-12 rounded-lg border-[1px] lg:border-[2px] ${
+            className={`flex items-center justify-center gap-2  h-16 w-12 rounded-lg border-[1px]  ${
               isAkbarCard ? "border-gold" : "border-white/20"
             }`}
           >
@@ -95,7 +95,7 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`flex items-center justify-center gap-2 lg:h-20 lg:w-16 h-16 w-12 rounded-lg border-[1px] lg:border-[2px]  ${
+            className={`flex items-center justify-center gap-2  h-16 w-12 rounded-lg border-[1px]   ${
               isAnthonyCard ? "border-gold" : "border-white/20"
             }`}
           >

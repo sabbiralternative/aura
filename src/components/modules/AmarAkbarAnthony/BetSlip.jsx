@@ -2,7 +2,7 @@ import { Status } from "../../../const";
 
 const BetSlip = ({ status }) => {
   return (
-    <div className="lg:absolute w-full max-w-xl translate-y-2 flex flex-col perspective transition-all ease-in-out duration-1000 items-center justify-center lg:bottom-20">
+    <div className=" w-full max-w-xl translate-y-2 flex flex-col perspective transition-all ease-in-out duration-1000 items-center justify-center ">
       <div
         className={`grid grid-cols-12 gap-0.5 h-fit w-full mx-auto max-w-3xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm ${
           status === Status.SUSPENDED ? "applyPerspective" : ""
@@ -15,7 +15,7 @@ const BetSlip = ({ status }) => {
           <span className="absolute flex items-center h-4 gap-1 px-1 w-full text-xs font-normal tracking-wider rounded-t bg-black/40 text-white/90 top-0">
             Amar{" "}
           </span>
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Back
           </span>
           <div className="z-50">
@@ -33,7 +33,7 @@ const BetSlip = ({ status }) => {
           <span className="absolute flex items-center h-4 gap-1 px-1 w-full text-xs font-normal tracking-wider rounded-t bg-black/40 text-white/90 top-0">
             Akbar
           </span>
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Back
           </span>
           <div className="z-50">
@@ -51,7 +51,7 @@ const BetSlip = ({ status }) => {
           <span className="absolute flex items-center h-4 gap-1 px-1 w-full text-xs font-normal tracking-wider rounded-t bg-black/40 text-white/90 top-0">
             Anthony
           </span>
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Back
           </span>
           <div className="z-50">
@@ -66,7 +66,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-red to-red/60 rounded-t-none h-12"
           id="amar-lay"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Lay
           </span>
           <div className="z-50">
@@ -81,7 +81,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-red to-red/60 rounded-t-none h-12"
           id="akbar-lay"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Lay
           </span>
           <div className="z-50">
@@ -96,7 +96,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-red to-red/60 rounded-t-none h-12"
           id="anthony-lay"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Lay
           </span>
           <div className="z-50">
@@ -111,7 +111,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12"
           id="odd"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Odd
           </span>
           <div className="z-50">
@@ -126,7 +126,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12"
           id="even"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Even
           </span>
           <div className="z-50">
@@ -141,7 +141,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12"
           id="black"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Black
           </span>
           <div className="z-50">
@@ -185,7 +185,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12"
           id="red"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Red
           </span>
           <div className="z-50">
@@ -228,7 +228,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-6 h-12 bg-gradient-to-t from-gray/20 to-gray/50 h-12"
           id="under7"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Under7
           </span>
           <div className="z-50">
@@ -243,7 +243,7 @@ const BetSlip = ({ status }) => {
           className="relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-6 h-12 bg-gradient-to-t from-gray/20 to-gray/50 h-12"
           id="over7"
         >
-          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl lg:text-2xl text-white/60 top-1/2 left-1/2">
+          <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Over7
           </span>
           <div className="z-50">

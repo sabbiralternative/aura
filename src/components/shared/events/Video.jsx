@@ -1,7 +1,7 @@
 const Video = () => {
   return (
     <div className="flex flex-col w-full relative min-h-[40%]">
-      <div className="w-full aspect-video w-[100%] lg:scale-[86%] origin-top transition-all duration-1000 ease-in-out scale-[160%]">
+      <div className="w-full aspect-video w-[100%]  origin-top transition-all duration-1000 ease-in-out scale-[160%]">
         <iframe
           className="w-full h-full"
           src="https://player.fawk.app/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVyYXRvcklkIjoiOTQxNCIsInVzZXJJZCI6IjY5MTA1NTdfOTQxNCIsInVzZXJuYW1lIjoiYjAyLjkxXzgyOTEwMjMyOTciLCJwbGF5ZXJUb2tlbkF0TGF1bmNoIjoiV3lJeU1ESTBMVEV5TFRFMlZERXpPakF4T2pVNUxqRTJOelExTkNJc05qa3hNRFUxTnl3aVFqY3pOalUzTURoR09FRXpORFpETWpjMlJEbEdRamhCT0RFek5UWTJRMEV4T0VaQlF6aEZNek5DTjBKQ1JUUXlNemMxTmpkRVFrWkZRMFZCTkRORE5pSmQiLCJ0b2tlbiI6ImFhYmJjY2RkIiwiYmFsYW5jZSI6NCwiZXhwb3N1cmUiOjAsImN1cnJlbmN5IjoiSU5SIiwibGFuZ3VhZ2UiOiJlbiIsInRpbWVzdGFtcCI6MTczNDMzNTIzNjAwMCwiY2xpZW50SVAiOlsiMSJdLCJWSVAiOiIzIiwiZXJyb3JDb2RlIjowLCJlcnJvckRlc2NyaXB0aW9uIjoib2siLCJpcCI6IjQ5LjM2LjExMS4yNTAsIDEwLjI1LjEuMTAiLCJzeXN0ZW1Vc2VySWQiOiI2NjY3MDU5MDE3YjliNzc0OThhMjExZjIiLCJpYXQiOjE3MzQzMzUyMzYsImV4cCI6MTczNDM0NjAzNn0.slib_xcPTsfsjjO6OfnqBER_ZtfpFvsQscItGas5wvM/98789"

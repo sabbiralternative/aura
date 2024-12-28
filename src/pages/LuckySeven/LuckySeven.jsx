@@ -92,12 +92,12 @@ const LuckySeven = () => {
       )}
 
       <Video />
-      <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-48 lg:left-8 lg:bottom-46">
+      <div className=" transition-all duration-1000 ease-in-out bottom-48">
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
       </div>
       {/* <SuspendedBetSlip /> */}
       <BetSlip status={firstEvent?.status} />
-      <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
+      <div className="bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
         <AmountSection title="7 up &amp; Down" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />

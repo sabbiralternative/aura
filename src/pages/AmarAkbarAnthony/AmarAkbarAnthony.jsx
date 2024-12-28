@@ -24,7 +24,7 @@ const AmarAkbarAnthony = () => {
 
   return (
     <main
-      className="max-w-md relative flex gap-2 lg:aspect-video mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
+      className="max-w-md relative flex gap-2  mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
       id="7updownParent"
       style={{ height: "929px", width: "1023px" }}
     >
@@ -94,11 +94,11 @@ const AmarAkbarAnthony = () => {
       )}
 
       <Video />
-      <div className="lg:absolute transition-all duration-1000 ease-in-out bottom-48 lg:left-8 lg:bottom-46">
+      <div className=" transition-all duration-1000 ease-in-out bottom-48  ">
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
       </div>
       <BetSlip status={firstEvent?.status} />
-      <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
+      <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
         <AmountSection title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />

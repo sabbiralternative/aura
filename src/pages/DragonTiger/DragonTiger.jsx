@@ -93,7 +93,7 @@ const DragonTiger = () => {
       <Video />
 
       <BetSlip data={data?.result} status={firstEvent?.status} />
-      <div className="lg:absolute bottom-0 flex flex-col w-full gap-2 px-1">
+      <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton />
         <AmountSection title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />

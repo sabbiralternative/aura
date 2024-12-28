@@ -23,7 +23,7 @@ const Counter = ({ timer }) => {
   }, [timer, circumference, initialValue]);
 
   return (
-    <div className="absolute z-50 top-[30%] lg:top-10 lg:left-20 left-1/2 -translate-x-1/2">
+    <div className="absolute z-50 top-[30%] left-1/2 -translate-x-1/2">
       <div className="w-[60px] lg:scale-150 origin-center aspect-square rounded-full flex justify-center items-center relative">
         <div className="border-[6px] h-[83%] w-[83%] rounded-full aspect-square absolute border-white/10 bg-black/10" />
 

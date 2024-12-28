@@ -9,13 +9,12 @@ const Card = ({ data }) => {
   const playerB3 = data?.runners?.[1]?.card?.[2];
 
   return (
-  
-    <span className="lg:absolute transition-all duration-1000 ease-in-out translate-y-[100%] lg:translate-y-0 lg:left-12">
-      <div className="perspective flex lg:flex-col lg:gap-8 mx-auto items-center w-fit gap-4 justify-center transform transition-all linear duration-1000 perspective">
+    <span className="transition-all duration-1000 ease-in-out translate-y-[100%]">
+      <div className="perspective flex  mx-auto items-center w-fit gap-4 justify-center transform transition-all linear duration-1000 perspective">
         <div className="applyPerspective flex items-center justify-start gap-2 pt-6 p-1 rounded-lg border-[2px] border-white/20">
           <span className="text-white/80 absolute -top-[2px] -translate-y-full right-0 z-50 text-xs uppercase" />
           <div
-            className={`lg:h-16 h-10 aspect-[5/7]  ${
+            className={` h-10 aspect-[5/7]  ${
               playerA1 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
@@ -27,7 +26,7 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`lg:h-16 h-10 aspect-[5/7]  ${
+            className={`h-10 aspect-[5/7]  ${
               playerA2 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
@@ -39,7 +38,7 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`lg:h-16 h-10 aspect-[5/7]  ${
+            className={` h-10 aspect-[5/7]  ${
               playerA3 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
@@ -57,7 +56,7 @@ const Card = ({ data }) => {
         <div className="flex applyPerspective items-center justify-end gap-2 pt-6 p-1 rounded-lg border-[2px] border-white/20">
           <span className="text-white/80 absolute -top-[2px] -translate-y-full left-0 z-50 text-xs uppercase" />
           <div
-            className={`lg:h-16 h-10 aspect-[5/7]  ${
+            className={` h-10 aspect-[5/7]  ${
               playerB1 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
@@ -69,7 +68,7 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`lg:h-16 h-10 aspect-[5/7] ${
+            className={` h-10 aspect-[5/7] ${
               playerB2 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
@@ -81,7 +80,7 @@ const Card = ({ data }) => {
             </div>
           </div>
           <div
-            className={`lg:h-16 h-10 aspect-[5/7] ${
+            className={` h-10 aspect-[5/7] ${
               playerB3 ? "flip-card" : "cardFadeInAnimation"
             }`}
           >
@@ -99,7 +98,6 @@ const Card = ({ data }) => {
         </div>
       </div>
     </span>
-  
   );
 };
 

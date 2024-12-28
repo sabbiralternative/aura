@@ -8,15 +8,15 @@ const BetSlip = ({ status, data }) => {
 
   return (
     <div
-      className={`lg:absolute flex flex-col gap-1 perspective w-full transition-all ease-in-out duration-1000 items-center justify-center lg:bottom-36 `}
+      className={` flex flex-col gap-1 perspective w-full transition-all ease-in-out duration-1000 items-center justify-center  `}
     >
       <div
-        className={`grid grid-cols-8 lg:grid-cols-16 gap-0.5 h-fit w-full mx-auto max-w-3xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm ${
+        className={`grid grid-cols-8  gap-0.5 h-fit w-full mx-auto max-w-3xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm ${
           status === Status.SUSPENDED ? "applyPerspective" : ""
         }`}
       >
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2 lg:col-span-3 false false rounded-tl-md false false false bg-gradient-to-l from-red to-red/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false rounded-tl-md false false false bg-gradient-to-l from-red to-red/70"
           id="dragonEven"
         >
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
@@ -32,7 +32,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2 lg:col-span-3 false false false false false false bg-gradient-to-l from-red to-red/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false false false false false bg-gradient-to-l from-red to-red/70"
           id="dragonOdd"
         >
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
@@ -48,7 +48,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2 lg:col-span-3 false false false false false false bg-gradient-to-l from-orange to-orange/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false false false false false bg-gradient-to-l from-orange to-orange/70"
           id="tigerEven"
         >
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
@@ -64,7 +64,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2 lg:col-span-3 false false false rounded-tr-md false false bg-gradient-to-l from-orange to-orange/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false false rounded-tr-md false false bg-gradient-to-l from-orange to-orange/70"
           id="tigerOdd"
         >
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
@@ -82,7 +82,7 @@ const BetSlip = ({ status, data }) => {
 
         {/* Dragon */}
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-r from-red to-red/80 col-span-3 lg:col-span-4 row-span-2 h-[130px] perspective"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-r from-red to-red/80 col-span-3  row-span-2 h-[130px] perspective"
           id="dragon"
         >
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
@@ -105,14 +105,13 @@ const BetSlip = ({ status, data }) => {
               style={{ zIndex: 999 }}
             >
               <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-              <img src={`/src/assets/images/cards/${card1}.jpg`} alt="" />
+                <img src={`/src/assets/images/cards/${card1}.jpg`} alt="" />
               </div>
 
               <div
                 className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden  flip-card-back`}
               >
-                 <CardBack />
-                
+                <CardBack />
               </div>
             </div>
           </div>
@@ -285,7 +284,7 @@ const BetSlip = ({ status, data }) => {
 
         {/* Tiger */}
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-l from-orange to-orange/80 col-span-3 lg:col-span-4 row-span-2 h-[130px]"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-l from-orange to-orange/80 col-span-3 row-span-2 h-[130px]"
           id="tiger"
         >
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
@@ -307,12 +306,12 @@ const BetSlip = ({ status, data }) => {
               style={{ zIndex: 999 }}
             >
               <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-              <img src={`/src/assets/images/cards/${card2}.jpg`} alt="" />
+                <img src={`/src/assets/images/cards/${card2}.jpg`} alt="" />
               </div>
               <div
                 className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden flip-card-back`}
               >
-             <CardBack />
+                <CardBack />
               </div>
             </div>
           </div>
@@ -392,7 +391,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2 lg:col-span-4 false false false false false bg-gradient-to-l from-red to-red/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-red to-red/70"
           id="dragonRed"
         >
           <span className="absolute flex w-8 h-5 p-1 text-xs rounded top-1 bg-black/20 left-1">
@@ -434,7 +433,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2 lg:col-span-4 false false false false false bg-gradient-to-l from-red to-red/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-red to-red/70"
           id="dragonBlack"
         >
           <span className="absolute flex w-8 h-5 p-1 text-xs rounded top-1 bg-black/20 left-1">
@@ -477,7 +476,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2 lg:col-span-4 false false false false false bg-gradient-to-l from-orange to-orange/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-orange to-orange/70"
           id="tigerRed"
         >
           <span className="absolute flex w-8 h-5 p-1 text-xs rounded top-1 bg-black/20 left-1">
@@ -519,7 +518,7 @@ const BetSlip = ({ status, data }) => {
           )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2 lg:col-span-4 false false false false false bg-gradient-to-l from-orange to-orange/70"
+          className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-orange to-orange/70"
           id="tigerBlack"
         >
           <span className="absolute flex w-8 h-5 p-1 text-xs rounded top-1 bg-black/20 left-1">
@@ -565,7 +564,7 @@ const BetSlip = ({ status, data }) => {
           return (
             <div
               key={runner?.id}
-              className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false col-span-1 h-10 lg:h-16 lg:col-span-2 false false rounded-bl-md false bg-gradient-to-l from-red to-red/70"
+              className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false col-span-1 h-10   false false rounded-bl-md false bg-gradient-to-l from-red to-red/70"
               id="dragonDiamond"
             >
               <span className="absolute w-4 h-5 p-1 rounded top-1 bg-black/20 left-1">
@@ -597,7 +596,7 @@ const BetSlip = ({ status, data }) => {
           return (
             <div
               key={runner?.id}
-              className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false col-span-1 h-10 lg:h-16 lg:col-span-2 false false false false bg-gradient-to-l from-orange to-orange/70"
+              className="relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false col-span-1 h-10   false false false false bg-gradient-to-l from-orange to-orange/70"
               id="tigerDiamond"
             >
               <span className="absolute w-4 h-5 p-1 rounded top-1 bg-black/20 left-1">
