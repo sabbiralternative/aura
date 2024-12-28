@@ -26,7 +26,7 @@ const TeenPatti2020 = () => {
       <main
         className="max-w-md relative flex lg:aspect-video mx-auto flex-col overflow-x-hidden items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
         id="7updownParent"
-        style={{ height: "932px", width: "430px" }}
+        style={{ minHeight: "100vw", width: "430px" }}
       >
         {/* Not Using */}
         {/* <div

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
-    <div className="flex items-center justify-center lg:h-screen">
+    <div className="flex items-center justify-center min-h-screen max-w-[430px] mx-auto">
       <Outlet />
     </div>
   );

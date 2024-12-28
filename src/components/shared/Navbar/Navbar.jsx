@@ -1,11 +1,11 @@
 const Navbar = () => {
   return (
     <div
-      style={{ zIndex: 999 }}
-      className="fixed top-0 flex flex-col w-full autoAnimate translate-y-0"
+      style={{ zIndex: 999, maxWidth: "430px" }}
+      className="fixed top-0 flex flex-col w-full autoAnimate translate-y-0 "
     >
       <div className="left-0 flex flex-col h-fit text-white bg-black/20 backdrop-blur-lg">
-        <div className="flex items-center justify-between w-full gap-2 p-4">
+        <div className="flex items-center justify-between w-full gap-2 py-4">
           <svg
             width={364}
             height={127}
@@ -191,7 +191,7 @@ const Navbar = () => {
             </svg>
             <span className>6607</span>
           </div>
-          <div className="items-center justify-start flex-grow hidden gap-8 mx-8 lg:flex">
+          <div className="items-center justify-start flex-grow hidden gap-8 mx-8 ">
             <span className="autoAnimate cursor-pointer flex text-white items-center gap-1 scale-110">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

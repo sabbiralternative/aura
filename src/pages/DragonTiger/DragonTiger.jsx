@@ -23,7 +23,7 @@ const DragonTiger = () => {
     <main
       className="max-w-md relative flex gap-2 lg:aspect-video mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
       id="7updownParent"
-      style={{ height: "929px", width: "1023px" }}
+      style={{ minHeight: "100vw", width: "1023px" }}
     >
       {/* Not Using */}
       {/* <div

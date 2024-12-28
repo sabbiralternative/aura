@@ -9,13 +9,13 @@ import Navbar from "../../components/shared/Navbar/Navbar";
 const Home = () => {
   return (
     <>
-      <div className="relative w-full autoAnimate min-h-full pt-24 text-white lg:pt-14">
+      <div className="relative w-full autoAnimate min-h-full pt-24 text-white">
         <div
-          style={{ height: "100vh", width: "100vw" }}
+          style={{ height: "100vh" }}
           className="relative mx-auto bg-black select-none"
         >
           <Navbar />
-          <Banner />
+          {/* <Banner /> */}
           <div className="z-20 flex flex-col w-full gap-3">
             <RecentBigWin />
             <CrashGames />

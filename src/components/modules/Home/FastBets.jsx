@@ -1,6 +1,6 @@
 const FastBets = () => {
   return (
-    <div className="w-full px-2 overflow-hidden text-sm lg:px-12">
+    <div className="w-full px-2 overflow-hidden text-sm ">
       <div className="swiper swiper-container swiper-initialized swiper-horizontal swiper-ios swiper-backface-hidden">
         <div
           className="swiper-wrapper"
