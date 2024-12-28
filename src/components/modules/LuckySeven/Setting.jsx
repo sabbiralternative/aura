@@ -1,14 +1,21 @@
-const Setting = () => {
+import { useNavigate } from "react-router-dom";
+
+const Setting = ({ setShowSetting }) => {
+  const navigate = useNavigate();
+
   return (
     <div
-      className="scale-y-100 h-[70%] fixed origin-bottom flex   flex-col items-center   bottom-0   w-full  max-w-xl  transition-all ease-in-out "
+      className="scale-y-100 h-[70%] fixed origin-bottom flex   flex-col items-center   bottom-0   w-full  max-w-md  transition-all ease-in-out "
       style={{ zIndex: "1000" }}
     >
       <div className="flex flex-col flex-grow w-full bg-black/60 backdrop-blur-md rounded-t-xl ">
         <div className="flex flex-col h-full overflow-y-scroll ">
           <div className="flex items-center justify-between px-4 pt-4">
             <span className="text-base font-bold text-white"></span>
-            <button className="font-semibold ">
+            <button
+              onClick={() => setShowSetting(false)}
+              className="font-semibold "
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -49,7 +56,13 @@ const Setting = () => {
               </div>
             </div>
             <div className=" animate__animated animate__faster overflow-y-auto p-4  h-full  grid content-start grid-cols-3 gap-1 w-full transition-transform delay-100 ease-in-out animate__bounceInLeft">
-              <div className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit ">
+              <div
+                onClick={() => {
+                  navigate("/");
+                  setShowSetting(false);
+                }}
+                className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

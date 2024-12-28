@@ -11,8 +11,11 @@ import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton
 import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
 import Card from "../../components/modules/TeenPatti2020/Card";
 import BetSlip from "../../components/modules/TeenPatti2020/BetSlip";
+import { useState } from "react";
+import Setting from "../../components/modules/LuckySeven/Setting";
 
 const TeenPatti2020 = () => {
+  const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -192,7 +195,10 @@ const TeenPatti2020 = () => {
             </div>{" "}
           </span>
           <span className="z-50 flex flex-col items-end gap-0.5">
-            <button className="text-text-primary glass p-2 text-sm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
+            <button
+              onClick={() => setShowSetting(true)}
+              className="text-text-primary glass p-2 text-sm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -589,7 +595,8 @@ const TeenPatti2020 = () => {
           </div>
         </div>
       </div>
-      {/* <Setting />; */}
+      {showSetting && <Setting setShowSetting={setShowSetting} />}
+
       {/* <div
         className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"
         style={{ zIndex: 1000 }}

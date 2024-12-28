@@ -9,8 +9,11 @@ import { Status } from "../../const";
 import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
 import BetSlip from "../../components/modules/DragonTiger/BetSlip";
 import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
+import { useState } from "react";
+import Setting from "../../components/modules/LuckySeven/Setting";
 
 const DragonTiger = () => {
+  const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -94,10 +97,11 @@ const DragonTiger = () => {
 
       <BetSlip data={data?.result} status={firstEvent?.status} />
       <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
-        <ActionButton />
+        <ActionButton setShowSetting={setShowSetting} />
         <AmountSection title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
+      {showSetting && <Setting setShowSetting={setShowSetting} />}
       {/* <Setting />; */}
       {/* <div
         className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"

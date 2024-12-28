@@ -3,15 +3,17 @@ import { useGetEventDetailsQuery } from "../../redux/features/events/events";
 import RecentWinner from "../../components/modules/LuckySeven/RecentWinner";
 import ActionButton from "../../components/modules/LuckySeven/ActionButton";
 import BetSlip from "../../components/modules/LuckySeven/BetSlip";
-// import Setting from "../../components/modules/LuckySeven/Setting";
+import Setting from "../../components/modules/LuckySeven/Setting";
 import Card from "../../components/modules/LuckySeven/Card";
 import Video from "../../components/shared/events/Video";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
 import Counter from "../../components/shared/events/Counter";
 import AmountSection from "../../components/shared/events/AmountSection";
+import { useState } from "react";
 
 const LuckySeven = () => {
+  const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -90,7 +92,6 @@ const LuckySeven = () => {
       {firstEvent?.status === Status.OPEN && firstEvent?.timer > 0 && (
         <Counter timer={firstEvent?.timer} />
       )}
-
       <Video />
       <div className=" transition-all duration-1000 ease-in-out bottom-48">
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
@@ -98,11 +99,11 @@ const LuckySeven = () => {
       {/* <SuspendedBetSlip /> */}
       <BetSlip status={firstEvent?.status} />
       <div className="bottom-0 flex flex-col w-full gap-2 px-1">
-        <ActionButton />
+        <ActionButton setShowSetting={setShowSetting} />
         <AmountSection title="7 up &amp; Down" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
-      {/* <Setting />; */}
+      {showSetting && <Setting setShowSetting={setShowSetting} />}
       {/* <div
         className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"
         style={{ zIndex: 1000 }}

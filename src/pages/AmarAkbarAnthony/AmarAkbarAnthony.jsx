@@ -12,8 +12,11 @@ import { Status } from "../../const";
 import Card from "../../components/modules/AmarAkbarAnthony/Card";
 import BetSlip from "../../components/modules/AmarAkbarAnthony/BetSlip";
 import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
+import { useState } from "react";
+import Setting from "../../components/modules/LuckySeven/Setting";
 
 const AmarAkbarAnthony = () => {
+  const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -99,11 +102,12 @@ const AmarAkbarAnthony = () => {
       </div>
       <BetSlip status={firstEvent?.status} />
       <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
-        <ActionButton />
+        <ActionButton setShowSetting={setShowSetting} />
         <AmountSection title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
-      {/* <Setting />; */}
+      {showSetting && <Setting setShowSetting={setShowSetting} />}
+
       {/* <div
         className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"
         style={{ zIndex: 1000 }}

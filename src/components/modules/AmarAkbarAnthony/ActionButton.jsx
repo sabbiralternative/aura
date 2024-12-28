@@ -1,4 +1,4 @@
-const ActionButton = () => {
+const ActionButton = ({ setShowSetting }) => {
   return (
     <div className="relative flex items-center justify-between w-full">
       <div className="flex items-center justify-center gap-2 text-white">
@@ -2039,7 +2039,10 @@ const ActionButton = () => {
           </svg>
         </div>
         <span className="z-50 flex flex-col items-end gap-0.5">
-          <button className="text-text-primary glass p-2 text-sm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
+          <button
+            onClick={() => setShowSetting(true)}
+            className="text-text-primary glass p-2 text-sm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
