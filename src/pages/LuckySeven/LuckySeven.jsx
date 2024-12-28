@@ -22,7 +22,7 @@ const LuckySeven = () => {
 
   return (
     <main
-      className="max-w-md relative flex gap-2 lg:aspect-video mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
+      className="max-w-md relative flex gap-2  mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
       id="7updownParent"
       style={{ minHeight: "100vw", width: "1023px" }}
     >

@@ -22,9 +22,9 @@ const TeenPatti2020 = () => {
   const firstEvent = data?.result?.[0];
   console.log(firstEvent);
   return (
-    <div className="flex items-center justify-center lg:h-screen">
+    <div className="flex items-center justify-center ">
       <main
-        className="max-w-md relative flex lg:aspect-video mx-auto flex-col overflow-x-hidden items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
+        className="max-w-md relative flex  mx-auto flex-col overflow-x-hidden items-center bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
         id="7updownParent"
         style={{ minHeight: "100vw", width: "430px" }}
       >
@@ -93,7 +93,7 @@ const TeenPatti2020 = () => {
           <Counter timer={firstEvent?.timer} />
         )}
 
-        <div className="relative w-full lg:h-full h-[20%]">
+        <div className="relative w-full  h-[20%]">
           <div className="w-full aspect-video w-[100%]  origin-top  transition-all duration-1000 ease-in-out scale-[140%]">
             <iframe
               className="w-full h-full"
@@ -107,7 +107,7 @@ const TeenPatti2020 = () => {
             />
           </div>
           <div
-            className="h-full absolute pointer-events-none top-0 lg:left-auto lg:right-0 text-xs overflow-y-auto w-fit lg:px-2 transition-all duration-500 ease-in-out opacity-0 left-0"
+            className="h-full absolute pointer-events-none top-0  text-xs overflow-y-auto w-fit  transition-all duration-500 ease-in-out opacity-0 left-0"
             style={{
               maskImage:
                 "linear-gradient(transparent,black,black, black,black,transparent)",

@@ -44,7 +44,7 @@ const Card = ({ data }) => {
                   />
                 </svg>
               </div> */}
-              {/* <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#000] font-semibold text-xl lg:text-3xl">
+              {/* <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#000] font-semibold text-xl ">
                 {indexCard}
               </span> */}
               {/* <div className="absolute bottom-1 left-1 w-[30%]">
