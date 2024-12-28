@@ -24,9 +24,10 @@ const TeenPatti2020 = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <main
-        className="max-w-md relative flex  lg:aspect-video    mx-auto   flex-col overflow-x-hidden  items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
+        className="main max-w-md relative flex  lg:aspect-video    mx-auto   flex-col overflow-x-hidden  items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
         id="7updownParent"
-        style={{ minHeight: "100vh", width: "430px" }}
+        // style={{ minHeight: "100vh", width: "430px" }}
+        style={{ margin: 0 }}
       >
         {/* Not Using */}
         {/* <div
