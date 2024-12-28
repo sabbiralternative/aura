@@ -22,11 +22,11 @@ const TeenPatti2020 = () => {
   const firstEvent = data?.result?.[0];
   console.log(firstEvent);
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center min-h-screen">
       <main
-        className="max-w-md relative flex  mx-auto flex-col overflow-x-hidden items-center bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
+        className="max-w-md relative flex  lg:aspect-video    mx-auto   flex-col overflow-x-hidden  items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
         id="7updownParent"
-        style={{ minHeight: "100vw", width: "430px" }}
+        style={{ minHeight: "100vh", width: "430px" }}
       >
         {/* Not Using */}
         {/* <div
