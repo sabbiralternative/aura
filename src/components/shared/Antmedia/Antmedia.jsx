@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 const AntMedia = () => {
   const bigVideo = useRef(null);
   const embeddedPlayerRef = useRef(null);
-  const playOrderLocal = ["webrtc", "hls", "dash"];
 
   useEffect(() => {
+    const playOrderLocal = ["webrtc", "hls", "dash"];
     embeddedPlayerRef.current = new WebPlayer(
       {
         streamId: "football2",
@@ -26,9 +26,21 @@ const AntMedia = () => {
       .catch((error) => {
         console.error("Error while initializing embedded player: " + error);
       });
-  }, [playOrderLocal]);
+  }, []);
+
+  useEffect(() => {
+    if (bigVideo.current) {
+      const videoElement = document.getElementById("videoPlayer");
+
+      if (videoElement.style.display === "none") {
+        videoElement.style.display = "block";
+      }
+    }
+  }, [bigVideo]);
+
   return (
     <div
+      id="videoPlayer"
       style={{
         width: "100%",
         height: "200px",
@@ -36,6 +48,7 @@ const AntMedia = () => {
         top: 0,
         right: 0,
         left: 0,
+        display: "none",
       }}
       ref={bigVideo}
     ></div>
