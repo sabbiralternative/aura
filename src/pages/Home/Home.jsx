@@ -1,9 +1,9 @@
-import Banner from "../../components/modules/Home/Banner";
-import CrashGames from "../../components/modules/Home/CrashGames";
-import FastBets from "../../components/modules/Home/FastBets";
+// import Banner from "../../components/modules/Home/Banner";
+// import CrashGames from "../../components/modules/Home/CrashGames";
+// import FastBets from "../../components/modules/Home/FastBets";
 import IndianCardGames from "../../components/modules/Home/IndianCardGames";
 import LiveCasino from "../../components/modules/Home/LiveCasino";
-import RecentBigWin from "../../components/modules/Home/RecentBigWin";
+// import RecentBigWin from "../../components/modules/Home/RecentBigWin";
 import Navbar from "../../components/shared/Navbar/Navbar";
 
 const Home = () => {
@@ -17,9 +17,9 @@ const Home = () => {
           <Navbar />
           {/* <Banner /> */}
           <div className="z-20 flex flex-col w-full gap-3">
-            <RecentBigWin />
+            {/* <RecentBigWin />
             <CrashGames />
-            <FastBets />
+            <FastBets /> */}
             <LiveCasino />
             <IndianCardGames />
           </div>

@@ -5,6 +5,7 @@ import LuckySeven from "../pages/LuckySeven/LuckySeven";
 import AmarAkbarAnthony from "../pages/AmarAkbarAnthony/AmarAkbarAnthony";
 import DragonTiger from "../pages/DragonTiger/DragonTiger";
 import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
+import AntMedia from "../components/shared/Antmedia/Antmedia";
 
 export const router = createBrowserRouter(
   [
@@ -31,6 +32,10 @@ export const router = createBrowserRouter(
         {
           path: "/teen-patti-2020/:eventTypeId/:eventId",
           element: <TeenPatti2020 />,
+        },
+        {
+          path: "/antmedia",
+          element: <AntMedia />,
         },
       ],
     },

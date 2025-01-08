@@ -7,3 +7,7 @@
   width: auto !important;
   margin-right: 8px !important;
 }
+
+.video-js .vjs-control-bar {
+  display: none !important;
+}
