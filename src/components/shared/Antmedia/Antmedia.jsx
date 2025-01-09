@@ -48,7 +48,7 @@ const AntMedia = () => {
         top: 0,
         right: 0,
         left: 0,
-        display: "none",
+        // display: "none",
       }}
       ref={bigVideo}
     ></div>

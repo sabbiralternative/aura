@@ -48,6 +48,7 @@ export const API = {
   mac88: "",
   bonus: "",
   index: "",
+  casino: "",
 };
 
 export const settings = {
