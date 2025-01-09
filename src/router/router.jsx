@@ -5,6 +5,7 @@ import LuckySeven from "../pages/LuckySeven/LuckySeven";
 import AmarAkbarAnthony from "../pages/AmarAkbarAnthony/AmarAkbarAnthony";
 import DragonTiger from "../pages/DragonTiger/DragonTiger";
 import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
+import TeenPattiOneDay from "../pages/TeenPattiOneDay/TeenPattiOneDay";
 
 export const router = createBrowserRouter(
   [
@@ -17,20 +18,24 @@ export const router = createBrowserRouter(
           element: <Home />,
         },
         {
-          path: "/Lucky7-A/:eventTypeId/:eventId",
+          path: "/lucky7/:eventTypeId/:eventId",
           element: <LuckySeven />,
         },
         {
-          path: "/AmarAkbarAnthony/:eventTypeId/:eventId",
+          path: "/aaa/:eventTypeId/:eventId",
           element: <AmarAkbarAnthony />,
         },
         {
-          path: "/20-20DTL/:eventTypeId/:eventId",
+          path: "/dt20/:eventTypeId/:eventId",
           element: <DragonTiger />,
         },
         {
-          path: "/20-20Teenpatti/:eventTypeId/:eventId",
+          path: "/teenmuf/:eventTypeId/:eventId",
           element: <TeenPatti2020 />,
+        },
+        {
+          path: "/teen/:eventTypeId/:eventId",
+          element: <TeenPattiOneDay />,
         },
       ],
     },

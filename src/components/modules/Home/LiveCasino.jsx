@@ -5,7 +5,7 @@ import { useGetLiveCasinoThumbnailQuery } from "../../../redux/features/casino/c
 
 const LiveCasino = () => {
   const { data } = useGetLiveCasinoThumbnailQuery();
-  console.log(data);
+
   const swiperRef = useRef(null);
   const navigate = useNavigate();
 
@@ -31,9 +31,7 @@ const LiveCasino = () => {
   };
 
   const handleNavigate = (casino) => {
-    const formatLink = `/${casino?.name?.replace(/\s+/g, "")}/${
-      casino?.eventTypeId
-    }/${casino?.eventId}`;
+    const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
 
     navigate(formatLink);
   };

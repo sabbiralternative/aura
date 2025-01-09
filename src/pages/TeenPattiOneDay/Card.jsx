@@ -1,4 +1,4 @@
-import { CardBack } from "../../../assets/icon";
+import { CardBack } from "../../assets/icon";
 
 const Card = ({ data }) => {
   const playerA1 = data?.runners?.[0]?.card?.[0];
@@ -9,7 +9,7 @@ const Card = ({ data }) => {
   const playerB3 = data?.runners?.[1]?.card?.[2];
 
   return (
-    <span className="transition-all duration-1000 ease-in-out translate-y-[100%] mb-20 ">
+    <span className="transition-all duration-1000 ease-in-out translate-y-[50%] lg:translate-y-0 mb-20 lg:absolute lg:bottom-64 lg:left-[25%]">
       <div className="perspective flex  mx-auto items-center w-fit gap-4 justify-center transform transition-all linear duration-1000 perspective">
         <div className="applyPerspective flex items-center justify-start gap-2 pt-6 p-1 rounded-lg border-[2px] border-white/20">
           <span className="text-white/80 absolute -top-[2px] -translate-y-full right-0 z-50 text-xs uppercase" />

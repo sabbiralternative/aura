@@ -24,7 +24,7 @@ const TeenPatti2020 = () => {
   );
 
   const firstEvent = data?.result?.[0];
-  console.log(firstEvent);
+
   return (
     <main
       className="main max-w-md relative flex  lg:aspect-video    mx-auto   flex-col overflow-x-hidden  items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
