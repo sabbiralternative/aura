@@ -28,10 +28,9 @@ const BetSlip = ({ data, status }) => {
           <div className="z-50">
             <div className="relative w-10 h-10"></div>
           </div>
-          {data?.[3]?.status === "OPEN" &&
-          data?.[3]?.runners?.[0]?.status === "ACTIVE" ? (
+          {data?.[0]?.status === "OPEN" ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
-              {data?.[3]?.runners?.[0]?.back[0]?.price}
+              {data?.[0]?.runners?.[0]?.back[0]?.price}
             </span>
           ) : (
             <Lock position="bottom-1 right-0.5" />
@@ -50,10 +49,9 @@ const BetSlip = ({ data, status }) => {
           <div className="z-50">
             <div className="relative w-10 h-10"></div>
           </div>
-          {data?.[3]?.status === "OPEN" &&
-          data?.[3]?.runners?.[1]?.status === "ACTIVE" ? (
+          {data?.[0]?.status === "OPEN" ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
-              {data?.[3]?.runners?.[1]?.lay[0]?.price}
+              {data?.[0]?.runners?.[0]?.lay[0]?.price}
             </span>
           ) : (
             <Lock position="bottom-1 left-0.5" />
@@ -75,10 +73,9 @@ const BetSlip = ({ data, status }) => {
           <div className="z-50">
             <div className="relative w-10 h-10"></div>
           </div>
-          {data?.[4]?.status === "OPEN" &&
-          data?.[4]?.runners?.[0]?.status === "ACTIVE" ? (
+          {data?.[0]?.status === "OPEN" ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
-              {data?.[4]?.runners?.[0]?.back[0]?.price}
+              {data?.[0]?.runners?.[1]?.back[0]?.price}
             </span>
           ) : (
             <Lock position="bottom-1 right-0.5" />
@@ -97,10 +94,9 @@ const BetSlip = ({ data, status }) => {
           <div className="z-50">
             <div className="relative w-10 h-10"></div>
           </div>
-          {data?.[4]?.status === "OPEN" &&
-          data?.[4]?.runners?.[0]?.status === "ACTIVE" ? (
+          {data?.[0]?.status === "OPEN" ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
-              {data?.[4]?.runners?.[0]?.back[0]?.price}
+              {data?.[0]?.runners?.[1]?.lay[0]?.price}
             </span>
           ) : (
             <Lock position="bottom-1 left-0.5" />
