@@ -6,6 +6,7 @@ import AmarAkbarAnthony from "../pages/AmarAkbarAnthony/AmarAkbarAnthony";
 import DragonTiger from "../pages/DragonTiger/DragonTiger";
 import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
 import TeenPattiOneDay from "../pages/TeenPattiOneDay/TeenPattiOneDay";
+import Muflis from "../pages/Muflis/Muflis";
 
 export const router = createBrowserRouter(
   [
@@ -31,6 +32,10 @@ export const router = createBrowserRouter(
         },
         {
           path: "/teenmuf/:eventTypeId/:eventId",
+          element: <Muflis />,
+        },
+        {
+          path: "/teen20/:eventTypeId/:eventId",
           element: <TeenPatti2020 />,
         },
         {
