@@ -10,6 +10,7 @@ import BetSlip from "./BetSlip";
 import RecentWinner from "./RecentWinner";
 import BalanceInfo from "./BalanceInfo";
 import Card from "./Card";
+import Chip from "../../components/shared/Chip/Chip";
 
 const TeenPattiOneDay = () => {
   const [showFullScreen, setShowFullScreen] = useState(false);
@@ -116,11 +117,12 @@ const TeenPattiOneDay = () => {
           </div>
           <span className="absolute z-50 -translate-x-1/2 left-1/2 transition-all duration-1000 ease-in-out">
             <div>
-              <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
+              <Chip />
+              {/* <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
                 <span className="px-2 text-xs text-white/70 glass">
                   Insufficient Balance
                 </span>
-              </button>
+              </button> */}
             </div>{" "}
           </span>
           <span className="z-50 flex flex-col items-end gap-0.5">
@@ -146,7 +148,7 @@ const TeenPattiOneDay = () => {
           </span>
         </div>
         <div>
-          <BalanceInfo />
+          <BalanceInfo firstEvent={firstEvent} />
           <RecentWinner recentWinner={firstEvent?.recent_winner} />
         </div>
       </div>

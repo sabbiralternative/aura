@@ -101,7 +101,7 @@ const LuckySeven = () => {
       <BetSlip status={firstEvent?.status} />
       <div className="bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton setShowSetting={setShowSetting} />
-        <AmountSection title="7 up &amp; Down" />
+        <AmountSection firstEvent={firstEvent} title="7 up &amp; Down" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
       {showSetting && (

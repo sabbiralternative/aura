@@ -99,7 +99,7 @@ const DragonTiger = () => {
       <BetSlip data={data?.result} status={firstEvent?.status} />
       <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton setShowSetting={setShowSetting} />
-        <AmountSection title="Amar Akbar Anthony" />
+        <AmountSection firstEvent={firstEvent} title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
       {showSetting && (

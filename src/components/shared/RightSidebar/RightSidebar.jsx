@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
 import { setShowRightSidebar } from "../../../redux/features/stateSlice";
@@ -6,6 +6,7 @@ import { useAuthMutation } from "../../../redux/features/auth/authApi";
 import { setUser } from "../../../redux/features/auth/authSlice";
 
 const RightSidebar = () => {
+  const [refetch, setRefetch] = useState(false);
   const dispatch = useDispatch();
   const { showRightSidebar } = useSelector((state) => state.global);
   const { token, username, balance } = useSelector((state) => state.auth);
@@ -26,7 +27,7 @@ const RightSidebar = () => {
       };
       getUser();
     }
-  }, [token, handleAuth, dispatch]);
+  }, [token, handleAuth, dispatch, refetch]);
 
   return (
     <div
@@ -80,6 +81,7 @@ const RightSidebar = () => {
           </span>
         </div>
         <svg
+          onClick={() => setRefetch((prev) => !prev)}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"

@@ -8,8 +8,11 @@ import { useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import BetSlip from "./BetSlip";
+import { useSelector } from "react-redux";
+import Chip from "../../components/shared/Chip/Chip";
 
 const TeenPatti2020 = () => {
+  const { balance } = useSelector((state) => state.auth);
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
@@ -113,14 +116,16 @@ const TeenPatti2020 = () => {
             </div>
           </div>
           <span className="absolute z-50 -translate-x-1/2 left-1/2 transition-all duration-1000 ease-in-out">
-            <div>
+            {/* <div>
               <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
                 <span className="px-2 text-xs text-white/70 glass">
                   Insufficient Balance
                 </span>
               </button>
-            </div>{" "}
+            </div> */}
+            <Chip />
           </span>
+
           <span className="z-50 flex flex-col items-end gap-0.5">
             <button
               onClick={() => setShowSetting(true)}
@@ -152,16 +157,16 @@ const TeenPatti2020 = () => {
               <span className="flex items-center gap-1">
                 Balance
                 <span className="text-yellow">
-                  <span>₹0.00</span>
+                  <span>₹{balance}</span>
                 </span>
               </span>
             </div>
             <div className="z-10 flex flex-col items-end font-normal text-xs tracking-wide capitalize text-text-primary">
               <span className="flex gap-0.5 items-center text-white/50">
-                #107488826
+                {firstEvent?.roundId}
               </span>
               <span className="whitespace-nowrap">
-                Teenpatti T20
+                {firstEvent?.eventName}
                 <span className="text-yellow">
                   <span>₹100.00</span> - <span>₹2,00,000.00</span>
                 </span>
