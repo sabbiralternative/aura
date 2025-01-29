@@ -19,7 +19,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerA1}.jpg`} alt="" />
+              <img src={`/cards/${playerA1}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />
@@ -31,7 +31,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerA2}.jpg`} alt="" />
+              <img src={`/cards/${playerA2}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />
@@ -43,7 +43,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerA3}.jpg`} alt="" />
+              <img src={`/cards/${playerA3}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />
@@ -61,7 +61,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerB1}.jpg`} alt="" />
+              <img src={`/cards/${playerB1}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />
@@ -73,7 +73,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerB2}.jpg`} alt="" />
+              <img src={`/cards/${playerB2}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />
@@ -85,7 +85,7 @@ const Card = ({ data }) => {
             }`}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-front">
-              <img src={`/src/assets/images/cards/${playerB3}.jpg`} alt="" />
+              <img src={`/cards/${playerB3}.jpg`} alt="" />
             </div>
             <div className="transition-transform ease-in-out h-full w-full bg-white lg:rounded-[5px] rounded-[3px] relative flip-card-back overflow-hidden">
               <CardBack />

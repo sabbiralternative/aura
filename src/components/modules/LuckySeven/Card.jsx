@@ -36,7 +36,7 @@ const Card = ({ data }) => {
           style={{ zIndex: 999 }}
         >
           <div className="h-full flex flex-col gap-1 lg:gap-2 py-1 justify-center items-center w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-            <img src={`/src/assets/images/cards/${indexCard}.jpg`} alt="" />
+            <img src={`/cards/${indexCard}.jpg`} alt="" />
             {/* <span className="h-5 text-[#dd181f] font-semibold text-lg lg:text-xl">
               {indexCard}
             </span>

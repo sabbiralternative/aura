@@ -105,7 +105,7 @@ const BetSlip = ({ status, data }) => {
               style={{ zIndex: 999 }}
             >
               <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-                <img src={`/src/assets/images/cards/${card1}.jpg`} alt="" />
+                <img src={`/cards/${card1}.jpg`} alt="" />
               </div>
 
               <div
@@ -306,7 +306,7 @@ const BetSlip = ({ status, data }) => {
               style={{ zIndex: 999 }}
             >
               <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-                <img src={`/src/assets/images/cards/${card2}.jpg`} alt="" />
+                <img src={`/cards/${card2}.jpg`} alt="" />
               </div>
               <div
                 className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden flip-card-back`}

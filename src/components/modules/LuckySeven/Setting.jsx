@@ -1,7 +1,19 @@
 import { useNavigate } from "react-router-dom";
 
-const Setting = ({ setShowSetting }) => {
+const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
   const navigate = useNavigate();
+
+  const handleToggleFullScreen = () => {
+    if (showFullScreen) {
+      setShowFullScreen(false);
+      document.exitFullscreen();
+      setShowSetting(false);
+    } else {
+      setShowFullScreen(true);
+      document.body.requestFullscreen();
+      setShowSetting(false);
+    }
+  };
 
   return (
     <div
@@ -127,7 +139,10 @@ const Setting = ({ setShowSetting }) => {
                 </svg>
                 <span className="text-sm font-semibold ">sound off</span>
               </div>
-              <div className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit ">
+              <div
+                onClick={handleToggleFullScreen}
+                className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

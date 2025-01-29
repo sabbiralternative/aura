@@ -16,6 +16,7 @@ import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 
 const Muflis = () => {
+  const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
@@ -599,7 +600,13 @@ const Muflis = () => {
           </div>
         </div>
       </div>
-      {showSetting && <Setting setShowSetting={setShowSetting} />}
+      {showSetting && (
+        <Setting
+          setShowFullScreen={setShowFullScreen}
+          showFullScreen={showFullScreen}
+          setShowSetting={setShowSetting}
+        />
+      )}
 
       {/* <div
         className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"

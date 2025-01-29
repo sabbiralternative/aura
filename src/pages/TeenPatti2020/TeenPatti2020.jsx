@@ -10,6 +10,7 @@ import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import BetSlip from "./BetSlip";
 
 const TeenPatti2020 = () => {
+  const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
@@ -521,7 +522,13 @@ const TeenPatti2020 = () => {
           </div>
         </div>
       </div>
-      {showSetting && <Setting setShowSetting={setShowSetting} />}
+      {showSetting && (
+        <Setting
+          setShowFullScreen={setShowFullScreen}
+          showFullScreen={showFullScreen}
+          setShowSetting={setShowSetting}
+        />
+      )}
 
       {firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">

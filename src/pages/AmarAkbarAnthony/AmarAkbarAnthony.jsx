@@ -16,6 +16,7 @@ import { useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 
 const AmarAkbarAnthony = () => {
+  const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
@@ -106,7 +107,13 @@ const AmarAkbarAnthony = () => {
         <AmountSection title="Amar Akbar Anthony" />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
-      {showSetting && <Setting setShowSetting={setShowSetting} />}
+      {showSetting && (
+        <Setting
+          setShowFullScreen={setShowFullScreen}
+          showFullScreen={showFullScreen}
+          setShowSetting={setShowSetting}
+        />
+      )}
 
       {/* <div
         className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"

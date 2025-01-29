@@ -12,6 +12,7 @@ import BalanceInfo from "./BalanceInfo";
 import Card from "./Card";
 
 const TeenPattiOneDay = () => {
+  const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
@@ -149,7 +150,13 @@ const TeenPattiOneDay = () => {
           <RecentWinner recentWinner={firstEvent?.recent_winner} />
         </div>
       </div>
-      {showSetting && <Setting setShowSetting={setShowSetting} />}
+      {showSetting && (
+        <Setting
+          setShowSetting={setShowSetting}
+          setShowFullScreen={setShowFullScreen}
+          showFullScreen={showFullScreen}
+        />
+      )}
 
       {firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">

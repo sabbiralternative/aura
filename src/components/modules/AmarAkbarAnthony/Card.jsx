@@ -27,7 +27,7 @@ const Card = ({ data }) => {
             style={{ zIndex: 1000 }}
           >
             <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-              <img src={`/src/assets/images/cards/${indexCard}.jpg`} alt="" />
+              <img src={`/cards/${indexCard}.jpg`} alt="" />
               {/* <div className="absolute top-1 right-1 w-[30%]">
                 <svg
                   width={209}
