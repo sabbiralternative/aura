@@ -7,12 +7,14 @@ import DragonTiger from "../pages/DragonTiger/DragonTiger";
 import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
 import TeenPattiOneDay from "../pages/TeenPattiOneDay/TeenPattiOneDay";
 import Muflis from "../pages/Muflis/Muflis";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter(
   [
     {
       path: "/",
       element: <App />,
+      errorElement: <ErrorPage />,
       children: [
         {
           index: true,

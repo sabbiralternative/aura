@@ -3,6 +3,7 @@ import { setShowRightSidebar } from "../../../redux/features/stateSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+
   return (
     <div
       style={{ zIndex: 999, maxWidth: "430px" }}

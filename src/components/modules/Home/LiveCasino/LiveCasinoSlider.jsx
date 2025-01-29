@@ -1,13 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useRef } from "react";
-import { useGetLiveCasinoThumbnailQuery } from "../../../redux/features/casino/casino.api";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const LiveCasino = () => {
-  const { data } = useGetLiveCasinoThumbnailQuery();
-
+const LiveCasinoSlider = ({ data, handleNavigate, setShowAll }) => {
   const swiperRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Set the swiper instance on initial render
@@ -28,12 +23,6 @@ const LiveCasino = () => {
     if (swiperRef.current) {
       swiperRef.current.slideNext();
     }
-  };
-
-  const handleNavigate = (casino) => {
-    const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
-
-    navigate(formatLink);
   };
 
   return (
@@ -185,8 +174,11 @@ const LiveCasino = () => {
             </div>
           </div>
           <span className="flex items-center gap-1 ml-auto">
-            <button className="flex p-1 px-2 text-xs rounded-md cursor-pointer whitespace-nowrap hover:bg-purple/20 text-purple active:scale-90 autoAnimate">
-              <p>View all 25</p>
+            <button
+              onClick={() => setShowAll((prev) => !prev)}
+              className="flex p-1 px-2 text-xs rounded-md cursor-pointer whitespace-nowrap hover:bg-purple/20 text-purple active:scale-90 autoAnimate"
+            >
+              <p>View all {data?.length}</p>
             </button>
             <div className="flex items-center gap-1 w-fit">
               <span
@@ -235,4 +227,4 @@ const LiveCasino = () => {
   );
 };
 
-export default LiveCasino;
+export default LiveCasinoSlider;

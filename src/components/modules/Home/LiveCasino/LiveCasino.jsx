@@ -1,0 +1,37 @@
+import { useNavigate } from "react-router-dom";
+import { useGetLiveCasinoThumbnailQuery } from "../../../../redux/features/casino/casino.api";
+import LiveCasinoAll from "./LiveCasinoAll";
+import LiveCasinoSlider from "./LiveCasinoSlider";
+import { useState } from "react";
+
+const LiveCasino = () => {
+  const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
+  const { data } = useGetLiveCasinoThumbnailQuery();
+
+  const handleNavigate = (casino) => {
+    const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
+
+    navigate(formatLink);
+  };
+
+  return (
+    <>
+      {showAll ? (
+        <LiveCasinoAll
+          data={data}
+          handleNavigate={handleNavigate}
+          setShowAll={setShowAll}
+        />
+      ) : (
+        <LiveCasinoSlider
+          data={data}
+          handleNavigate={handleNavigate}
+          setShowAll={setShowAll}
+        />
+      )}
+    </>
+  );
+};
+
+export default LiveCasino;

@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
+
 const TopHeader = () => {
+  const { username } = useSelector((state) => state.auth);
   return (
-    <div className="absolute top-0 w-full flex justify-between text-xs z-50">
-      <div className="flex items-center text-white">
+    <div className="absolute top-0 w-full flex justify-end text-xs z-50">
+      {/* <div className="flex items-center text-white">
         <div className="flex items-center justify-center gap-1 py-1 pl-2 pr-1 leading-none rounded-br-md glass">
           <span className>14</span>
           <div className="relative w-3 h-3">
@@ -22,7 +25,7 @@ const TopHeader = () => {
             </svg>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="flex items-center gap-1 pl-1 pr-2 text-white rounded-bl-md glass">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +41,7 @@ const TopHeader = () => {
             clipRule="evenodd"
           />
         </svg>
-        <span> b02.91_8291023297</span>
+        <span> {username}</span>
       </div>
     </div>
   );

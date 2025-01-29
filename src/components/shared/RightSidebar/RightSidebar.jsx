@@ -1,16 +1,33 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
 import { setShowRightSidebar } from "../../../redux/features/stateSlice";
+import { useAuthMutation } from "../../../redux/features/auth/authApi";
+import { setUser } from "../../../redux/features/auth/authSlice";
 
 const RightSidebar = () => {
   const dispatch = useDispatch();
   const { showRightSidebar } = useSelector((state) => state.global);
+  const { token, username, balance } = useSelector((state) => state.auth);
+  const [handleAuth] = useAuthMutation();
 
   const sidebarRef = useRef(null);
   useCloseModalClickOutside(sidebarRef, () => {
     dispatch(setShowRightSidebar(false));
   });
+
+  useEffect(() => {
+    if (token) {
+      const getUser = async () => {
+        const res = await handleAuth({ token }).unwrap();
+        dispatch(
+          setUser({ username: res.username, balance: res.balance, token })
+        );
+      };
+      getUser();
+    }
+  }, [token, handleAuth, dispatch]);
+
   return (
     <div
       ref={sidebarRef}
@@ -57,9 +74,9 @@ const RightSidebar = () => {
           ></path>
         </svg>
         <div className="flex flex-col">
-          <span className="">user562971</span>
+          <span className="">{username}</span>
           <span className=" text-yellow">
-            <span>₹10,414.00</span>
+            <span>₹{balance}</span>
           </span>
         </div>
         <svg
