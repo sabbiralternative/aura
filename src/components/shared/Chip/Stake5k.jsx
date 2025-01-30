@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { setShowChip, setStake } from "../../../redux/features/stateSlice";
 
-const Stake5k = () => {
+const Stake5k = ({ value = "5K" }) => {
   const dispatch = useDispatch();
   return (
     <span
@@ -107,7 +107,7 @@ const Stake5k = () => {
                       }}
                     />
                     <span className="border-[1px] h-[26px] aspect-square rounded-full flex justify-center  items-center text-[10px]">
-                      5K
+                      {value === 5000 ? "5K" : value}
                     </span>
                   </span>
                 </span>

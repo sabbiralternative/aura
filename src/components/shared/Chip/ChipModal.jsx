@@ -46,11 +46,11 @@ const ChipModal = () => {
           style={{ zIndex: 998 }}
         >
           <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-black/80 via-transparent to-transparent  p-64  -space-x-[40px] transition-all rounded-full top-1/2 -translate-y-1/2 z-50  ease-in-out duration-200 absolute   flex items-center justify-center w-fit max-w-xl h-fit  ">
-            <Stake100 />
-            <Stake500 />
-            <Stake1k />
-            <Stake5k />
-            <Stake10k />
+            <Stake100 value={100} />
+            <Stake500 value={500} />
+            <Stake1k value="1K" />
+            <Stake5k value="5K" />
+            <Stake10k value="10K" />
           </div>
           <div
             onClick={() => dispatch(setShowChip(false))}

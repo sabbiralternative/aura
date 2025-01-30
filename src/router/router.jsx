@@ -8,6 +8,7 @@ import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
 import TeenPattiOneDay from "../pages/TeenPattiOneDay/TeenPattiOneDay";
 import Muflis from "../pages/Muflis/Muflis";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Bollywood from "../pages/Bollywood/Bollywood";
 
 export const router = createBrowserRouter(
   [
@@ -43,6 +44,10 @@ export const router = createBrowserRouter(
         {
           path: "/teen/:eventTypeId/:eventId",
           element: <TeenPattiOneDay />,
+        },
+        {
+          path: "/btable/:eventTypeId/:eventId",
+          element: <Bollywood />,
         },
       ],
     },

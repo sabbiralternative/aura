@@ -1,14 +1,6 @@
-import { useDispatch } from "react-redux";
-import { setShowChip, setStake } from "../../../redux/features/stateSlice";
-
 const Stake10k = ({ value = "10K" }) => {
-  const dispatch = useDispatch();
   return (
     <span
-      onClick={() => {
-        dispatch(setStake(10000));
-        dispatch(setShowChip(false));
-      }}
       className=" transition-all duration-200 ease-in-out "
       style={{ transform: "translate(60px, 0px) rotate(0deg)" }}
     >

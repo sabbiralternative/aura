@@ -1,16 +1,10 @@
-import { useDispatch } from "react-redux";
-import { setShowChip, setStake } from "../../../redux/features/stateSlice";
-
-const Stake10k = ({ value = "10K" }) => {
-  const dispatch = useDispatch();
+const Stake500 = ({ value = 500 }) => {
   return (
     <span
-      onClick={() => {
-        dispatch(setStake(10000));
-        dispatch(setShowChip(false));
-      }}
       className=" transition-all duration-200 ease-in-out "
-      style={{ transform: "translate(60px, 0px) rotate(0deg)" }}
+      style={{
+        transform: "translate(-42.4264px, -42.4264px) rotate(0deg)",
+      }}
     >
       <div className="coinContainer transition-all duration-1000 ease-in-out ">
         <div className="text-white coin ">
@@ -19,40 +13,40 @@ const Stake10k = ({ value = "10K" }) => {
             style={{
               transform: "translateZ(10px)",
               zIndex: 1000,
-              backgroundColor: "rgb(39, 39, 39)",
+              backgroundColor: "rgb(34, 197, 94)",
             }}
           >
             <span className="relative flex items-center justify-center w-full h-full font-black bg-white rounded-full">
               <span
                 className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-                style={{ backgroundColor: "rgb(39, 39, 39)" }}
+                style={{ backgroundColor: "rgb(34, 197, 94)" }}
               >
                 <span
                   className="w-[40px] h-[8px] absolute"
                   style={{
-                    borderLeft: "6px solid rgb(39, 39, 39)",
-                    borderRight: "6px solid rgb(39, 39, 39)",
+                    borderLeft: "6px solid rgb(34, 197, 94)",
+                    borderRight: "6px solid rgb(34, 197, 94)",
                   }}
                 />
                 <span
                   className="w-[40px] h-[8px] absolute rotate-45"
                   style={{
-                    borderLeft: "6px solid rgb(39, 39, 39)",
-                    borderRight: "6px solid rgb(39, 39, 39)",
+                    borderLeft: "6px solid rgb(34, 197, 94)",
+                    borderRight: "6px solid rgb(34, 197, 94)",
                   }}
                 />
                 <span
                   className="w-[40px] h-[8px] absolute rotate-90"
                   style={{
-                    borderLeft: "6px solid rgb(39, 39, 39)",
-                    borderRight: "6px solid rgb(39, 39, 39)",
+                    borderLeft: "6px solid rgb(34, 197, 94)",
+                    borderRight: "6px solid rgb(34, 197, 94)",
                   }}
                 />
                 <span
                   className="w-[40px] h-[8px] absolute -rotate-45"
                   style={{
-                    borderLeft: "6px solid rgb(39, 39, 39)",
-                    borderRight: "6px solid rgb(39, 39, 39)",
+                    borderLeft: "6px solid rgb(34, 197, 94)",
+                    borderRight: "6px solid rgb(34, 197, 94)",
                   }}
                 />
                 <span
@@ -79,8 +73,8 @@ const Stake10k = ({ value = "10K" }) => {
                     <span
                       className="w-[26px] h-[8px] absolute -rotate-45"
                       style={{
-                        borderLeft: "2px solid rgb(39, 39, 39)",
-                        borderRight: "2px solid rgb(39, 39, 39)",
+                        borderLeft: "2px solid rgb(34, 197, 94)",
+                        borderRight: "2px solid rgb(34, 197, 94)",
                       }}
                     />
                     <span
@@ -93,8 +87,8 @@ const Stake10k = ({ value = "10K" }) => {
                     <span
                       className="w-[26px] h-[8px] absolute rotate-45"
                       style={{
-                        borderLeft: "2px solid rgb(39, 39, 39)",
-                        borderRight: "2px solid rgb(39, 39, 39)",
+                        borderLeft: "2px solid rgb(34, 197, 94)",
+                        borderRight: "2px solid rgb(34, 197, 94)",
                       }}
                     />
                     <span
@@ -105,7 +99,7 @@ const Stake10k = ({ value = "10K" }) => {
                       }}
                     />
                     <span className="border-[1px] h-[26px] aspect-square rounded-full flex justify-center  items-center text-[10px]">
-                      {value === 10000 ? "10K" : value}
+                      {value}
                     </span>
                   </span>
                 </span>
@@ -118,34 +112,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -172,8 +166,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -186,8 +180,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -208,34 +202,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -262,8 +256,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -276,8 +270,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -298,34 +292,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -352,8 +346,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -366,8 +360,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -388,34 +382,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -442,8 +436,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -456,8 +450,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -478,34 +472,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -532,8 +526,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -546,8 +540,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -568,34 +562,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -622,8 +616,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -636,8 +630,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -658,34 +652,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -712,8 +706,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -726,8 +720,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -748,34 +742,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -802,8 +796,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -816,8 +810,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -838,34 +832,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -892,8 +886,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -906,8 +900,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -928,34 +922,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -982,8 +976,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -996,8 +990,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1018,34 +1012,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1072,8 +1066,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1086,8 +1080,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1108,34 +1102,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1162,8 +1156,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1176,8 +1170,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1198,34 +1192,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1252,8 +1246,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1266,8 +1260,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1288,34 +1282,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1342,8 +1336,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1356,8 +1350,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1378,34 +1372,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1432,8 +1426,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1446,8 +1440,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1468,34 +1462,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1522,8 +1516,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1536,8 +1530,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1558,34 +1552,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1612,8 +1606,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1626,8 +1620,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1648,34 +1642,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1702,8 +1696,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1716,8 +1710,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1738,34 +1732,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1792,8 +1786,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1806,8 +1800,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1828,34 +1822,34 @@ const Stake10k = ({ value = "10K" }) => {
           >
             <span
               className="relative flex items-center justify-center w-full h-full font-bold rounded-full overflow-clip "
-              style={{ backgroundColor: "rgb(0, 0, 0)" }}
+              style={{ backgroundColor: "rgb(0, 100, 37)" }}
             >
               <span
                 className="w-[40px] h-[8px] absolute"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute rotate-90"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
                 className="w-[40px] h-[8px] absolute -rotate-45"
                 style={{
-                  borderLeft: "6px solid rgb(0, 0, 0)",
-                  borderRight: "6px solid rgb(0, 0, 0)",
+                  borderLeft: "6px solid rgb(0, 100, 37)",
+                  borderRight: "6px solid rgb(0, 100, 37)",
                 }}
               />
               <span
@@ -1882,8 +1876,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute -rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1896,8 +1890,8 @@ const Stake10k = ({ value = "10K" }) => {
                   <span
                     className="w-[26px] h-[8px] absolute rotate-45"
                     style={{
-                      borderLeft: "2px solid rgb(0, 0, 0)",
-                      borderRight: "2px solid rgb(0, 0, 0)",
+                      borderLeft: "2px solid rgb(0, 100, 37)",
+                      borderRight: "2px solid rgb(0, 100, 37)",
                     }}
                   />
                   <span
@@ -1918,4 +1912,4 @@ const Stake10k = ({ value = "10K" }) => {
   );
 };
 
-export default Stake10k;
+export default Stake500;

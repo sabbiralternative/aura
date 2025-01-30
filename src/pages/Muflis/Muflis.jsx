@@ -1,21 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../../redux/features/events/events";
-import AmountSection from "../../components/shared/events/AmountSection";
-// import Setting from "../../components/modules/LuckySeven/Setting";
-import Video from "../../components/shared/events/Video";
 import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
-import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
-
-import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
 import Card from "../../components/modules/TeenPatti2020/Card";
-import BetSlip from "../../components/modules/TeenPatti2020/BetSlip";
 import { useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import { useSelector } from "react-redux";
 import Chip from "../../components/shared/Chip/Chip";
+import BetSlip from "./BetSlip";
 
 const Muflis = () => {
   const { balance } = useSelector((state) => state.auth);
@@ -35,66 +29,6 @@ const Muflis = () => {
       id="7updownParent"
       style={{ minHeight: "100vh", width: "100%" }}
     >
-      {/* Not Using */}
-      {/* <div
-        className="items-center absolute top-10 right-0 z-50 bg-black/80 rounded-bl-lg border-l border-y border-white/30 w-52 transition-all duration-500 ease-in-out translate-x-full"
-        style={{ zIndex: 1000 }}
-      >
-        <span className="flex flex-col justify-center items-center p-2 gap-2 relative">
-          <span className="absolute -top-[1px] -left-[34px] border-l border-y rounded-l-full p-1 border-white/30 bg-black/80 hidden opacity-0">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-              data-slot="icon"
-              className="w-6 h-6 transition-all duration-500 ease-in-out text-white rotate-180"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </span>
-          <span className="w-full text-center text-white">Auto Play </span>
-          <span className="text-white/90 text-[10px] border-b border-gray/40">
-            Auto Play will repeat your last bet
-          </span>
-          <div className="grid grid-cols-3 gap-1 w-full">
-            <div className="border-yellow/80 p-2 w-full bg-black/80 border to-black/40 rounded-lg flex flex-col justify-center items-center">
-              <span className="text-yellow">5</span>
-              <span className="text-[10px] text-white">ROUNDS</span>
-            </div>
-            <div className="border-white/30 p-2 w-full bg-black/80 border to-black/40 rounded-lg flex flex-col justify-center items-center">
-              <span className="text-white">10</span>
-              <span className="text-[10px] text-white">ROUNDS</span>
-            </div>
-            <div className="border-white/30 p-2 w-full bg-black/80 border to-black/40 rounded-lg flex flex-col justify-center items-center">
-              <span className="text-white">∞</span>
-              <span className="text-[10px] text-white">ROUNDS</span>
-            </div>
-          </div>
-          <div className="rounded-full py-1 w-fit px-4 flex items-center justify-center gap-0.5 border text-sm font-semibold bg-white text-black">
-            Start
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-              data-slot="icon"
-              className="w-4 h-4"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-        </span>
-      </div> */}
-      {/* Not Using */}
       <TopHeader />
       {firstEvent?.status === Status.OPEN && firstEvent?.timer > 0 && (
         <Counter timer={firstEvent?.timer} />
@@ -103,16 +37,6 @@ const Muflis = () => {
       <div className="relative w-full  h-[20%]">
         <div className="w-full aspect-video w-[100%]  origin-top  transition-all duration-1000 ease-in-out scale-[140%]">
           <AntMedia />
-          {/* <iframe
-            className="w-full h-full"
-            src="https://player.fawk.app/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcGVyYXRvcklkIjoiOTU1MSIsInVzZXJJZCI6IjU2Mjk3MSIsInVzZXJuYW1lIjoidXNlcjU2Mjk3MSIsInBsYXllclRva2VuQXRMYXVuY2giOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdFpXMWlaWEpEYjJSbElqb2lOR1UwTkRjMVkyWXROREpsTmkweE1XVm1MVGhpTTJRdE1EWXhPVFkxTldGbU1EY3lJaXdpYkdGemRGTjBZWFIxYzBOb1pXTnJJam94TENKdVltWWlPakUzTXpVeE9USTRPVFVzSW14dloybHVUbUZ0WlNJNklqZzRPRGc0T0RRd01EQWlMQ0poYkd4dmQwSmxkSFJwYm1jaU9uUnlkV1VzSW1WNGNDSTZNVGN6TlRJM09USTVOU3dpYVdGMElqb3hOek0xTVRreU9EazFMQ0pwY0NJNklqRXdNeTR4T0RJdU1UTXdMakl4T0NJc0ltSXlZeUk2TVN3aWJXVnRZbVZ5U1dRaU9pSTFOakk1TnpFaUxDSmljbUZ1WTJoTmIySnBiR1VpT2lJNU1Ea3dOemN6TXprd0lpd2lZM1Z5Y21WdVkza2lPaUpwYm5JaUxDSmpZWE5wYm05RGRYSnlaVzVqZVNJNkltbHVjaUlzSW0xaGMzUmxja2xrSWpvaU5qQWlMQ0p6ZFhCbGNrMWhjM1JsY2tsa0lqb2lNQ0lzSW1oNWNHVnlUV0Z6ZEdWeVNXUWlPaUl5TkNJc0ltRmtiV2x1VFdGemRHVnlTV1FpT2lJMElpd2ljM1Z3WlhKQlpHMXBiazFoYzNSbGNrbGtJam9pTWlJc0luQnlaWE5sZEZOMFlXdGxVMlYwZEdsdVozTWlPbnNpYjI1bFEyeHBZMnRUWlhSMGFXNW5jeUk2ZXlKaFkzUnBkbVVpT21aaGJITmxMQ0p6Wld4bFkzUmxaQ0k2Wm1Gc2MyVXNJbk5sZEhScGJtZHpJanBiTUN3d0xEQmRmU3dpY0hKbGMyVjBVM1JoYTJWVFpYUjBhVzVuY3lJNmV5SnpaWFIwYVc1bmN5STZXekV3TURBc01qQXdNQ3cxTURBd0xERXdNREF3TERJd01EQXdMRFV3TURBd1hTd2liVzlpYVd4bFUzUmhhMlZ6UlhoamFHRnVaMlZIWVcxbFUyVjBkR2x1WjNNaU9sc3lNREF3TERVd01EQXNNVEF3TUYwc0ltMXZZbWxzWlZOMFlXdGxjMU5sZEhScGJtZHpJanBiTWpBd01DdzFNREF3TERFd01EQXdYWDE5TENKcGMwSnZiblZ6UVhaaGFXeGhZbXhsSWpvd0xDSmlkWFIwYjI1V1lXeDFaU0k2ZXlKbllXMWxJanBiZXlKc1lXSmxiQ0k2TVRBd0xDSjJZV3gxWlNJNklqRXdNQ0o5TEhzaWJHRmlaV3dpT2pFd01Dd2lkbUZzZFdVaU9pSXlNREFpZlN4N0lteGhZbVZzSWpveE1EQXNJblpoYkhWbElqb2lNekF3SW4wc2V5SnNZV0psYkNJNk1UQXdMQ0oyWVd4MVpTSTZJalV3TUNKOUxIc2liR0ZpWld3aU9qRXdNQ3dpZG1Gc2RXVWlPaUl4TURBd0luMHNleUpzWVdKbGJDSTZNVEF3TENKMllXeDFaU0k2SWpJd01EQWlmU3g3SW14aFltVnNJam94TURBc0luWmhiSFZsSWpvaU5UQXdNQ0o5TEhzaWJHRmlaV3dpT2pFd01Dd2lkbUZzZFdVaU9pSXhNREF3TUNKOVhYMTkuNzB5NldkTDRfZ3FGSlAzWW5EQkx6MGVPdEllMjQ0emhTck9UT1doSGRNQSIsInRva2VuIjoiZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnRaVzFpWlhKRGIyUmxJam9pTkdVME5EYzFZMll0TkRKbE5pMHhNV1ZtTFRoaU0yUXRNRFl4T1RZMU5XRm1NRGN5SWl3aWJHRnpkRk4wWVhSMWMwTm9aV05ySWpveExDSnVZbVlpT2pFM016VXhPVEk0T1RVc0lteHZaMmx1VG1GdFpTSTZJamc0T0RnNE9EUXdNREFpTENKaGJHeHZkMEpsZEhScGJtY2lPblJ5ZFdVc0ltVjRjQ0k2TVRjek5USTNPVEk1TlN3aWFXRjBJam94TnpNMU1Ua3lPRGsxTENKcGNDSTZJakV3TXk0eE9ESXVNVE13TGpJeE9DSXNJbUl5WXlJNk1Td2liV1Z0WW1WeVNXUWlPaUkxTmpJNU56RWlMQ0ppY21GdVkyaE5iMkpwYkdVaU9pSTVNRGt3Tnpjek16a3dJaXdpWTNWeWNtVnVZM2tpT2lKcGJuSWlMQ0pqWVhOcGJtOURkWEp5Wlc1amVTSTZJbWx1Y2lJc0ltMWhjM1JsY2tsa0lqb2lOakFpTENKemRYQmxjazFoYzNSbGNrbGtJam9pTUNJc0ltaDVjR1Z5VFdGemRHVnlTV1FpT2lJeU5DSXNJbUZrYldsdVRXRnpkR1Z5U1dRaU9pSTBJaXdpYzNWd1pYSkJaRzFwYmsxaGMzUmxja2xrSWpvaU1pSXNJbkJ5WlhObGRGTjBZV3RsVTJWMGRHbHVaM01pT25zaWIyNWxRMnhwWTJ0VFpYUjBhVzVuY3lJNmV5SmhZM1JwZG1VaU9tWmhiSE5sTENKelpXeGxZM1JsWkNJNlptRnNjMlVzSW5ObGRIUnBibWR6SWpwYk1Dd3dMREJkZlN3aWNISmxjMlYwVTNSaGEyVlRaWFIwYVc1bmN5STZleUp6WlhSMGFXNW5jeUk2V3pFd01EQXNNakF3TUN3MU1EQXdMREV3TURBd0xESXdNREF3TERVd01EQXdYU3dpYlc5aWFXeGxVM1JoYTJWelJYaGphR0Z1WjJWSFlXMWxVMlYwZEdsdVozTWlPbHN5TURBd0xEVXdNREFzTVRBd01GMHNJbTF2WW1sc1pWTjBZV3RsYzFObGRIUnBibWR6SWpwYk1qQXdNQ3cxTURBd0xERXdNREF3WFgxOUxDSnBjMEp2Ym5WelFYWmhhV3hoWW14bElqb3dMQ0ppZFhSMGIyNVdZV3gxWlNJNmV5Sm5ZVzFsSWpwYmV5SnNZV0psYkNJNk1UQXdMQ0oyWVd4MVpTSTZJakV3TUNKOUxIc2liR0ZpWld3aU9qRXdNQ3dpZG1Gc2RXVWlPaUl5TURBaWZTeDdJbXhoWW1Wc0lqb3hNREFzSW5aaGJIVmxJam9pTXpBd0luMHNleUpzWVdKbGJDSTZNVEF3TENKMllXeDFaU0k2SWpVd01DSjlMSHNpYkdGaVpXd2lPakV3TUN3aWRtRnNkV1VpT2lJeE1EQXdJbjBzZXlKc1lXSmxiQ0k2TVRBd0xDSjJZV3gxWlNJNklqSXdNREFpZlN4N0lteGhZbVZzSWpveE1EQXNJblpoYkhWbElqb2lOVEF3TUNKOUxIc2liR0ZpWld3aU9qRXdNQ3dpZG1Gc2RXVWlPaUl4TURBd01DSjlYWDE5LjcweTZXZEw0X2dxRkpQM1luREJMejBlT3RJZTI0NHpoU3JPVE9XaEhkTUEiLCJiYWxhbmNlIjowLCJleHBvc3VyZSI6MCwiY3VycmVuY3kiOiJJTlIiLCJsYW5ndWFnZSI6ImVuIiwidGltZXN0YW1wIjoxNzM1MjAyMzY2LCJjbGllbnRJUCI6WyIxIl0sIlZJUCI6IjMiLCJlcnJvckNvZGUiOjAsImVycm9yRGVzY3JpcHRpb24iOiJvayIsImlwIjoiMTAzLjE4Mi4xMzAuMjE4LCAxMC4yNS4xLjY3Iiwic3lzdGVtVXNlcklkIjoiNjZiOWIyMzMwZjczOGQ2ODFlMjkyM2FhIiwiaWF0IjoxNzM1MjAyMzY2LCJleHAiOjE3MzUyMTMxNjZ9.LHQukHDGCQ7d1vC0zKOFlS5IGKxp_RLvv7hPsdkyUgw/56768"
-            frameBorder={0}
-            allow="autoplay; encrypted-media"
-            style={{
-              maskImage:
-                "linear-gradient(black, black, black, black,black, transparent )",
-            }}
-          /> */}
         </div>
         <div
           className="h-full absolute pointer-events-none top-0  text-xs overflow-y-auto w-fit  transition-all duration-500 ease-in-out opacity-0 left-0"
