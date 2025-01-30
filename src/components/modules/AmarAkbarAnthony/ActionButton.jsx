@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
+import { Status } from "../../../const";
 import Chip from "../../shared/Chip/Chip";
 
-const ActionButton = ({ setShowSetting }) => {
+const ActionButton = ({ setShowSetting, status }) => {
+  const { balance } = useSelector((state) => state.auth);
   return (
     <div className="relative flex items-center justify-between w-full">
       <div className="flex items-center justify-center gap-2 text-white">
@@ -52,7 +55,14 @@ const ActionButton = ({ setShowSetting }) => {
           </svg>
         </div>
       </div>
-      <Chip />
+      {status === Status.OPEN && balance >= 100 && <Chip />}
+      {balance < 100 && (
+        <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
+          <span className="px-2 text-xs text-white/70 glass">
+            Insufficient Balance
+          </span>
+        </button>
+      )}
 
       <span className="flex gap-2">
         <div className="flex items-center gap-1 p-2 text-xs font-semibold text-white border rounded-full cursor-pointer border-white/20 glass">

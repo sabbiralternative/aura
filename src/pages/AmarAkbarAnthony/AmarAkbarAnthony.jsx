@@ -103,7 +103,10 @@ const AmarAkbarAnthony = () => {
       </div>
       <BetSlip status={firstEvent?.status} />
       <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
-        <ActionButton setShowSetting={setShowSetting} />
+        <ActionButton
+          status={firstEvent?.status}
+          setShowSetting={setShowSetting}
+        />
         <AmountSection title="Amar Akbar Anthony" firstEvent={firstEvent} />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
