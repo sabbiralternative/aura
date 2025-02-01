@@ -1,32 +1,47 @@
 import { useSelector } from "react-redux";
 import { Lock } from "../../assets/icon";
 import { Status } from "../../const";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Stake from "../../components/shared/Stake/Stake";
+import { useOrderMutation } from "../../redux/features/events/events";
 
-const BetSlip = ({ data, status }) => {
+const BetSlip = ({
+  data,
+  status,
+  setToast,
+  setStakeState,
+  stakeState,
+  initialState,
+}) => {
+  const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
 
-  const initialState = {
-    playerABack: { show: false, value: stake },
-    playerALay: { show: false, value: stake },
-    playerBBack: { show: false, value: stake },
-    playerBLay: { show: false, value: stake },
-    aPlus: { show: false, value: stake },
-    bPlus: { show: false, value: stake },
-  };
-
-  const [stakeState, setStakeState] = useState(initialState);
-
   // Generic function to update stake state
-  const handleStakeChange = (key) => {
-    setStakeState((prev) => ({
-      ...prev,
-      [key]: {
-        show: true,
-        value: prev[key].show ? prev[key].value + 100 : prev[key].value,
-      },
-    }));
+  const handleStakeChange = (key, data) => {
+    setStakeState((prev) => {
+      const maxSerial = Math.max(
+        0,
+        ...Object.values(prev)
+          .map((item) => item.serial)
+          .filter((serial) => serial !== undefined)
+      );
+
+      return {
+        ...prev,
+        [key]: {
+          show: true,
+          stake: prev[key].show
+            ? prev[key].stake + prev[key].actionBy
+            : prev[key].stake,
+          marketId: data?.marketId,
+          selection_id: data?.selection_id,
+          runner_name: data?.runner_name,
+          isback: data?.isback,
+          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+          actionBy: stake,
+        },
+      };
+    });
   };
 
   // Reset state when status is OPEN
@@ -43,12 +58,36 @@ const BetSlip = ({ data, status }) => {
       for (const key in prev) {
         updatedState[key] = {
           ...prev[key],
-          value: prev[key].show ? prev[key].value : stake, // Update only if show is false
+          stake: prev[key].show ? prev[key].stake : stake,
+          actionBy: prev[key].show ? prev[key].actionBy : stake,
         };
       }
       return updatedState;
     });
   }, [stake]); // Runs when stake value changes
+
+  useEffect(() => {
+    const filterPlacedBet = Object.values(stakeState).filter((bet) => bet.show);
+    let payload = filterPlacedBet.map((bet) => ({
+      marketId: bet?.marketId,
+      selection_id: bet?.selection_id,
+      runner_name: bet?.runner_name,
+      stake: bet?.stake,
+      isback: bet?.isback,
+    }));
+
+    if (status === Status.SUSPENDED && payload?.length > 0) {
+      const handleOrder = async () => {
+        const res = await addOrder(payload).unwrap();
+        payload = [];
+        if (res?.success) {
+          setToast(res?.Message);
+        }
+      };
+      handleOrder();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addOrder, status]);
 
   return (
     <div
@@ -61,7 +100,14 @@ const BetSlip = ({ data, status }) => {
       ${status === Status.SUSPENDED ? "applyPerspective" : ""}`}
       >
         <div
-          onClick={() => handleStakeChange("playerABack")}
+          onClick={() =>
+            handleStakeChange("playerABack", {
+              marketId: data?.[0]?.id,
+              selection_id: data?.[0]?.runners?.[0]?.id,
+              runner_name: data?.[0]?.runners?.[0]?.name,
+              isback: 1,
+            })
+          }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
             ${
               data?.[0]?.status === Status.OPEN
@@ -80,7 +126,7 @@ const BetSlip = ({ data, status }) => {
           <div className="z-50">
             <div className="relative w-10 h-10">
               {stakeState.playerABack.show && (
-                <Stake stake={stakeState.playerABack.value} />
+                <Stake stake={stakeState.playerABack.stake} />
               )}
             </div>
           </div>
@@ -93,7 +139,14 @@ const BetSlip = ({ data, status }) => {
           )}
         </div>
         <div
-          onClick={() => handleStakeChange("playerALay")}
+          onClick={() =>
+            handleStakeChange("playerALay", {
+              marketId: data?.[0]?.id,
+              selection_id: data?.[0]?.runners?.[0]?.id,
+              runner_name: data?.[0]?.runners?.[0]?.name,
+              isback: 0,
+            })
+          }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
         cursor-pointer
          bg-gradient-to-l from-red to-red/70 rounded-r-lg h-16 ${
@@ -110,7 +163,7 @@ const BetSlip = ({ data, status }) => {
             <div className="relative w-10 h-10">
               {" "}
               {stakeState.playerALay.show && (
-                <Stake stake={stakeState.playerALay.value} />
+                <Stake stake={stakeState.playerALay.stake} />
               )}
             </div>
           </div>
@@ -123,7 +176,14 @@ const BetSlip = ({ data, status }) => {
           )}
         </div>
         <div
-          onClick={() => handleStakeChange("playerBBack")}
+          onClick={() =>
+            handleStakeChange("playerBBack", {
+              marketId: data?.[0]?.id,
+              selection_id: data?.[0]?.runners?.[1]?.id,
+              runner_name: data?.[0]?.runners?.[1]?.name,
+              isback: 1,
+            })
+          }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
        ${
          data?.[0]?.status === Status.OPEN
@@ -143,7 +203,7 @@ const BetSlip = ({ data, status }) => {
             <div className="relative w-10 h-10">
               {" "}
               {stakeState.playerBBack.show && (
-                <Stake stake={stakeState.playerBBack.value} />
+                <Stake stake={stakeState.playerBBack.stake} />
               )}
             </div>
           </div>
@@ -156,7 +216,14 @@ const BetSlip = ({ data, status }) => {
           )}
         </div>
         <div
-          onClick={() => handleStakeChange("playerBLay")}
+          onClick={() =>
+            handleStakeChange("playerBLay", {
+              marketId: data?.[0]?.id,
+              selection_id: data?.[0]?.runners?.[1]?.id,
+              runner_name: data?.[0]?.runners?.[1]?.name,
+              isback: 0,
+            })
+          }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
 
          bg-gradient-to-l from-red to-red/70 rounded-r-lg h-16 ${
@@ -173,7 +240,7 @@ const BetSlip = ({ data, status }) => {
             <div className="relative w-10 h-10">
               {" "}
               {stakeState.playerBLay.show && (
-                <Stake stake={stakeState.playerBLay.value} />
+                <Stake stake={stakeState.playerBLay.stake} />
               )}
             </div>
           </div>
@@ -187,7 +254,14 @@ const BetSlip = ({ data, status }) => {
         </div>
 
         <div
-          onClick={() => handleStakeChange("aPlus")}
+          onClick={() =>
+            handleStakeChange("aPlus", {
+              marketId: data?.[1]?.id,
+              selection_id: data?.[1]?.runners?.[0]?.id,
+              runner_name: data?.[1]?.runners?.[0]?.name,
+              isback: 1,
+            })
+          }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
          cursor-pointer
          bg-gradient-to-t from-gray/30 to-gray/70 col-span-2 rounded-lg h-12 ${
@@ -204,7 +278,7 @@ const BetSlip = ({ data, status }) => {
             <div className="relative w-10 h-10">
               {" "}
               {stakeState.aPlus.show && (
-                <Stake stake={stakeState.aPlus.value} />
+                <Stake stake={stakeState.aPlus.stake} />
               )}
             </div>
           </div>
@@ -218,7 +292,14 @@ const BetSlip = ({ data, status }) => {
           )}
         </div>
         <div
-          onClick={() => handleStakeChange("bPlus")}
+          onClick={() =>
+            handleStakeChange("bPlus", {
+              marketId: data?.[2]?.id,
+              selection_id: data?.[2]?.runners?.[0]?.id,
+              runner_name: data?.[2]?.runners?.[0]?.name,
+              isback: 1,
+            })
+          }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
          cursor-pointer
          bg-gradient-to-t from-gray/30 to-gray/70 col-span-2 rounded-lg h-12 ${
@@ -235,7 +316,7 @@ const BetSlip = ({ data, status }) => {
             <div className="relative w-10 h-10">
               {" "}
               {stakeState.bPlus.show && (
-                <Stake stake={stakeState.bPlus.value} />
+                <Stake stake={stakeState.bPlus.stake} />
               )}
             </div>
           </div>

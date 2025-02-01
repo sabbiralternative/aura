@@ -1,23 +1,23 @@
 import { useDispatch } from "react-redux";
 import { setShowChip } from "../../../redux/features/stateSlice";
 
-const Chip100 = () => {
+const Chip100 = ({ handleUndoStake, isPlaceStake }) => {
   const dispatch = useDispatch();
 
   return (
     <div
-      onClick={() => dispatch(setShowChip(true))}
       className=" relative flex flex-col items-center w-fit  gap-2 select-none h-fit text-text-primary transition-all ease-in-out duration-500 opacity-100
       "
     >
       <div className="flex  items-center justify-center w-full gap-3 h-fit flex-row">
         <div
+          onClick={handleUndoStake}
           className="flex flex-col items-center justify-center w-12 text-xs capitalize transition-opacity ease-in-out cursor-pointer"
           style={{
             zIndex: 997,
-            opacity: "0.5",
-            cursor: "not-allowed",
-            pointerEvents: "none",
+            opacity: isPlaceStake ? 1 : "0.5",
+            cursor: isPlaceStake ? "pointer" : "not-allowed",
+            pointerEvents: isPlaceStake ? "auto" : "none",
           }}
         >
           <div className="flex items-center justify-center h-4 aspect-square">
@@ -39,6 +39,7 @@ const Chip100 = () => {
           <span>undo</span>
         </div>
         <div
+          onClick={() => dispatch(setShowChip(true))}
           className="relative flex flex-col items-center h-fit w-fit "
           style={{ zIndex: 998 }}
         >

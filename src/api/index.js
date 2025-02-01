@@ -2,6 +2,7 @@ export const API = {
   eventDetails: "",
   casino: "",
   auth: "",
+  order: "",
 };
 
 export const Settings = {

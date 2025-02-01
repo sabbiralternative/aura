@@ -15,7 +15,16 @@ export const eventsApi = baseApi.injectEndpoints({
         };
       },
     }),
+    order: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `${API.order}`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetEventDetailsQuery } = eventsApi;
+export const { useGetEventDetailsQuery, useOrderMutation } = eventsApi;

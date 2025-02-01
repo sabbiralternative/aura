@@ -6,8 +6,9 @@ import Stake500 from "./Stake500";
 import Stake5k from "./Stake5k";
 import { setShowChip } from "../../../redux/features/stateSlice";
 
-const ChipModal = () => {
+const ChipModal = ({ handleUndoStake }) => {
   const dispatch = useDispatch();
+
   return (
     <div
       className=" relative flex flex-col items-center w-fit  gap-2 select-none h-fit text-text-primary transition-all ease-in-out duration-500 opacity-100
@@ -15,6 +16,7 @@ const ChipModal = () => {
     >
       <div className="flex  items-center justify-center w-full gap-3 h-fit flex-row">
         <div
+          onClick={handleUndoStake}
           className="flex flex-col items-center justify-center w-12 text-xs capitalize transition-opacity ease-in-out cursor-pointer"
           style={{
             zIndex: 997,

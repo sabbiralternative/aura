@@ -12,8 +12,11 @@ import BalanceInfo from "./BalanceInfo";
 import Card from "./Card";
 import Chip from "../../components/shared/Chip/Chip";
 import { useSelector } from "react-redux";
+import Toast from "../../components/shared/Toast/Toast";
 
 const TeenPattiOneDay = () => {
+  const { stake } = useSelector((state) => state.global);
+  const [toast, setToast] = useState(null);
   const { balance } = useSelector((state) => state.auth);
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
@@ -24,6 +27,47 @@ const TeenPattiOneDay = () => {
   );
 
   const firstEvent = data?.result?.[0];
+
+  const initialState = {
+    playerABack: { show: false, stake },
+    playerALay: { show: false, stake },
+    playerBBack: { show: false, stake },
+    playerBLay: { show: false, stake },
+    aPlus: { show: false, stake },
+    bPlus: { show: false, stake },
+  };
+
+  const [stakeState, setStakeState] = useState(initialState);
+
+  const handleUndoStake = () => {
+    setStakeState((prev) => {
+      const prevValues = Object.entries(prev);
+      const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
+        if (currentObj.serial > (maxObj?.serial || 0)) {
+          return { key, obj: currentObj };
+        }
+        return maxObj;
+      }, {});
+
+      if (maxSerialObject.obj) {
+        const updatedObj = { ...maxSerialObject.obj };
+        if (updatedObj.stake > updatedObj.actionBy) {
+          updatedObj.stake -= updatedObj.actionBy;
+        } else {
+          updatedObj.show = false;
+          delete updatedObj.serial;
+        }
+
+        return {
+          ...prev,
+          [maxSerialObject.key]: updatedObj,
+        };
+      }
+
+      return prev;
+    });
+  };
+  const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
   return (
     <main
@@ -63,9 +107,17 @@ const TeenPattiOneDay = () => {
           <div style={{ height: "186px" }} />
         </div> */}
       </div>
+
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
         {<Card data={firstEvent} />}
-        <BetSlip data={data?.result} status={firstEvent?.status} />
+        <BetSlip
+          initialState={initialState}
+          stakeState={stakeState}
+          setStakeState={setStakeState}
+          setToast={setToast}
+          data={data?.result}
+          status={firstEvent?.status}
+        />
 
         <div className="relative flex items-center justify-between w-full">
           <div className="flex items-center justify-center gap-2 text-white">
@@ -119,7 +171,12 @@ const TeenPattiOneDay = () => {
           </div>
           <span className="absolute z-50 -translate-x-1/2 left-1/2 transition-all duration-1000 ease-in-out">
             <div>
-              {firstEvent?.status === Status.OPEN && balance >= 100 && <Chip />}
+              {firstEvent?.status === Status.OPEN && balance >= 100 && (
+                <Chip
+                  isPlaceStake={isPlaceStake}
+                  handleUndoStake={handleUndoStake}
+                />
+              )}
               {balance < 100 && (
                 <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
                   <span className="px-2 text-xs text-white/70 glass">
@@ -169,8 +226,12 @@ const TeenPattiOneDay = () => {
           showFullScreen={showFullScreen}
         />
       )}
-
-      {firstEvent?.status === Status.OPEN && (
+      {toast && (
+        <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
+          <Toast message={toast} setMessage={setToast} />{" "}
+        </div>
+      )}
+      {!toast && firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
           PLACE YOUR BETS
         </div>
