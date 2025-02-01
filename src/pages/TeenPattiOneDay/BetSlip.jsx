@@ -106,7 +106,9 @@ const BetSlip = ({
               marketId: data?.[0]?.id,
               selection_id: data?.[0]?.runners?.[0]?.id,
               runner_name: data?.[0]?.runners?.[0]?.name,
-              isback: 1,
+              isback: 0,
+              event_id: data?.[0]?.eventId,
+              event_type_id: data?.[0]?.event_type_id,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -145,7 +147,9 @@ const BetSlip = ({
               marketId: data?.[0]?.id,
               selection_id: data?.[0]?.runners?.[0]?.id,
               runner_name: data?.[0]?.runners?.[0]?.name,
-              isback: 0,
+              isback: 1,
+              event_id: data?.[0]?.eventId,
+              event_type_id: data?.[0]?.event_type_id,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -182,7 +186,9 @@ const BetSlip = ({
               marketId: data?.[0]?.id,
               selection_id: data?.[0]?.runners?.[1]?.id,
               runner_name: data?.[0]?.runners?.[1]?.name,
-              isback: 1,
+              isback: 0,
+              event_id: data?.[0]?.eventId,
+              event_type_id: data?.[0]?.event_type_id,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -222,7 +228,9 @@ const BetSlip = ({
               marketId: data?.[0]?.id,
               selection_id: data?.[0]?.runners?.[1]?.id,
               runner_name: data?.[0]?.runners?.[1]?.name,
-              isback: 0,
+              isback: 1,
+              event_id: data?.[0]?.eventId,
+              event_type_id: data?.[0]?.event_type_id,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -260,7 +268,9 @@ const BetSlip = ({
               marketId: data?.[1]?.id,
               selection_id: data?.[1]?.runners?.[0]?.id,
               runner_name: data?.[1]?.runners?.[0]?.name,
-              isback: 1,
+              isback: 0,
+              event_id: data?.[1]?.eventId,
+              event_type_id: data?.[1]?.event_type_id,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -298,7 +308,9 @@ const BetSlip = ({
               marketId: data?.[2]?.id,
               selection_id: data?.[2]?.runners?.[0]?.id,
               runner_name: data?.[2]?.runners?.[0]?.name,
-              isback: 1,
+              isback: 0,
+              event_id: data?.[2]?.eventId,
+              event_type_id: data?.[2]?.event_type_id,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center

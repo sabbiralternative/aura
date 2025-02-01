@@ -4,7 +4,7 @@ import { Status } from "../../const";
 const BetSlip = ({ data, status }) => {
   return (
     <div
-      className={`flex lg:absolute flex-col gap-1 perspective w-full max-w-lg transition-all ease-in-out duration-1000 items-center justify-center bottom-32 ${
+      className={`flex  flex-col gap-1 perspective w-full max-w-lg transition-all ease-in-out duration-1000 items-center justify-center bottom-32 ${
         status === Status.SUSPENDED ? "applyPerspective" : ""
       }`}
     >
