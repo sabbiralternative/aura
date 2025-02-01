@@ -39,6 +39,7 @@ const BetSlip = ({
           isback: data?.isback,
           serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
           actionBy: stake,
+          undo: [...(prev[key]?.undo || []), stake],
         },
       };
     });
@@ -59,7 +60,7 @@ const BetSlip = ({
         updatedState[key] = {
           ...prev[key],
           stake: prev[key].show ? prev[key].stake : stake,
-          actionBy: prev[key].show ? prev[key].actionBy : stake,
+          actionBy: stake,
         };
       }
       return updatedState;

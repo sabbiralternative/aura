@@ -50,9 +50,16 @@ const TeenPattiOneDay = () => {
       }, {});
 
       if (maxSerialObject.obj) {
-        const updatedObj = { ...maxSerialObject.obj };
-        if (updatedObj.stake > updatedObj.actionBy) {
-          updatedObj.stake -= updatedObj.actionBy;
+        const updatedObj = {
+          ...maxSerialObject.obj,
+          undo: [...maxSerialObject.obj.undo],
+        };
+
+        if (
+          updatedObj.undo.length > 0 &&
+          updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
+        ) {
+          updatedObj.stake -= updatedObj.undo.pop();
         } else {
           updatedObj.show = false;
           delete updatedObj.serial;
@@ -67,6 +74,7 @@ const TeenPattiOneDay = () => {
       return prev;
     });
   };
+
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
   return (
