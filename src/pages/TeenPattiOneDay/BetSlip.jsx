@@ -7,15 +7,16 @@ import Stake from "../../components/shared/Stake/Stake";
 const BetSlip = ({ data, status }) => {
   const { stake } = useSelector((state) => state.global);
 
-  // Single state object to manage all stake values and visibility
-  const [stakeState, setStakeState] = useState({
+  const initialState = {
     playerABack: { show: false, value: stake },
     playerALay: { show: false, value: stake },
     playerBBack: { show: false, value: stake },
     playerBLay: { show: false, value: stake },
     aPlus: { show: false, value: stake },
     bPlus: { show: false, value: stake },
-  });
+  };
+
+  const [stakeState, setStakeState] = useState(initialState);
 
   // Generic function to update stake state
   const handleStakeChange = (key) => {
@@ -31,16 +32,23 @@ const BetSlip = ({ data, status }) => {
   // Reset state when status is OPEN
   useEffect(() => {
     if (status === Status.OPEN) {
-      setStakeState({
-        playerABack: { show: false, value: stake },
-        playerALay: { show: false, value: stake },
-        playerBBack: { show: false, value: stake },
-        playerBLay: { show: false, value: stake },
-        aPlus: { show: false, value: stake },
-        bPlus: { show: false, value: stake },
-      });
+      setStakeState(initialState);
     }
-  }, [status, stake]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  useEffect(() => {
+    setStakeState((prev) => {
+      const updatedState = {};
+      for (const key in prev) {
+        updatedState[key] = {
+          ...prev[key],
+          value: prev[key].show ? prev[key].value : stake, // Update only if show is false
+        };
+      }
+      return updatedState;
+    });
+  }, [stake]); // Runs when stake value changes
 
   return (
     <div
@@ -56,7 +64,7 @@ const BetSlip = ({ data, status }) => {
           onClick={() => handleStakeChange("playerABack")}
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
             ${
-              data?.[0]?.status === "OPEN"
+              data?.[0]?.status === Status.OPEN
                 ? "cursor-pointer"
                 : " cursor-not-allowed pointer-events-none"
             }
@@ -76,7 +84,7 @@ const BetSlip = ({ data, status }) => {
               )}
             </div>
           </div>
-          {data?.[0]?.status === "OPEN" ? (
+          {data?.[0]?.status === Status.OPEN ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
               {data?.[0]?.runners?.[0]?.back[0]?.price}
             </span>
@@ -89,7 +97,7 @@ const BetSlip = ({ data, status }) => {
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
         cursor-pointer
          bg-gradient-to-l from-red to-red/70 rounded-r-lg h-16 ${
-           data?.[0]?.status === "OPEN"
+           data?.[0]?.status === Status.OPEN
              ? "cursor-pointer"
              : " cursor-not-allowed pointer-events-none"
          }`}
@@ -106,7 +114,7 @@ const BetSlip = ({ data, status }) => {
               )}
             </div>
           </div>
-          {data?.[0]?.status === "OPEN" ? (
+          {data?.[0]?.status === Status.OPEN ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
               {data?.[0]?.runners?.[0]?.lay[0]?.price}
             </span>
@@ -118,7 +126,7 @@ const BetSlip = ({ data, status }) => {
           onClick={() => handleStakeChange("playerBBack")}
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
        ${
-         data?.[0]?.status === "OPEN"
+         data?.[0]?.status === Status.OPEN
            ? "cursor-pointer"
            : " cursor-not-allowed pointer-events-none"
        }
@@ -139,7 +147,7 @@ const BetSlip = ({ data, status }) => {
               )}
             </div>
           </div>
-          {data?.[0]?.status === "OPEN" ? (
+          {data?.[0]?.status === Status.OPEN ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
               {data?.[0]?.runners?.[1]?.back[0]?.price}
             </span>
@@ -152,7 +160,7 @@ const BetSlip = ({ data, status }) => {
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
 
          bg-gradient-to-l from-red to-red/70 rounded-r-lg h-16 ${
-           data?.[0]?.status === "OPEN"
+           data?.[0]?.status === Status.OPEN
              ? "cursor-pointer"
              : " cursor-not-allowed pointer-events-none"
          }`}
@@ -169,7 +177,7 @@ const BetSlip = ({ data, status }) => {
               )}
             </div>
           </div>
-          {data?.[0]?.status === "OPEN" ? (
+          {data?.[0]?.status === Status.OPEN ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
               {data?.[0]?.runners?.[1]?.lay[0]?.price}
             </span>
@@ -183,7 +191,7 @@ const BetSlip = ({ data, status }) => {
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
          cursor-pointer
          bg-gradient-to-t from-gray/30 to-gray/70 col-span-2 rounded-lg h-12 ${
-           data?.[1]?.status === "OPEN"
+           data?.[1]?.status === Status.OPEN
              ? "cursor-pointer"
              : " cursor-not-allowed pointer-events-none"
          }`}
@@ -200,8 +208,8 @@ const BetSlip = ({ data, status }) => {
               )}
             </div>
           </div>
-          {data?.[1]?.status === "OPEN" &&
-          data?.[1]?.runners?.[0]?.status === "ACTIVE" ? (
+          {data?.[1]?.status === Status.OPEN &&
+          data?.[1]?.runners?.[0]?.status === Status.ACTIVE ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
               {data?.[1]?.runners?.[0]?.back[0]?.price}
             </span>
@@ -214,7 +222,7 @@ const BetSlip = ({ data, status }) => {
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
          cursor-pointer
          bg-gradient-to-t from-gray/30 to-gray/70 col-span-2 rounded-lg h-12 ${
-           data?.[2]?.status === "OPEN"
+           data?.[2]?.status === Status.OPEN
              ? "cursor-pointer"
              : " cursor-not-allowed pointer-events-none"
          }`}
@@ -231,8 +239,8 @@ const BetSlip = ({ data, status }) => {
               )}
             </div>
           </div>
-          {data?.[2]?.status === "OPEN" &&
-          data?.[2]?.runners?.[0]?.status === "ACTIVE" ? (
+          {data?.[2]?.status === Status.OPEN &&
+          data?.[2]?.runners?.[0]?.status === Status.ACTIVE ? (
             <span className="absolute font-mono tracking-tighter bottom-1 text-[10px] text-white left-0.5">
               {data?.[2]?.runners?.[0]?.back[0]?.price}
             </span>
