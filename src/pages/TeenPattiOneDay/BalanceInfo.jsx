@@ -7,7 +7,7 @@ const BalanceInfo = ({ firstEvent, totalBet }) => {
       <div className="z-10 flex flex-col text-xs font-normal capitalize text-text-primary">
         <span className="flex items-center gap-1">
           Total Bet
-          <span className="text-yellow">{totalBet > 0 && totalBet}</span>
+          <span className="text-yellow">{totalBet}</span>
         </span>
         <span className="flex items-center gap-1">
           Balance
