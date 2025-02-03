@@ -12,6 +12,7 @@ const BetSlip = ({
   setStakeState,
   stakeState,
   initialState,
+  setTotalBet,
 }) => {
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
@@ -35,6 +36,7 @@ const BetSlip = ({
             : prev[key].stake,
           marketId: data?.marketId,
           selection_id: data?.selection_id,
+          price: data?.price,
           runner_name: data?.runner_name,
           isback: data?.isback,
           serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
@@ -75,6 +77,7 @@ const BetSlip = ({
       runner_name: bet?.runner_name,
       stake: bet?.stake,
       isback: bet?.isback,
+      price: bet?.price,
     }));
 
     if (status === Status.SUSPENDED && payload?.length > 0) {
@@ -82,6 +85,11 @@ const BetSlip = ({
         const res = await addOrder(payload).unwrap();
         payload = [];
         if (res?.success) {
+          let totalBet = 0;
+          for (let bet of filterPlacedBet) {
+            totalBet += bet?.stake;
+          }
+          setTotalBet((prev) => prev + totalBet);
           setToast(res?.Message);
         }
       };
@@ -109,6 +117,7 @@ const BetSlip = ({
               isback: 0,
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
+              price: data?.[0]?.runners?.[0]?.back[0]?.price,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -150,6 +159,7 @@ const BetSlip = ({
               isback: 1,
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
+              price: data?.[0]?.runners?.[0]?.lay[0]?.price,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -189,6 +199,7 @@ const BetSlip = ({
               isback: 0,
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
+              price: data?.[0]?.runners?.[1]?.back[0]?.price,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -231,6 +242,7 @@ const BetSlip = ({
               isback: 1,
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
+              price: data?.[0]?.runners?.[1]?.lay[0]?.price,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -271,6 +283,7 @@ const BetSlip = ({
               isback: 0,
               event_id: data?.[1]?.eventId,
               event_type_id: data?.[1]?.event_type_id,
+              price: data?.[1]?.runners?.[0]?.back[0]?.price,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -311,6 +324,7 @@ const BetSlip = ({
               isback: 0,
               event_id: data?.[2]?.eventId,
               event_type_id: data?.[2]?.event_type_id,
+              price: data?.[2]?.runners?.[0]?.back[0]?.price,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center

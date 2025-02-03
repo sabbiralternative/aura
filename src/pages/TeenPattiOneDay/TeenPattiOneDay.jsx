@@ -3,7 +3,7 @@ import { useGetEventDetailsQuery } from "../../redux/features/events/events";
 import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import BetSlip from "./BetSlip";
@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
 
 const TeenPattiOneDay = () => {
+  const [totalBet, setTotalBet] = useState(0);
   const { stake } = useSelector((state) => state.global);
   const [toast, setToast] = useState(null);
   const { balance } = useSelector((state) => state.auth);
@@ -27,6 +28,7 @@ const TeenPattiOneDay = () => {
   );
 
   const firstEvent = data?.result?.[0];
+  const roundId = firstEvent?.roundId;
 
   const initialState = {
     playerABack: { show: false, stake },
@@ -77,6 +79,10 @@ const TeenPattiOneDay = () => {
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
+  useEffect(() => {
+    setTotalBet(0);
+  }, [roundId]);
+
   return (
     <main
       className="main max-w-md relative flex  lg:aspect-video    mx-auto   flex-col overflow-x-hidden  items-center justify-between bg-gradient-to-b from-[#1d184b] via-[#1d184b]"
@@ -119,6 +125,7 @@ const TeenPattiOneDay = () => {
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
         {<Card data={firstEvent} />}
         <BetSlip
+          setTotalBet={setTotalBet}
           initialState={initialState}
           stakeState={stakeState}
           setStakeState={setStakeState}
@@ -223,7 +230,7 @@ const TeenPattiOneDay = () => {
           </span>
         </div>
         <div>
-          <BalanceInfo firstEvent={firstEvent} />
+          <BalanceInfo firstEvent={firstEvent} totalBet={totalBet} />
           <RecentWinner recentWinner={firstEvent?.recent_winner} />
         </div>
       </div>
