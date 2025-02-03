@@ -4,14 +4,18 @@ import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
 import Card from "../../components/modules/TeenPatti2020/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import { useSelector } from "react-redux";
 import Chip from "../../components/shared/Chip/Chip";
 import BetSlip from "./BetSlip";
+import Toast from "../../components/shared/Toast/Toast";
 
 const Muflis = () => {
+  const [totalBet, setTotalBet] = useState(0);
+  const { stake } = useSelector((state) => state.global);
+  const [toast, setToast] = useState(null);
   const { balance } = useSelector((state) => state.auth);
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
@@ -22,6 +26,60 @@ const Muflis = () => {
   );
 
   const firstEvent = data?.result?.[0];
+  const roundId = firstEvent?.roundId;
+
+  const initialState = {
+    top9A: { show: false, stake },
+    top9B: { show: false, stake },
+    playerA: { show: false, stake },
+    playerB: { show: false, stake },
+    baccaratA: { show: false, stake },
+    baccaratB: { show: false, stake },
+  };
+
+  const [stakeState, setStakeState] = useState(initialState);
+
+  const handleUndoStake = () => {
+    setStakeState((prev) => {
+      const prevValues = Object.entries(prev);
+      const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
+        if (currentObj.serial > (maxObj?.serial || 0)) {
+          return { key, obj: currentObj };
+        }
+        return maxObj;
+      }, {});
+
+      if (maxSerialObject.obj) {
+        const updatedObj = {
+          ...maxSerialObject.obj,
+          undo: [...maxSerialObject.obj.undo],
+        };
+
+        if (
+          updatedObj.undo.length > 0 &&
+          updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
+        ) {
+          updatedObj.stake -= updatedObj.undo.pop();
+        } else {
+          updatedObj.show = false;
+          delete updatedObj.serial;
+        }
+
+        return {
+          ...prev,
+          [maxSerialObject.key]: updatedObj,
+        };
+      }
+
+      return prev;
+    });
+  };
+
+  const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
+
+  useEffect(() => {
+    setTotalBet(0);
+  }, [roundId]);
 
   return (
     <main
@@ -63,7 +121,15 @@ const Muflis = () => {
       </div>
       <div className="bottom-0 flex flex-col w-full gap-4 px-1">
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
-        <BetSlip data={data?.result} status={firstEvent?.status} />
+        <BetSlip
+          setTotalBet={setTotalBet}
+          initialState={initialState}
+          stakeState={stakeState}
+          setStakeState={setStakeState}
+          setToast={setToast}
+          data={data?.result}
+          status={firstEvent?.status}
+        />
 
         <div className="relative flex items-center justify-between w-full">
           <div className="flex items-center justify-center gap-2 text-white">
@@ -117,7 +183,12 @@ const Muflis = () => {
           </div>
           <span className="absolute z-50 -translate-x-1/2 left-1/2 transition-all duration-1000 ease-in-out">
             <div>
-              {firstEvent?.status === Status.OPEN && balance >= 100 && <Chip />}
+              {firstEvent?.status === Status.OPEN && balance >= 100 && (
+                <Chip
+                  isPlaceStake={isPlaceStake}
+                  handleUndoStake={handleUndoStake}
+                />
+              )}
               {balance < 100 && (
                 <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
                   <span className="px-2 text-xs text-white/70 glass">
@@ -153,7 +224,7 @@ const Muflis = () => {
           <div className="flex items-end justify-between w-full">
             <div className="z-10 flex flex-col text-xs font-normal capitalize text-text-primary">
               <span className="flex items-center gap-1">
-                Total Bet<span className="text-yellow">0</span>
+                Total Bet<span className="text-yellow">{totalBet}</span>
               </span>
               <span className="flex items-center gap-1">
                 Balance
@@ -547,8 +618,13 @@ const Muflis = () => {
         0
       </div>
       */}
-      {firstEvent?.status === Status.OPEN && (
-        <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">
+      {toast && (
+        <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
+          <Toast message={toast} setMessage={setToast} />{" "}
+        </div>
+      )}
+      {!toast && firstEvent?.status === Status.OPEN && (
+        <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
           PLACE YOUR BETS
         </div>
       )}

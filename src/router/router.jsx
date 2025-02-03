@@ -9,6 +9,8 @@ import TeenPattiOneDay from "../pages/TeenPattiOneDay/TeenPattiOneDay";
 import Muflis from "../pages/Muflis/Muflis";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Bollywood from "../pages/Bollywood/Bollywood";
+import Baccarat from "../pages/Baccarat/Baccarat";
+import War from "../pages/War/War";
 
 export const router = createBrowserRouter(
   [
@@ -48,6 +50,14 @@ export const router = createBrowserRouter(
         {
           path: "/btable/:eventTypeId/:eventId",
           element: <Bollywood />,
+        },
+        {
+          path: "/baccarat/:eventTypeId/:eventId",
+          element: <Baccarat />,
+        },
+        {
+          path: "/war/:eventTypeId/:eventId",
+          element: <War />,
         },
       ],
     },

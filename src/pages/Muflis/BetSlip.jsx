@@ -1,7 +1,114 @@
+import { useSelector } from "react-redux";
 import { Lock } from "../../assets/icon";
 import { Status } from "../../const";
+import { useOrderMutation } from "../../redux/features/events/events";
+import { useEffect } from "react";
+import { getBackPrice, isRunnerActive } from "../../utils/betSlip";
+import Stake from "../../components/shared/Stake/Stake";
 
-const BetSlip = ({ data, status }) => {
+const BetSlip = ({
+  data,
+  status,
+  setToast,
+  setStakeState,
+  stakeState,
+  initialState,
+  setTotalBet,
+}) => {
+  const [addOrder] = useOrderMutation();
+  const { stake } = useSelector((state) => state.global);
+
+  // Generic function to update stake state
+  const handleStakeChange = (payload) => {
+    const { key, data, dataIndex, runnerIndex, type } = payload;
+    const formatData = {
+      marketId: data?.[dataIndex]?.id,
+      selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
+      runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
+      isback: type === "back" ? 0 : 1,
+      event_id: data?.[dataIndex]?.eventId,
+      event_type_id: data?.[dataIndex]?.event_type_id,
+      price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
+    };
+    setStakeState((prev) => {
+      const maxSerial = Math.max(
+        0,
+        ...Object.values(prev)
+          .map((item) => item.serial)
+          .filter((serial) => serial !== undefined)
+      );
+
+      return {
+        ...prev,
+        [key]: {
+          show: true,
+          stake: prev[key].show
+            ? prev[key].stake + prev[key].actionBy
+            : prev[key].stake,
+          marketId: formatData?.marketId,
+          selection_id: formatData?.selection_id,
+          price: formatData?.price,
+          runner_name: formatData?.runner_name,
+          isback: formatData?.isback,
+          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+          actionBy: stake,
+          undo: [...(prev[key]?.undo || []), stake],
+        },
+      };
+    });
+  };
+
+  // Reset state when status is OPEN
+  useEffect(() => {
+    if (status === Status.OPEN) {
+      setStakeState(initialState);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  useEffect(() => {
+    setStakeState((prev) => {
+      const updatedState = {};
+      for (const key in prev) {
+        updatedState[key] = {
+          ...prev[key],
+          stake: prev[key].show ? prev[key].stake : stake,
+          actionBy: stake,
+        };
+      }
+      return updatedState;
+    });
+  }, [stake]); // Runs when stake value changes
+
+  useEffect(() => {
+    const filterPlacedBet = Object.values(stakeState).filter((bet) => bet.show);
+    let payload = filterPlacedBet.map((bet) => ({
+      marketId: bet?.marketId,
+      selection_id: bet?.selection_id,
+      runner_name: bet?.runner_name,
+      stake: bet?.stake,
+      isback: bet?.isback,
+      price: bet?.price,
+    }));
+
+    if (status === Status.SUSPENDED && payload?.length > 0) {
+      const handleOrder = async () => {
+        const res = await addOrder(payload).unwrap();
+        payload = [];
+        if (res?.success) {
+          let totalBet = 0;
+          for (let bet of filterPlacedBet) {
+            totalBet += bet?.stake;
+          }
+          setTotalBet((prev) => prev + totalBet);
+          setToast(res?.Message);
+        }
+      };
+      handleOrder();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addOrder, status]);
+
   return (
     <div
       className={`flex  flex-col gap-1 perspective w-full max-w-lg transition-all ease-in-out duration-1000 items-center justify-center bottom-32 ${
@@ -10,15 +117,35 @@ const BetSlip = ({ data, status }) => {
     >
       <div className="grid grid-cols-2 h-fit w-full px-2 gap-0.5 mx-auto transition-all ease-in-out duration-1000">
         <div
-          className="relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "top9A",
+              data,
+              dataIndex: 2,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20 ${
+            isRunnerActive(data, 2, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="top9A"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white/60">
             Top9A
           </span>
-          {data?.[2]?.status === "OPEN" ? (
+          <div className="z-50">
+            <div className="relative w-10 h-10">
+              {stakeState?.top9A?.show && (
+                <Stake stake={stakeState?.top9A?.stake} />
+              )}
+            </div>
+          </div>
+          {isRunnerActive(data, 2, 0) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {data?.[2]?.runners?.[0]?.back[0]?.price}
+              {getBackPrice(data, 2, 0)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -1045,15 +1172,35 @@ const BetSlip = ({ data, status }) => {
           </svg>
         </div>
         <div
-          className="relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "top9B",
+              data,
+              dataIndex: 3,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20 ${
+            isRunnerActive(data, 3, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="top9B"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white/60">
             Top9B
           </span>
-          {data?.[3]?.status === "OPEN" ? (
+          <div className="z-50">
+            <div className="relative w-10 h-10">
+              {stakeState?.top9B?.show && (
+                <Stake stake={stakeState?.top9B?.stake} />
+              )}
+            </div>
+          </div>
+          {isRunnerActive(data, 3, 0) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {data?.[3]?.runners?.[0]?.back[0]?.price}
+              {getBackPrice(data, 3, 0)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -2080,15 +2227,35 @@ const BetSlip = ({ data, status }) => {
           </svg>
         </div>
         <div
-          className="relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-green/60 text-green"
+          onClick={() =>
+            handleStakeChange({
+              key: "playerA",
+              data,
+              dataIndex: 0,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-green/60 text-green ${
+            isRunnerActive(data, 0, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="playerA"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white">
             PlayerA
           </span>
-          {data?.[0]?.status === "OPEN" ? (
+          <div className="z-50">
+            <div className="relative w-10 h-10">
+              {stakeState?.playerA?.show && (
+                <Stake stake={stakeState?.playerA?.stake} />
+              )}
+            </div>
+          </div>
+          {isRunnerActive(data, 0, 0) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {data?.[0]?.runners?.[0]?.back[0]?.price}
+              {getBackPrice(data, 0, 0)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -3115,15 +3282,35 @@ const BetSlip = ({ data, status }) => {
           </svg>
         </div>
         <div
-          className="relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-blue/60"
+          onClick={() =>
+            handleStakeChange({
+              key: "playerB",
+              data,
+              dataIndex: 0,
+              runnerIndex: 1,
+              type: "back",
+            })
+          }
+          className={`relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-blue/60 ${
+            isRunnerActive(data, 0, 1)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="playerB"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white">
             PlayerB
           </span>
-          {data?.[0]?.status === "OPEN" ? (
+          <div className="z-50">
+            <div className="relative w-10 h-10">
+              {stakeState?.playerB?.show && (
+                <Stake stake={stakeState?.playerB?.stake} />
+              )}
+            </div>
+          </div>
+          {isRunnerActive(data, 0, 1) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {data?.[0]?.runners?.[1]?.back[0]?.price}
+              {getBackPrice(data, 0, 1)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -4149,15 +4336,35 @@ const BetSlip = ({ data, status }) => {
           </svg>
         </div>
         <div
-          className="relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "baccaratA",
+              data,
+              dataIndex: 1,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20 ${
+            isRunnerActive(data, 1, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="baccaratA"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white/60">
             BaccaratA
           </span>
-          {data?.[1]?.status === "OPEN" ? (
+          <div className="z-50">
+            <div className="relative w-10 h-10">
+              {stakeState?.baccaratA?.show && (
+                <Stake stake={stakeState?.baccaratA?.stake} />
+              )}
+            </div>
+          </div>
+          {isRunnerActive(data, 1, 0) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {data?.[1]?.runners?.[0]?.back[0]?.price}
+              {getBackPrice(data, 1, 0)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -5183,15 +5390,35 @@ const BetSlip = ({ data, status }) => {
           </svg>
         </div>
         <div
-          className="relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "baccaratB",
+              data,
+              dataIndex: 1,
+              runnerIndex: 1,
+              type: "back",
+            })
+          }
+          className={`relative backdrop-blur-sm rounded-lg h-14 w-full flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/50 bg-white/20 ${
+            isRunnerActive(data, 1, 1)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="baccaratB"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white/60">
             BaccaratB
           </span>
-          {data?.[1]?.status === "OPEN" ? (
+          <div className="z-50">
+            <div className="relative w-10 h-10">
+              {stakeState?.baccaratB?.show && (
+                <Stake stake={stakeState?.baccaratB?.stake} />
+              )}
+            </div>
+          </div>
+          {isRunnerActive(data, 1, 1) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {data?.[0]?.runners?.[1]?.back[0]?.price}
+              {getBackPrice(data, 1, 1)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
