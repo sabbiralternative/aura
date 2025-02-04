@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 
-const AmountSection = ({ firstEvent }) => {
+const AmountSection = ({ firstEvent,totalBet }) => {
   const { balance } = useSelector((state) => state.auth);
 
   return (
     <div className="flex items-end justify-between w-full">
       <div className="z-10 flex flex-col text-xs font-normal capitalize text-text-primary">
         <span className="flex items-center gap-1">
-          Total Win<span className="text-yellow">0</span>
+          Total Win<span className="text-yellow">{totalBet}</span>
         </span>
         <span className="flex items-center gap-1">
           Balance

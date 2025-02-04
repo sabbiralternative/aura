@@ -5,7 +5,17 @@ const RecentWinner = ({ recentWinner }) => {
         return (
           <span key={winner?.roundId}>
             <div className="bounceInAnimation text-black uppercase flex items-center justify-center gap-2">
-              <div className="px-2 py-1 bg-white flex items-center justify-center gap-1 cursor-pointer rounded-md">
+              <div
+                className={`px-2 py-1  flex items-center justify-center gap-1 cursor-pointer rounded-md ${
+                  winner?.winner === "H"
+                    ? "bg-[#38b142] text-white"
+                    : winner.winner === "L"
+                    ? "bg-[#d83b32] text-white"
+                    : winner.winner === "7"
+                    ? "bg-[#156ed1] text-white"
+                    : "bg-white"
+                }`}
+              >
                 {/* <span className="w-4 h-4">
                   <svg
                     width={198}
@@ -21,7 +31,7 @@ const RecentWinner = ({ recentWinner }) => {
                     />
                   </svg>
                 </span> */}
-                <span className="text-sm font-semibold">{winner?.winner}</span>
+                <span className="text-sm font-semibold ">{winner?.winner}</span>
               </div>
             </div>{" "}
           </span>

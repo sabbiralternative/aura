@@ -1,6 +1,115 @@
+import { useSelector } from "react-redux";
 import { Status } from "../../../const";
+import { useOrderMutation } from "../../../redux/features/events/events";
+import { useEffect } from "react";
+import { getBackPrice, isRunnerActive } from "../../../utils/betSlip";
+import Stake from "../../shared/Stake/Stake";
+import { Lock } from "../../../assets/icon";
 
-const BetSlip = ({ status }) => {
+const BetSlip = ({
+  data,
+  status,
+  setToast,
+  setStakeState,
+  stakeState,
+  initialState,
+  setTotalBet,
+}) => {
+  const [addOrder] = useOrderMutation();
+  const { stake } = useSelector((state) => state.global);
+
+  // Generic function to update stake state
+  const handleStakeChange = (payload) => {
+    const { key, data, dataIndex, runnerIndex, type } = payload;
+    const formatData = {
+      marketId: data?.[dataIndex]?.id,
+      selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
+      runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
+      isback: type === "back" ? 0 : 1,
+      event_id: data?.[dataIndex]?.eventId,
+      event_type_id: data?.[dataIndex]?.event_type_id,
+      price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
+    };
+    setStakeState((prev) => {
+      const maxSerial = Math.max(
+        0,
+        ...Object.values(prev)
+          .map((item) => item.serial)
+          .filter((serial) => serial !== undefined)
+      );
+
+      return {
+        ...prev,
+        [key]: {
+          show: true,
+          stake: prev[key].show
+            ? prev[key].stake + prev[key].actionBy
+            : prev[key].stake,
+          marketId: formatData?.marketId,
+          selection_id: formatData?.selection_id,
+          price: formatData?.price,
+          runner_name: formatData?.runner_name,
+          isback: formatData?.isback,
+          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+          actionBy: stake,
+          undo: [...(prev[key]?.undo || []), stake],
+        },
+      };
+    });
+  };
+
+  // Reset state when status is OPEN
+  useEffect(() => {
+    if (status === Status.OPEN) {
+      setStakeState(initialState);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  useEffect(() => {
+    setStakeState((prev) => {
+      const updatedState = {};
+      for (const key in prev) {
+        updatedState[key] = {
+          ...prev[key],
+          stake: prev[key].show ? prev[key].stake : stake,
+          actionBy: stake,
+        };
+      }
+      return updatedState;
+    });
+  }, [stake]); // Runs when stake value changes
+
+  useEffect(() => {
+    const filterPlacedBet = Object.values(stakeState).filter((bet) => bet.show);
+    let payload = filterPlacedBet.map((bet) => ({
+      marketId: bet?.marketId,
+      selection_id: bet?.selection_id,
+      runner_name: bet?.runner_name,
+      stake: bet?.stake,
+      isback: bet?.isback,
+      price: bet?.price,
+    }));
+
+    if (status === Status.SUSPENDED && payload?.length > 0) {
+      const handleOrder = async () => {
+        const res = await addOrder(payload).unwrap();
+        payload = [];
+        if (res?.success) {
+          let totalBet = 0;
+          for (let bet of filterPlacedBet) {
+            totalBet += bet?.stake;
+          }
+          setTotalBet((prev) => prev + totalBet);
+          setToast(res?.Message);
+        }
+      };
+      handleOrder();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addOrder, status]);
+
+  // console.log(data);
   return (
     <div className="flex flex-col w-full gap-2 px-1 perspective transition-all duration-1000 ease-in-out">
       <div
@@ -9,7 +118,20 @@ const BetSlip = ({ status }) => {
         }`}
       >
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer rounded-tl-md false false false col-span-2 border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "even",
+              data,
+              dataIndex: 1,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer rounded-tl-md false false false col-span-2 border-white/20 bg-white/20 ${
+            isRunnerActive(data, 1, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="even"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -19,14 +141,35 @@ const BetSlip = ({ status }) => {
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              {stakeState?.even?.show && (
+                <Stake stake={stakeState?.even?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            2.1
-          </span>
+          {isRunnerActive(data, 1, 0) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 1, 0)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-green/80"
+          onClick={() =>
+            handleStakeChange({
+              key: "up",
+              data,
+              dataIndex: 0,
+              runnerIndex: 1,
+              type: "back",
+            })
+          }
+          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-[#38b142] ${
+            isRunnerActive(data, 0, 1)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="up"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -36,14 +179,33 @@ const BetSlip = ({ status }) => {
             </span>
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              {stakeState?.up?.show && <Stake stake={stakeState?.up?.stake} />}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            2
-          </span>
+          {isRunnerActive(data, 0, 1) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 0, 1)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false rounded-tr-md false false col-span-2 border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "odd",
+              data,
+              dataIndex: 1,
+              runnerIndex: 1,
+              type: "back",
+            })
+          }
+          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false rounded-tr-md false false col-span-2 border-white/20 bg-white/20 ${
+            isRunnerActive(data, 1, 1)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="odd"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -53,12 +215,22 @@ const BetSlip = ({ status }) => {
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              {stakeState?.odd?.show && (
+                <Stake stake={stakeState?.odd?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            1.8
-          </span>
+          {isRunnerActive(data, 1, 1) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 1, 1)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
+
+        {/* Below not integrated */}
         <div
           className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
           id="diamond"
@@ -119,7 +291,7 @@ const BetSlip = ({ status }) => {
           </span>
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-blue/80 bg-blue/80"
+          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#156ed1] bg-[#156ed1]"
           id="seven"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -195,8 +367,22 @@ const BetSlip = ({ status }) => {
             3.75
           </span>
         </div>
+        {/* Above not integrated */}
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false rounded-bl-md false col-span-2 border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "red",
+              data,
+              dataIndex: 2,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false rounded-bl-md false col-span-2 border-white/20 bg-white/20 ${
+            isRunnerActive(data, 2, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="red"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -232,14 +418,35 @@ const BetSlip = ({ status }) => {
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              {stakeState?.red?.show && (
+                <Stake stake={stakeState?.red?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            1.98
-          </span>
+          {isRunnerActive(data, 2, 0) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 2, 0)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-red/80 bg-red/80"
+          onClick={() =>
+            handleStakeChange({
+              key: "down",
+              data,
+              dataIndex: 0,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#d83b32] bg-[#d83b32] ${
+            isRunnerActive(data, 0, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="down"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -249,14 +456,35 @@ const BetSlip = ({ status }) => {
             </span>
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              {stakeState?.down?.show && (
+                <Stake stake={stakeState?.down?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            2
-          </span>
+          {isRunnerActive(data, 0, 0) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 0, 0)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false rounded-br-md col-span-2 border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "black",
+              data,
+              dataIndex: 2,
+              runnerIndex: 1,
+              type: "back",
+            })
+          }
+          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false rounded-br-md col-span-2 border-white/20 bg-white/20 ${
+            isRunnerActive(data, 2, 1)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="black"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -293,11 +521,19 @@ const BetSlip = ({ status }) => {
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              {stakeState?.black?.show && (
+                <Stake stake={stakeState?.black?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            1.98
-          </span>
+          {isRunnerActive(data, 2, 1) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 2, 1)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
       </div>
     </div>

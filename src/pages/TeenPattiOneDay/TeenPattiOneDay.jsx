@@ -98,32 +98,11 @@ const TeenPattiOneDay = () => {
         <div className="w-full aspect-video w-[100%]  origin-top  transition-all duration-1000 ease-in-out scale-[140%]">
           <AntMedia />
         </div>
-        {/* <div
-          className="h-full absolute pointer-events-none top-0  text-xs overflow-y-auto w-fit  transition-all duration-500 ease-in-out opacity-0 left-0"
-          style={{
-            maskImage:
-              "linear-gradient(transparent,black,black, black,black,transparent)",
-          }}
-        >
-          <div style={{ height: "186px" }} />
-          <div
-            className="text-xl text-white stroke-black"
-            style={{ textShadow: "black 1px 1px 2px" }}
-          >
-            Total Win
-            <span
-              className="text-yellow"
-              style={{ textShadow: "black 1px 1px 2px" }}
-            >
-              0
-            </span>
-          </div>
-          <div style={{ height: "186px" }} />
-        </div> */}
+  
       </div>
 
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
-        {<Card data={firstEvent} />}
+        { firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
         <BetSlip
           setTotalBet={setTotalBet}
           initialState={initialState}
