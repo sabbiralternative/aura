@@ -111,11 +111,11 @@ const BetSlip = ({
 
   return (
     <div
-      className={`flex  flex-col gap-1 perspective w-full max-w-lg transition-all ease-in-out duration-1000 items-center justify-center bottom-32 ${
-        status === Status.SUSPENDED ? "applyPerspective" : ""
-      }`}
+      className={`flex  flex-col gap-1 perspective w-full max-w-lg transition-all ease-in-out duration-1000 items-center justify-center bottom-32 `}
     >
-      <div className="grid grid-cols-2 h-fit w-full px-2 gap-0.5 mx-auto transition-all ease-in-out duration-1000">
+      <div className={`grid grid-cols-2 h-fit w-full px-2 gap-0.5 mx-auto transition-all ease-in-out duration-1000 ${
+        status === Status.SUSPENDED ? "applyPerspective" : ""
+      }`}>
         <div
           onClick={() =>
             handleStakeChange({

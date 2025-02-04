@@ -37,7 +37,6 @@ const War = () => {
     player4: { show: false, stake },
     player5: { show: false, stake },
     player6: { show: false, stake },
- 
   };
 
   const [stakeState, setStakeState] = useState(initialState);
@@ -102,7 +101,9 @@ const War = () => {
       </div>
 
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
-        {<Card data={data?.result} />}
+        {firstEvent?.status === Status.SUSPENDED && (
+          <Card data={data?.result} />
+        )}
         <BetSlip
           setTotalBet={setTotalBet}
           initialState={initialState}
