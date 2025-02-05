@@ -3,18 +3,21 @@ import { useGetEventDetailsQuery } from "../../redux/features/events/events";
 import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import BetSlip from "./BetSlip";
 import RecentWinner from "./RecentWinner";
 import BalanceInfo from "./BalanceInfo";
-import Card from "./Card";
 import Chip from "../../components/shared/Chip/Chip";
 import { useSelector } from "react-redux";
+import Toast from "../../components/shared/Toast/Toast";
 
 const Bollywood = () => {
   const { balance } = useSelector((state) => state.auth);
+  const [totalBet, setTotalBet] = useState(0);
+  const { stake } = useSelector((state) => state.global);
+  const [toast, setToast] = useState(null);
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
@@ -24,6 +27,74 @@ const Bollywood = () => {
   );
 
   const firstEvent = data?.result?.[0];
+  const roundId = firstEvent?.roundId;
+
+  const initialState = {
+    donBack: { show: false, stake },
+    donLay: { show: false, stake },
+    aaaBack: { show: false, stake },
+    aaaLay: { show: false, stake },
+    sbagBack: { show: false, stake },
+    sbagLay: { show: false, stake },
+    dvBack: { show: false, stake },
+    dvLay: { show: false, stake },
+    kkpkBack: { show: false, stake },
+    kkpkLay: { show: false, stake },
+    gulamBack: { show: false, stake },
+    gulamLay: { show: false, stake },
+    kq: { show: false, stake },
+    ja: { show: false, stake },
+    red: { show: false, stake },
+    black: { show: false, stake },
+    J: { show: false, stake },
+    Q: { show: false, stake },
+    K: { show: false, stake },
+    A: { show: false, stake },
+  };
+
+  const [stakeState, setStakeState] = useState(initialState);
+
+  const handleUndoStake = () => {
+    setStakeState((prev) => {
+      const prevValues = Object.entries(prev);
+      const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
+        if (currentObj.serial > (maxObj?.serial || 0)) {
+          return { key, obj: currentObj };
+        }
+        return maxObj;
+      }, {});
+
+      if (maxSerialObject.obj) {
+        const updatedObj = {
+          ...maxSerialObject.obj,
+          undo: [...maxSerialObject.obj.undo],
+        };
+
+        if (
+          updatedObj.undo.length > 0 &&
+          updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
+        ) {
+          updatedObj.stake -= updatedObj.undo.pop();
+        } else {
+          updatedObj.show = false;
+          delete updatedObj.serial;
+        }
+
+        return {
+          ...prev,
+          [maxSerialObject.key]: updatedObj,
+        };
+      }
+
+      return prev;
+    });
+  };
+
+  const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
+
+  useEffect(() => {
+    setTotalBet(0);
+  }, [roundId]);
 
   return (
     <main
@@ -40,32 +111,18 @@ const Bollywood = () => {
         <div className="w-full aspect-video w-[100%]  origin-top  transition-all duration-1000 ease-in-out scale-[140%]">
           <AntMedia />
         </div>
-        {/* <div
-          className="h-full absolute pointer-events-none top-0  text-xs overflow-y-auto w-fit  transition-all duration-500 ease-in-out opacity-0 left-0"
-          style={{
-            maskImage:
-              "linear-gradient(transparent,black,black, black,black,transparent)",
-          }}
-        >
-          <div style={{ height: "186px" }} />
-          <div
-            className="text-xl text-white stroke-black"
-            style={{ textShadow: "black 1px 1px 2px" }}
-          >
-            Total Win
-            <span
-              className="text-yellow"
-              style={{ textShadow: "black 1px 1px 2px" }}
-            >
-              0
-            </span>
-          </div>
-          <div style={{ height: "186px" }} />
-        </div> */}
       </div>
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
-        {<Card data={firstEvent} />}
-        <BetSlip data={data?.result} status={firstEvent?.status} />
+        {/* {<Card data={firstEvent} />} */}
+        <BetSlip
+          setTotalBet={setTotalBet}
+          initialState={initialState}
+          stakeState={stakeState}
+          setStakeState={setStakeState}
+          setToast={setToast}
+          data={data?.result}
+          status={firstEvent?.status}
+        />
 
         <div className="relative flex items-center justify-between w-full">
           <div className="flex items-center justify-center gap-2 text-white">
@@ -119,7 +176,12 @@ const Bollywood = () => {
           </div>
           <span className="absolute z-50 -translate-x-1/2 left-1/2 transition-all duration-1000 ease-in-out">
             <div>
-              {firstEvent?.status === Status.OPEN && balance >= 100 && <Chip />}
+              {firstEvent?.status === Status.OPEN && balance >= 100 && (
+                <Chip
+                  handleUndoStake={handleUndoStake}
+                  isPlaceStake={isPlaceStake}
+                />
+              )}
               {balance < 100 && (
                 <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
                   <span className="px-2 text-xs text-white/70 glass">
@@ -127,12 +189,6 @@ const Bollywood = () => {
                   </span>
                 </button>
               )}
-
-              {/* <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
-                <span className="px-2 text-xs text-white/70 glass">
-                  Insufficient Balance
-                </span>
-              </button> */}
             </div>{" "}
           </span>
           <span className="z-50 flex flex-col items-end gap-0.5">
@@ -158,7 +214,7 @@ const Bollywood = () => {
           </span>
         </div>
         <div>
-          <BalanceInfo firstEvent={firstEvent} />
+          <BalanceInfo totalBet={totalBet} firstEvent={firstEvent} />
           <RecentWinner recentWinner={firstEvent?.recent_winner} />
         </div>
       </div>
@@ -169,8 +225,12 @@ const Bollywood = () => {
           showFullScreen={showFullScreen}
         />
       )}
-
-      {firstEvent?.status === Status.OPEN && (
+      {toast && (
+        <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
+          <Toast message={toast} setMessage={setToast} />{" "}
+        </div>
+      )}
+      {!toast && firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
           PLACE YOUR BETS
         </div>
