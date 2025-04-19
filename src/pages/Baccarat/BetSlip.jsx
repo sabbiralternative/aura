@@ -22,6 +22,10 @@ const BetSlip = ({
   const handleStakeChange = (payload) => {
     const { key, data, dataIndex, runnerIndex, type } = payload;
     const formatData = {
+      roundId: data?.[dataIndex]?.roundId,
+      name: data?.[dataIndex]?.name,
+      eventId: data?.[dataIndex]?.eventId,
+      eventName: data?.[dataIndex]?.eventName,
       marketId: data?.[dataIndex]?.id,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
@@ -522,7 +526,9 @@ const BetSlip = ({
                 style={{ zIndex: 999 }}
               >
                 {data?.[0]?.runners?.[0]?.card?.length > 0 ? (
-                  <img src={`/cards/${data?.[0]?.runners?.[0]?.card?.[0]}.jpg`} />
+                  <img
+                    src={`/cards/${data?.[0]?.runners?.[0]?.card?.[0]}.jpg`}
+                  />
                 ) : (
                   <CardBack />
                 )}
@@ -535,7 +541,9 @@ const BetSlip = ({
               >
                 <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
                   {data?.[0]?.runners?.[0]?.card?.length > 1 ? (
-                    <img src={`/cards/${data?.[0]?.runners?.[0]?.card[1]}.jpg`} />
+                    <img
+                      src={`/cards/${data?.[0]?.runners?.[0]?.card[1]}.jpg`}
+                    />
                   ) : (
                     <CardBack />
                   )}
@@ -549,7 +557,9 @@ const BetSlip = ({
               >
                 <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
                   {data?.[0]?.runners?.[0]?.card?.length > 2 ? (
-                    <img src={`/cards/${data?.[0]?.runners?.[0]?.card?.[2]}.jpg`} />
+                    <img
+                      src={`/cards/${data?.[0]?.runners?.[0]?.card?.[2]}.jpg`}
+                    />
                   ) : (
                     <CardBack />
                   )}
@@ -637,7 +647,9 @@ const BetSlip = ({
               >
                 <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
                   {data?.[0]?.runners?.[1]?.card?.length > 0 ? (
-                    <img src={`/cards/${data?.[0]?.runners?.[1]?.card?.[0]}.jpg`} />
+                    <img
+                      src={`/cards/${data?.[0]?.runners?.[1]?.card?.[0]}.jpg`}
+                    />
                   ) : (
                     <CardBack />
                   )}
@@ -651,7 +663,9 @@ const BetSlip = ({
               >
                 <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
                   {data?.[0]?.runners?.[1]?.card?.length > 1 ? (
-                    <img src={`/cards/${data?.[0]?.runners?.[0]?.card?.[1]}.jpg`} />
+                    <img
+                      src={`/cards/${data?.[0]?.runners?.[0]?.card?.[1]}.jpg`}
+                    />
                   ) : (
                     <CardBack />
                   )}
@@ -665,7 +679,9 @@ const BetSlip = ({
               >
                 <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
                   {data?.[0]?.runners?.[1]?.card?.length > 2 ? (
-                    <img src={`/cards/${data?.[0]?.runners?.[1]?.card?.[2]}.jpg`} />
+                    <img
+                      src={`/cards/${data?.[0]?.runners?.[1]?.card?.[2]}.jpg`}
+                    />
                   ) : (
                     <CardBack />
                   )}

@@ -18,15 +18,28 @@ const RightSidebar = () => {
   });
 
   useEffect(() => {
+    let intervalId;
+
     if (token) {
       const getUser = async () => {
-        const res = await handleAuth({ token }).unwrap();
-        dispatch(
-          setUser({ username: res.username, balance: res.balance, token })
-        );
+        try {
+          const res = await handleAuth({ token }).unwrap();
+          dispatch(
+            setUser({ username: res.username, balance: res.balance, token })
+          );
+        } catch (error) {
+          console.error("Failed to fetch user:", error);
+        }
       };
-      getUser();
+
+      getUser(); // initial call
+
+      intervalId = setInterval(() => {
+        getUser();
+      }, 5000);
     }
+
+    return () => clearInterval(intervalId);
   }, [token, handleAuth, dispatch, refetch]);
 
   return (

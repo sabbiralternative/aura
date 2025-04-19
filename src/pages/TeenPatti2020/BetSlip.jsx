@@ -22,6 +22,10 @@ const BetSlip = ({
   const handleStakeChange = (payload) => {
     const { key, data, dataIndex, runnerIndex, type } = payload;
     const formatData = {
+      roundId: data?.[dataIndex]?.roundId,
+      name: data?.[dataIndex]?.name,
+      eventId: data?.[dataIndex]?.eventId,
+      eventName: data?.[dataIndex]?.eventName,
       marketId: data?.[dataIndex]?.id,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,

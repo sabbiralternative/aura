@@ -21,8 +21,13 @@ const BetSlip = ({
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
     const { key, data, dataIndex, runnerIndex, type } = payload;
+
     const formatData = {
       marketId: data?.[dataIndex]?.id,
+      roundId: data?.[dataIndex]?.roundId,
+      name: data?.[dataIndex]?.name,
+      eventId: data?.[dataIndex]?.eventId,
+      eventName: data?.[dataIndex]?.eventName,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
       isback: type === "back" ? 0 : 1,
@@ -30,6 +35,7 @@ const BetSlip = ({
       event_type_id: data?.[dataIndex]?.event_type_id,
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
+
     setStakeState((prev) => {
       const maxSerial = Math.max(
         0,

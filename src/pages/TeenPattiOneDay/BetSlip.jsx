@@ -38,6 +38,10 @@ const BetSlip = ({
           selection_id: data?.selection_id,
           price: data?.price,
           runner_name: data?.runner_name,
+          roundId: data?.roundId,
+          name: data?.name,
+          eventId: data?.eventId,
+          eventName: data?.eventName,
           isback: data?.isback,
           serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
           actionBy: stake,
@@ -78,6 +82,10 @@ const BetSlip = ({
       stake: bet?.stake,
       isback: bet?.isback,
       price: bet?.price,
+      roundId: bet?.roundId,
+      name: bet?.name,
+      eventId: bet?.eventId,
+      eventName: bet?.eventName,
     }));
 
     if (status === Status.SUSPENDED && payload?.length > 0) {
@@ -118,6 +126,10 @@ const BetSlip = ({
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
               price: data?.[0]?.runners?.[0]?.back[0]?.price,
+              roundId: data?.[0]?.roundId,
+              name: data?.[0]?.name,
+              eventId: data?.[0]?.eventId,
+              eventName: data?.[0]?.eventName,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -160,6 +172,10 @@ const BetSlip = ({
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
               price: data?.[0]?.runners?.[0]?.lay[0]?.price,
+              roundId: data?.[0]?.roundId,
+              name: data?.[0]?.name,
+              eventId: data?.[0]?.eventId,
+              eventName: data?.[0]?.eventName,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -200,6 +216,10 @@ const BetSlip = ({
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
               price: data?.[0]?.runners?.[1]?.back[0]?.price,
+              roundId: data?.[0]?.roundId,
+              name: data?.[0]?.name,
+              eventId: data?.[0]?.eventId,
+              eventName: data?.[0]?.eventName,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -243,6 +263,10 @@ const BetSlip = ({
               event_id: data?.[0]?.eventId,
               event_type_id: data?.[0]?.event_type_id,
               price: data?.[0]?.runners?.[1]?.lay[0]?.price,
+              roundId: data?.[0]?.roundId,
+              name: data?.[0]?.name,
+              eventId: data?.[0]?.eventId,
+              eventName: data?.[0]?.eventName,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -284,6 +308,10 @@ const BetSlip = ({
               event_id: data?.[1]?.eventId,
               event_type_id: data?.[1]?.event_type_id,
               price: data?.[1]?.runners?.[0]?.back[0]?.price,
+              roundId: data?.[1]?.roundId,
+              name: data?.[1]?.name,
+              eventId: data?.[1]?.eventId,
+              eventName: data?.[1]?.eventName,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center
@@ -325,6 +353,10 @@ const BetSlip = ({
               event_id: data?.[2]?.eventId,
               event_type_id: data?.[2]?.event_type_id,
               price: data?.[2]?.runners?.[0]?.back[0]?.price,
+              roundId: data?.[2]?.roundId,
+              name: data?.[2]?.name,
+              eventId: data?.[2]?.eventId,
+              eventName: data?.[2]?.eventName,
             })
           }
           className={`relative hover:border-white/80  flex flex-col items-center justify-center

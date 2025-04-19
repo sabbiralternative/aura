@@ -26,6 +26,8 @@ const DragonTiger = () => {
     { pollingInterval: 1000 }
   );
 
+
+
   const firstEvent = data?.result?.[0];
   const roundId = firstEvent?.roundId;
 
