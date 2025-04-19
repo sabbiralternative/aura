@@ -49,6 +49,10 @@ const BetSlip = ({
       return {
         ...prev,
         [key]: {
+          roundId: formatData?.roundId,
+          name: formatData?.name,
+          eventId: formatData?.eventId,
+          eventName: formatData?.eventName,
           show: true,
           stake: prev[key].show
             ? prev[key].stake + prev[key].actionBy
@@ -91,6 +95,10 @@ const BetSlip = ({
   useEffect(() => {
     const filterPlacedBet = Object.values(stakeState).filter((bet) => bet.show);
     let payload = filterPlacedBet.map((bet) => ({
+      roundId: bet?.roundId,
+      name: bet?.name,
+      eventId: bet?.eventId,
+      eventName: bet?.eventName,
       marketId: bet?.marketId,
       selection_id: bet?.selection_id,
       runner_name: bet?.runner_name,
