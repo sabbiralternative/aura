@@ -24,11 +24,11 @@ const Card = ({ data }) => {
         style={{ zIndex: 997 }}
       >
         <div
-          className={`h-12 lg:h-16 aspect-[5/7] ${
+          className={`h-12 lg:h-16 aspect-[5/7]  ${
             cardNumber > 7
-              ? "flip-card-up"
+              ? "flip-card-up mr-[5px]"
               : cardNumber < 7
-              ? "flip-card-down"
+              ? "flip-card-down ml-[5px]"
               : cardNumber === 7
               ? "flip-card"
               : "cardFadeInAnimation"

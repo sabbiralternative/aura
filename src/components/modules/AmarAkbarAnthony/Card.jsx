@@ -17,9 +17,9 @@ const Card = ({ data }) => {
           <div
             className={` h-12 aspect-[5/7] flip-card ${
               isAmarCard
-                ? "flip-card-up"
+                ? "flip-card-up ml-[1px]"
                 : isAnthonyCard
-                ? "flip-card-down"
+                ? "flip-card-down mr-[1px]"
                 : isAkbarCard
                 ? "flip-card"
                 : "cardFadeInAnimation"

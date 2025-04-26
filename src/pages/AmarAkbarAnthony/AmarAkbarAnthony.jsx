@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../../redux/features/events/events";
-import RecentWinner from "../../components/modules/LuckySeven/RecentWinner";
+
 import AmountSection from "../../components/shared/events/AmountSection";
 
 // import Setting from "../../components/modules/LuckySeven/Setting";
@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
+import RecentWinner from "../../components/modules/AmarAkbarAnthony/RecentWinner";
 
 const AmarAkbarAnthony = () => {
   const [totalBet, setTotalBet] = useState(0);
