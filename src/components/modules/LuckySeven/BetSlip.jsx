@@ -105,8 +105,6 @@ const BetSlip = ({
       price: bet?.price,
     }));
 
-    console.log(payload);
-
     if (status === Status.SUSPENDED && payload?.length > 0) {
       const handleOrder = async () => {
         const res = await addOrder(payload).unwrap();
@@ -125,7 +123,6 @@ const BetSlip = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addOrder, status]);
 
-  // console.log(data);
   return (
     <div className="flex flex-col w-full gap-2 px-1 perspective transition-all duration-1000 ease-in-out">
       <div

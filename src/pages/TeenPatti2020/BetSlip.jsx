@@ -121,7 +121,6 @@ const BetSlip = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addOrder, status]);
 
-  // console.log(data);
   return (
     <div
       className={`py-4 perspective transition-all duration-1000 ease-in-out `}

@@ -22,14 +22,10 @@ const RightSidebar = () => {
 
     if (token) {
       const getUser = async () => {
-        try {
-          const res = await handleAuth({ token }).unwrap();
-          dispatch(
-            setUser({ username: res.username, balance: res.balance, token })
-          );
-        } catch (error) {
-          console.error("Failed to fetch user:", error);
-        }
+        const res = await handleAuth({ token }).unwrap();
+        dispatch(
+          setUser({ username: res.username, balance: res.balance, token })
+        );
       };
 
       getUser(); // initial call
