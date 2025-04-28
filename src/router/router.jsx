@@ -11,6 +11,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Bollywood from "../pages/Bollywood/Bollywood";
 import Baccarat from "../pages/Baccarat/Baccarat";
 import War from "../pages/War/War";
+import BetHistory from "../pages/BetHistory/BetHistory";
 
 export const router = createBrowserRouter(
   [
@@ -58,6 +59,10 @@ export const router = createBrowserRouter(
         {
           path: "/war/:eventTypeId/:eventId",
           element: <War />,
+        },
+        {
+          path: "/bet-history",
+          element: <BetHistory />,
         },
       ],
     },

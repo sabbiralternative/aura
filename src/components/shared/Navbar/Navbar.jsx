@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setShowRightSidebar } from "../../../redux/features/stateSlice";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { balance, username } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -13,6 +15,7 @@ const Navbar = () => {
       <div className="left-0 flex flex-col h-fit text-white bg-black/20 backdrop-blur-lg">
         <div className="flex items-center justify-between w-full gap-2 py-4">
           <svg
+            onClick={() => navigate("/")}
             width={364}
             height={127}
             className="w-20 h-6"
