@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getBackPrice, isRunnerActive } from "../../../utils/betSlip";
 import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
@@ -15,13 +15,14 @@ const BetSlip = ({
   initialState,
   setTotalBet,
 }) => {
+  const [animation, setAnimation] = useState(null);
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
     const { key, data, dataIndex, runnerIndex, type } = payload;
-
+    setAnimation(key);
     const formatData = {
       marketId: data?.[dataIndex]?.id,
       roundId: data?.[dataIndex]?.roundId,
@@ -35,37 +36,42 @@ const BetSlip = ({
       event_type_id: data?.[dataIndex]?.event_type_id,
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
+    const timeout = setTimeout(() => {
+      setAnimation(null);
+      setStakeState((prev) => {
+        const maxSerial = Math.max(
+          0,
+          ...Object.values(prev)
+            .map((item) => item.serial)
+            .filter((serial) => serial !== undefined)
+        );
 
-    setStakeState((prev) => {
-      const maxSerial = Math.max(
-        0,
-        ...Object.values(prev)
-          .map((item) => item.serial)
-          .filter((serial) => serial !== undefined)
-      );
+        return {
+          ...prev,
+          [key]: {
+            roundId: formatData?.roundId,
+            name: formatData?.name,
+            eventId: formatData?.eventId,
+            eventName: formatData?.eventName,
+            show: true,
+            animation: false,
+            stake: prev[key].show
+              ? prev[key].stake + prev[key].actionBy
+              : prev[key].stake,
+            marketId: formatData?.marketId,
+            selection_id: formatData?.selection_id,
+            price: formatData?.price,
+            runner_name: formatData?.runner_name,
+            isback: formatData?.isback,
+            serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+            actionBy: stake,
+            undo: [...(prev[key]?.undo || []), stake],
+          },
+        };
+      });
+    }, 500);
 
-      return {
-        ...prev,
-        [key]: {
-          roundId: formatData?.roundId,
-          name: formatData?.name,
-          eventId: formatData?.eventId,
-          eventName: formatData?.eventName,
-          show: true,
-          stake: prev[key].show
-            ? prev[key].stake + prev[key].actionBy
-            : prev[key].stake,
-          marketId: formatData?.marketId,
-          selection_id: formatData?.selection_id,
-          price: formatData?.price,
-          runner_name: formatData?.runner_name,
-          isback: formatData?.isback,
-          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
-          actionBy: stake,
-          undo: [...(prev[key]?.undo || []), stake],
-        },
-      };
-    });
+    return () => clearTimeout(timeout);
   };
 
   // Reset state when status is OPEN
@@ -140,7 +146,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer rounded-tl-md false false false col-span-2 border-white/20 bg-white/20 ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer rounded-tl-md false false false col-span-2 border-white/20 bg-white/20 ${
             isRunnerActive(data, 1, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -155,6 +161,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "even"
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
+
               {stakeState?.even?.show && (
                 <Stake stake={stakeState?.even?.stake} />
               )}
@@ -178,7 +194,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-[#38b142] ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-[#38b142] ${
             isRunnerActive(data, 0, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -193,6 +209,15 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "up"
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
               {stakeState?.up?.show && <Stake stake={stakeState?.up?.stake} />}
             </div>
           </div>
@@ -214,7 +239,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false rounded-tr-md false false col-span-2 border-white/20 bg-white/20 ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false rounded-tr-md false false col-span-2 border-white/20 bg-white/20 ${
             isRunnerActive(data, 1, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -229,6 +254,15 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "odd"
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
               {stakeState?.odd?.show && (
                 <Stake stake={stakeState?.odd?.stake} />
               )}
@@ -245,7 +279,7 @@ const BetSlip = ({
 
         {/* Below not integrated */}
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
           id="diamond"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -274,7 +308,7 @@ const BetSlip = ({
           </span>
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
           id="heart"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -304,7 +338,7 @@ const BetSlip = ({
           </span>
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#156ed1] bg-[#156ed1]"
+          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#156ed1] bg-[#156ed1]"
           id="seven"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -321,7 +355,7 @@ const BetSlip = ({
           </span>
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
           id="spade"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -351,7 +385,7 @@ const BetSlip = ({
           </span>
         </div>
         <div
-          className="relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
           id="club"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -391,7 +425,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false rounded-bl-md false col-span-2 border-white/20 bg-white/20 ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false rounded-bl-md false col-span-2 border-white/20 bg-white/20 ${
             isRunnerActive(data, 2, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -432,6 +466,15 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "red"
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
               {stakeState?.red?.show && (
                 <Stake stake={stakeState?.red?.stake} />
               )}
@@ -455,7 +498,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#d83b32] bg-[#d83b32] ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#d83b32] bg-[#d83b32] ${
             isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -470,6 +513,15 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "down"
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
               {stakeState?.down?.show && (
                 <Stake stake={stakeState?.down?.stake} />
               )}
@@ -493,7 +545,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false rounded-br-md col-span-2 border-white/20 bg-white/20 ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false rounded-br-md col-span-2 border-white/20 bg-white/20 ${
             isRunnerActive(data, 2, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -535,6 +587,15 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "black"
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
               {stakeState?.black?.show && (
                 <Stake stake={stakeState?.black?.stake} />
               )}
