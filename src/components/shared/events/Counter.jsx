@@ -20,6 +20,9 @@ const Counter = ({ timer }) => {
     } else {
       setStrokeColor("#F70000");
     }
+    if (timer < 4 && timer > 0) {
+      new Audio("/countdown.mp3").play();
+    }
   }, [timer, circumference, initialValue]);
 
   return (

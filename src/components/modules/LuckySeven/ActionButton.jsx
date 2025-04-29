@@ -2091,10 +2091,9 @@ const ActionButton = ({
           </div>
         </div>{" "}
       </span> */}
-      {
-        // status === Status.OPEN && balance >= 100 &&
+      {status === Status.OPEN && balance >= 100 && (
         <Chip isPlaceStake={isPlaceStake} handleUndoStake={handleUndoStake} />
-      }
+      )}
       {balance < 100 && (
         <button className="text-text-primary glass p-1 text-xm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200">
           <span className="px-2 text-xs text-white/70 glass">
