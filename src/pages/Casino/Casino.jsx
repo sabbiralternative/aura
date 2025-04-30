@@ -1,0 +1,167 @@
+import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/shared/Navbar/Navbar";
+import { useGetLiveCasinoThumbnailQuery } from "../../redux/features/casino/casino.api";
+
+const Casino = () => {
+  const navigate = useNavigate();
+  const { data } = useGetLiveCasinoThumbnailQuery();
+
+  const handleNavigate = (casino) => {
+    const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
+    new Audio("/click.mp3").play();
+    navigate(formatLink);
+  };
+
+  return (
+    <div className="relative w-full autoAnimate min-h-full pt-24 text-white">
+      <div
+        style={{ height: "100vh" }}
+        className="relative mx-auto bg-black select-none"
+      >
+        <Navbar />
+
+        <div className="z-20 flex flex-col w-full gap-3">
+          <div>
+            <div className="sticky top-0 z-50 py-1 backdrop-blur-lg bg-black/10">
+              <div className=" flex w-full gap-1 px-4 py-1.5 pr-12 overflow-x-auto">
+                <div className="bg-white text-black  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  All Games
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  New
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Poker
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Trending
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Teen patti
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Live
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Virtual
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Roulette
+                </div>
+                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
+                  Baccarat
+                </div>
+              </div>
+              <div className="absolute top-0 right-0 z-50 w-12 h-full pointer-events-none bg-gradient-to-l from-black to-transparent" />
+            </div>
+            <div className="z-20 flex flex-wrap justify-center gap-2">
+              {data?.map((casino) => (
+                <div
+                  key={casino?.eventId}
+                  onClick={() => handleNavigate(casino)}
+                  className="relative cursor-pointer select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group"
+                >
+                  <div className="absolute top-0 right-0 z-20 w-20 h-20 translate-x-[30%] -translate-y-[30%] ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 5760 3240"
+                      width={5760}
+                      height={3240}
+                      preserveAspectRatio="xMidYMid meet"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        transform: "translate3d(0px, 0px, 0px)",
+                        contentVisibility: "visible",
+                      }}
+                    >
+                      <defs>
+                        <clipPath id="__lottie_element_370">
+                          <rect width={5760} height={3240} x={0} y={0} />
+                        </clipPath>
+                      </defs>
+                      <g clipPath="url(#__lottie_element_370)">
+                        <g
+                          transform="matrix(1,0,0,1,2171.656982421875,1132.4759521484375)"
+                          opacity={1}
+                          style={{ display: "block" }}
+                        >
+                          <g opacity={1} transform="matrix(3,0,0,3,0,0)">
+                            <path
+                              fill="rgb(255,233,120)"
+                              fillOpacity={1}
+                              d=" M7.800000190734863,-75.1500015258789 C18.059999465942383,-42.34000015258789 39.12799835205078,-18.41200065612793 71.23899841308594,-7.76200008392334 C74.59700012207031,-6.6479997634887695 76.86599731445312,-3.51200008392334 76.87200164794922,0.028999999165534973 C76.88600158691406,9.979000091552734 66.93199920654297,6.061999797821045 46.82699966430664,19.839000701904297 C44.93600082397461,21.70800018310547 20.135000228881836,35.297000885009766 7.818999767303467,75.12699890136719 C6.755000114440918,78.56400299072266 3.5789999961853027,80.91200256347656 -0.020999999716877937,80.91799926757812 C0.20200000703334808,80.99500274658203 -6.025000095367432,81.08000183105469 -7.88100004196167,75.15299987792969 C-17.913999557495117,43.0989990234375 -38.86899948120117,18.87299919128418 -71.3290023803711,7.760000228881836 C-78.7239990234375,5.228000164031982 -78.71700286865234,-5.263999938964844 -71.33100128173828,-7.794000148773193 C-38.67399978637695,-18.979999542236328 -17.844999313354492,-43.38199996948242 -7.890999794006348,-75.15499877929688 C-6.816999912261963,-78.58200073242188 -3.6389999389648438,-80.91799926757812 -0.04600000008940697,-80.91799926757812 C-0.28200000524520874,-80.9990005493164 5.951000213623047,-81.06400299072266 7.800000190734863,-75.1500015258789z"
+                            />
+                          </g>
+                        </g>
+                        <g
+                          transform="matrix(1,0,0,1,2501.68798828125,2257.52001953125)"
+                          opacity={1}
+                          style={{ display: "block" }}
+                        >
+                          <g opacity={1} transform="matrix(3,0,0,3,0,0)">
+                            <path
+                              fill="rgb(255,227,84)"
+                              fillOpacity={1}
+                              d=" M7.802000045776367,-75.14900207519531 C18.097000122070312,-42.20600128173828 39.255001068115234,-18.368000030517578 71.24099731445312,-7.760000228881836 C74.5989990234375,-6.64900016784668 76.86799621582031,-3.509999990463257 76.87200164794922,0.027000000700354576 C76.88700103759766,10.029999732971191 66.98799896240234,6.02400016784668 46.82500076293945,19.836999893188477 C46.82500076293945,19.836999893188477 46.82500076293945,19.836999893188477 46.82400131225586,19.84000015258789 C28.381999969482422,32.46699905395508 15.258999824523926,51.06800079345703 7.820000171661377,75.125 C6.75600004196167,78.56500244140625 3.5799999237060547,80.91300201416016 -0.019999999552965164,80.91899871826172 C0.19900000095367432,80.99400329589844 -6.02400016784668,81.08200073242188 -7.880000114440918,75.15399932861328 C-17.93899917602539,43.01499938964844 -38.948001861572266,18.8439998626709 -71.3290023803711,7.761000156402588 C-78.7239990234375,5.229000091552734 -78.71600341796875,-5.265999794006348 -71.33000183105469,-7.795000076293945 C-38.737998962402344,-18.952999114990234 -17.86400032043457,-43.31399917602539 -7.889999866485596,-75.15499877929688 C-6.815999984741211,-78.58200073242188 -3.6389999389648438,-80.91799926757812 -0.04500000178813934,-80.91799926757812 C-0.28200000524520874,-80.9990005493164 5.952000141143799,-81.06500244140625 7.802000045776367,-75.14900207519531z"
+                            />
+                          </g>
+                        </g>
+                        <g
+                          transform="matrix(1,0,0,1,3182.6708984375,1619.135009765625)"
+                          opacity={1}
+                          style={{ display: "block" }}
+                        >
+                          <g opacity={1} transform="matrix(3,0,0,3,0,0)">
+                            <path
+                              fill="rgb(255,213,0)"
+                              fillOpacity={1}
+                              d=" M166.13600158691406,-17.56599998474121 C178.4709930419922,-13.418000221252441 191.5959930419922,-10.067000389099121 205.13900756835938,-7.609000205993652 C209.0449981689453,-6.900000095367432 211.88400268554688,-3.5 211.88999938964844,0.47200000286102295 C211.8939971923828,4.441999912261963 209.06100463867188,7.8480000495910645 205.1580047607422,8.565999984741211 C174.31199645996094,14.243000030517578 146.3040008544922,24.375999450683594 121.91899871826172,38.6870002746582 C45.58399963378906,83.53399658203125 17.743000030517578,160.34100341796875 7.823999881744385,216.875 C7.135000228881836,220.8000030517578 3.7269999980926514,223.6699981689453 -0.26100000739097595,223.67300415039062 C0.15199999511241913,223.83299255371094 -7.140999794006348,223.7989959716797 -8.364999771118164,216.89100646972656 C-27.843000411987305,107.26200103759766 -94.03399658203125,29.260000228881836 -205.19500732421875,8.697999954223633 C-214.12100219726562,7.046000003814697 -214.1230010986328,-5.813000202178955 -205.1999969482422,-7.4679999351501465 C-93.00399780273438,-28.29199981689453 -27.95199966430664,-106.44300079345703 -8.404999732971191,-216.95399475097656 C-6.809000015258789,-225.96499633789062 6.186999797821045,-225.96400451660156 7.7829999923706055,-216.95399475097656 C24.60099983215332,-121.8499984741211 75.71700286865234,-47.972999572753906 166.13600158691406,-17.56599998474121z"
+                            />
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    className="relative  overflow-clip rounded-md select-none  w-36 min-[380px]:w-44"
+                    style={{ aspectRatio: "1 / 1" }}
+                  >
+                    <div className="absolute top-0 left-0 z-20 flex gap-1 py-0.5 px-2 rounded-br-lg text-xs  bg-black/30">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        data-slot="icon"
+                        className="items-center w-4 h-4 "
+                      >
+                        <path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" />
+                      </svg>
+                      <p>14</p>
+                    </div>
+                    <img
+                      src={casino?.image}
+                      loading="eager"
+                      alt="game"
+                      sizes="30vw"
+                      className="z-10 object-cover w-full h-full transition-all absolute duration-500 ease-in-out lg:group-hover:scale-110 bg-white/10  "
+                    />
+                  </div>
+                  <div className="flex items-center justify-start px-2 autoAnimate ">
+                    <span className="flex items-center justify-center w-full gap-[2px] p-1 text-xs  text-white/50">
+                      <span>₹{casino?.min}</span> - <span>₹{casino?.max}</span>
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Casino;

@@ -12,6 +12,7 @@ import Bollywood from "../pages/Bollywood/Bollywood";
 import Baccarat from "../pages/Baccarat/Baccarat";
 import War from "../pages/War/War";
 import BetHistory from "../pages/BetHistory/BetHistory";
+import Casino from "../pages/Casino/Casino";
 
 export const router = createBrowserRouter(
   [
@@ -23,6 +24,10 @@ export const router = createBrowserRouter(
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/casino",
+          element: <Casino />,
         },
         {
           path: "/lucky7/:eventTypeId/:eventId",

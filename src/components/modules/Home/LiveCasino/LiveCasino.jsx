@@ -11,7 +11,7 @@ const LiveCasino = () => {
 
   const handleNavigate = (casino) => {
     const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
-
+    new Audio("/click.mp3").play();
     navigate(formatLink);
   };
 

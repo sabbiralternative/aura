@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setShowRightSidebar } from "../../../redux/features/stateSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const { balance, username } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Navbar = () => {
       className="fixed top-0 flex flex-col w-full autoAnimate translate-y-0 "
     >
       <div className="left-0 flex flex-col h-fit text-white bg-black/20 backdrop-blur-lg">
-        <div className="flex items-center justify-between w-full gap-2 py-4">
+        <div className="flex items-center justify-between w-full gap-2 py-4 px-3 md:px-0">
           <svg
             onClick={() => navigate("/")}
             width={364}
@@ -245,6 +246,7 @@ const Navbar = () => {
         <div style={{ zIndex: 999 }} className="w-full ">
           <div className="relative flex w-full bg-black/10  backdrop-blur-3xl">
             <button
+              onClick={() => navigate("/")}
               style={{ zIndex: 998 }}
               className="flex justify-center w-full gap-1 py-2 text-sm items-center text-white whitespace-nowrap"
             >
@@ -262,6 +264,7 @@ const Navbar = () => {
               Home
             </button>
             <button
+              onClick={() => navigate("/casino")}
               style={{ zIndex: 998 }}
               className="flex justify-center w-full gap-1 py-2 text-sm items-center text-white whitespace-nowrap"
             >
@@ -389,7 +392,16 @@ const Navbar = () => {
               Favorites
             </button>
             <div
-              style={{ zIndex: 996, width: "25%", left: "0%" }}
+              style={{
+                zIndex: 996,
+                width: "25%",
+                left:
+                  pathname === "/"
+                    ? "0%"
+                    : pathname === "/casino"
+                    ? "25%"
+                    : "0%",
+              }}
               className="absolute h-full flex flex-col justify-end items-center transition-all ease-in-out"
             >
               <div className="w-full h-2/3 bg-gradient-to-t from-white/20 to-transparent" />
