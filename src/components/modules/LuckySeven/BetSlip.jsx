@@ -13,6 +13,7 @@ const BetSlip = ({
   setStakeState,
   stakeState,
   initialState,
+  setTotalWinAmount,
 }) => {
   const [animation, setAnimation] = useState(null);
   const [addOrder] = useOrderMutation();
@@ -116,14 +117,11 @@ const BetSlip = ({
         const res = await addOrder(payload).unwrap();
         payload = [];
         if (res?.success) {
-          let totalExistingBets = [];
-          const totalBetPlace = localStorage.getItem("totalBetPlace");
-          if (totalBetPlace && totalBetPlace !== "undefined") {
-            totalExistingBets = JSON.parse(totalBetPlace);
-          }
+          setTotalWinAmount(null);
+          let totalBets = [];
 
           for (let bet of filterPlacedBet) {
-            totalExistingBets.push({
+            totalBets.push({
               selection_id: bet.selection_id,
               price: bet?.price,
               eventId: bet?.eventId,
@@ -132,10 +130,7 @@ const BetSlip = ({
               stake: bet?.stake,
             });
           }
-          localStorage.setItem(
-            "totalBetPlace",
-            JSON.stringify(totalExistingBets)
-          );
+          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
 
           setToast(res?.Message);
         }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import BetHistory from "../../shared/BetHistory/BetHistory";
+import { playClickSound } from "../../../utils/playClickSound";
 
 const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
   const { username, balance } = useSelector((state) => state.auth);
 
   const handleToggleFullScreen = () => {
+    playClickSound();
     if (showFullScreen) {
       setShowFullScreen(false);
       document.exitFullscreen();
@@ -22,6 +24,8 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
 
   const handleShowBetHistory = () => {
     setShowBetHistory(true);
+
+    playClickSound();
   };
 
   return (
@@ -43,7 +47,11 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
             <div className="flex items-center justify-between px-4 pt-4">
               <span className="text-base font-bold text-white"></span>
               <button
-                onClick={() => setShowSetting(false)}
+                onClick={() => {
+                  setShowSetting(false);
+
+                  playClickSound();
+                }}
                 className="font-semibold "
               >
                 <svg
@@ -90,6 +98,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                   onClick={() => {
                     navigate("/");
                     setShowSetting(false);
+                    playClickSound();
                   }}
                   className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
                 >
@@ -109,7 +118,12 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                   </svg>
                   <span className="text-sm font-semibold ">Lobby</span>
                 </div>
-                <div className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit ">
+                <div
+                  onClick={() => {
+                    playClickSound();
+                  }}
+                  className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -126,7 +140,12 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                   </svg>
                   <span className="text-sm font-semibold ">How to Play</span>
                 </div>
-                <div className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit ">
+                <div
+                  onClick={() => {
+                    playClickSound();
+                  }}
+                  className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -143,7 +162,12 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                   </svg>
                   <span className="text-sm font-semibold ">Settings</span>
                 </div>
-                <div className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit ">
+                <div
+                  onClick={() => {
+                    playClickSound();
+                  }}
+                  className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"

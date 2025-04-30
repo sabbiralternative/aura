@@ -1,8 +1,13 @@
+import { playClickSound } from "../../../utils/playClickSound";
+
 const Header = ({ setShowBetHistory, setShowSetting }) => {
   return (
     <div className="flex items-center justify-between px-4 pt-4">
       <span
-        onClick={() => setShowBetHistory(false)}
+        onClick={() => {
+          setShowBetHistory(false);
+          playClickSound();
+        }}
         className="flex items-center gap-1 text-white cursor-pointer"
       >
         <svg
@@ -25,6 +30,7 @@ const Header = ({ setShowBetHistory, setShowSetting }) => {
         onClick={() => {
           setShowBetHistory(false);
           setShowSetting(false);
+          playClickSound(false);
         }}
         className="font-semibold "
       >

@@ -2,17 +2,19 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-const AmountSection = ({ firstEvent, data }) => {
-  const roundId = data?.[0]?.roundId;
-
-  const totalWin = JSON.parse(localStorage.getItem("totalWin"));
+const AmountSection = ({
+  firstEvent,
+  data,
+  totalWinAmount,
+  setTotalWinAmount,
+}) => {
+  // const roundId = data?.[0]?.roundId;
 
   const totalBetPlace = localStorage.getItem("totalBetPlace");
-
   const { eventId } = useParams();
   const { balance } = useSelector((state) => state.auth);
 
-  let totalAmount = 0;
+  let totalBetAmount = 0;
   if (totalBetPlace) {
     const parseTotalBet = JSON.parse(totalBetPlace);
     if (parseTotalBet?.length > 0) {
@@ -20,7 +22,7 @@ const AmountSection = ({ firstEvent, data }) => {
         (order) => order?.eventId == eventId
       );
       for (const order of filterOrderByEventId) {
-        totalAmount = parseFloat((totalAmount + order?.stake).toFixed(2));
+        totalBetAmount = parseFloat((totalBetAmount + order?.stake).toFixed(2));
       }
     }
   }
@@ -63,43 +65,39 @@ const AmountSection = ({ firstEvent, data }) => {
 
               totalWin += looserSum + WinnerSum;
 
-              localStorage.setItem("totalWin", totalWin.toString());
+              setTotalWinAmount(totalWin);
             }
           });
         });
-      } else {
-        const storedTotalWin = localStorage.getItem("totalWin");
-        if (storedTotalWin) {
-          totalWin = parseFloat(storedTotalWin);
-        }
       }
     }
   }, [data, totalBetPlace]);
 
   useEffect(() => {
-    if (totalBetPlace) {
+    if (totalBetPlace && totalWinAmount > 0) {
+      new Audio("/pokerwin.mp3").play();
       const parseTotalBet = JSON.parse(totalBetPlace);
       const filterCurrentEventBet = parseTotalBet?.filter(
         (bet) => bet?.eventId != eventId
       );
+
       localStorage.setItem(
         "totalBetPlace",
         JSON.stringify(filterCurrentEventBet)
       );
-      localStorage.removeItem("totalWin");
     }
-  }, [roundId, eventId]);
+  }, [eventId, totalWinAmount, totalBetPlace]);
 
   return (
     <div className="flex items-end justify-between w-full">
       <div className="z-10 flex flex-col text-xs font-normal capitalize text-text-primary">
-        {totalWin ? (
+        {totalWinAmount ? (
           <span className="flex items-center gap-1">
-            Total Win<span className="text-yellow">{totalWin}</span>
+            Last Win<span className="text-yellow">{totalWinAmount}</span>
           </span>
         ) : (
           <span className="flex items-center gap-1">
-            Total Bet<span className="text-yellow">{totalAmount}</span>
+            Total Bet<span className="text-yellow">{totalBetAmount}</span>
           </span>
         )}
 

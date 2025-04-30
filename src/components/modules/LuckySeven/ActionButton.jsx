@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Status } from "../../../const";
 import Chip from "../../shared/Chip/Chip";
+import { playClickSound } from "../../../utils/playClickSound";
 
 const ActionButton = ({
   setShowSetting,
@@ -2103,7 +2104,10 @@ const ActionButton = ({
       )}
       <span className="z-50 flex flex-col items-end gap-0.5">
         <button
-          onClick={() => setShowSetting(true)}
+          onClick={() => {
+            setShowSetting(true);
+            playClickSound();
+          }}
           className="text-text-primary glass p-2 text-sm border border-white/20 h-fit w-fit flex items-center gap-1 rounded-full transition-all duration-200"
         >
           <svg

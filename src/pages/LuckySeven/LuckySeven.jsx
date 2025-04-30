@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
 
 const LuckySeven = () => {
+  const [totalWinAmount, setTotalWinAmount] = useState(null);
   const { stake } = useSelector((state) => state.global);
   const [toast, setToast] = useState(null);
   const [showFullScreen, setShowFullScreen] = useState(false);
@@ -97,6 +98,7 @@ const LuckySeven = () => {
       </div>
       {/* <SuspendedBetSlip /> */}
       <BetSlip
+        setTotalWinAmount={setTotalWinAmount}
         initialState={initialState}
         stakeState={stakeState}
         setStakeState={setStakeState}
@@ -113,6 +115,8 @@ const LuckySeven = () => {
         />
 
         <AmountSection
+        setTotalWinAmount={setTotalWinAmount}
+        totalWinAmount={totalWinAmount}
           data={data?.result}
           firstEvent={firstEvent}
           title="7 up &amp; Down"
