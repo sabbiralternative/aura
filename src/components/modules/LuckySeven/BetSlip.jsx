@@ -13,7 +13,6 @@ const BetSlip = ({
   setStakeState,
   stakeState,
   initialState,
-  setTotalBet,
 }) => {
   const [animation, setAnimation] = useState(null);
   const [addOrder] = useOrderMutation();
@@ -117,11 +116,27 @@ const BetSlip = ({
         const res = await addOrder(payload).unwrap();
         payload = [];
         if (res?.success) {
-          let totalBet = 0;
-          for (let bet of filterPlacedBet) {
-            totalBet += bet?.stake;
+          let totalExistingBets = [];
+          const totalBetPlace = localStorage.getItem("totalBetPlace");
+          if (totalBetPlace && totalBetPlace !== "undefined") {
+            totalExistingBets = JSON.parse(totalBetPlace);
           }
-          setTotalBet((prev) => prev + totalBet);
+
+          for (let bet of filterPlacedBet) {
+            totalExistingBets.push({
+              selection_id: bet.selection_id,
+              price: bet?.price,
+              eventId: bet?.eventId,
+              marketId: bet?.marketId,
+              name: bet?.name,
+              stake: bet?.stake,
+            });
+          }
+          localStorage.setItem(
+            "totalBetPlace",
+            JSON.stringify(totalExistingBets)
+          );
+
           setToast(res?.Message);
         }
       };
@@ -278,9 +293,22 @@ const BetSlip = ({
           )}
         </div>
 
-        {/* Below not integrated */}
+        {/* Below is middle */}
         <div
-          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "diamond",
+              data,
+              dataIndex: 5,
+              runnerIndex: 0,
+              type: "back",
+            })
+          }
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerActive(data, 5, 0)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="diamond"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -302,14 +330,45 @@ const BetSlip = ({
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "diamond"
+                    ? "absolute top-0 visible transition-all duration-500"
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
+              {stakeState?.diamond?.show && (
+                <Stake stake={stakeState?.diamond?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            3.75
-          </span>
+          {isRunnerActive(data, 5, 0) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 5, 0)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
+
         <div
-          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "heart",
+              data,
+              dataIndex: 5,
+              runnerIndex: 1,
+              type: "back",
+            })
+          }
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerActive(data, 5, 1)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="heart"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -332,14 +391,44 @@ const BetSlip = ({
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "heart"
+                    ? "absolute top-0 visible transition-all duration-500"
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
+              {stakeState?.heart?.show && (
+                <Stake stake={stakeState?.heart?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            3.75
-          </span>
+          {isRunnerActive(data, 5, 1) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 5, 1)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#156ed1] bg-[#156ed1]"
+          onClick={() =>
+            handleStakeChange({
+              key: "seven",
+              data,
+              dataIndex: 0,
+              runnerIndex: 2,
+              type: "back",
+            })
+          }
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer  col-span-2 border-[#156ed1] bg-[#156ed1] ${
+            isRunnerActive(data, 0, 2)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="seven"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -348,15 +437,46 @@ const BetSlip = ({
               7
             </span>
           </span>
+
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "seven"
+                    ? "absolute top-0 visible transition-all duration-500"
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
+              {stakeState?.seven?.show && (
+                <Stake stake={stakeState?.seven?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            11.5
-          </span>
+          {isRunnerActive(data, 0, 2) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 0, 2)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "spade",
+              data,
+              dataIndex: 5,
+              runnerIndex: 2,
+              type: "back",
+            })
+          }
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerActive(data, 5, 2)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="spade"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -379,14 +499,44 @@ const BetSlip = ({
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "spade"
+                    ? "absolute top-0 visible transition-all duration-500"
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
+              {stakeState?.spade?.show && (
+                <Stake stake={stakeState?.spade?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            3.75
-          </span>
+          {isRunnerActive(data, 5, 2) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 5, 2)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
         <div
-          className="relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20"
+          onClick={() =>
+            handleStakeChange({
+              key: "club",
+              data,
+              dataIndex: 5,
+              runnerIndex: 3,
+              type: "back",
+            })
+          }
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerActive(data, 5, 3)
+              ? "cursor-pointer"
+              : " cursor-not-allowed pointer-events-none"
+          }`}
           id="club"
         >
           <span className="absolute top-0 left-0 w-full h-full text-sm tracking-tight text-white">
@@ -409,13 +559,30 @@ const BetSlip = ({
             <span className="absolute top-0 left-0 flex items-center justify-center w-full h-full font-extrabold tracking-tighter text-white opacity-50 -rotate-12 text-4xl" />
           </span>
           <div className="z-50">
-            <div className="relative w-10 h-10" />
+            <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation === "club"
+                    ? "absolute top-0 visible transition-all duration-500"
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={stake} />
+              </div>
+              {stakeState?.club?.show && (
+                <Stake stake={stakeState?.club?.stake} />
+              )}
+            </div>
           </div>
-          <span className="absolute bottom-0 text-[10px] text-white left-1">
-            3.75
-          </span>
+          {isRunnerActive(data, 5, 3) ? (
+            <span className="absolute bottom-0 text-[10px] text-white left-1">
+              {getBackPrice(data, 5, 3)}
+            </span>
+          ) : (
+            <Lock position="bottom-0 left-1" />
+          )}
         </div>
-        {/* Above not integrated */}
+        {/* Above is middle row */}
         <div
           onClick={() =>
             handleStakeChange({

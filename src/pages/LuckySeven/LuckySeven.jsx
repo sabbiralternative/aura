@@ -10,12 +10,11 @@ import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
 import Counter from "../../components/shared/events/Counter";
 import AmountSection from "../../components/shared/events/AmountSection";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
 
 const LuckySeven = () => {
-  const [totalBet, setTotalBet] = useState(0);
   const { stake } = useSelector((state) => state.global);
   const [toast, setToast] = useState(null);
   const [showFullScreen, setShowFullScreen] = useState(false);
@@ -27,7 +26,6 @@ const LuckySeven = () => {
   );
 
   const firstEvent = data?.result?.[0];
-  const roundId = firstEvent?.roundId;
 
   const initialState = {
     even: { show: false, stake },
@@ -36,6 +34,11 @@ const LuckySeven = () => {
     red: { show: false, stake },
     down: { show: false, stake },
     black: { show: false, stake },
+    seven: { show: false, stake },
+    diamond: { show: false, stake },
+    heart: { show: false, stake },
+    spade: { show: false, stake },
+    club: { show: false, stake },
   };
 
   const [stakeState, setStakeState] = useState(initialState);
@@ -78,10 +81,6 @@ const LuckySeven = () => {
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
-  useEffect(() => {
-    setTotalBet(0);
-  }, [roundId]);
-
   return (
     <main
       className="max-w-md relative flex gap-2  mx-auto flex-col overflow-x-hidden justify-between items-center bg-gradient-to-b from-[#79272d] via-[#79272d]"
@@ -98,7 +97,6 @@ const LuckySeven = () => {
       </div>
       {/* <SuspendedBetSlip /> */}
       <BetSlip
-        setTotalBet={setTotalBet}
         initialState={initialState}
         stakeState={stakeState}
         setStakeState={setStakeState}
@@ -115,7 +113,7 @@ const LuckySeven = () => {
         />
 
         <AmountSection
-          totalBet={totalBet}
+          data={data?.result}
           firstEvent={firstEvent}
           title="7 up &amp; Down"
         />
