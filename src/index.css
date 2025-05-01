@@ -11,3 +11,24 @@
 .video-js .vjs-control-bar {
   display: none !important;
 }
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.blink-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(221, 11, 11, 0.5);
+  border-radius: inherit;
+  animation: blink 1s infinite;
+  z-index: 10;
+  pointer-events: none;
+}

@@ -2,7 +2,11 @@ import { useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
 import { useEffect, useState } from "react";
-import { getBackPrice, isRunnerActive } from "../../../utils/betSlip";
+import {
+  getBackPrice,
+  isRunnerActive,
+  isRunnerWinner,
+} from "../../../utils/betSlip";
 import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
 
@@ -160,6 +164,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer rounded-tl-md false false false col-span-2 border-white/20 bg-white/20 ${
+            isRunnerWinner(data, 1, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 1, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -207,7 +213,9 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-[#38b142] ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-[#38b142]  ${
+            isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -252,7 +260,9 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false rounded-tr-md false false col-span-2 border-white/20 bg-white/20 ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false rounded-tr-md false false col-span-2 border-white/20 bg-white/20  ${
+            isRunnerWinner(data, 1, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 1, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -301,7 +311,9 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+          className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20  ${
+            isRunnerWinner(data, 5, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 5, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -362,6 +374,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerWinner(data, 5, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 5, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -422,6 +436,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer  col-span-2 border-[#156ed1] bg-[#156ed1] ${
+            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -470,6 +486,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerWinner(data, 5, 2) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 5, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -530,6 +548,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
+            isRunnerWinner(data, 5, 3) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 5, 3)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -591,6 +611,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false rounded-bl-md false col-span-2 border-white/20 bg-white/20 ${
+            isRunnerWinner(data, 2, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 2, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -664,6 +686,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#d83b32] bg-[#d83b32] ${
+            isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -711,6 +735,8 @@ const BetSlip = ({
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false rounded-br-md col-span-2 border-white/20 bg-white/20 ${
+            isRunnerWinner(data, 2, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 2, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"

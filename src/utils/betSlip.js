@@ -17,3 +17,6 @@ export const getBackPrice = (data, dataIndex, runnerIndex) => {
 export const getLayPrice = (data, dataIndex, runnerIndex) => {
   return data?.[dataIndex]?.runners?.[runnerIndex]?.lay?.[0]?.price;
 };
+export const isRunnerWinner = (data, dataIndex, runnerIndex) => {
+  return data?.[dataIndex]?.runners?.[runnerIndex]?.status === "WINNER";
+};
