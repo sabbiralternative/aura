@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   getBackPrice,
   isRunnerActive,
@@ -11,6 +11,7 @@ import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
 
 const BetSlip = ({
+  double,
   data,
   status,
   setToast,
@@ -19,8 +20,9 @@ const BetSlip = ({
   initialState,
   setTotalWinAmount,
   setShowWinLossResult,
+  animation,
+  setAnimation,
 }) => {
-  const [animation, setAnimation] = useState(null);
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
 
@@ -28,7 +30,7 @@ const BetSlip = ({
   const handleStakeChange = (payload) => {
     new Audio("/pokerchip2.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
-    setAnimation(key);
+    setAnimation([key]);
     const formatData = {
       marketId: data?.[dataIndex]?.id,
       roundId: data?.[dataIndex]?.roundId,
@@ -43,7 +45,7 @@ const BetSlip = ({
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
     const timeout = setTimeout(() => {
-      setAnimation(null);
+      setAnimation([]);
       setStakeState((prev) => {
         const maxSerial = Math.max(
           0,
@@ -182,12 +184,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "even"
+                  animation.includes("even")
                     ? "absolute top-0 visible transition-all duration-500 "
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.even?.stake : stake} />
               </div>
 
               {stakeState?.even?.show && (
@@ -232,12 +234,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "up"
+                  animation.includes("up")
                     ? "absolute top-0 visible transition-all duration-500 "
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.up?.stake : stake} />
               </div>
               {stakeState?.up?.show && <Stake stake={stakeState?.up?.stake} />}
             </div>
@@ -279,12 +281,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "odd"
+                  animation.includes("odd")
                     ? "absolute top-0 visible transition-all duration-500 "
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.odd?.stake : stake} />
               </div>
               {stakeState?.odd?.show && (
                 <Stake stake={stakeState?.odd?.stake} />
@@ -342,12 +344,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "diamond"
+                  animation.includes("diamond")
                     ? "absolute top-0 visible transition-all duration-500"
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.diamond?.stake : stake} />
               </div>
               {stakeState?.diamond?.show && (
                 <Stake stake={stakeState?.diamond?.stake} />
@@ -405,12 +407,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "heart"
+                  animation.includes("heart")
                     ? "absolute top-0 visible transition-all duration-500"
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.heart?.stake : stake} />
               </div>
               {stakeState?.heart?.show && (
                 <Stake stake={stakeState?.heart?.stake} />
@@ -455,12 +457,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "seven"
+                  animation.includes("seven")
                     ? "absolute top-0 visible transition-all duration-500"
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.seven?.stake : stake} />
               </div>
               {stakeState?.seven?.show && (
                 <Stake stake={stakeState?.seven?.stake} />
@@ -517,12 +519,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "spade"
+                  animation.includes("spade")
                     ? "absolute top-0 visible transition-all duration-500"
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.spade?.stake : stake} />
               </div>
               {stakeState?.spade?.show && (
                 <Stake stake={stakeState?.spade?.stake} />
@@ -579,12 +581,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "club"
+                  animation.includes("club")
                     ? "absolute top-0 visible transition-all duration-500"
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.club?.stake : stake} />
               </div>
               {stakeState?.club?.show && (
                 <Stake stake={stakeState?.club?.stake} />
@@ -655,12 +657,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "red"
+                  animation.includes("red")
                     ? "absolute top-0 visible transition-all duration-500 "
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.red?.stake : stake} />
               </div>
               {stakeState?.red?.show && (
                 <Stake stake={stakeState?.red?.stake} />
@@ -704,12 +706,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "down"
+                  animation.includes("down")
                     ? "absolute top-0 visible transition-all duration-500 "
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.down?.stake : stake} />
               </div>
               {stakeState?.down?.show && (
                 <Stake stake={stakeState?.down?.stake} />
@@ -780,12 +782,12 @@ const BetSlip = ({
             <div className="relative w-10 h-10">
               <div
                 className={`${
-                  animation === "black"
+                  animation.includes("black")
                     ? "absolute top-0 visible transition-all duration-500 "
                     : "absolute -top-16 invisible opacity-0"
                 }  z-50`}
               >
-                <Stake stake={stake} />
+                <Stake stake={double ? stakeState?.black?.stake : stake} />
               </div>
               {stakeState?.black?.show && (
                 <Stake stake={stakeState?.black?.stake} />

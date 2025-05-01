@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
 
 const LuckySeven = () => {
+  const [double, setDouble] = useState(false);
+  const [animation, setAnimation] = useState([]);
   const [showWinLossResult, setShowWinLossResult] = useState(false);
   const [totalWinAmount, setTotalWinAmount] = useState(null);
   const { stake } = useSelector((state) => state.global);
@@ -46,6 +48,7 @@ const LuckySeven = () => {
   const [stakeState, setStakeState] = useState(initialState);
 
   const handleUndoStake = () => {
+    new Audio("/undo.mp3").play();
     setStakeState((prev) => {
       const prevValues = Object.entries(prev);
       const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
@@ -80,6 +83,53 @@ const LuckySeven = () => {
       return prev;
     });
   };
+  const handleDoubleStake = () => {
+    setDouble(true);
+    new Audio("/bet.mp3").play();
+    setStakeState((prevState) => {
+      const updatedState = { ...prevState };
+      const maxSerial = Math.max(
+        0,
+        ...Object.values(updatedState)
+          .map((item) => item.serial)
+          .filter((serial) => serial !== undefined)
+      );
+
+      const oddNames = [];
+
+      Object.keys(updatedState).forEach((key) => {
+        if (updatedState[key].show) {
+          oddNames.push(key);
+        }
+      });
+      setAnimation(oddNames);
+
+      setTimeout(() => {
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              undo: [
+                ...updatedState[key].undo,
+                updatedState[key].undo[updatedState[key].undo?.length - 1] * 2,
+              ],
+              serial: updatedState[key]?.serial
+                ? updatedState[key]?.serial
+                : maxSerial + 1,
+              stake: updatedState[key].stake * 2,
+            };
+          }
+        });
+
+        setDouble(false);
+        setAnimation([]);
+      }, 500);
+
+      return updatedState;
+    });
+  };
+
+  console.log(stakeState);
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
@@ -99,6 +149,9 @@ const LuckySeven = () => {
       </div>
       {/* <SuspendedBetSlip /> */}
       <BetSlip
+        double={double}
+        animation={animation}
+        setAnimation={setAnimation}
         setShowWinLossResult={setShowWinLossResult}
         setTotalWinAmount={setTotalWinAmount}
         initialState={initialState}
@@ -110,6 +163,8 @@ const LuckySeven = () => {
       />
       <div className="bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton
+          handleDoubleStake={handleDoubleStake}
+          stakeState={stakeState}
           handleUndoStake={handleUndoStake}
           isPlaceStake={isPlaceStake}
           status={firstEvent?.status}
@@ -134,27 +189,17 @@ const LuckySeven = () => {
           setShowSetting={setShowSetting}
         />
       )}
-      {/* <div
-        className="scale-y-0 h-[70%] fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"
-        style={{ zIndex: 1000 }}
-      />
-      <div
-        className="scale-y-0 h-fit fixed origin-bottom flex flex-col items-center bottom-0 w-full max-w-xl transition-all ease-in-out"
-        style={{ zIndex: 1000 }}
-      >
-        0
-      </div>
-      */}
+
       {toast && (
         <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
           <Toast message={toast} setMessage={setToast} />{" "}
         </div>
       )}
-      {!toast && firstEvent?.status === Status.OPEN && (
+      {/* {!toast && firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[30%] -translate-x-1/2 z-50 text-center text-white">
           PLACE YOUR BETS
         </div>
-      )}
+      )} */}
     </main>
   );
 };
