@@ -14,6 +14,7 @@ const BetSlip = ({
   stakeState,
   initialState,
   setTotalWinAmount,
+  setShowWinLossResult,
 }) => {
   const [animation, setAnimation] = useState(null);
   const [addOrder] = useOrderMutation();
@@ -117,6 +118,7 @@ const BetSlip = ({
         const res = await addOrder(payload).unwrap();
         payload = [];
         if (res?.success) {
+          setShowWinLossResult(false);
           setTotalWinAmount(null);
           let totalBets = [];
 

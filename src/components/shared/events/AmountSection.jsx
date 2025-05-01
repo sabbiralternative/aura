@@ -7,6 +7,8 @@ const AmountSection = ({
   data,
   totalWinAmount,
   setTotalWinAmount,
+  setShowWinLossResult,
+  showWinLossResult,
 }) => {
   // const roundId = data?.[0]?.roundId;
 
@@ -66,6 +68,7 @@ const AmountSection = ({
               totalWin += looserSum + WinnerSum;
 
               setTotalWinAmount(totalWin);
+              setShowWinLossResult(true);
             }
           });
         });
@@ -74,9 +77,15 @@ const AmountSection = ({
   }, [data, totalBetPlace]);
 
   useEffect(() => {
-    if (totalBetPlace && totalWinAmount > 0) {
-      new Audio("/pokerwin.mp3").play();
+    if (totalBetPlace && (totalWinAmount > 0 || showWinLossResult)) {
       const parseTotalBet = JSON.parse(totalBetPlace);
+      const filterOrderByEventId = parseTotalBet?.filter(
+        (order) => order?.eventId == eventId
+      );
+      if (totalWinAmount > 0 && filterOrderByEventId?.length > 0) {
+        new Audio("/pokerwin.mp3").play();
+      }
+
       const filterCurrentEventBet = parseTotalBet?.filter(
         (bet) => bet?.eventId != eventId
       );
@@ -86,12 +95,12 @@ const AmountSection = ({
         JSON.stringify(filterCurrentEventBet)
       );
     }
-  }, [eventId, totalWinAmount, totalBetPlace]);
+  }, [eventId, totalWinAmount, totalBetPlace, showWinLossResult]);
 
   return (
     <div className="flex items-end justify-between w-full">
       <div className="z-10 flex flex-col text-xs font-normal capitalize text-text-primary">
-        {totalWinAmount ? (
+        {showWinLossResult ? (
           <span className="flex items-center gap-1">
             Last Win<span className="text-yellow">{totalWinAmount}</span>
           </span>
