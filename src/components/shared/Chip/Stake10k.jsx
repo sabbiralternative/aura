@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { setShowChip, setStake } from "../../../redux/features/stateSlice";
+import { handleChipChange } from "../../../utils/sound";
 
 const Stake10k = ({ value = "10K" }) => {
   const dispatch = useDispatch();
@@ -8,6 +9,7 @@ const Stake10k = ({ value = "10K" }) => {
       onClick={() => {
         dispatch(setStake(10000));
         dispatch(setShowChip(false));
+        handleChipChange();
       }}
       className=" transition-all duration-200 ease-in-out "
       style={{ transform: "translate(60px, 0px) rotate(0deg)" }}

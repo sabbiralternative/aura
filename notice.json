@@ -30,10 +30,10 @@
       "format": "png"
     },
     "endpoint": {
-      "eventDetails": "https://cache7.live/api/exchange/encrypted/odds/event",
+      "eventDetails": "https://dream11.dev/api/exchange/encrypted/odds/event",
       "casino": "https://cache7.live/casino.php",
       "auth": "https://api7.live/api/funbar/auth.php",
-      "order": "https://api7.live/api/funbar/order.php"
+      "order": "https://dream11.dev/api/funbar/order.php"
     }
   },
   "success": true

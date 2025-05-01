@@ -27,7 +27,11 @@ const RightSidebar = () => {
         const res = await handleAuth({ token }).unwrap();
 
         dispatch(
-          setUser({ username: res.username, balance: res.balance, token })
+          setUser({
+            username: res.username,
+            balance: res.balance,
+            token,
+          })
         );
       };
 

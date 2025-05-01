@@ -83,7 +83,7 @@ const AmountSection = ({
         (order) => order?.eventId == eventId
       );
       if (totalWinAmount > 0 && filterOrderByEventId?.length > 0) {
-        new Audio("/pokerwin.mp3").play();
+        new Audio("/win.mp3").play();
       }
 
       const filterCurrentEventBet = parseTotalBet?.filter(

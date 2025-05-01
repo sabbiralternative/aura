@@ -50,37 +50,59 @@ const LuckySeven = () => {
   const handleUndoStake = () => {
     new Audio("/undo.mp3").play();
     setStakeState((prev) => {
+      const updatedState = { ...prev };
       const prevValues = Object.entries(prev);
-      const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
-        if (currentObj.serial > (maxObj?.serial || 0)) {
-          return { key, obj: currentObj };
+      const isPlacedDouble = Object.values(stakeState).filter(
+        (item) => item?.double
+      );
+
+      if (isPlacedDouble?.length > 0) {
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              stake: updatedState[key].stake / 2,
+              double: updatedState[key].double - 1,
+            };
+          }
+        });
+
+        return updatedState;
+      } else {
+        const maxSerialObject = prevValues.reduce(
+          (maxObj, [key, currentObj]) => {
+            if (currentObj.serial > (maxObj?.serial || 0)) {
+              return { key, obj: currentObj };
+            }
+            return maxObj;
+          },
+          {}
+        );
+
+        if (maxSerialObject.obj) {
+          const updatedObj = {
+            ...maxSerialObject.obj,
+            undo: [...maxSerialObject.obj.undo],
+          };
+
+          if (
+            updatedObj.undo.length > 0 &&
+            updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
+          ) {
+            updatedObj.stake -= updatedObj.undo.pop();
+          } else {
+            updatedObj.show = false;
+            delete updatedObj.serial;
+          }
+
+          return {
+            ...prev,
+            [maxSerialObject.key]: updatedObj,
+          };
         }
-        return maxObj;
-      }, {});
 
-      if (maxSerialObject.obj) {
-        const updatedObj = {
-          ...maxSerialObject.obj,
-          undo: [...maxSerialObject.obj.undo],
-        };
-
-        if (
-          updatedObj.undo.length > 0 &&
-          updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
-        ) {
-          updatedObj.stake -= updatedObj.undo.pop();
-        } else {
-          updatedObj.show = false;
-          delete updatedObj.serial;
-        }
-
-        return {
-          ...prev,
-          [maxSerialObject.key]: updatedObj,
-        };
+        return prev;
       }
-
-      return prev;
     });
   };
   const handleDoubleStake = () => {
@@ -107,16 +129,17 @@ const LuckySeven = () => {
       setTimeout(() => {
         Object.keys(updatedState).forEach((key) => {
           if (updatedState[key].show) {
+            const currentStake = updatedState[key].stake;
             updatedState[key] = {
               ...updatedState[key],
-              undo: [
-                ...updatedState[key].undo,
-                updatedState[key].undo[updatedState[key].undo?.length - 1] * 2,
-              ],
+              undo: [...updatedState[key].undo, currentStake],
               serial: updatedState[key]?.serial
                 ? updatedState[key]?.serial
                 : maxSerial + 1,
               stake: updatedState[key].stake * 2,
+              double: updatedState[key].double
+                ? updatedState[key].double + 1
+                : 1,
             };
           }
         });
@@ -128,8 +151,6 @@ const LuckySeven = () => {
       return updatedState;
     });
   };
-
-  console.log(stakeState);
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
@@ -164,7 +185,6 @@ const LuckySeven = () => {
       <div className="bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton
           handleDoubleStake={handleDoubleStake}
-          stakeState={stakeState}
           handleUndoStake={handleUndoStake}
           isPlaceStake={isPlaceStake}
           status={firstEvent?.status}

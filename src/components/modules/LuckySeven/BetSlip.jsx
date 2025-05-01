@@ -28,7 +28,7 @@ const BetSlip = ({
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
-    new Audio("/pokerchip2.mp3").play();
+    new Audio("/bet.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
     setAnimation([key]);
     const formatData = {
