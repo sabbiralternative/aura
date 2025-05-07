@@ -9,7 +9,7 @@ const Originals = () => {
   const handleNavigate = (casino) => {
     new Audio("/click.mp3").play();
     const formatLink = `${casino?.url}/${token}`;
-    window.open(formatLink, "_Main");
+    window.location.href = formatLink;
   };
 
   return (
