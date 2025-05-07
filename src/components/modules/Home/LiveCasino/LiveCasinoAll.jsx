@@ -1,4 +1,4 @@
-const LiveCasinoAll = ({ data, setShowAll, handleNavigate }) => {
+const LiveCasinoAll = ({ data, setShowAll, handleNavigate, title }) => {
   return (
     <div className="w-full  overflow-hidden text-sm">
       <div className="swiper swiper-container swiper-initialized swiper-horizontal swiper-backface-hidden">
@@ -23,7 +23,7 @@ const LiveCasinoAll = ({ data, setShowAll, handleNavigate }) => {
               </svg>
             </div>
             <div className="flex font-bold leading-tight tracking-wider">
-              Live Casino{" "}
+              {title}
             </div>
           </div>
           <span className="flex items-center gap-1 ml-auto">

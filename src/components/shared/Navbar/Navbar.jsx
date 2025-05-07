@@ -291,6 +291,7 @@ const Navbar = () => {
               Casino
             </button>
             <button
+              onClick={() => navigate("/originals")}
               style={{ zIndex: 998 }}
               className="flex justify-center w-full gap-1 py-2 text-sm items-center text-white whitespace-nowrap"
             >
@@ -376,6 +377,7 @@ const Navbar = () => {
               Originals
             </button>
             <button
+              onClick={() => navigate("/fast-games")}
               style={{ zIndex: 998 }}
               className="flex justify-center w-full gap-1 py-2 text-sm items-center text-white whitespace-nowrap"
             >
@@ -400,6 +402,10 @@ const Navbar = () => {
                     ? "0%"
                     : pathname === "/casino"
                     ? "25%"
+                    : pathname === "/originals"
+                    ? "50%"
+                    : pathname === "/fast-games"
+                    ? "75%"
                     : "0%",
               }}
               className="absolute h-full flex flex-col justify-end items-center transition-all ease-in-out"

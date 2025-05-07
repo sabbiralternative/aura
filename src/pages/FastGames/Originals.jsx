@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar/Navbar";
 import { useGetLiveCasinoThumbnailQuery } from "../../redux/features/casino/casino.api";
 
-const Casino = () => {
+const FastGames = () => {
   const navigate = useNavigate();
-  const { data } = useGetLiveCasinoThumbnailQuery({ id: "casino" });
+  const { data } = useGetLiveCasinoThumbnailQuery({ id: "fast" });
 
   const handleNavigate = (casino) => {
     const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
@@ -164,4 +164,4 @@ const Casino = () => {
   );
 };
 
-export default Casino;
+export default FastGames;

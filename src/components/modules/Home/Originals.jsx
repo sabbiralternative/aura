@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { useGetLiveCasinoThumbnailQuery } from "../../../../redux/features/casino/casino.api";
-import LiveCasinoAll from "./LiveCasinoAll";
-import LiveCasinoSlider from "./LiveCasinoSlider";
-import { useState } from "react";
 
-const LiveCasino = () => {
+import { useState } from "react";
+import { useGetLiveCasinoThumbnailQuery } from "../../../redux/features/casino/casino.api";
+import LiveCasinoAll from "./LiveCasino/LiveCasinoAll";
+import LiveCasinoSlider from "./LiveCasino/LiveCasinoSlider";
+
+const Originals = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-  const { data } = useGetLiveCasinoThumbnailQuery({ id: "casino" });
+  const { data } = useGetLiveCasinoThumbnailQuery({ id: "originals" });
 
   const handleNavigate = (casino) => {
     const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
@@ -19,14 +20,14 @@ const LiveCasino = () => {
     <>
       {showAll ? (
         <LiveCasinoAll
-          title="Live Casino"
+          title="Originals"
           data={data}
           handleNavigate={handleNavigate}
           setShowAll={setShowAll}
         />
       ) : (
         <LiveCasinoSlider
-          title="Live Casino"
+          title="Originals"
           data={data}
           handleNavigate={handleNavigate}
           setShowAll={setShowAll}
@@ -36,4 +37,4 @@ const LiveCasino = () => {
   );
 };
 
-export default LiveCasino;
+export default Originals;

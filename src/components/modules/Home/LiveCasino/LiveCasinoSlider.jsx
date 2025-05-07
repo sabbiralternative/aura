@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const LiveCasinoSlider = ({ data, handleNavigate, setShowAll }) => {
+const LiveCasinoSlider = ({ data, handleNavigate, setShowAll, title }) => {
   const swiperRef = useRef(null);
 
   useEffect(() => {
@@ -170,7 +170,7 @@ const LiveCasinoSlider = ({ data, handleNavigate, setShowAll }) => {
               </svg>
             </div>
             <div className="flex font-bold leading-tight tracking-wider">
-              Live Casino
+              {title}
             </div>
           </div>
           <span className="flex items-center gap-1 ml-auto">
