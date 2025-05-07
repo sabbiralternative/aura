@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import {
 } from "../../../utils/betSlip";
 import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
+import { setBalance } from "../../../redux/features/auth/authSlice";
 
 const BetSlip = ({
   double,
@@ -23,8 +24,10 @@ const BetSlip = ({
   animation,
   setAnimation,
 }) => {
+  const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
+  const { balance } = useSelector((state) => state.auth);
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
@@ -127,8 +130,10 @@ const BetSlip = ({
           setShowWinLossResult(false);
           setTotalWinAmount(null);
           let totalBets = [];
+          let totalAmountPlaced = 0;
 
           for (let bet of filterPlacedBet) {
+            totalAmountPlaced = totalAmountPlaced + bet?.stake;
             totalBets.push({
               selection_id: bet.selection_id,
               price: bet?.price,
@@ -138,8 +143,9 @@ const BetSlip = ({
               stake: bet?.stake,
             });
           }
-          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
 
+          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+          dispatch(setBalance(balance - parseFloat(totalAmountPlaced)));
           setToast(res?.Message);
         }
       };

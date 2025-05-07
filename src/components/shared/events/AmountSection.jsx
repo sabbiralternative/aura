@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { setBalance } from "../../../redux/features/auth/authSlice";
 
 const AmountSection = ({
   firstEvent,
@@ -11,6 +12,7 @@ const AmountSection = ({
   showWinLossResult,
 }) => {
   // const roundId = data?.[0]?.roundId;
+  const dispatch = useDispatch();
 
   const totalBetPlace = localStorage.getItem("totalBetPlace");
   const { eventId } = useParams();
@@ -83,6 +85,7 @@ const AmountSection = ({
         (order) => order?.eventId == eventId
       );
       if (totalWinAmount > 0 && filterOrderByEventId?.length > 0) {
+        dispatch(setBalance(balance + parseFloat(totalWinAmount)));
         new Audio("/win.mp3").play();
       }
 
@@ -95,7 +98,7 @@ const AmountSection = ({
         JSON.stringify(filterCurrentEventBet)
       );
     }
-  }, [eventId, totalWinAmount, totalBetPlace, showWinLossResult]);
+  }, [eventId, totalWinAmount, totalBetPlace, showWinLossResult, dispatch]);
 
   return (
     <div className="flex items-end justify-between w-full">

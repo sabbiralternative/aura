@@ -31,7 +31,7 @@
     },
     "endpoint": {
       "eventDetails": "https://dream11.dev/api/exchange/encrypted/odds/event",
-      "casino": "https://cache7.live/casino.php",
+      "casino": "https://dream11.dev/api/funbar/casino.php",
       "auth": "https://api7.live/api/funbar/auth.php",
       "order": "https://dream11.dev/api/funbar/order.php"
     }

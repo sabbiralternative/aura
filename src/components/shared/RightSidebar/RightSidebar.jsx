@@ -25,21 +25,20 @@ const RightSidebar = () => {
     if (token) {
       const getUser = async () => {
         const res = await handleAuth({ token }).unwrap();
-
         dispatch(
           setUser({
             username: res.username,
-            balance: res.balance,
+            balance: res?.balance,
             token,
           })
         );
       };
 
-      getUser(); // initial call
+      getUser();
 
       intervalId = setInterval(() => {
         getUser();
-      }, 5000);
+      }, 30000);
     }
 
     return () => clearInterval(intervalId);

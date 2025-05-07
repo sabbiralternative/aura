@@ -7,7 +7,7 @@ import { useState } from "react";
 const LiveCasino = () => {
   const [showAll, setShowAll] = useState(false);
   const navigate = useNavigate();
-  const { data } = useGetLiveCasinoThumbnailQuery();
+  const { data } = useGetLiveCasinoThumbnailQuery({ id: "casino" });
 
   const handleNavigate = (casino) => {
     const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
