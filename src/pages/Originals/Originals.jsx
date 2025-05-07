@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/shared/Navbar/Navbar";
 import { useGetLiveCasinoThumbnailQuery } from "../../redux/features/casino/casino.api";
+import { useSelector } from "react-redux";
 
 const Originals = () => {
-  const navigate = useNavigate();
+  const { token } = useSelector((state) => state.auth);
   const { data } = useGetLiveCasinoThumbnailQuery({ id: "originals" });
 
   const handleNavigate = (casino) => {
-    const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
     new Audio("/click.mp3").play();
-    navigate(formatLink);
+    const formatLink = `${casino?.url}/${token}`;
+    window.open(formatLink, "_Main");
   };
 
   return (

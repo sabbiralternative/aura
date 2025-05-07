@@ -175,6 +175,7 @@ const LuckySeven = () => {
               updatedState[key] = {
                 ...updatedState[key],
                 show: true,
+                roundId: firstEvent?.roundId,
               };
             }
           });

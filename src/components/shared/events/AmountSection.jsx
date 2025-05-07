@@ -41,6 +41,7 @@ const AmountSection = ({
         data?.forEach((games) => {
           games?.runners?.forEach((runner) => {
             if (runner?.status === "WINNER") {
+              console.log(runner?.status);
               const winnerFilter = parseTotalBet?.filter(
                 (order) =>
                   order?.selection_id === runner?.id &&
@@ -79,7 +80,8 @@ const AmountSection = ({
   }, [data, totalBetPlace]);
 
   useEffect(() => {
-    if (totalBetPlace && (totalWinAmount > 0 || showWinLossResult)) {
+    if (totalBetPlace && (totalWinAmount != null || showWinLossResult)) {
+      /* TODO totalWinAmount and showWinLossResult not setting null and false after placeBet */
       const parseTotalBet = JSON.parse(totalBetPlace);
       const filterOrderByEventId = parseTotalBet?.filter(
         (order) => order?.eventId == eventId
