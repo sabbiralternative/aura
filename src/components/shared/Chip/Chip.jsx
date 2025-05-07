@@ -6,7 +6,12 @@ import Chip5k from "./Chip5k";
 import { useSelector } from "react-redux";
 import Chip1k from "./Chip1k";
 
-const Chip = ({ handleUndoStake, isPlaceStake, handleDoubleStake }) => {
+const Chip = ({
+  handleUndoStake,
+  isPlaceStake,
+  handleDoubleStake,
+  isRepeatTheBet,
+}) => {
   const { showChip, stake } = useSelector((state) => state.global);
 
   return (
@@ -57,9 +62,10 @@ const Chip = ({ handleUndoStake, isPlaceStake, handleDoubleStake }) => {
               className="flex flex-col items-center justify-center w-12 text-xs capitalize transition-opacity ease-in-out cursor-pointer"
               style={{
                 zIndex: 997,
-                opacity: isPlaceStake ? "1" : "0.5",
-                cursor: isPlaceStake ? "pointer" : "not-allowed",
-                pointerEvents: isPlaceStake ? "auto" : "none",
+                opacity: isPlaceStake || isRepeatTheBet ? "1" : "0.5",
+                cursor:
+                  isPlaceStake || isRepeatTheBet ? "pointer" : "not-allowed",
+                pointerEvents: isPlaceStake || isRepeatTheBet ? "auto" : "none",
               }}
             >
               <div className="flex items-center justify-center h-4 aspect-square">
@@ -78,7 +84,7 @@ const Chip = ({ handleUndoStake, isPlaceStake, handleDoubleStake }) => {
                   />
                 </svg>
               </div>
-              <span>Double</span>
+              <span> {isRepeatTheBet ? "Repeat" : "Double"}</span>
             </div>
           </div>
         </div>

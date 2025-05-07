@@ -18,11 +18,11 @@ const BetSlip = ({
   setToast,
   setStakeState,
   stakeState,
-  initialState,
   setTotalWinAmount,
   setShowWinLossResult,
   animation,
   setAnimation,
+  initialState,
 }) => {
   const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
@@ -31,6 +31,12 @@ const BetSlip = ({
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
+    const isRepeatTheBet = Object.values(stakeState).find(
+      (item) => item?.selection_id && item?.show === false
+    );
+    if (isRepeatTheBet) {
+      setStakeState(initialState);
+    }
     new Audio("/bet.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
     setAnimation([key]);
@@ -88,7 +94,18 @@ const BetSlip = ({
   // Reset state when status is OPEN
   useEffect(() => {
     if (status === Status.OPEN) {
-      setStakeState(initialState);
+      setStakeState((prev) => {
+        const updatedState = { ...prev };
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              show: false,
+            };
+          }
+        });
+        return updatedState;
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);

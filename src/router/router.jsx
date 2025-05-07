@@ -14,7 +14,7 @@ import War from "../pages/War/War";
 import BetHistory from "../pages/BetHistory/BetHistory";
 import Casino from "../pages/Casino/Casino";
 import Originals from "../pages/Originals/Originals";
-import FastGames from "../pages/FastGames/Originals";
+import FastGames from "../pages/FastGames/FastGames";
 
 export const router = createBrowserRouter(
   [

@@ -21,39 +21,7 @@ const Casino = () => {
         <Navbar />
 
         <div className="z-20 flex flex-col w-full gap-3">
-          <div>
-            <div className="sticky top-0 z-50 py-1 backdrop-blur-lg bg-black/10">
-              <div className=" flex w-full gap-1 px-4 py-1.5 pr-12 overflow-x-auto">
-                <div className="bg-white text-black  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  All Games
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  New
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Poker
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Trending
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Teen patti
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Live
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Virtual
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Roulette
-                </div>
-                <div className="  text-white  px-3 border border-white/20 py-1.5 rounded-full cursor-pointer text-sm font-medium text-center whitespace-nowrap z-40">
-                  Baccarat
-                </div>
-              </div>
-              <div className="absolute top-0 right-0 z-50 w-12 h-full pointer-events-none bg-gradient-to-l from-black to-transparent" />
-            </div>
+          <div className="mt-4">
             <div className="z-20 flex flex-wrap justify-center gap-2">
               {data?.map((casino) => (
                 <div

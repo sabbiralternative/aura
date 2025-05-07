@@ -105,51 +105,84 @@ const LuckySeven = () => {
       }
     });
   };
+  const isRepeatTheBet = Object.values(stakeState).find(
+    (item) => item?.selection_id && item?.show === false
+  );
+
   const handleDoubleStake = () => {
-    setDouble(true);
     new Audio("/bet.mp3").play();
-    setStakeState((prevState) => {
-      const updatedState = { ...prevState };
-      const maxSerial = Math.max(
-        0,
-        ...Object.values(updatedState)
-          .map((item) => item.serial)
-          .filter((serial) => serial !== undefined)
-      );
+    if (!isRepeatTheBet) {
+      setDouble(true);
+      setStakeState((prevState) => {
+        const updatedState = { ...prevState };
+        console.log({ updatedState });
+        const maxSerial = Math.max(
+          0,
+          ...Object.values(updatedState)
+            .map((item) => item.serial)
+            .filter((serial) => serial !== undefined)
+        );
 
-      const oddNames = [];
+        const oddNames = [];
 
-      Object.keys(updatedState).forEach((key) => {
-        if (updatedState[key].show) {
-          oddNames.push(key);
-        }
-      });
-      setAnimation(oddNames);
-
-      setTimeout(() => {
         Object.keys(updatedState).forEach((key) => {
           if (updatedState[key].show) {
-            const currentStake = updatedState[key].stake;
-            updatedState[key] = {
-              ...updatedState[key],
-              undo: [...updatedState[key].undo, currentStake],
-              serial: updatedState[key]?.serial
-                ? updatedState[key]?.serial
-                : maxSerial + 1,
-              stake: updatedState[key].stake * 2,
-              double: updatedState[key].double
-                ? updatedState[key].double + 1
-                : 1,
-            };
+            oddNames.push(key);
           }
         });
+        setAnimation(oddNames);
 
-        setDouble(false);
-        setAnimation([]);
-      }, 500);
+        setTimeout(() => {
+          Object.keys(updatedState).forEach((key) => {
+            if (updatedState[key].show) {
+              const currentStake = updatedState[key].stake;
+              updatedState[key] = {
+                ...updatedState[key],
+                undo: [...updatedState[key].undo, currentStake],
+                serial: updatedState[key]?.serial
+                  ? updatedState[key]?.serial
+                  : maxSerial + 1,
+                stake: updatedState[key].stake * 2,
+                double: updatedState[key].double
+                  ? updatedState[key].double + 1
+                  : 1,
+              };
+            }
+          });
 
-      return updatedState;
-    });
+          setDouble(false);
+          setAnimation([]);
+        }, 500);
+
+        return updatedState;
+      });
+    } else {
+      setStakeState((prev) => {
+        const updatedState = { ...prev };
+        setDouble(true);
+        const oddNames = [];
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].selection_id && !updatedState[key].show) {
+            oddNames.push(key);
+          }
+        });
+        setAnimation(oddNames);
+
+        setTimeout(() => {
+          setAnimation([]);
+          Object.keys(updatedState).forEach((key) => {
+            if (updatedState[key].selection_id && !updatedState[key].show) {
+              updatedState[key] = {
+                ...updatedState[key],
+                show: true,
+              };
+            }
+          });
+        }, 500);
+
+        return updatedState;
+      });
+    }
   };
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
@@ -170,12 +203,12 @@ const LuckySeven = () => {
       </div>
       {/* <SuspendedBetSlip /> */}
       <BetSlip
+        initialState={initialState}
         double={double}
         animation={animation}
         setAnimation={setAnimation}
         setShowWinLossResult={setShowWinLossResult}
         setTotalWinAmount={setTotalWinAmount}
-        initialState={initialState}
         stakeState={stakeState}
         setStakeState={setStakeState}
         setToast={setToast}
@@ -184,6 +217,7 @@ const LuckySeven = () => {
       />
       <div className="bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton
+          isRepeatTheBet={isRepeatTheBet}
           handleDoubleStake={handleDoubleStake}
           handleUndoStake={handleUndoStake}
           isPlaceStake={isPlaceStake}

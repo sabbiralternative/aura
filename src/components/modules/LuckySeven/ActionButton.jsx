@@ -9,6 +9,7 @@ const ActionButton = ({
   isPlaceStake,
   handleUndoStake,
   handleDoubleStake,
+  isRepeatTheBet,
 }) => {
   const { balance } = useSelector((state) => state.auth);
   return (
@@ -33,6 +34,7 @@ const ActionButton = ({
 
       {status === Status.OPEN && balance >= 100 && (
         <Chip
+          isRepeatTheBet={isRepeatTheBet}
           handleDoubleStake={handleDoubleStake}
           isPlaceStake={isPlaceStake}
           handleUndoStake={handleUndoStake}
