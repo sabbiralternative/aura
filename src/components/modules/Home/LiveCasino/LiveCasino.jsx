@@ -10,7 +10,7 @@ const LiveCasino = () => {
   const { data } = useGetLiveCasinoThumbnailQuery({ id: "casino" });
 
   const handleNavigate = (casino) => {
-    const formatLink = `/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
+    const formatLink = `/event-details/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
     new Audio("/click.mp3").play();
     navigate(formatLink);
   };

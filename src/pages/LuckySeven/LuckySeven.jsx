@@ -115,7 +115,6 @@ const LuckySeven = () => {
       setDouble(true);
       setStakeState((prevState) => {
         const updatedState = { ...prevState };
-        console.log({ updatedState });
         const maxSerial = Math.max(
           0,
           ...Object.values(updatedState)

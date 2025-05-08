@@ -1,18 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
-import { setShowRightSidebar } from "../../../redux/features/stateSlice";
-import { useAuthMutation } from "../../../redux/features/auth/authApi";
-import { setUser } from "../../../redux/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import {
+  setRefetchBalance,
+  setShowRightSidebar,
+} from "../../../redux/features/stateSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/auth";
 
 const RightSidebar = () => {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [refetch, setRefetch] = useState(false);
   const dispatch = useDispatch();
-  const { showRightSidebar } = useSelector((state) => state.global);
+  const { showRightSidebar, refetchBalance } = useSelector(
+    (state) => state.global
+  );
   const { token, username, balance } = useSelector((state) => state.auth);
-  const [handleAuth] = useAuthMutation();
+  const { mutate: handleAuth } = useAuth();
 
   const sidebarRef = useRef(null);
   useCloseModalClickOutside(sidebarRef, () => {
@@ -20,29 +24,10 @@ const RightSidebar = () => {
   });
 
   useEffect(() => {
-    let intervalId;
-
-    if (token) {
-      const getUser = async () => {
-        const res = await handleAuth({ token }).unwrap();
-        dispatch(
-          setUser({
-            username: res.username,
-            balance: res?.balance,
-            token,
-          })
-        );
-      };
-
-      getUser();
-
-      intervalId = setInterval(() => {
-        getUser();
-      }, 30000);
+    if (token && (pathname === "/" || pathname?.includes("/event-details"))) {
+      handleAuth(pathname);
     }
-
-    return () => clearInterval(intervalId);
-  }, [token, handleAuth, dispatch, refetch]);
+  }, [token, handleAuth, refetchBalance, pathname]);
 
   return (
     <div
@@ -96,7 +81,7 @@ const RightSidebar = () => {
           </span>
         </div>
         <svg
-          onClick={() => setRefetch((prev) => !prev)}
+          onClick={() => dispatch(setRefetchBalance(!refetchBalance))}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"

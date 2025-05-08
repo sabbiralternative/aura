@@ -145,9 +145,9 @@ const BetSlip = ({
 
         payload = [];
         if (res?.success) {
-          console.log({ res });
           setShowWinLossResult(false);
           setTotalWinAmount(null);
+
           let totalBets = [];
           let totalAmountPlaced = 0;
 
@@ -164,6 +164,7 @@ const BetSlip = ({
           }
 
           localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+
           dispatch(setBalance(balance - parseFloat(totalAmountPlaced)));
           setToast(res?.Message);
         }

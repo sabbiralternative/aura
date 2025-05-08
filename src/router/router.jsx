@@ -40,39 +40,39 @@ export const router = createBrowserRouter(
           element: <FastGames />,
         },
         {
-          path: "/lucky7/:eventTypeId/:eventId",
+          path: "/event-details/lucky7/:eventTypeId/:eventId",
           element: <LuckySeven />,
         },
         {
-          path: "/aaa/:eventTypeId/:eventId",
+          path: "/event-details/aaa/:eventTypeId/:eventId",
           element: <AmarAkbarAnthony />,
         },
         {
-          path: "/dt20/:eventTypeId/:eventId",
+          path: "/event-details/dt20/:eventTypeId/:eventId",
           element: <DragonTiger />,
         },
         {
-          path: "/teenmuf/:eventTypeId/:eventId",
+          path: "/event-details/teenmuf/:eventTypeId/:eventId",
           element: <Muflis />,
         },
         {
-          path: "/teen20/:eventTypeId/:eventId",
+          path: "/event-details/teen20/:eventTypeId/:eventId",
           element: <TeenPatti2020 />,
         },
         {
-          path: "/teen/:eventTypeId/:eventId",
+          path: "/event-details/teen/:eventTypeId/:eventId",
           element: <TeenPattiOneDay />,
         },
         {
-          path: "/btable/:eventTypeId/:eventId",
+          path: "/event-details/btable/:eventTypeId/:eventId",
           element: <Bollywood />,
         },
         {
-          path: "/baccarat/:eventTypeId/:eventId",
+          path: "/event-details/baccarat/:eventTypeId/:eventId",
           element: <Baccarat />,
         },
         {
-          path: "/war/:eventTypeId/:eventId",
+          path: "/event-details/war/:eventTypeId/:eventId",
           element: <War />,
         },
         {
