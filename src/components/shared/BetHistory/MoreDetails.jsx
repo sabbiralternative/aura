@@ -1,10 +1,65 @@
-const MoreDetails = ({ setTab }) => {
+import { useEffect, useRef } from "react";
+
+const MoreDetails = ({ setRoundId, bets }) => {
+  const ref = useRef();
+  let netMarketTotal = 0;
+
+  for (const bet of bets) {
+    netMarketTotal = netMarketTotal + bet?.amount;
+  }
+
+  useEffect(() => {
+    if (ref && ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
   return (
     <>
       <div
+        ref={ref}
         className="flex flex-col w-full pt-2 overflow-hidden divide-y-2 rounded-lg bg-controls-idle divide-dashed divide-controls-idle
         "
       >
+        {bets?.map((bet, i) => {
+          return (
+            <div
+              key={i}
+              className="flex flex-col gap-2 px-4 py-1 text-white slideInAnimation"
+            >
+              <div className="flex items-center gap-2 text-base">
+                <span className="font-semibold">
+                  {bet?.place_name} ({bet?.market_name})
+                </span>
+                <span className="ml-auto font-semibold ">
+                  <div className="tracking-wider text-white w-fit">
+                    <span className="text-sm">{bet?.date}</span>
+                    {/* <span className="text-xs font-light opacity-75">
+                   
+                      2:52:27 AM
+                    </span> */}
+                  </div>
+                </span>
+              </div>
+              <div className="flex justify-between ">
+                <span className="text-sm text-white">
+                  <span className="text-white/60">Type </span> {bet?.type}
+                </span>
+                <span className="text-[10px]">{bet?.round_id}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>
+                  <span className="text-white/60">Stake </span>₹{bet?.stake}
+                  <div />
+                </span>
+                <span
+                  className={`${bet?.amount > 0 ? "text-green" : "text-red"}`}
+                >
+                  ₹{bet?.amount}
+                </span>
+              </div>
+            </div>
+          );
+        })}
         <div className="flex flex-col gap-2 px-4 py-1 text-white slideInAnimation">
           <div className="flex items-center gap-2 text-base">
             <span className="font-semibold">Even (Odd-Even)</span>
@@ -32,7 +87,7 @@ const MoreDetails = ({ setTab }) => {
             <span className="  text-green">₹110</span>
           </div>
         </div>
-        <div className="flex flex-col gap-2 px-4 py-1 text-white slideInAnimation">
+        {/* <div className="flex flex-col gap-2 px-4 py-1 text-white slideInAnimation">
           <div className="flex items-center gap-2 text-base">
             <span className="font-semibold">Red (Colour)</span>
             <span className="ml-auto font-semibold ">
@@ -68,8 +123,8 @@ const MoreDetails = ({ setTab }) => {
               <div className>₹9,873</div>
             </span>
           </div>
-        </div>
-        <div className="flex flex-col w-full gap-0 px-4 py-1 mx-auto slideInAnimation">
+        </div> */}
+        {/* <div className="flex flex-col w-full gap-0 px-4 py-1 mx-auto slideInAnimation">
           <div>
             <div className="w-full">
               <div
@@ -174,14 +229,18 @@ const MoreDetails = ({ setTab }) => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex justify-between px-4 py-2 text-sm bg-controls-idle">
           <span className="text-white">Net Market Total </span>
-          <span className="text-green">₹10</span>
+          <span
+            className={` ${netMarketTotal > 0 ? "text-green" : "text-red"}`}
+          >
+            ₹{netMarketTotal}
+          </span>
         </div>
       </div>
       <button
-        onClick={() => setTab(null)}
+        onClick={() => setRoundId(null)}
         className="flex  items-center justify-center gap-2  py-2 bg-controls-idle w-full rounded-lg tracking-wider font-semibold cursor-pointer text-red"
       >
         Hide Details

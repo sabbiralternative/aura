@@ -1,8 +1,6 @@
 import { useState } from "react";
 
-const DatePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+const DatePicker = ({ startDate, setStartDate, endDate, setEndDate }) => {
   const [tab, setTab] = useState("today");
 
   const handleSetDate = (type) => {

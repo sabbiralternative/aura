@@ -3,6 +3,8 @@ export const API = {
   casino: "",
   auth: "",
   order: "",
+  pnl: "",
+  bets: "",
 };
 
 export const Settings = {
