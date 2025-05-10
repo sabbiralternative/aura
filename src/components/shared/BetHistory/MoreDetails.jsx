@@ -5,7 +5,7 @@ const MoreDetails = ({ setRoundId, bets }) => {
   let netMarketTotal = 0;
 
   for (const bet of bets) {
-    netMarketTotal = netMarketTotal + bet?.amount;
+    netMarketTotal = netMarketTotal + bet?.amount_total;
   }
 
   useEffect(() => {
@@ -13,6 +13,7 @@ const MoreDetails = ({ setRoundId, bets }) => {
       ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, []);
+
   return (
     <>
       <div

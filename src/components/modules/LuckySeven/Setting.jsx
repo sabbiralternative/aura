@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import BetHistory from "../../shared/BetHistory/BetHistory";
 import { playClickSound } from "../../../utils/playClickSound";
+import HowToPlay from "../../shared/HowToPlay/HowToPlay";
 
 const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
   const navigate = useNavigate();
   const [showBetHistory, setShowBetHistory] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
   const { username, balance } = useSelector((state) => state.auth);
 
   const handleToggleFullScreen = () => {
@@ -27,7 +29,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
 
     playClickSound();
   };
-
+  console.log(showHowToPlay);
   return (
     <>
       {showBetHistory && (
@@ -36,9 +38,15 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
           setShowBetHistory={setShowBetHistory}
         />
       )}
+      {showHowToPlay && (
+        <HowToPlay
+          setShowSetting={setShowSetting}
+          setShowHowToPlay={setShowHowToPlay}
+        />
+      )}
       <div
         className={`scale-y-100 h-[70%] fixed origin-bottom flex   flex-col items-center   bottom-0   w-full  max-w-md  transition-all ease-in-out ${
-          showBetHistory ? "invisible" : "visible"
+          showBetHistory || showHowToPlay ? "invisible" : "visible"
         }`}
         style={{ zIndex: "1000" }}
       >
@@ -121,6 +129,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                 <div
                   onClick={() => {
                     playClickSound();
+                    setShowHowToPlay(true);
                   }}
                   className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
                 >

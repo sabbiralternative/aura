@@ -7,7 +7,7 @@ const MainLayout = () => {
 
   const handleFullScreen = () => {
     if (showFullScreen) {
-      document.body.requestFullscreen();
+      // document.body.requestFullscreen();
       setShowFullScreen(false);
     }
   };
