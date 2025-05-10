@@ -60,33 +60,7 @@ const MoreDetails = ({ setRoundId, bets }) => {
             </div>
           );
         })}
-        <div className="flex flex-col gap-2 px-4 py-1 text-white slideInAnimation">
-          <div className="flex items-center gap-2 text-base">
-            <span className="font-semibold">Even (Odd-Even)</span>
-            <span className="ml-auto font-semibold ">
-              <div className="tracking-wider text-white w-fit">
-                <span className="text-sm">2025-04-27</span>
-                <span className="text-xs font-light opacity-75">
-                  {" "}
-                  2:52:27 AM
-                </span>{" "}
-              </div>
-            </span>
-          </div>
-          <div className="flex justify-between ">
-            <span className="text-sm text-white">
-              <span className="text-white/60">Type </span> Back
-            </span>
-            <span className="text-[10px]">#680d4e936ca835e7613ee5c4</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>
-              <span className="text-white/60">Stake </span>₹100
-              <div />
-            </span>
-            <span className="  text-green">₹110</span>
-          </div>
-        </div>
+
         {/* <div className="flex flex-col gap-2 px-4 py-1 text-white slideInAnimation">
           <div className="flex items-center gap-2 text-base">
             <span className="font-semibold">Red (Colour)</span>

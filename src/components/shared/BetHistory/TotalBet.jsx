@@ -18,7 +18,12 @@ const TotalBet = ({ betHistories }) => {
   return (
     <>
       <div className="flex w-full gap-1 px-2 text-sm font-semibold text-white">
-        <span className="mx-auto">{betHistories?.length} Bets</span>
+        <span className="mx-auto">
+          {" "}
+          {betHistories?.length > 0
+            ? `${betHistories?.length} Bets`
+            : "No bets found"}
+        </span>
       </div>
       <div className="flex flex-col-reverse gap-2">
         {/* First Bet */}
