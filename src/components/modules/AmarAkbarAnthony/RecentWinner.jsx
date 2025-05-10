@@ -21,11 +21,11 @@ const RecentWinner = ({ recentWinner }) => {
               <div className="bounceInAnimation text-black uppercase flex items-center justify-center gap-2">
                 <div
                   className={`px-2 py-1  flex items-center justify-center gap-1 cursor-pointer rounded-md ${
-                    winner?.winner === "H"
+                    winner?.winner === "A"
                       ? "bg-[#38b142] text-white"
-                      : winner.winner === "L"
+                      : winner.winner === "B"
                       ? "bg-[#d83b32] text-white"
-                      : winner.winner === "7"
+                      : winner.winner === "C"
                       ? "bg-[#156ed1] text-white"
                       : "bg-white"
                   }`}
