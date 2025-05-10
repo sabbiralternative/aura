@@ -2,17 +2,20 @@ import { useState } from "react";
 import RecentModal from "./RecentModal";
 
 const RecentWinner = ({ recentWinner }) => {
-  const [showRecentModal, setShowRecentModal] = useState(false);
+  const [recentWinnerData, setRecentWinnerData] = useState(false);
   return (
     <>
-      {showRecentModal && (
-        <RecentModal setShowRecentModal={setShowRecentModal} />
+      {recentWinnerData && (
+        <RecentModal
+          recentWinnerData={recentWinnerData}
+          setRecentWinnerData={setRecentWinnerData}
+        />
       )}
       <div className="overflow-x-scroll flex items-center gap-0.5 pb-1">
         {recentWinner?.map((winner) => {
           return (
             <span
-              onClick={() => setShowRecentModal(true)}
+              onClick={() => setRecentWinnerData(winner)}
               key={winner?.roundId}
             >
               <div className="bounceInAnimation text-black uppercase flex items-center justify-center gap-2">

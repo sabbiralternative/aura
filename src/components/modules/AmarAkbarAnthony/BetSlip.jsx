@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
 import { useEffect } from "react";
@@ -6,31 +6,47 @@ import {
   getBackPrice,
   getLayPrice,
   isRunnerActive,
+  isRunnerWinner,
 } from "../../../utils/betSlip";
 import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
+import { setBalance } from "../../../redux/features/auth/authSlice";
 
 const BetSlip = ({
+  double,
   data,
   status,
   setToast,
   setStakeState,
   stakeState,
+  setTotalWinAmount,
+  setShowWinLossResult,
+  animation,
+  setAnimation,
   initialState,
-  setTotalBet,
 }) => {
+  const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
+  const { balance } = useSelector((state) => state.auth);
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
+    const isRepeatTheBet = Object.values(stakeState).find(
+      (item) => item?.selection_id && item?.show === false
+    );
+    if (isRepeatTheBet) {
+      setStakeState(initialState);
+    }
+    new Audio("/bet.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
+    setAnimation([key]);
     const formatData = {
+      marketId: data?.[dataIndex]?.id,
       roundId: data?.[dataIndex]?.roundId,
       name: data?.[dataIndex]?.name,
       eventId: data?.[dataIndex]?.eventId,
       eventName: data?.[dataIndex]?.eventName,
-      marketId: data?.[dataIndex]?.id,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
       isback: type === "back" ? 0 : 1,
@@ -38,42 +54,59 @@ const BetSlip = ({
       event_type_id: data?.[dataIndex]?.event_type_id,
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
-    setStakeState((prev) => {
-      const maxSerial = Math.max(
-        0,
-        ...Object.values(prev)
-          .map((item) => item.serial)
-          .filter((serial) => serial !== undefined)
-      );
+    const timeout = setTimeout(() => {
+      setAnimation([]);
+      setStakeState((prev) => {
+        const maxSerial = Math.max(
+          0,
+          ...Object.values(prev)
+            .map((item) => item.serial)
+            .filter((serial) => serial !== undefined)
+        );
 
-      return {
-        ...prev,
-        [key]: {
-          roundId: formatData?.roundId,
-          name: formatData?.name,
-          eventId: formatData?.eventId,
-          eventName: formatData?.eventName,
-          show: true,
-          stake: prev[key].show
-            ? prev[key].stake + prev[key].actionBy
-            : prev[key].stake,
-          marketId: formatData?.marketId,
-          selection_id: formatData?.selection_id,
-          price: formatData?.price,
-          runner_name: formatData?.runner_name,
-          isback: formatData?.isback,
-          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
-          actionBy: stake,
-          undo: [...(prev[key]?.undo || []), stake],
-        },
-      };
-    });
+        return {
+          ...prev,
+          [key]: {
+            roundId: formatData?.roundId,
+            name: formatData?.name,
+            eventId: formatData?.eventId,
+            eventName: formatData?.eventName,
+            show: true,
+            animation: false,
+            stake: prev[key].show
+              ? prev[key].stake + prev[key].actionBy
+              : prev[key].stake,
+            marketId: formatData?.marketId,
+            selection_id: formatData?.selection_id,
+            price: formatData?.price,
+            runner_name: formatData?.runner_name,
+            isback: formatData?.isback,
+            serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+            actionBy: stake,
+            undo: [...(prev[key]?.undo || []), stake],
+          },
+        };
+      });
+    }, 500);
+
+    return () => clearTimeout(timeout);
   };
 
   // Reset state when status is OPEN
   useEffect(() => {
     if (status === Status.OPEN) {
-      setStakeState(initialState);
+      setStakeState((prev) => {
+        const updatedState = { ...prev };
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              show: false,
+            };
+          }
+        });
+        return updatedState;
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -110,13 +143,30 @@ const BetSlip = ({
     if (status === Status.SUSPENDED && payload?.length > 0) {
       const handleOrder = async () => {
         const res = await addOrder(payload).unwrap();
+
         payload = [];
         if (res?.success) {
-          let totalBet = 0;
+          setShowWinLossResult(false);
+          setTotalWinAmount(null);
+
+          let totalBets = [];
+          let totalAmountPlaced = 0;
+
           for (let bet of filterPlacedBet) {
-            totalBet += bet?.stake;
+            totalAmountPlaced = totalAmountPlaced + bet?.stake;
+            totalBets.push({
+              selection_id: bet.selection_id,
+              price: bet?.price,
+              eventId: bet?.eventId,
+              marketId: bet?.marketId,
+              name: bet?.name,
+              stake: bet?.stake,
+            });
           }
-          setTotalBet((prev) => prev + totalBet);
+
+          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+
+          dispatch(setBalance(balance - parseFloat(totalAmountPlaced)));
           setToast(res?.Message);
         }
       };
@@ -144,6 +194,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-indigo to-blue rounded-b-none h-12 ${
+            isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -158,6 +210,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("amarBack")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.amarBack?.stake : stake} />
+              </div>
+
               {stakeState?.amarBack?.show && (
                 <Stake stake={stakeState?.amarBack?.stake} />
               )}
@@ -185,9 +247,11 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-indigo to-blue rounded-b-none h-12 ${
+            isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 1)
               ? "cursor-pointer"
-              : " cursor-not-allowed pointer-events-none"
+              : " cursor-not-allowed pointer-amarts-none"
           }`}
           id="akbar-back"
         >
@@ -197,12 +261,20 @@ const BetSlip = ({
           <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Back
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.akbarBack?.show && (
-                <Stake stake={stakeState?.akbarBack?.stake} />
-              )}
+          <div className="relative w-10 h-10">
+            <div
+              className={`${
+                animation.includes("akbarBack")
+                  ? "absolute top-0 visible transition-all duration-500 "
+                  : "absolute -top-16 invisible opacity-0"
+              }  z-50`}
+            >
+              <Stake stake={double ? stakeState?.akbarBack?.stake : stake} />
             </div>
+
+            {stakeState?.akbarBack?.show && (
+              <Stake stake={stakeState?.akbarBack?.stake} />
+            )}
           </div>
           {isRunnerActive(data, 0, 1) ? (
             <span className="absolute font-mono tracking-tighter bottom-0 text-[10px] text-white left-0.5">
@@ -226,6 +298,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-indigo to-blue rounded-b-none h-12 ${
+            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -238,12 +312,20 @@ const BetSlip = ({
           <span className="absolute text-lg font-bold -translate-x-1/2 -translate-y-1/2 drop-shadow-2xl  text-white/60 top-1/2 left-1/2">
             Back
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.anthonyBack?.show && (
-                <Stake stake={stakeState?.anthonyBack?.stake} />
-              )}
+          <div className="relative w-10 h-10">
+            <div
+              className={`${
+                animation.includes("anthonyBack")
+                  ? "absolute top-0 visible transition-all duration-500 "
+                  : "absolute -top-16 invisible opacity-0"
+              }  z-50`}
+            >
+              <Stake stake={double ? stakeState?.anthonyBack?.stake : stake} />
             </div>
+
+            {stakeState?.anthonyBack?.show && (
+              <Stake stake={stakeState?.anthonyBack?.stake} />
+            )}
           </div>
           {isRunnerActive(data, 0, 2) ? (
             <span className="absolute font-mono tracking-tighter bottom-0 text-[10px] text-white left-0.5">
@@ -267,6 +349,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-red to-red/60 rounded-t-none h-12 ${
+            isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -278,6 +362,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("amarLay")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.amarLay?.stake : stake} />
+              </div>
+
               {stakeState?.amarLay?.show && (
                 <Stake stake={stakeState?.amarLay?.stake} />
               )}
@@ -307,6 +401,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-red to-red/60 rounded-t-none h-12 ${
+            isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -318,6 +414,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("akbarLay")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.akbarLay?.stake : stake} />
+              </div>
+
               {stakeState?.akbarLay?.show && (
                 <Stake stake={stakeState?.akbarLay?.stake} />
               )}
@@ -345,6 +451,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-4 bg-gradient-to-r from-red to-red/60 rounded-t-none h-12 ${
+            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -356,6 +464,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("anthonyLay")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.anthonyLay?.stake : stake} />
+              </div>
+
               {stakeState?.anthonyLay?.show && (
                 <Stake stake={stakeState?.anthonyLay?.stake} />
               )}
@@ -383,6 +501,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12 ${
+            isRunnerWinner(data, 1, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 1, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -394,6 +514,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("odd")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.odd?.stake : stake} />
+              </div>
+
               {stakeState?.odd?.show && (
                 <Stake stake={stakeState?.odd?.stake} />
               )}
@@ -421,6 +551,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12 ${
+            isRunnerWinner(data, 1, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 1, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -432,6 +564,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("even")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.even?.stake : stake} />
+              </div>
+
               {stakeState?.even?.show && (
                 <Stake stake={stakeState?.even?.stake} />
               )}
@@ -459,6 +601,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12 ${
+            isRunnerWinner(data, 2, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 2, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -470,6 +614,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("black")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.black?.stake : stake} />
+              </div>
+
               {stakeState?.black?.show && (
                 <Stake stake={stakeState?.black?.stake} />
               )}
@@ -526,6 +680,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 rounded-t-md col-span-3 bg-gradient-to-t from-gray/20 to-gray/50 h-12 ${
+            isRunnerWinner(data, 2, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 2, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -537,6 +693,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("red")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.red?.stake : stake} />
+              </div>
+
               {stakeState?.red?.show && (
                 <Stake stake={stakeState?.red?.stake} />
               )}
@@ -592,6 +758,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-6 h-12 bg-gradient-to-t from-gray/20 to-gray/50 h-12 ${
+            isRunnerWinner(data, 3, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 3, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -603,6 +771,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("under7")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.under7?.stake : stake} />
+              </div>
+
               {stakeState?.under7?.show && (
                 <Stake stake={stakeState?.under7?.stake} />
               )}
@@ -630,6 +808,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded flex flex-col items-center justify-center cursor-pointer opacity-100 cursor-pointer border-white/10 col-span-6 h-12 bg-gradient-to-t from-gray/20 to-gray/50 h-12 ${
+            isRunnerWinner(data, 3, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 3, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -641,6 +821,16 @@ const BetSlip = ({
           </span>
           <div className="z-50">
             <div className="relative w-10 h-10">
+              <div
+                className={`${
+                  animation.includes("over7")
+                    ? "absolute top-0 visible transition-all duration-500 "
+                    : "absolute -top-16 invisible opacity-0"
+                }  z-50`}
+              >
+                <Stake stake={double ? stakeState?.over7?.stake : stake} />
+              </div>
+
               {stakeState?.over7?.show && (
                 <Stake stake={stakeState?.over7?.stake} />
               )}

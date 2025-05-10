@@ -12,14 +12,19 @@ import { Status } from "../../const";
 import Card from "../../components/modules/AmarAkbarAnthony/Card";
 import BetSlip from "../../components/modules/AmarAkbarAnthony/BetSlip";
 import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Setting from "../../components/modules/LuckySeven/Setting";
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
 import RecentWinner from "../../components/modules/AmarAkbarAnthony/RecentWinner";
+import { handleDoubleStake } from "../../utils/handleDoubleStake";
+import { handleUndoStake } from "../../utils/handleUndoStake";
 
 const AmarAkbarAnthony = () => {
-  const [totalBet, setTotalBet] = useState(0);
+  const [double, setDouble] = useState(false);
+  const [animation, setAnimation] = useState([]);
+  const [showWinLossResult, setShowWinLossResult] = useState(false);
+  const [totalWinAmount, setTotalWinAmount] = useState(null);
   const { stake } = useSelector((state) => state.global);
   const [toast, setToast] = useState(null);
   const [showFullScreen, setShowFullScreen] = useState(false);
@@ -31,7 +36,6 @@ const AmarAkbarAnthony = () => {
   );
 
   const firstEvent = data?.result?.[0];
-  const roundId = firstEvent?.roundId;
 
   const initialState = {
     amarBack: { show: false, stake },
@@ -50,47 +54,11 @@ const AmarAkbarAnthony = () => {
 
   const [stakeState, setStakeState] = useState(initialState);
 
-  const handleUndoStake = () => {
-    setStakeState((prev) => {
-      const prevValues = Object.entries(prev);
-      const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
-        if (currentObj.serial > (maxObj?.serial || 0)) {
-          return { key, obj: currentObj };
-        }
-        return maxObj;
-      }, {});
-
-      if (maxSerialObject.obj) {
-        const updatedObj = {
-          ...maxSerialObject.obj,
-          undo: [...maxSerialObject.obj.undo],
-        };
-
-        if (
-          updatedObj.undo.length > 0 &&
-          updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
-        ) {
-          updatedObj.stake -= updatedObj.undo.pop();
-        } else {
-          updatedObj.show = false;
-          delete updatedObj.serial;
-        }
-
-        return {
-          ...prev,
-          [maxSerialObject.key]: updatedObj,
-        };
-      }
-
-      return prev;
-    });
-  };
+  const isRepeatTheBet = Object.values(stakeState).find(
+    (item) => item?.selection_id && item?.show === false
+  );
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
-
-  useEffect(() => {
-    setTotalBet(0);
-  }, [roundId]);
 
   return (
     <main
@@ -108,8 +76,12 @@ const AmarAkbarAnthony = () => {
         {firstEvent?.status === Status.SUSPENDED && <Card data={firstEvent} />}
       </div>
       <BetSlip
-        setTotalBet={setTotalBet}
         initialState={initialState}
+        double={double}
+        animation={animation}
+        setAnimation={setAnimation}
+        setShowWinLossResult={setShowWinLossResult}
+        setTotalWinAmount={setTotalWinAmount}
         stakeState={stakeState}
         setStakeState={setStakeState}
         setToast={setToast}
@@ -118,12 +90,29 @@ const AmarAkbarAnthony = () => {
       />
       <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton
-          handleUndoStake={handleUndoStake}
+          isRepeatTheBet={isRepeatTheBet}
+          handleDoubleStake={() =>
+            handleDoubleStake(
+              isRepeatTheBet,
+              setDouble,
+              setStakeState,
+              setAnimation,
+              firstEvent
+            )
+          }
+          handleUndoStake={() => handleUndoStake(setStakeState, stakeState)}
           isPlaceStake={isPlaceStake}
           status={firstEvent?.status}
           setShowSetting={setShowSetting}
         />
-        <AmountSection totalBet={totalBet} firstEvent={firstEvent} />
+        <AmountSection
+          showWinLossResult={showWinLossResult}
+          setShowWinLossResult={setShowWinLossResult}
+          setTotalWinAmount={setTotalWinAmount}
+          totalWinAmount={totalWinAmount}
+          data={data?.result}
+          firstEvent={firstEvent}
+        />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
       {showSetting && (
@@ -139,11 +128,11 @@ const AmarAkbarAnthony = () => {
           <Toast message={toast} setMessage={setToast} />{" "}
         </div>
       )}
-      {!toast && firstEvent?.status === Status.OPEN && (
+      {/* {!toast && firstEvent?.status === Status.OPEN && (
         <div className="place-bets absolute w-full left-1/2 top-[40%] -translate-x-1/2 z-50 text-center text-white">
           PLACE YOUR BETS
         </div>
-      )}
+      )} */}
     </main>
   );
 };

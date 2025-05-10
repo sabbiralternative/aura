@@ -13,6 +13,8 @@ import AmountSection from "../../components/shared/events/AmountSection";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
+import { handleUndoStake } from "../../utils/handleUndoStake";
+import { handleDoubleStake } from "../../utils/handleDoubleStake";
 
 const LuckySeven = () => {
   const [double, setDouble] = useState(false);
@@ -47,143 +49,9 @@ const LuckySeven = () => {
 
   const [stakeState, setStakeState] = useState(initialState);
 
-  const handleUndoStake = () => {
-    new Audio("/undo.mp3").play();
-    setStakeState((prev) => {
-      const updatedState = { ...prev };
-      const prevValues = Object.entries(prev);
-      const isPlacedDouble = Object.values(stakeState).filter(
-        (item) => item?.double
-      );
-
-      if (isPlacedDouble?.length > 0) {
-        Object.keys(updatedState).forEach((key) => {
-          if (updatedState[key].show) {
-            updatedState[key] = {
-              ...updatedState[key],
-              stake: updatedState[key].stake / 2,
-              double: updatedState[key].double - 1,
-            };
-          }
-        });
-
-        return updatedState;
-      } else {
-        const maxSerialObject = prevValues.reduce(
-          (maxObj, [key, currentObj]) => {
-            if (currentObj.serial > (maxObj?.serial || 0)) {
-              return { key, obj: currentObj };
-            }
-            return maxObj;
-          },
-          {}
-        );
-
-        if (maxSerialObject.obj) {
-          const updatedObj = {
-            ...maxSerialObject.obj,
-            undo: [...maxSerialObject.obj.undo],
-          };
-
-          if (
-            updatedObj.undo.length > 0 &&
-            updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
-          ) {
-            updatedObj.stake -= updatedObj.undo.pop();
-          } else {
-            updatedObj.show = false;
-            delete updatedObj.serial;
-          }
-
-          return {
-            ...prev,
-            [maxSerialObject.key]: updatedObj,
-          };
-        }
-
-        return prev;
-      }
-    });
-  };
   const isRepeatTheBet = Object.values(stakeState).find(
     (item) => item?.selection_id && item?.show === false
   );
-
-  const handleDoubleStake = () => {
-    new Audio("/bet.mp3").play();
-    if (!isRepeatTheBet) {
-      setDouble(true);
-      setStakeState((prevState) => {
-        const updatedState = { ...prevState };
-        const maxSerial = Math.max(
-          0,
-          ...Object.values(updatedState)
-            .map((item) => item.serial)
-            .filter((serial) => serial !== undefined)
-        );
-
-        const oddNames = [];
-
-        Object.keys(updatedState).forEach((key) => {
-          if (updatedState[key].show) {
-            oddNames.push(key);
-          }
-        });
-        setAnimation(oddNames);
-
-        setTimeout(() => {
-          Object.keys(updatedState).forEach((key) => {
-            if (updatedState[key].show) {
-              const currentStake = updatedState[key].stake;
-              updatedState[key] = {
-                ...updatedState[key],
-                undo: [...updatedState[key].undo, currentStake],
-                serial: updatedState[key]?.serial
-                  ? updatedState[key]?.serial
-                  : maxSerial + 1,
-                stake: updatedState[key].stake * 2,
-                double: updatedState[key].double
-                  ? updatedState[key].double + 1
-                  : 1,
-              };
-            }
-          });
-
-          setDouble(false);
-          setAnimation([]);
-        }, 500);
-
-        return updatedState;
-      });
-    } else {
-      setStakeState((prev) => {
-        const updatedState = { ...prev };
-        setDouble(true);
-        const oddNames = [];
-        Object.keys(updatedState).forEach((key) => {
-          if (updatedState[key].selection_id && !updatedState[key].show) {
-            oddNames.push(key);
-          }
-        });
-        setAnimation(oddNames);
-
-        setTimeout(() => {
-          setAnimation([]);
-          Object.keys(updatedState).forEach((key) => {
-            if (updatedState[key].selection_id && !updatedState[key].show) {
-              updatedState[key] = {
-                ...updatedState[key],
-                show: true,
-                roundId: firstEvent?.roundId,
-              };
-            }
-          });
-        }, 500);
-
-        return updatedState;
-      });
-    }
-  };
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
 
@@ -218,8 +86,16 @@ const LuckySeven = () => {
       <div className="bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton
           isRepeatTheBet={isRepeatTheBet}
-          handleDoubleStake={handleDoubleStake}
-          handleUndoStake={handleUndoStake}
+          handleDoubleStake={() =>
+            handleDoubleStake(
+              isRepeatTheBet,
+              setDouble,
+              setStakeState,
+              setAnimation,
+              firstEvent
+            )
+          }
+          handleUndoStake={() => handleUndoStake(setStakeState, stakeState)}
           isPlaceStake={isPlaceStake}
           status={firstEvent?.status}
           setShowSetting={setShowSetting}
@@ -232,7 +108,6 @@ const LuckySeven = () => {
           totalWinAmount={totalWinAmount}
           data={data?.result}
           firstEvent={firstEvent}
-          title="7 up &amp; Down"
         />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
