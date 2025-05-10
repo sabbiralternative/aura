@@ -12,6 +12,7 @@ export const useAuth = (pathName) => {
     enabled: token ? token : null,
     mutationFn: async () => {
       const { data } = await AxiosSecure.post(API.auth, { token });
+
       dispatch(
         setUser({
           username: data.username,
