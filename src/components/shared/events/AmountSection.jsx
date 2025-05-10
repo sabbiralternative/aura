@@ -124,12 +124,7 @@ const AmountSection = ({
         <span className="flex gap-0.5 items-center text-white/50">
           {firstEvent?.roundId}
         </span>
-        <span className="whitespace-nowrap">
-          {firstEvent?.eventName}
-          <span className="text-yellow">
-            <span>₹100.00</span> - <span>₹2,00,000.00</span>
-          </span>
-        </span>
+        <span className="whitespace-nowrap">{firstEvent?.eventName}</span>
       </div>
     </div>
   );
