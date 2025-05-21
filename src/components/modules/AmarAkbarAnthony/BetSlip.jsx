@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getBackPrice,
   getLayPrice,
@@ -11,6 +11,7 @@ import {
 import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
 import { setBalance } from "../../../redux/features/auth/authSlice";
+import NextGame from "../../shared/NextGame/NextGame";
 
 const BetSlip = ({
   double,
@@ -25,6 +26,7 @@ const BetSlip = ({
   setAnimation,
   initialState,
 }) => {
+  const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
   const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
@@ -108,8 +110,13 @@ const BetSlip = ({
         return updatedState;
       });
     }
+    if (showSuspendedWarning) {
+      setTimeout(() => {
+        setShowSuspendedWarning(false);
+      }, 1000);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  }, [status, showSuspendedWarning]);
 
   useEffect(() => {
     setStakeState((prev) => {
@@ -175,13 +182,23 @@ const BetSlip = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addOrder, status]);
 
+  const handleShowSuspendedStatus = () => {
+    if (status === Status.SUSPENDED) {
+      setShowSuspendedWarning(true);
+    }
+  };
+
   return (
-    <div className=" w-full max-w-xl translate-y-2 flex flex-col perspective transition-all ease-in-out duration-1000 items-center justify-center ">
+    <div
+      onClick={handleShowSuspendedStatus}
+      className=" w-full max-w-xl translate-y-2 flex flex-col perspective transition-all ease-in-out duration-1000 items-center justify-center "
+    >
       <div
         className={`grid grid-cols-12 gap-0.5 h-fit w-full mx-auto max-w-3xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm ${
           status === Status.SUSPENDED ? "applyPerspective" : ""
         }`}
       >
+        {showSuspendedWarning && <NextGame />}
         {/* Amar Back */}
         <div
           onClick={() =>

@@ -32,3 +32,34 @@
   z-index: 10;
   pointer-events: none;
 }
+
+.tooltip-top-center--0ef50 {
+  background-clip: padding-box;
+  background-color: #1a1a1a;
+  border: 1px solid hsla(0, 0%, 100%, 0.2);
+  border-radius: 4px;
+  color: #e8e8e8;
+  font-weight: 500;
+  line-height: 1.2;
+  max-width: 100vw;
+  opacity: 0.95;
+  padding: 3px 4px;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  transition: transform 0.3s, opacity 0.3s;
+  white-space: nowrap;
+  will-change: transform, opacity;
+  z-index: 1000;
+}
+
+.tooltipsContainer--515fb {
+  bottom: calc(var(--rem-migration-size) * 0.5);
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: calc(var(--rem-migration-size) * 0.5);
+  width: 100%;
+  z-index: 101;
+}

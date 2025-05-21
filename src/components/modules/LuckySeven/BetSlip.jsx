@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getBackPrice,
   isRunnerActive,
@@ -10,6 +10,7 @@ import {
 import Stake from "../../shared/Stake/Stake";
 import { Lock } from "../../../assets/icon";
 import { setBalance } from "../../../redux/features/auth/authSlice";
+import NextGame from "../../shared/NextGame/NextGame";
 
 const BetSlip = ({
   double,
@@ -24,6 +25,7 @@ const BetSlip = ({
   setAnimation,
   initialState,
 }) => {
+  const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
   const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
@@ -107,8 +109,13 @@ const BetSlip = ({
         return updatedState;
       });
     }
+    if (showSuspendedWarning) {
+      setTimeout(() => {
+        setShowSuspendedWarning(false);
+      }, 1000);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  }, [status, showSuspendedWarning]);
 
   useEffect(() => {
     setStakeState((prev) => {
@@ -174,13 +181,23 @@ const BetSlip = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addOrder, status]);
 
+  const handleShowSuspendedStatus = () => {
+    if (status === Status.SUSPENDED) {
+      setShowSuspendedWarning(true);
+    }
+  };
+
   return (
-    <div className="flex flex-col w-full gap-2 px-1 perspective transition-all duration-1000 ease-in-out">
+    <div
+      onClick={handleShowSuspendedStatus}
+      className="flex flex-col w-full gap-2 px-1 perspective transition-all duration-1000 ease-in-out"
+    >
       <div
         className={`grid grid-cols-6 gap-0.5 h-fit w-full mx-auto max-w-xl px-2 transition-all ease-in-out duration-1000 backdrop-blur-sm ${
           status === Status.SUSPENDED ? "applyPerspective" : ""
         }`}
       >
+        {showSuspendedWarning && <NextGame />}
         <div
           onClick={() =>
             handleStakeChange({

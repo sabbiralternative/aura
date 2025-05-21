@@ -2,9 +2,10 @@ import { useSelector } from "react-redux";
 import { CardBack, Lock } from "../../../assets/icon";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Stake from "../../shared/Stake/Stake";
 import { isRunnerActive } from "../../../utils/betSlip";
+import NextGame from "../../shared/NextGame/NextGame";
 
 const BetSlip = ({
   data,
@@ -15,6 +16,7 @@ const BetSlip = ({
   initialState,
   setTotalBet,
 }) => {
+  const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
   const firstData = data?.[0];
   const card1 = firstData?.runners?.[0]?.card?.[0];
   const card2 = firstData?.runners?.[1]?.card?.[0];
@@ -75,8 +77,13 @@ const BetSlip = ({
     if (status === Status.OPEN) {
       setStakeState(initialState);
     }
+    if (showSuspendedWarning) {
+      setTimeout(() => {
+        setShowSuspendedWarning(false);
+      }, 1000);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  }, [status, showSuspendedWarning]);
 
   useEffect(() => {
     setStakeState((prev) => {
@@ -125,8 +132,15 @@ const BetSlip = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addOrder, status]);
 
+  const handleShowSuspendedStatus = () => {
+    if (status === Status.SUSPENDED) {
+      setShowSuspendedWarning(true);
+    }
+  };
+
   return (
     <div
+      onClick={handleShowSuspendedStatus}
       className={` flex flex-col gap-1 perspective w-full transition-all ease-in-out duration-1000 items-center justify-center  `}
     >
       <div
@@ -134,6 +148,7 @@ const BetSlip = ({
           status === Status.SUSPENDED ? "applyPerspective" : ""
         }`}
       >
+        {showSuspendedWarning && <NextGame />}
         <div
           onClick={() =>
             handleStakeChange({

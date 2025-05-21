@@ -2,9 +2,10 @@ import { useSelector } from "react-redux";
 import { Lock } from "../../assets/icon";
 import { Status } from "../../const";
 import { useOrderMutation } from "../../redux/features/events/events";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getBackPrice, isRunnerActive } from "../../utils/betSlip";
 import Stake from "../../components/shared/Stake/Stake";
+import NextGame from "../../components/shared/NextGame/NextGame";
 
 const BetSlip = ({
   data,
@@ -15,6 +16,7 @@ const BetSlip = ({
   initialState,
   setTotalBet,
 }) => {
+  const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
 
@@ -71,8 +73,13 @@ const BetSlip = ({
     if (status === Status.OPEN) {
       setStakeState(initialState);
     }
+    if (showSuspendedWarning) {
+      setTimeout(() => {
+        setShowSuspendedWarning(false);
+      }, 1000);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  }, [status, showSuspendedWarning]);
 
   useEffect(() => {
     setStakeState((prev) => {
@@ -121,8 +128,15 @@ const BetSlip = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [addOrder, status]);
 
+  const handleShowSuspendedStatus = () => {
+    if (status === Status.SUSPENDED) {
+      setShowSuspendedWarning(true);
+    }
+  };
+
   return (
     <div
+      onClick={handleShowSuspendedStatus}
       className={`flex  flex-col gap-1 perspective w-full max-w-lg transition-all ease-in-out duration-1000 items-center justify-center bottom-32 `}
     >
       <div
@@ -130,6 +144,7 @@ const BetSlip = ({
           status === Status.SUSPENDED ? "applyPerspective" : ""
         }`}
       >
+        {showSuspendedWarning && <NextGame />}
         <div
           onClick={() =>
             handleStakeChange({
