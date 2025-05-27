@@ -12,6 +12,7 @@ import BalanceInfo from "./BalanceInfo";
 import Chip from "../../components/shared/Chip/Chip";
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
+// import Card from "./Card";
 
 const Bollywood = () => {
   const { balance } = useSelector((state) => state.auth);
