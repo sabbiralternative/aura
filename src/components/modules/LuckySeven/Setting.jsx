@@ -29,7 +29,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
 
     playClickSound();
   };
-  console.log(showHowToPlay);
+
   return (
     <>
       {showBetHistory && (

@@ -1,35 +1,50 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Lock } from "../../assets/icon";
 import { Status } from "../../const";
 import { useOrderMutation } from "../../redux/features/events/events";
 import { useEffect, useState } from "react";
-import { isRunnerActive } from "../../utils/betSlip";
-import Stake from "../../components/shared/Stake/Stake";
+import { isRunnerActive, isRunnerWinner } from "../../utils/betSlip";
 import NextGame from "../../components/shared/NextGame/NextGame";
 import Card2 from "./Card2";
+import { setBalance } from "../../redux/features/auth/authSlice";
+import StakeAnimation from "../../components/shared/StakeAnimation/StakeAnimation";
 
 const BetSlip = ({
+  double,
   data,
   status,
   setToast,
   setStakeState,
   stakeState,
+  setTotalWinAmount,
+  setShowWinLossResult,
+  animation,
+  setAnimation,
   initialState,
-  setTotalBet,
 }) => {
   const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
+  const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
+  const { balance } = useSelector((state) => state.auth);
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
+    const isRepeatTheBet = Object.values(stakeState).find(
+      (item) => item?.selection_id && item?.show === false
+    );
+    if (isRepeatTheBet) {
+      setStakeState(initialState);
+    }
+    new Audio("/bet.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
+    setAnimation([key]);
     const formatData = {
+      marketId: data?.[dataIndex]?.id,
       roundId: data?.[dataIndex]?.roundId,
       name: data?.[dataIndex]?.name,
       eventId: data?.[dataIndex]?.eventId,
       eventName: data?.[dataIndex]?.eventName,
-      marketId: data?.[dataIndex]?.id,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
       isback: type === "back" ? 0 : 1,
@@ -37,42 +52,59 @@ const BetSlip = ({
       event_type_id: data?.[dataIndex]?.event_type_id,
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
-    setStakeState((prev) => {
-      const maxSerial = Math.max(
-        0,
-        ...Object.values(prev)
-          .map((item) => item.serial)
-          .filter((serial) => serial !== undefined)
-      );
+    const timeout = setTimeout(() => {
+      setAnimation([]);
+      setStakeState((prev) => {
+        const maxSerial = Math.max(
+          0,
+          ...Object.values(prev)
+            .map((item) => item.serial)
+            .filter((serial) => serial !== undefined)
+        );
 
-      return {
-        ...prev,
-        [key]: {
-          roundId: formatData?.roundId,
-          name: formatData?.name,
-          eventId: formatData?.eventId,
-          eventName: formatData?.eventName,
-          show: true,
-          stake: prev[key].show
-            ? prev[key].stake + prev[key].actionBy
-            : prev[key].stake,
-          marketId: formatData?.marketId,
-          selection_id: formatData?.selection_id,
-          price: formatData?.price,
-          runner_name: formatData?.runner_name,
-          isback: formatData?.isback,
-          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
-          actionBy: stake,
-          undo: [...(prev[key]?.undo || []), stake],
-        },
-      };
-    });
+        return {
+          ...prev,
+          [key]: {
+            roundId: formatData?.roundId,
+            name: formatData?.name,
+            eventId: formatData?.eventId,
+            eventName: formatData?.eventName,
+            show: true,
+            animation: false,
+            stake: prev[key].show
+              ? prev[key].stake + prev[key].actionBy
+              : prev[key].stake,
+            marketId: formatData?.marketId,
+            selection_id: formatData?.selection_id,
+            price: formatData?.price,
+            runner_name: formatData?.runner_name,
+            isback: formatData?.isback,
+            serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+            actionBy: stake,
+            undo: [...(prev[key]?.undo || []), stake],
+          },
+        };
+      });
+    }, 500);
+
+    return () => clearTimeout(timeout);
   };
 
   // Reset state when status is OPEN
   useEffect(() => {
     if (status === Status.OPEN) {
-      setStakeState(initialState);
+      setStakeState((prev) => {
+        const updatedState = { ...prev };
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              show: false,
+            };
+          }
+        });
+        return updatedState;
+      });
     }
     if (showSuspendedWarning) {
       setTimeout(() => {
@@ -114,13 +146,30 @@ const BetSlip = ({
     if (status === Status.SUSPENDED && payload?.length > 0) {
       const handleOrder = async () => {
         const res = await addOrder(payload).unwrap();
+
         payload = [];
         if (res?.success) {
-          let totalBet = 0;
+          setShowWinLossResult(false);
+          setTotalWinAmount(null);
+
+          let totalBets = [];
+          let totalAmountPlaced = 0;
+
           for (let bet of filterPlacedBet) {
-            totalBet += bet?.stake;
+            totalAmountPlaced = totalAmountPlaced + bet?.stake;
+            totalBets.push({
+              selection_id: bet.selection_id,
+              price: bet?.price,
+              eventId: bet?.eventId,
+              marketId: bet?.marketId,
+              name: bet?.name,
+              stake: bet?.stake,
+            });
           }
-          setTotalBet((prev) => prev + totalBet);
+
+          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+
+          dispatch(setBalance(balance - parseFloat(totalAmountPlaced)));
           setToast(res?.Message);
         }
       };
@@ -134,6 +183,12 @@ const BetSlip = ({
       setShowSuspendedWarning(true);
     }
   };
+  const don = "S1";
+  const AAA = ["H1", "C1", "D1"];
+  const DharamVeer = ["D13", "C13"];
+  const KKPK = ["H13", "C2", "D12", "H12"];
+  const ghulam = ["H11", "C11", "D11"];
+  const SBAG = ["S13", "S12", "S11"];
   const indexCard = data?.[0]?.indexCard?.[0];
 
   return (
@@ -163,13 +218,15 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-l from-blue to-blue/70 rounded-l-md h-16 ${
-       isRunnerActive(data, 0, 0)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 0)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="Don-back"
           >
-            {indexCard && <Card2 indexCard={indexCard} />}
+            {indexCard && indexCard === don && <Card2 indexCard={indexCard} />}
 
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               Don
@@ -177,13 +234,13 @@ const BetSlip = ({
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Back
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.donBack?.show && (
-                  <Stake stake={stakeState?.donBack?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="donBack"
+              stake={stake}
+              stakeState={stakeState}
+            />
 
             {isRunnerActive(data, 0, 0) ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -209,23 +266,25 @@ const BetSlip = ({
      false
      false
      col-span-4 lg:col-span-2
-     bg-gradient-to-r from-red to-red/70 rounded-r-md h-16  ${
-       isRunnerActive(data, 0, 0)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+     bg-gradient-to-r from-red to-red/70 rounded-r-md h-16 ${
+       isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+     }  ${
+              isRunnerActive(data, 0, 0)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="Don-lay"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Lay
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.donLay?.show && (
-                  <Stake stake={stakeState?.donLay?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="donLay"
+              stake={stake}
+              stakeState={stakeState}
+            />
 
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[0]?.status === Status.ACTIVE ? (
@@ -254,25 +313,30 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-l from-blue to-blue/70 rounded-l-md h-16 ${
-       isRunnerActive(data, 0, 1)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 1)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="AmarAkbarAnthony-back"
           >
+            {indexCard && AAA.includes(indexCard) && (
+              <Card2 indexCard={indexCard} />
+            )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               AmarAkbarAnthony
             </span>
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Back
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.aaaBack?.show && (
-                  <Stake stake={stakeState?.aaaBack?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="aaaBack"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[1]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -300,22 +364,24 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-r from-red to-red/70 rounded-r-md h-16 ${
-       isRunnerActive(data, 0, 1)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
+     }  ${
+              isRunnerActive(data, 0, 1)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="AmarAkbarAnthony-lay"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Lay
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.aaaLay?.show && (
-                  <Stake stake={stakeState?.aaaLay?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="aaaLay"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[1]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  right-0.5">
@@ -343,25 +409,31 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-l from-blue to-blue/70 rounded-l-md h-16 ${
-       isRunnerActive(data, 0, 2)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 2)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="SahibBibiAurGulam-back"
           >
+            {indexCard && SBAG.includes(indexCard) && (
+              <Card2 indexCard={indexCard} />
+            )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               SahibBibiAurGulam
             </span>
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Back
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.sbagBack?.show && (
-                  <Stake stake={stakeState?.sbagBack?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="sbagBack"
+              stake={stake}
+              stakeState={stakeState}
+            />
+
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[2]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -389,22 +461,24 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-r from-red to-red/70 rounded-r-md h-16 ${
-       isRunnerActive(data, 0, 2)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 2)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="SahibBibiAurGulam-lay"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Lay
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.sbagLay?.show && (
-                  <Stake stake={stakeState?.sbagLay?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="sbagLay"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[2]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  right-0.5">
@@ -432,25 +506,30 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-l from-blue to-blue/70 rounded-l-md h-16 ${
-       isRunnerActive(data, 0, 3)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 3) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 3)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="DharamVeer-back"
           >
+            {indexCard && DharamVeer.includes(indexCard) && (
+              <Card2 indexCard={indexCard} />
+            )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               DharamVeer
             </span>
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Back
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.dvBack?.show && (
-                  <Stake stake={stakeState?.dvBack?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="dvBack"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[3]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -478,22 +557,24 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-r from-red to-red/70 rounded-r-md h-16 ${
-       isRunnerActive(data, 0, 3)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 3) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 3)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="DharamVeer-lay"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Lay
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.dvLay?.show && (
-                  <Stake stake={stakeState?.dvLay?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="dvLay"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[3]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  right-0.5">
@@ -520,25 +601,30 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-l from-blue to-blue/70 rounded-l-md h-16 ${
-       isRunnerActive(data, 0, 4)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 4) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 4)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="KisKisoPyaarKaroon-back"
           >
+            {indexCard && KKPK.includes(indexCard) && (
+              <Card2 indexCard={indexCard} />
+            )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               KisKisoPyaarKaroon
             </span>
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Back
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.kkpkBack?.show && (
-                  <Stake stake={stakeState?.kkpkBack?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="kkpkBack"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[4]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -566,22 +652,24 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-r from-red to-red/70 rounded-r-md h-16 ${
-       isRunnerActive(data, 0, 4)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 4) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 4)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="KisKisoPyaarKaroon-lay"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Lay
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.kkpkLay?.show && (
-                  <Stake stake={stakeState?.kkpkLay?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="kkpkLay"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[4]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  right-0.5">
@@ -608,25 +696,30 @@ const BetSlip = ({
      false
      col-span-4 lg:col-span-2
      bg-gradient-to-l from-blue to-blue/70 rounded-l-md h-16 ${
-       isRunnerActive(data, 0, 5)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 0, 5) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 0, 5)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="Ghulam-back"
           >
+            {indexCard && ghulam.includes(indexCard) && (
+              <Card2 indexCard={indexCard} />
+            )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               Ghulam
             </span>
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Back
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.gulamBack?.show && (
-                  <Stake stake={stakeState?.gulamBack?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="gulamBack"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[5]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -652,23 +745,25 @@ const BetSlip = ({
      false
      false
      col-span-4 lg:col-span-2
-     bg-gradient-to-r from-red to-red/70 rounded-r-md h-16  ${
-       isRunnerActive(data, 0, 5)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+     bg-gradient-to-r from-red to-red/70 rounded-r-md h-16 ${
+       isRunnerWinner(data, 0, 5) ? "blink-overlay" : ""
+     }  ${
+              isRunnerActive(data, 0, 5)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="Ghulam-lay"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Lay
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.gulamLay?.show && (
-                  <Stake stake={stakeState?.gulamLay?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="gulamLay"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[0]?.status === Status.OPEN &&
             data?.[0]?.runners?.[5]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  right-0.5">
@@ -694,22 +789,24 @@ const BetSlip = ({
      false
      false
      rounded-md col-span-4 lg:col-span-3 bg-gradient-to-b from-gray/40 to-gray/20 h-[50px] ${
-       isRunnerActive(data, 2, 0)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 2, 0) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 2, 0)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="K-Q"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               K-Q
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.kq?.show && (
-                  <Stake stake={stakeState?.kq?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="kq"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[2]?.status === Status.OPEN &&
             data?.[2]?.runners?.[0]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -736,22 +833,24 @@ const BetSlip = ({
      false
      false
      rounded-md col-span-4 lg:col-span-3 bg-gradient-to-b from-gray/40 to-gray/20 h-[50px] ${
-       isRunnerActive(data, 2, 1)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 2, 1) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 2, 1)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="J-A"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               J-A
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.ja?.show && (
-                  <Stake stake={stakeState?.ja?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="ja"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[2]?.status === Status.OPEN &&
             data?.[2]?.runners?.[1]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -778,22 +877,24 @@ const BetSlip = ({
      false
      false
      rounded-md col-span-4 lg:col-span-3 bg-gradient-to-b from-gray/40 to-gray/20 h-[50px] ${
-       isRunnerActive(data, 3, 0)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 3, 0) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 3, 0)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="Red"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Red
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.red?.show && (
-                  <Stake stake={stakeState?.red?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="red"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[3]?.status === Status.OPEN &&
             data?.[3]?.runners?.[0]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -850,22 +951,24 @@ const BetSlip = ({
      false
      false
      rounded-md col-span-4 lg:col-span-3 bg-gradient-to-b from-gray/40 to-gray/20 h-[50px] ${
-       isRunnerActive(data, 3, 1)
-         ? "cursor-pointer"
-         : " cursor-not-allowed pointer-events-none"
-     }`}
+       isRunnerWinner(data, 3, 1) ? "blink-overlay" : ""
+     } ${
+              isRunnerActive(data, 3, 1)
+                ? "cursor-pointer"
+                : " cursor-not-allowed pointer-events-none"
+            }`}
             id="Black"
           >
             <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
               Black
             </span>
-            <div className="z-50">
-              <div className="relative w-10 h-10">
-                {stakeState?.black?.show && (
-                  <Stake stake={stakeState?.black?.stake} />
-                )}
-              </div>
-            </div>
+            <StakeAnimation
+              animation={animation}
+              double={double}
+              runner="black"
+              stake={stake}
+              stakeState={stakeState}
+            />
             {data?.[3]?.status === Status.OPEN &&
             data?.[3]?.runners?.[1]?.status === Status.ACTIVE ? (
               <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
@@ -926,22 +1029,24 @@ const BetSlip = ({
          false
          false
          rounded-md col-span-4 lg:col-span-3 h-[50px] bg-gradient-to-b from-gray/40 to-gray/20 ${
-           isRunnerActive(data, 4, i)
-             ? "cursor-pointer"
-             : " cursor-not-allowed pointer-events-none"
-         }`}
+           isRunnerWinner(data, 4, i) ? "blink-overlay" : ""
+         } ${
+                  isRunnerActive(data, 4, i)
+                    ? "cursor-pointer"
+                    : " cursor-not-allowed pointer-events-none"
+                }`}
                 id="J"
               >
                 <span className="absolute text-xl font-bold -translate-x-1/2 -translate-y-1/2 text-white/40 top-1/2 left-1/2 ">
                   {runner?.name}
                 </span>
-                <div className="z-50">
-                  <div className="relative w-10 h-10">
-                    {stakeState?.[runner?.name]?.show && (
-                      <Stake stake={stakeState?.[runner?.name]?.stake} />
-                    )}
-                  </div>
-                </div>
+                <StakeAnimation
+                  animation={animation}
+                  double={double}
+                  runner={runner?.name}
+                  stake={stake}
+                  stakeState={stakeState}
+                />
                 {data?.[4]?.status === Status.OPEN &&
                 runner?.status === Status.ACTIVE ? (
                   <span className="absolute font-mono tracking-tighter bottom-0.5 text-[8px] text-white  left-0.5">
