@@ -8,13 +8,13 @@ import Card from "../../components/modules/AmarAkbarAnthony/Card";
 import BetSlip from "../../components/modules/AmarAkbarAnthony/BetSlip";
 import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
 import { useState } from "react";
-import Setting from "../../components/modules/LuckySeven/Setting";
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
 import RecentWinner from "../../components/modules/AmarAkbarAnthony/RecentWinner";
 import { handleDoubleStake } from "../../utils/handleDoubleStake";
 import { handleUndoStake } from "../../utils/handleUndoStake";
 import AmountSection from "./AmountSection";
+import Setting from "./Setting";
 
 const AmarAkbarAnthony = () => {
   const [double, setDouble] = useState(false);

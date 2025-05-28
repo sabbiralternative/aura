@@ -695,7 +695,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-red to-red/70 ${
+          className={`relative overflow-clip h-16 flex rounded-bl-md flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-red to-red/70 ${
             isRunnerActive(data, 4, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -882,7 +882,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-orange to-orange/70 ${
+          className={`relative rounded-br-md overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-orange to-orange/70 ${
             isRunnerActive(data, 5, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -935,7 +935,7 @@ const BetSlip = ({
             <Lock position="right-0.5 bottom-1" />
           )}
         </div>
-        {data?.[6]?.runners?.slice(0, 4)?.map((runner, i) => {
+        {/* {data?.[6]?.runners?.slice(0, 4)?.map((runner, i) => {
           return (
             <div
               onClick={() =>
@@ -988,8 +988,8 @@ const BetSlip = ({
               )}
             </div>
           );
-        })}
-        {data?.[7]?.runners?.slice(0, 4)?.map((runner, i) => {
+        })} */}
+        {/* {data?.[7]?.runners?.slice(0, 4)?.map((runner, i) => {
           return (
             <div
               onClick={() =>
@@ -1042,7 +1042,7 @@ const BetSlip = ({
               )}
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

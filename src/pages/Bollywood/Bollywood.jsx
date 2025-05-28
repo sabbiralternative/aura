@@ -4,7 +4,6 @@ import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
 import { useState } from "react";
-import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import BetSlip from "./BetSlip";
 import RecentWinner from "./RecentWinner";
@@ -15,6 +14,7 @@ import ActionButton from "../../components/modules/LuckySeven/ActionButton";
 import { handleDoubleStake } from "../../utils/handleDoubleStake";
 import { handleUndoStake } from "../../utils/handleUndoStake";
 import AmountSection from "./AmountSection";
+import Setting from "./Setting";
 
 const Bollywood = () => {
   const [double, setDouble] = useState(false);

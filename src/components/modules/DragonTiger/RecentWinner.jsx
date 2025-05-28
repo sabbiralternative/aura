@@ -1,20 +1,34 @@
+import { useState } from "react";
+import RecentModal from "./RecentModal";
+
 const RecentWinner = ({ recentWinner }) => {
+  const [recentWinnerData, setRecentWinnerData] = useState(null);
   return (
-    <div className="overflow-x-scroll flex items-center gap-0.5 pb-1">
-      {recentWinner?.map((winner) => {
-        return (
-          <span key={winner?.roundId}>
-            <div className="bounceInAnimation text-black uppercase flex items-center justify-center gap-2">
-              <div
-                className={`px-2 py-1  flex items-center justify-center gap-1 cursor-pointer rounded-md ${
-                  winner?.winner?.charAt(0) === "D"
-                    ? "bg-[#ff0009] text-white"
-                    : winner?.winner?.charAt(0) === "T"
-                    ? "bg-[#c9a739] text-white"
-                    : "bg-white text-black"
-                }`}
-              >
-                {/* <span className="w-4 h-4">
+    <>
+      {recentWinnerData && (
+        <RecentModal
+          recentWinnerData={recentWinnerData}
+          setRecentWinnerData={setRecentWinnerData}
+        />
+      )}
+      <div className="overflow-x-scroll flex items-center gap-0.5 pb-1">
+        {recentWinner?.map((winner) => {
+          return (
+            <span
+              onClick={() => setRecentWinnerData(winner)}
+              key={winner?.roundId}
+            >
+              <div className="bounceInAnimation text-black uppercase flex items-center justify-center gap-2">
+                <div
+                  className={`px-2 py-1  flex items-center justify-center gap-1 cursor-pointer rounded-md ${
+                    winner?.winner?.charAt(0) === "D"
+                      ? "bg-[#ff0009] text-white"
+                      : winner?.winner?.charAt(0) === "T"
+                      ? "bg-[#c9a739] text-white"
+                      : "bg-white text-black"
+                  }`}
+                >
+                  {/* <span className="w-4 h-4">
                     <svg
                       width={198}
                       height={260}
@@ -29,15 +43,15 @@ const RecentWinner = ({ recentWinner }) => {
                       />
                     </svg>
                   </span> */}
-                <span className="text-sm font-semibold">
-                  {winner?.winner?.charAt(0)}
-                </span>
-              </div>
-            </div>{" "}
-          </span>
-        );
-      })}
-      {/* <span>
+                  <span className="text-sm font-semibold">
+                    {winner?.winner?.charAt(0)}
+                  </span>
+                </div>
+              </div>{" "}
+            </span>
+          );
+        })}
+        {/* <span>
           <div className="bounceInAnimation text-black uppercase flex items-center justify-center gap-2">
             <div className="px-2 py-1 bg-white flex items-center justify-center gap-1 cursor-pointer rounded-md">
               <span className="w-4 h-4">
@@ -1173,7 +1187,8 @@ const RecentWinner = ({ recentWinner }) => {
             </div>
           </div>
         </span> */}
-    </div>
+      </div>
+    </>
   );
 };
 

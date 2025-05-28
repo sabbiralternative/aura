@@ -10,9 +10,9 @@ import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton
 import BetSlip from "../../components/modules/DragonTiger/BetSlip";
 import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
 import { useEffect, useState } from "react";
-import Setting from "../../components/modules/LuckySeven/Setting";
 import Toast from "../../components/shared/Toast/Toast";
 import { useSelector } from "react-redux";
+import Setting from "./Setting";
 
 const DragonTiger = () => {
   const [totalBet, setTotalBet] = useState(0);
@@ -25,8 +25,6 @@ const DragonTiger = () => {
     { eventTypeId, eventId },
     { pollingInterval: 1000 }
   );
-
-
 
   const firstEvent = data?.result?.[0];
   const roundId = firstEvent?.roundId;
