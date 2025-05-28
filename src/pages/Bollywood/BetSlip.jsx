@@ -5,7 +5,7 @@ import { useOrderMutation } from "../../redux/features/events/events";
 import { useEffect, useState } from "react";
 import { isRunnerActive, isRunnerWinner } from "../../utils/betSlip";
 import NextGame from "../../components/shared/NextGame/NextGame";
-import Card2 from "./Card2";
+import Card from "./Card";
 import { setBalance } from "../../redux/features/auth/authSlice";
 import StakeAnimation from "../../components/shared/StakeAnimation/StakeAnimation";
 
@@ -164,6 +164,7 @@ const BetSlip = ({
               marketId: bet?.marketId,
               name: bet?.name,
               stake: bet?.stake,
+              isBack: bet?.isback,
             });
           }
 
@@ -226,7 +227,7 @@ const BetSlip = ({
             }`}
             id="Don-back"
           >
-            {indexCard && indexCard === don && <Card2 indexCard={indexCard} />}
+            {indexCard && indexCard === don && <Card indexCard={indexCard} />}
 
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               Don
@@ -322,7 +323,7 @@ const BetSlip = ({
             id="AmarAkbarAnthony-back"
           >
             {indexCard && AAA.includes(indexCard) && (
-              <Card2 indexCard={indexCard} />
+              <Card indexCard={indexCard} />
             )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               AmarAkbarAnthony
@@ -418,7 +419,7 @@ const BetSlip = ({
             id="SahibBibiAurGulam-back"
           >
             {indexCard && SBAG.includes(indexCard) && (
-              <Card2 indexCard={indexCard} />
+              <Card indexCard={indexCard} />
             )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               SahibBibiAurGulam
@@ -515,7 +516,7 @@ const BetSlip = ({
             id="DharamVeer-back"
           >
             {indexCard && DharamVeer.includes(indexCard) && (
-              <Card2 indexCard={indexCard} />
+              <Card indexCard={indexCard} />
             )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               DharamVeer
@@ -610,7 +611,7 @@ const BetSlip = ({
             id="KisKisoPyaarKaroon-back"
           >
             {indexCard && KKPK.includes(indexCard) && (
-              <Card2 indexCard={indexCard} />
+              <Card indexCard={indexCard} />
             )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               KisKisoPyaarKaroon
@@ -705,7 +706,7 @@ const BetSlip = ({
             id="Ghulam-back"
           >
             {indexCard && ghulam.includes(indexCard) && (
-              <Card2 indexCard={indexCard} />
+              <Card indexCard={indexCard} />
             )}
             <span className="absolute top-0 right-0 z-50 flex items-center h-4 gap-1 px-2 text-xs font-semibold tracking-wider text-white translate-x-1/2 rounded-b-sm bg-black/40">
               Ghulam

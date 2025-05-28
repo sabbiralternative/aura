@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { setBalance } from "../../../redux/features/auth/authSlice";
+import { setBalance } from "../../redux/features/auth/authSlice";
 
 const AmountSection = ({
   firstEvent,
@@ -25,7 +25,15 @@ const AmountSection = ({
         (order) => order?.eventId == eventId
       );
       for (const order of filterOrderByEventId) {
-        totalBetAmount = parseFloat((totalBetAmount + order?.stake).toFixed(2));
+        if (order?.isBack === 0) {
+          totalBetAmount = parseFloat(
+            (totalBetAmount + order?.stake).toFixed(2)
+          );
+        } else {
+          const calculateTotalPrice =
+            totalBetAmount + (order?.price * order?.stake - order?.stake);
+          totalBetAmount = parseFloat(calculateTotalPrice.toFixed(2));
+        }
       }
     }
   }
@@ -37,42 +45,52 @@ const AmountSection = ({
       const parseTotalBet = JSON.parse(totalBetPlace);
 
       if (parseTotalBet && parseTotalBet.length > 0) {
-        data?.forEach((games) => {
-          games?.runners?.forEach((runner) => {
-            if (runner?.status === "WINNER") {
-              const winnerFilter = parseTotalBet?.filter(
-                (order) =>
-                  order?.selection_id === runner?.id &&
-                  runner?.status === "WINNER"
-              );
+        // 🔍 Check if at least one runner has status === "WINNER"
+        const hasWinner = data?.some((games) =>
+          games?.runners?.some((runner) => runner?.status === "WINNER")
+        );
 
-              const looserFilter = parseTotalBet?.filter(
+        if (hasWinner) {
+          data?.forEach((games) => {
+            games?.runners?.forEach((runner) => {
+              const winnerFilter = parseTotalBet?.filter(
                 (order) =>
                   order?.selection_id === runner?.id &&
                   runner?.status === "ACTIVE"
               );
 
+              const looserFilter = parseTotalBet?.filter(
+                (order) =>
+                  order?.selection_id === runner?.id &&
+                  runner?.status === "WINNER"
+              );
+
               let WinnerSum = 0;
               let looserSum = 0;
+
               if (looserFilter) {
                 for (const looser of looserFilter) {
-                  looserSum = looserSum + -looser?.stake;
+                  looserSum += -looser?.stake;
                 }
               }
 
               if (winnerFilter) {
                 for (const winner of winnerFilter) {
-                  WinnerSum += winner?.price * winner?.stake;
+                  if (winner?.isBack === 1) {
+                    WinnerSum += winner?.stake;
+                  } else {
+                    WinnerSum += winner?.price * winner?.stake;
+                  }
                 }
               }
 
               totalWin += looserSum + WinnerSum;
-
-              setTotalWinAmount(totalWin);
-              setShowWinLossResult(true);
-            }
+            });
           });
-        });
+
+          setTotalWinAmount(totalWin);
+          setShowWinLossResult(true);
+        }
       }
     }
   }, [data, totalBetPlace]);
