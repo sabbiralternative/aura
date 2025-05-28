@@ -4,7 +4,7 @@ import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
 import { useEffect, useState } from "react";
 import Stake from "../../shared/Stake/Stake";
-import { isRunnerActive } from "../../../utils/betSlip";
+import { isRunnerActive, isRunnerWinner } from "../../../utils/betSlip";
 import NextGame from "../../shared/NextGame/NextGame";
 
 const BetSlip = ({
@@ -160,6 +160,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false rounded-tl-md false false false bg-gradient-to-l from-red to-red/70 ${
+            isRunnerWinner(data, 2, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 2, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -196,6 +198,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false false false false false bg-gradient-to-l from-red to-red/70 ${
+            isRunnerWinner(data, 2, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 2, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -232,6 +236,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false false false false false bg-gradient-to-l from-orange to-orange/70 ${
+            isRunnerWinner(data, 3, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 3, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -268,6 +274,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer col-span-2  false false false rounded-tr-md false false bg-gradient-to-l from-orange to-orange/70 ${
+            isRunnerWinner(data, 3, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 3, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -306,6 +314,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-r from-red to-red/80 col-span-3  row-span-2 h-[130px] perspective ${
+            isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -510,6 +520,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-t from-green to-green/80 col-span-2 ${
+            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -548,6 +560,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-l from-orange to-orange/80 col-span-3 row-span-2 h-[130px] ${
+            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 0, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -659,6 +673,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-b from-blue to-blue/80 col-span-2 ${
+            isRunnerWinner(data, 1, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 1, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -696,6 +712,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex rounded-bl-md flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-red to-red/70 ${
+            isRunnerWinner(data, 4, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 4, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -758,6 +776,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-red to-red/70 ${
+            isRunnerWinner(data, 4, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 4, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -821,6 +841,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-orange to-orange/70 ${
+            isRunnerWinner(data, 5, 0) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 5, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -883,6 +905,8 @@ const BetSlip = ({
             })
           }
           className={`relative rounded-br-md overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false col-span-2  false false false false false bg-gradient-to-l from-orange to-orange/70 ${
+            isRunnerWinner(data, 5, 1) ? "blink-overlay" : ""
+          } ${
             isRunnerActive(data, 5, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
