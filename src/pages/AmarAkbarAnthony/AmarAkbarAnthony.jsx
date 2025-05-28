@@ -1,10 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../../redux/features/events/events";
-
-import AmountSection from "../../components/shared/events/AmountSection";
-
-// import Setting from "../../components/modules/LuckySeven/Setting";
-
 import Video from "../../components/shared/events/Video";
 import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
@@ -19,6 +14,7 @@ import Toast from "../../components/shared/Toast/Toast";
 import RecentWinner from "../../components/modules/AmarAkbarAnthony/RecentWinner";
 import { handleDoubleStake } from "../../utils/handleDoubleStake";
 import { handleUndoStake } from "../../utils/handleUndoStake";
+import AmountSection from "./AmountSection";
 
 const AmarAkbarAnthony = () => {
   const [double, setDouble] = useState(false);

@@ -168,6 +168,7 @@ const BetSlip = ({
               marketId: bet?.marketId,
               name: bet?.name,
               stake: bet?.stake,
+               isBack: bet?.isback,
             });
           }
 
