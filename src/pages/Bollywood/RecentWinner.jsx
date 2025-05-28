@@ -2,30 +2,35 @@ import { useState } from "react";
 import RecentModal from "./RecentModal";
 
 const RecentWinner = ({ recentWinner }) => {
-  const [showRecentModal, setShowRecentModal] = useState(false);
+  const [recentWinnerData, setRecentWinnerData] = useState(null);
   return (
     <>
-      {showRecentModal && (
-        <RecentModal setShowRecentModal={setShowRecentModal} />
+      {recentWinnerData && (
+        <RecentModal
+          recentWinnerData={recentWinnerData}
+          setRecentWinnerData={setRecentWinnerData}
+        />
       )}
       <div className="flex justify-start w-full gap-1 p-1 overflow-x-scroll">
         {recentWinner?.map((winner) => {
           return (
             <span
-              onClick={() => setShowRecentModal(true)}
+              onClick={() => setRecentWinnerData(winner)}
               key={winner?.roundId}
             >
               <div className="bounceInAnimation text-text-primary uppercase flex items-center justify-center gap-1">
                 <div
                   className={`w-6 h-6 flex items-center justify-center cursor-pointer rounded-md ${
-                    winner?.winner === "D"
+                    winner?.winner === "A" ||
+                    winner?.winner === "B" ||
+                    winner?.winner === "C"
                       ? "bg-[#38b142] text-white"
+                      : winner.winner === "D"
+                      ? "bg-[#f49226] text-white"
                       : winner.winner === "E"
-                      ? "bg-[#d83b32] text-white"
-                      : winner.winner === "C"
-                      ? "bg-[#156ed1] text-white"
+                      ? "bg-[#bd73ff] text-white"
                       : winner.winner === "F"
-                      ? "bg-[#15d141] text-white"
+                      ? "bg-[#6B3700] text-white"
                       : "bg-white text-black"
                   }`}
                 >
