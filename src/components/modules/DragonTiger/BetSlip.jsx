@@ -1,38 +1,53 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CardBack, Lock } from "../../../assets/icon";
 import { Status } from "../../../const";
 import { useOrderMutation } from "../../../redux/features/events/events";
 import { useEffect, useState } from "react";
-import Stake from "../../shared/Stake/Stake";
 import { isRunnerActive, isRunnerWinner } from "../../../utils/betSlip";
 import NextGame from "../../shared/NextGame/NextGame";
+import { setBalance } from "../../../redux/features/auth/authSlice";
+import StakeAnimation from "../../shared/StakeAnimation/StakeAnimation";
 
 const BetSlip = ({
+  double,
   data,
   status,
   setToast,
   setStakeState,
   stakeState,
+  setTotalWinAmount,
+  setShowWinLossResult,
+  animation,
+  setAnimation,
   initialState,
-  setTotalBet,
 }) => {
   const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
+  const dispatch = useDispatch();
   const firstData = data?.[0];
   const card1 = firstData?.runners?.[0]?.card?.[0];
   const card2 = firstData?.runners?.[1]?.card?.[0];
+  const { balance } = useSelector((state) => state.auth);
 
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
+    const isRepeatTheBet = Object.values(stakeState).find(
+      (item) => item?.selection_id && item?.show === false
+    );
+    if (isRepeatTheBet) {
+      setStakeState(initialState);
+    }
+    new Audio("/bet.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
+    setAnimation([key]);
     const formatData = {
+      marketId: data?.[dataIndex]?.id,
       roundId: data?.[dataIndex]?.roundId,
       name: data?.[dataIndex]?.name,
       eventId: data?.[dataIndex]?.eventId,
       eventName: data?.[dataIndex]?.eventName,
-      marketId: data?.[dataIndex]?.id,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
       isback: type === "back" ? 0 : 1,
@@ -40,42 +55,59 @@ const BetSlip = ({
       event_type_id: data?.[dataIndex]?.event_type_id,
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
-    setStakeState((prev) => {
-      const maxSerial = Math.max(
-        0,
-        ...Object.values(prev)
-          .map((item) => item.serial)
-          .filter((serial) => serial !== undefined)
-      );
+    const timeout = setTimeout(() => {
+      setAnimation([]);
+      setStakeState((prev) => {
+        const maxSerial = Math.max(
+          0,
+          ...Object.values(prev)
+            .map((item) => item.serial)
+            .filter((serial) => serial !== undefined)
+        );
 
-      return {
-        ...prev,
-        [key]: {
-          roundId: formatData?.roundId,
-          name: formatData?.name,
-          eventId: formatData?.eventId,
-          eventName: formatData?.eventName,
-          show: true,
-          stake: prev[key].show
-            ? prev[key].stake + prev[key].actionBy
-            : prev[key].stake,
-          marketId: formatData?.marketId,
-          selection_id: formatData?.selection_id,
-          price: formatData?.price,
-          runner_name: formatData?.runner_name,
-          isback: formatData?.isback,
-          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
-          actionBy: stake,
-          undo: [...(prev[key]?.undo || []), stake],
-        },
-      };
-    });
+        return {
+          ...prev,
+          [key]: {
+            roundId: formatData?.roundId,
+            name: formatData?.name,
+            eventId: formatData?.eventId,
+            eventName: formatData?.eventName,
+            show: true,
+            animation: false,
+            stake: prev[key].show
+              ? prev[key].stake + prev[key].actionBy
+              : prev[key].stake,
+            marketId: formatData?.marketId,
+            selection_id: formatData?.selection_id,
+            price: formatData?.price,
+            runner_name: formatData?.runner_name,
+            isback: formatData?.isback,
+            serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+            actionBy: stake,
+            undo: [...(prev[key]?.undo || []), stake],
+          },
+        };
+      });
+    }, 500);
+
+    return () => clearTimeout(timeout);
   };
 
   // Reset state when status is OPEN
   useEffect(() => {
     if (status === Status.OPEN) {
-      setStakeState(initialState);
+      setStakeState((prev) => {
+        const updatedState = { ...prev };
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              show: false,
+            };
+          }
+        });
+        return updatedState;
+      });
     }
     if (showSuspendedWarning) {
       setTimeout(() => {
@@ -117,13 +149,30 @@ const BetSlip = ({
     if (status === Status.SUSPENDED && payload?.length > 0) {
       const handleOrder = async () => {
         const res = await addOrder(payload).unwrap();
+
         payload = [];
         if (res?.success) {
-          let totalBet = 0;
+          setShowWinLossResult(false);
+          setTotalWinAmount(null);
+
+          let totalBets = [];
+          let totalAmountPlaced = 0;
+
           for (let bet of filterPlacedBet) {
-            totalBet += bet?.stake;
+            totalAmountPlaced = totalAmountPlaced + bet?.stake;
+            totalBets.push({
+              selection_id: bet.selection_id,
+              price: bet?.price,
+              eventId: bet?.eventId,
+              marketId: bet?.marketId,
+              name: bet?.name,
+              stake: bet?.stake,
+            });
           }
-          setTotalBet((prev) => prev + totalBet);
+
+          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+
+          dispatch(setBalance(balance - parseFloat(totalAmountPlaced)));
           setToast(res?.Message);
         }
       };
@@ -171,13 +220,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             DragonEven
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.dragonEven?.show && (
-                <Stake stake={stakeState?.dragonEven?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="dragonEven"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[1]?.status === "OPEN" &&
           data?.[1]?.runners?.[0]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white left-0.5">
@@ -209,13 +258,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             DragonOdd
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.dragonOdd?.show && (
-                <Stake stake={stakeState?.dragonOdd?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="dragonOdd"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[1]?.status === "OPEN" &&
           data?.[1]?.runners?.[1]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white left-0.5">
@@ -247,13 +296,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             TigerEven
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tigerEven?.show && (
-                <Stake stake={stakeState?.tigerEven?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tigerEven"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[2]?.status === "OPEN" &&
           data?.[2]?.runners?.[0]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white left-0.5">
@@ -285,13 +334,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             TigerOdd
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tigerOdd?.show && (
-                <Stake stake={stakeState?.tigerOdd?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tigerOdd"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[2]?.status === "OPEN" &&
           data?.[2]?.runners?.[1]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white left-0.5">
@@ -325,13 +374,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             Dragon
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.dragon?.show && (
-                <Stake stake={stakeState?.dragon?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="dragon"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[0]?.status === "OPEN" &&
           data?.[0]?.runners?.[0]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white right-0.5">
@@ -531,13 +580,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             Tie
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tie?.show && (
-                <Stake stake={stakeState?.tie?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tie"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[0]?.status === "OPEN" &&
           data?.[0]?.runners?.[2]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white left-0.5">
@@ -571,13 +620,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             Tiger
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tiger?.show && (
-                <Stake stake={stakeState?.tiger?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tiger"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[0]?.status === "OPEN" &&
           data?.[0]?.runners?.[1]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white left-0.5">
@@ -684,13 +733,13 @@ const BetSlip = ({
           <span className="absolute z-10 h-4 text-xs font-semibold text-white top-1 left-1">
             SuitedTie
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.suitedTie?.show && (
-                <Stake stake={stakeState?.suitedTie?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="suitedTie"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[0]?.status === "OPEN" &&
           data?.[0]?.runners?.[3]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white right-0.5">
@@ -749,13 +798,13 @@ const BetSlip = ({
               />
             </svg>
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.dragonRed?.show && (
-                <Stake stake={stakeState?.dragonRed?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="dragonRed"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[3]?.status === "OPEN" &&
           data?.[3]?.runners?.[0]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white right-0.5">
@@ -814,13 +863,13 @@ const BetSlip = ({
               />
             </svg>
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.dragonBlack?.show && (
-                <Stake stake={stakeState?.dragonBlack?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="dragonBlack"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[3]?.status === "OPEN" &&
           data?.[3]?.runners?.[1]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white right-0.5">
@@ -878,13 +927,13 @@ const BetSlip = ({
               />
             </svg>
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tigerRed?.show && (
-                <Stake stake={stakeState?.tigerRed?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tigerRed"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[4]?.status === "OPEN" &&
           data?.[4]?.runners?.[0]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white right-0.5">
@@ -943,13 +992,13 @@ const BetSlip = ({
               />
             </svg>
           </span>
-          <div className="z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tigerBlack?.show && (
-                <Stake stake={stakeState?.tigerBlack?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tigerBlack"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[4]?.status === "OPEN" &&
           data?.[4]?.runners?.[1]?.status === "ACTIVE" ? (
             <span className="absolute bottom-1 text-[10px] text-white right-0.5">

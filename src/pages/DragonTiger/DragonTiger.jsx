@@ -1,21 +1,25 @@
 import { useParams } from "react-router-dom";
 import { useGetEventDetailsQuery } from "../../redux/features/events/events";
 import AmountSection from "../../components/shared/events/AmountSection";
-// import Setting from "../../components/modules/LuckySeven/Setting";
 import Video from "../../components/shared/events/Video";
 import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
-import ActionButton from "../../components/modules/AmarAkbarAnthony/ActionButton";
 import BetSlip from "../../components/modules/DragonTiger/BetSlip";
 import RecentWinner from "../../components/modules/DragonTiger/RecentWinner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Toast from "../../components/shared/Toast/Toast";
 import { useSelector } from "react-redux";
 import Setting from "./Setting";
+import { handleDoubleStake } from "../../utils/handleDoubleStake";
+import { handleUndoStake } from "../../utils/handleUndoStake";
+import ActionButton from "../../components/modules/LuckySeven/ActionButton";
 
 const DragonTiger = () => {
-  const [totalBet, setTotalBet] = useState(0);
+  const [double, setDouble] = useState(false);
+  const [animation, setAnimation] = useState([]);
+  const [showWinLossResult, setShowWinLossResult] = useState(false);
+  const [totalWinAmount, setTotalWinAmount] = useState(null);
   const { stake } = useSelector((state) => state.global);
   const [toast, setToast] = useState(null);
   const [showFullScreen, setShowFullScreen] = useState(false);
@@ -27,7 +31,6 @@ const DragonTiger = () => {
   );
 
   const firstEvent = data?.result?.[0];
-  const roundId = firstEvent?.roundId;
 
   const keysArray = [
     "dragonEven",
@@ -59,47 +62,11 @@ const DragonTiger = () => {
 
   const [stakeState, setStakeState] = useState(initialState);
 
-  const handleUndoStake = () => {
-    setStakeState((prev) => {
-      const prevValues = Object.entries(prev);
-      const maxSerialObject = prevValues.reduce((maxObj, [key, currentObj]) => {
-        if (currentObj.serial > (maxObj?.serial || 0)) {
-          return { key, obj: currentObj };
-        }
-        return maxObj;
-      }, {});
-
-      if (maxSerialObject.obj) {
-        const updatedObj = {
-          ...maxSerialObject.obj,
-          undo: [...maxSerialObject.obj.undo],
-        };
-
-        if (
-          updatedObj.undo.length > 0 &&
-          updatedObj.stake > updatedObj.undo[updatedObj.undo.length - 1]
-        ) {
-          updatedObj.stake -= updatedObj.undo.pop();
-        } else {
-          updatedObj.show = false;
-          delete updatedObj.serial;
-        }
-
-        return {
-          ...prev,
-          [maxSerialObject.key]: updatedObj,
-        };
-      }
-
-      return prev;
-    });
-  };
+  const isRepeatTheBet = Object.values(stakeState).find(
+    (item) => item?.selection_id && item?.show === false
+  );
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
-
-  useEffect(() => {
-    setTotalBet(0);
-  }, [roundId]);
 
   return (
     <main
@@ -115,8 +82,12 @@ const DragonTiger = () => {
       <Video />
 
       <BetSlip
-        setTotalBet={setTotalBet}
         initialState={initialState}
+        double={double}
+        animation={animation}
+        setAnimation={setAnimation}
+        setShowWinLossResult={setShowWinLossResult}
+        setTotalWinAmount={setTotalWinAmount}
         stakeState={stakeState}
         setStakeState={setStakeState}
         setToast={setToast}
@@ -125,12 +96,29 @@ const DragonTiger = () => {
       />
       <div className=" bottom-0 flex flex-col w-full gap-2 px-1">
         <ActionButton
-          handleUndoStake={handleUndoStake}
+          isRepeatTheBet={isRepeatTheBet}
+          handleDoubleStake={() =>
+            handleDoubleStake(
+              isRepeatTheBet,
+              setDouble,
+              setStakeState,
+              setAnimation,
+              firstEvent
+            )
+          }
+          handleUndoStake={() => handleUndoStake(setStakeState, stakeState)}
           isPlaceStake={isPlaceStake}
           status={firstEvent?.status}
           setShowSetting={setShowSetting}
         />
-        <AmountSection totalBet={totalBet} firstEvent={firstEvent} />
+        <AmountSection
+          showWinLossResult={showWinLossResult}
+          setShowWinLossResult={setShowWinLossResult}
+          setTotalWinAmount={setTotalWinAmount}
+          totalWinAmount={totalWinAmount}
+          data={data?.result}
+          firstEvent={firstEvent}
+        />
         <RecentWinner recentWinner={firstEvent?.recent_winner} />
       </div>
       {showSetting && (
