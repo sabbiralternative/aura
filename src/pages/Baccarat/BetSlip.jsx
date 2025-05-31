@@ -1,34 +1,53 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../../const";
 import { useOrderMutation } from "../../redux/features/events/events";
 import { useEffect, useState } from "react";
-import Stake from "../../components/shared/Stake/Stake";
 import { CardBack, Lock } from "../../assets/icon";
-import { getBackPrice, isRunnerActive } from "../../utils/betSlip";
+import {
+  getBackPrice,
+  isRunnerActive,
+  isRunnerWinner,
+} from "../../utils/betSlip";
 import NextGame from "../../components/shared/NextGame/NextGame";
+import { setBalance } from "../../redux/features/auth/authSlice";
+import StakeAnimation from "../../components/shared/StakeAnimation/StakeAnimation";
 
 const BetSlip = ({
+  double,
   data,
   status,
   setToast,
   setStakeState,
   stakeState,
+  setTotalWinAmount,
+  setShowWinLossResult,
+  animation,
+  setAnimation,
   initialState,
-  setTotalBet,
 }) => {
   const [showSuspendedWarning, setShowSuspendedWarning] = useState(false);
+  const dispatch = useDispatch();
   const [addOrder] = useOrderMutation();
   const { stake } = useSelector((state) => state.global);
+  const { balance } = useSelector((state) => state.auth);
 
   // Generic function to update stake state
   const handleStakeChange = (payload) => {
+    const isRepeatTheBet = Object.values(stakeState).find(
+      (item) => item?.selection_id && item?.show === false
+    );
+    if (isRepeatTheBet) {
+      setStakeState(initialState);
+    }
+    new Audio("/bet.mp3").play();
     const { key, data, dataIndex, runnerIndex, type } = payload;
+    setAnimation([key]);
     const formatData = {
+      marketId: data?.[dataIndex]?.id,
       roundId: data?.[dataIndex]?.roundId,
       name: data?.[dataIndex]?.name,
       eventId: data?.[dataIndex]?.eventId,
       eventName: data?.[dataIndex]?.eventName,
-      marketId: data?.[dataIndex]?.id,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
       isback: type === "back" ? 0 : 1,
@@ -36,42 +55,59 @@ const BetSlip = ({
       event_type_id: data?.[dataIndex]?.event_type_id,
       price: data?.[dataIndex]?.runners?.[runnerIndex]?.[type]?.[0]?.price,
     };
-    setStakeState((prev) => {
-      const maxSerial = Math.max(
-        0,
-        ...Object.values(prev)
-          .map((item) => item.serial)
-          .filter((serial) => serial !== undefined)
-      );
+    const timeout = setTimeout(() => {
+      setAnimation([]);
+      setStakeState((prev) => {
+        const maxSerial = Math.max(
+          0,
+          ...Object.values(prev)
+            .map((item) => item.serial)
+            .filter((serial) => serial !== undefined)
+        );
 
-      return {
-        ...prev,
-        [key]: {
-          roundId: formatData?.roundId,
-          name: formatData?.name,
-          eventId: formatData?.eventId,
-          eventName: formatData?.eventName,
-          show: true,
-          stake: prev[key].show
-            ? prev[key].stake + prev[key].actionBy
-            : prev[key].stake,
-          marketId: formatData?.marketId,
-          selection_id: formatData?.selection_id,
-          price: formatData?.price,
-          runner_name: formatData?.runner_name,
-          isback: formatData?.isback,
-          serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
-          actionBy: stake,
-          undo: [...(prev[key]?.undo || []), stake],
-        },
-      };
-    });
+        return {
+          ...prev,
+          [key]: {
+            roundId: formatData?.roundId,
+            name: formatData?.name,
+            eventId: formatData?.eventId,
+            eventName: formatData?.eventName,
+            show: true,
+            animation: false,
+            stake: prev[key].show
+              ? prev[key].stake + prev[key].actionBy
+              : prev[key].stake,
+            marketId: formatData?.marketId,
+            selection_id: formatData?.selection_id,
+            price: formatData?.price,
+            runner_name: formatData?.runner_name,
+            isback: formatData?.isback,
+            serial: prev[key]?.serial ? prev[key]?.serial : maxSerial + 1,
+            actionBy: stake,
+            undo: [...(prev[key]?.undo || []), stake],
+          },
+        };
+      });
+    }, 500);
+
+    return () => clearTimeout(timeout);
   };
 
   // Reset state when status is OPEN
   useEffect(() => {
     if (status === Status.OPEN) {
-      setStakeState(initialState);
+      setStakeState((prev) => {
+        const updatedState = { ...prev };
+        Object.keys(updatedState).forEach((key) => {
+          if (updatedState[key].show) {
+            updatedState[key] = {
+              ...updatedState[key],
+              show: false,
+            };
+          }
+        });
+        return updatedState;
+      });
     }
     if (showSuspendedWarning) {
       setTimeout(() => {
@@ -113,13 +149,30 @@ const BetSlip = ({
     if (status === Status.SUSPENDED && payload?.length > 0) {
       const handleOrder = async () => {
         const res = await addOrder(payload).unwrap();
+
         payload = [];
         if (res?.success) {
-          let totalBet = 0;
+          setShowWinLossResult(false);
+          setTotalWinAmount(null);
+
+          let totalBets = [];
+          let totalAmountPlaced = 0;
+
           for (let bet of filterPlacedBet) {
-            totalBet += bet?.stake;
+            totalAmountPlaced = totalAmountPlaced + bet?.stake;
+            totalBets.push({
+              selection_id: bet.selection_id,
+              price: bet?.price,
+              eventId: bet?.eventId,
+              marketId: bet?.marketId,
+              name: bet?.name,
+              stake: bet?.stake,
+            });
           }
-          setTotalBet((prev) => prev + totalBet);
+
+          localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+
+          dispatch(setBalance(balance - parseFloat(totalAmountPlaced)));
           setToast(res?.Message);
         }
       };
@@ -249,13 +302,14 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1 hidden">
             PERFECT PAIR
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.perfectPair?.show && (
-                <Stake stake={stakeState?.perfectPair?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="perfectPair"
+            stake={stake}
+            stakeState={stakeState}
+          />
+
           {isRunnerActive(data, 3, 0) ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white top-1 left-1">
               {getBackPrice(data, 3, 0)}
@@ -263,6 +317,7 @@ const BetSlip = ({
           ) : (
             <Lock position="top-1 left-1" />
           )}
+          {isRunnerWinner(data, 3, 0) && <span className="shimmer" />}
         </div>
         <div
           onClick={() =>
@@ -274,7 +329,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-3 h-20 border-transparent bg-gradient-to-b bg-gradient-to-t from-gray/40 to-gray/70 animateWinner ${
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-3 h-20 border-transparent bg-gradient-to-b bg-gradient-to-t from-gray/40 to-gray/70 animateWinner   ${
             data?.[4]?.status === Status.OPEN &&
             data?.[4]?.runners?.[0]?.status === Status.ACTIVE
               ? "cursor-pointer"
@@ -304,13 +359,13 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1 hidden">
             BIG
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.big?.show && (
-                <Stake stake={stakeState?.big?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="big"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[4]?.status === Status.OPEN &&
           data?.[4]?.runners?.[0]?.status ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white top-1 left-1">
@@ -320,7 +375,7 @@ const BetSlip = ({
             <Lock position="top-1 left-1" />
           )}
 
-          <span className="shimmer" />
+          {isRunnerWinner(data, 4, 0) && <span className="shimmer" />}
         </div>
         <div
           onClick={() =>
@@ -333,6 +388,8 @@ const BetSlip = ({
             })
           }
           className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-3 h-20 border-transparent bg-gradient-to-b bg-gradient-to-t from-gray/40 to-gray/70 ${
+            isRunnerWinner(data, 5, 0) ? "blink-overlay" : ""
+          }  ${
             data?.[4]?.status === Status.OPEN &&
             data?.[4]?.runners?.[0]?.status === Status.ACTIVE
               ? "cursor-pointer"
@@ -370,13 +427,13 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1 hidden">
             SMALL
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.small?.show && (
-                <Stake stake={stakeState?.small?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="small"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {data?.[5]?.status === Status.OPEN &&
           data?.[5]?.runners?.[5]?.status ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white top-1 left-1">
@@ -385,18 +442,19 @@ const BetSlip = ({
           ) : (
             <Lock position="top-1 left-1" />
           )}
+          {isRunnerWinner(data, 5, 0) && <span className="shimmer" />}
         </div>
         <div
           onClick={() =>
             handleStakeChange({
-              key: "perfectPair",
+              key: "eitherPair",
               data,
               dataIndex: 6,
               runnerIndex: 0,
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-3 h-20 border-transparent bg-gradient-to-b bg-gradient-to-t from-gray/40 to-gray/70 ${
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-3 h-20 border-transparent bg-gradient-to-b bg-gradient-to-t from-gray/40 to-gray/70   ${
             data?.[6]?.status === Status.OPEN &&
             data?.[6]?.runners?.[0]?.status === Status.ACTIVE
               ? "cursor-pointer"
@@ -491,13 +549,14 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1 hidden">
             EITHER PAIR
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.eitherPlayer?.show && (
-                <Stake stake={stakeState?.eitherPlayer?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="eitherPair"
+            stake={stake}
+            stakeState={stakeState}
+          />
+
           {data?.[6]?.status === Status.OPEN &&
           data?.[6]?.runners?.[0]?.status ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white top-1 left-1">
@@ -506,6 +565,7 @@ const BetSlip = ({
           ) : (
             <Lock position="top-1 left-1" />
           )}
+          {isRunnerWinner(data, 6, 0) && <span className="shimmer" />}
         </div>
 
         {/* player */}
@@ -519,7 +579,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 row-span-2 h-20 bg-gradient-to-b bg-gradient-to-t from-blue to-blue/70 ${
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 row-span-2 h-20  bg-gradient-to-t from-blue to-blue/70  ${
             isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
@@ -529,13 +589,13 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1 left-1">
             PLAYER
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.player?.show && (
-                <Stake stake={stakeState?.player?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="player"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {isRunnerActive(data, 0, 0) ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white left-1">
               {getBackPrice(data, 0, 0)}
@@ -543,20 +603,22 @@ const BetSlip = ({
           ) : (
             <Lock position="left-1" />
           )}
-
+          {isRunnerWinner(data, 0, 0) && <span className="shimmer" />}
           <div className="absolute z-40 flex gap-1 bottom-1 flex-row-reverse right-1">
             <div className>
               <div
                 className="h-12 aspect-[5/7] flip-card"
                 style={{ zIndex: 999 }}
               >
-                {data?.[0]?.runners?.[0]?.card?.length > 0 ? (
-                  <img
-                    src={`/cards/${data?.[0]?.runners?.[0]?.card?.[0]}.jpg`}
-                  />
-                ) : (
-                  <CardBack />
-                )}
+                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                  {data?.[0]?.runners?.[0]?.card?.length > 0 ? (
+                    <img
+                      src={`/cards/${data?.[0]?.runners?.[0]?.card[0]}.jpg`}
+                    />
+                  ) : (
+                    <CardBack />
+                  )}
+                </div>
               </div>
             </div>
             <div className>
@@ -604,7 +666,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-2 row-span-4 bg-gradient-to-b bg-gradient-to-t from-green to-green/70 ${isRunnerActive(
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-2 row-span-4 bg-gradient-to-b bg-gradient-to-t from-green to-green/70  ${isRunnerActive(
             data,
             0,
             2
@@ -614,13 +676,13 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1">
             TIE
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.tie?.show && (
-                <Stake stake={stakeState?.tie?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="tie"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {isRunnerActive(data, 0, 2) ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white">
               {getBackPrice(data, 0, 2)}
@@ -628,18 +690,19 @@ const BetSlip = ({
           ) : (
             <Lock position="" />
           )}
+          {isRunnerWinner(data, 0, 2) && <span className="shimmer" />}
         </div>
         <div
           onClick={() =>
             handleStakeChange({
-              key: "perfectPair",
+              key: "banker",
               data,
               dataIndex: 0,
               runnerIndex: 1,
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 row-span-2 h-20 bg-gradient-to-b bg-gradient-to-t from-red to-red/70 animateWinner ${isRunnerActive(
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 row-span-2 h-20 bg-gradient-to-b bg-gradient-to-t from-red to-red/70 animateWinner  ${isRunnerActive(
             data,
             0,
             1
@@ -649,13 +712,13 @@ const BetSlip = ({
           <span className="absolute text-sm font-semibold text-white top-1 right-1">
             BANKER
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.banker?.show && (
-                <Stake stake={stakeState?.banker?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="banker"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {isRunnerActive(data, 0, 1) ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white right-1">
               {getBackPrice(data, 0, 1)}
@@ -663,6 +726,7 @@ const BetSlip = ({
           ) : (
             <Lock position="right-1" />
           )}
+
           {/* Banker */}
           <div className="absolute z-40 flex gap-1 bottom-1 flex-row left-1">
             <div className>
@@ -715,7 +779,7 @@ const BetSlip = ({
             </div>
           </div>
           {/* Banker */}
-          <span className="shimmer" />
+          {isRunnerWinner(data, 0, 1) && <span className="shimmer" />}
         </div>
         <div
           onClick={() =>
@@ -727,23 +791,21 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 h-16 bg-gradient-to-b bg-gradient-to-t from-blue to-blue/70 ${isRunnerActive(
-            data,
-            1,
-            0
-          )}`}
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 h-16 bg-gradient-to-b bg-gradient-to-t from-blue to-blue/70 ${
+            isRunnerWinner(data, 1, 0) ? "blink-overlay" : ""
+          }  ${isRunnerActive(data, 1, 0)}`}
           id="PLAYER PAIR"
         >
           <span className="absolute text-sm font-semibold text-white top-1 left-1">
             PLAYER PAIR
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.playerPair?.show && (
-                <Stake stake={stakeState?.playerPair?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="playerPair"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {isRunnerActive(data, 1, 0) ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white left-1">
               {getBackPrice(data, 1, 0)}
@@ -751,34 +813,33 @@ const BetSlip = ({
           ) : (
             <Lock position="left-1" />
           )}
+          {isRunnerWinner(data, 1, 0) && <span className="shimmer" />}
         </div>
         <div
           onClick={() =>
             handleStakeChange({
-              key: "bankerPrice",
+              key: "bankerPair",
               data,
               dataIndex: 2,
               runnerIndex: 0,
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 h-16 bg-gradient-to-b bg-gradient-to-t from-red to-red/70 ${isRunnerActive(
-            data,
-            2,
-            0
-          )}`}
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 h-16 bg-gradient-to-b bg-gradient-to-t from-red to-red/70 ${
+            isRunnerWinner(data, 2, 0) ? "blink-overlay" : ""
+          }  ${isRunnerActive(data, 2, 0)}`}
           id="BANKER PAIR"
         >
           <span className="absolute text-sm font-semibold text-white top-1 right-1">
             BANKER PAIR
           </span>
-          <div className="float z-50">
-            <div className="relative w-10 h-10">
-              {stakeState?.bankerPair?.show && (
-                <Stake stake={stakeState?.bankerPair?.stake} />
-              )}
-            </div>
-          </div>
+          <StakeAnimation
+            animation={animation}
+            double={double}
+            runner="bankerPair"
+            stake={stake}
+            stakeState={stakeState}
+          />
           {isRunnerActive(data, 2, 0) ? (
             <span className="absolute bottom-0 text-xs font-semibold text-white right-1">
               {getBackPrice(data, 2, 0)}
@@ -786,6 +847,7 @@ const BetSlip = ({
           ) : (
             <Lock position="right-1" />
           )}
+          {isRunnerWinner(data, 2, 0) && <span className="shimmer" />}
         </div>
       </div>
     </div>
