@@ -91,7 +91,7 @@ const RecentModal = ({ setRecentWinnerData, recentWinnerData }) => {
                     : "text-white/80"
                 }`}
               >
-                PAIR
+                {recentWinnerData?.b?.cards_type}
               </span>
               {recentWinnerData?.b?.cards?.map((card) => (
                 <div key={card} className="h-12 lg:h-16 aspect-[5/7] flip-card">
