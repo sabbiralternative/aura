@@ -7,12 +7,24 @@ const Card = ({ data }) => {
   const playerB1 = data?.runners?.[1]?.card?.[0];
   const playerB2 = data?.runners?.[1]?.card?.[1];
   const playerB3 = data?.runners?.[1]?.card?.[2];
+  const playerA = data?.runners?.[0];
+  const playerB = data?.runners?.[1];
 
   return (
     <span className="transition-all duration-1000 ease-in-out translate-y-[100%] mb-20 ">
       <div className="perspective flex  mx-auto items-center w-fit gap-4 justify-center transform transition-all linear duration-1000 perspective">
-        <div className="applyPerspective flex items-center justify-start gap-2 pt-6 p-1 rounded-lg border-[2px] border-white/20">
-          <span className="text-white/80 absolute -top-[2px] -translate-y-full right-0 z-50 text-xs uppercase" />
+        <div
+          className={`applyPerspective flex items-center justify-start gap-2 pt-6 p-1 rounded-lg border-[2px]  ${
+            playerA?.status === "WINNER" ? "border-gold" : "border-white/20"
+          }`}
+        >
+          <span
+            className={`${
+              playerA?.status === "WINNER" ? "text-gold" : "text-white/80"
+            } absolute -top-[2px] -translate-y-full left-0 z-50 text-xs uppercase`}
+          >
+            {playerA?.cards_type}
+          </span>
           <div
             className={` h-10 aspect-[5/7]  ${
               playerA1 ? "flip-card" : "cardFadeInAnimation"
@@ -53,8 +65,18 @@ const Card = ({ data }) => {
             Player A
           </div>
         </div>
-        <div className="flex applyPerspective items-center justify-end gap-2 pt-6 p-1 rounded-lg border-[2px] border-white/20">
-          <span className="text-white/80 absolute -top-[2px] -translate-y-full left-0 z-50 text-xs uppercase" />
+        <div
+          className={`flex applyPerspective items-center justify-end gap-2 pt-6 p-1 rounded-lg border-[2px] ${
+            playerB?.status === "WINNER" ? "border-gold" : "border-white/20"
+          }`}
+        >
+          <span
+            className={`${
+              playerB?.status === "WINNER" ? "text-gold" : "text-white/80"
+            } absolute -top-[2px] -translate-y-full right-0 z-50 text-xs uppercase`}
+          >
+            {playerB?.cards_type}
+          </span>
           <div
             className={` h-10 aspect-[5/7]  ${
               playerB1 ? "flip-card" : "cardFadeInAnimation"
