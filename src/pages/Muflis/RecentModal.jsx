@@ -13,7 +13,7 @@ const RecentModal = ({ setRecentWinnerData, recentWinnerData }) => {
   return (
     <div
       ref={ref}
-      className="scale-y-100 h-fit fixed origin-bottom flex flex-col items-center bottom-0  w-full max-w-md transition-all ease-in-out "
+      className="scale-y-100 h-fit absolute left-0 origin-bottom flex flex-col items-center bottom-0  w-full max-w-md transition-all ease-in-out "
       style={{ zIndex: 1000 }}
     >
       <div className="flex flex-col flex-grow w-full bg-black/60 backdrop-blur-md rounded-t-xl">
