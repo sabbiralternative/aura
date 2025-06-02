@@ -159,14 +159,14 @@ const BetSlip = ({
                   type: "back",
                 })
               }
-              className={`relative flex items-center justify-center border border-transparent col-span-3 bg-gradient-to-t from-red to-red/70 rounded-tl-md ${
+              className={`relative flex items-center justify-center border border-transparent col-span-3 bg-gradient-to-t from-red to-red/70 rounded-tl-md h-[60px] ${
                 isRunnerActive(data, 0, 0)
                   ? "cursor-pointer"
                   : " cursor-not-allowed pointer-events-none"
               }`}
               id="a"
             >
-              <div className="h-12 w-12 opacity-70">
+              <div className="h-12 w-full opacity-70 absolute">
                 <svg
                   className="w-full h-full"
                   width={133}
@@ -219,14 +219,14 @@ const BetSlip = ({
                   type: "back",
                 })
               }
-              className={`relative flex items-center justify-center border border-transparent col-span-3 bg-gradient-to-t from-blue to-blue/70 rounded-tr-md ${
+              className={`relative flex items-center justify-center border border-transparent col-span-3 bg-gradient-to-t from-blue to-blue/70 rounded-tr-md h-[60px] ${
                 isRunnerActive(data, 0, 1)
                   ? "cursor-pointer"
                   : " cursor-not-allowed pointer-events-none"
               }`}
               id="b"
             >
-              <div className="h-12 w-12 opacity-70">
+              <div className="h-12 w-full absolute opacity-70">
                 <svg
                   className="w-full h-full"
                   width={103}
