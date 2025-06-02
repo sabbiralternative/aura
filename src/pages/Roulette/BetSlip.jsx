@@ -8,6 +8,7 @@ import NextGame from "../../components/shared/NextGame/NextGame";
 import Card from "./Card";
 import { setBalance } from "../../redux/features/auth/authSlice";
 import StakeAnimation from "../../components/shared/StakeAnimation/StakeAnimation";
+import { keyNames } from "./const";
 
 const BetSlip = ({
   double,
@@ -184,24 +185,29 @@ const BetSlip = ({
       setShowSuspendedWarning(true);
     }
   };
-  const don = "S1";
-  const AAA = ["H1", "C1", "D1"];
-  const DharamVeer = ["D13", "C13"];
-  const KKPK = ["H13", "C2", "D12", "H12"];
-  const ghulam = ["H11", "C11", "D11"];
-  const SBAG = ["S13", "S12", "S11"];
-  const indexCard = data?.[0]?.indexCard?.[0];
 
   return (
     <>
       <div
-        className="absolute h-[70%]  origin-bottom  flex flex-col justify-end items-center px-2 w-full mx-auto gap-1 perspective transition-all ease-in-out duration-1000 bottom-36  lg:bottom-0 scale-[100%]
-   "
+        onClick={handleShowSuspendedStatus}
+        className={`absolute h-[70%]  origin-bottom  flex flex-col justify-end items-center px-2 w-full mx-auto gap-1 perspective transition-all ease-in-out duration-1000 bottom-36  lg:bottom-0 scale-[100%] ${
+          status === Status.SUSPENDED ? "applyPerspective" : ""
+        }`}
       >
+        {showSuspendedWarning && <NextGame />}
         <span className>
           <div className="flex justify-center items-start  w-full h-full mx-auto transition-all ease-in-out  duration-1000 ">
             <div className="grid grid-cols-2 mt-[15px] min-h-[416px] lg:min-h-[601px]  grid-rows-13 w-[70px] ">
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.oneToEighteen,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                border-t-[1px]
                col-span-1 row-span-2
@@ -216,12 +222,25 @@ const BetSlip = ({
                   <span>1-18</span>
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.oneToEighteen}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.firstTwelve,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                border-t-[1px]
                col-span-1 row-span-4 
@@ -238,12 +257,25 @@ const BetSlip = ({
                   </span>
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.firstTwelve}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.even,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-2
                "
@@ -257,12 +289,25 @@ const BetSlip = ({
                   even
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.even}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.red,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-2
                "
@@ -277,9 +322,13 @@ const BetSlip = ({
                   red
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.red}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
                 <span className="rotate-90 absolute">
                   <div
@@ -289,6 +338,15 @@ const BetSlip = ({
                 </span>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.secondTwelve,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-4 
                "
@@ -304,12 +362,25 @@ const BetSlip = ({
                   </span>
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.secondTwelve}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.black,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-2
                "
@@ -324,9 +395,13 @@ const BetSlip = ({
                   black
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.black}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
                 <span className="rotate-90 absolute">
                   <div
@@ -336,6 +411,15 @@ const BetSlip = ({
                 </span>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.odd,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-2
                "
@@ -349,12 +433,25 @@ const BetSlip = ({
                   odd
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.odd}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.thirdTwelve,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-4 
                "
@@ -370,12 +467,25 @@ const BetSlip = ({
                   </span>
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.thirdTwelve}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
               <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.nineteenToThirtySix,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
                 className="relative flex flex-col items-center justify-center border-l-[1px]  border-b-[1px] border-gold bg-[#64646452]   
                col-span-1 row-span-2
                "
@@ -389,9 +499,13 @@ const BetSlip = ({
                   <span>19-36</span>
                 </span>
                 <div className="absolute bottom-1/2 lg:rotate-90 scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                  <div className=" ">
-                    <div className="relative w-10 h-10" />
-                  </div>
+                  <StakeAnimation
+                    animation={animation}
+                    double={double}
+                    runner={keyNames.nineteenToThirtySix}
+                    stake={stake}
+                    stakeState={stakeState}
+                  />
                 </div>
               </div>
             </div>
@@ -400,7 +514,17 @@ const BetSlip = ({
                 className="absolute aspect-square w-[148px] -top-[74px]   -z-10 left-[31px] border-[4px] border-gold bg-[#5ea94f] "
                 style={{ transform: "rotateX(82deg) rotateZ(46deg)" }}
               />
-              <div>
+              <div
+                onClick={() =>
+                  handleStakeChange({
+                    key: keyNames.zero,
+                    data,
+                    dataIndex: 0,
+                    runnerIndex: 0,
+                    type: "back",
+                  })
+                }
+              >
                 <div
                   id={0}
                   className="flex relative  bg-[#5ea94f]  h-4 justify-center items-end text-white border-x-[1px] border-b-[1px] border-gold
@@ -408,14 +532,27 @@ const BetSlip = ({
                 >
                   0
                   <div className="absolute bottom-[90%] lg:rotate-90   scale-[60%] origin-center z-50 left-1/2 -translate-x-1/2 translate-y-1/2">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.zero}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
               </div>
               <div className="grid grid-cols-3 grid-rows-13   w-[210px] min-h-[450px]   lg:min-h-[600px]  ">
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.one,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -425,12 +562,25 @@ const BetSlip = ({
                     1
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.one}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.two,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -440,12 +590,25 @@ const BetSlip = ({
                     2
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.two}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.three,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -456,12 +619,25 @@ const BetSlip = ({
                     3
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.three}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.four,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -471,12 +647,25 @@ const BetSlip = ({
                     4
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.four}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.five,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -486,12 +675,25 @@ const BetSlip = ({
                     5
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.five}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.six,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#060606]
@@ -502,12 +704,25 @@ const BetSlip = ({
                     6
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.six}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.seven,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -517,12 +732,25 @@ const BetSlip = ({
                     7
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.seven}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.eight,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -532,12 +760,25 @@ const BetSlip = ({
                     8
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.eight}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.nine,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -548,12 +789,25 @@ const BetSlip = ({
                     9
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.nine}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.ten,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -563,12 +817,25 @@ const BetSlip = ({
                     10
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.ten}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.eleven,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -578,12 +845,25 @@ const BetSlip = ({
                     11
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.eleven}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twelve,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -594,12 +874,25 @@ const BetSlip = ({
                     12
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twelve}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirteen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -609,12 +902,25 @@ const BetSlip = ({
                     13
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirteen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.fourteen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -624,12 +930,25 @@ const BetSlip = ({
                     14
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.fourteen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.fifteen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#060606]
@@ -640,12 +959,25 @@ const BetSlip = ({
                     15
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.fifteen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.sixteen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -655,12 +987,25 @@ const BetSlip = ({
                     16
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.sixteen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.seventeen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -670,12 +1015,25 @@ const BetSlip = ({
                     17
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.seventeen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.eighteen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -686,12 +1044,25 @@ const BetSlip = ({
                     18
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.eighteen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.nineteen,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -701,12 +1072,25 @@ const BetSlip = ({
                     19
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.nineteen}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twenty,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -716,12 +1100,25 @@ const BetSlip = ({
                     20
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twenty}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyOne,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -732,12 +1129,25 @@ const BetSlip = ({
                     21
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyOne}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyTwo,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -747,12 +1157,25 @@ const BetSlip = ({
                     22
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyTwo}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyThree,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -762,12 +1185,25 @@ const BetSlip = ({
                     23
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyThree}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyFour,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#060606]
@@ -778,12 +1214,25 @@ const BetSlip = ({
                     24
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyFour}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyFive,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -793,12 +1242,25 @@ const BetSlip = ({
                     25
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyFive}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentySix,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -808,12 +1270,25 @@ const BetSlip = ({
                     26
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentySix}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentySeven,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -824,12 +1299,25 @@ const BetSlip = ({
                     27
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentySeven}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyEight,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -839,12 +1327,25 @@ const BetSlip = ({
                     28
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyEight}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twentyNine,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -854,12 +1355,25 @@ const BetSlip = ({
                     29
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twentyNine}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirty,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -870,12 +1384,25 @@ const BetSlip = ({
                     30
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirty}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirtyOne,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -885,12 +1412,25 @@ const BetSlip = ({
                     31
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirtyOne}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirtyTwo,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -900,12 +1440,25 @@ const BetSlip = ({
                     32
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirtyTwo}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirtyThree,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#060606]
@@ -916,12 +1469,25 @@ const BetSlip = ({
                     33
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirtyThree}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirtyFour,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#ea1e1ee8]
                   "
@@ -931,12 +1497,25 @@ const BetSlip = ({
                     34
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirtyFour}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirtyFive,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#060606]
                   "
@@ -946,12 +1525,25 @@ const BetSlip = ({
                     35
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirtyFive}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.thirtySix,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#ea1e1ee8]
@@ -962,12 +1554,25 @@ const BetSlip = ({
                     36
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.thirtySix}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.oneToThirtyFour,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#64646452]
                   "
@@ -977,12 +1582,25 @@ const BetSlip = ({
                     1-34
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.oneToThirtyFour}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.twoToThirtyFive,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   bg-[#64646452]
                   "
@@ -992,12 +1610,25 @@ const BetSlip = ({
                     2-35
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.twoToThirtyFive}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
                 <div
+                  onClick={() =>
+                    handleStakeChange({
+                      key: keyNames.threeToThirtySix,
+                      data,
+                      dataIndex: 0,
+                      runnerIndex: 0,
+                      type: "back",
+                    })
+                  }
                   className="relative  flex flex-col items-center justify-center  border-l-[1px]  border-b-[1px] border-gold   
                   border-r-[1px]
                   bg-[#64646452]
@@ -1008,9 +1639,13 @@ const BetSlip = ({
                     3-36
                   </span>
                   <div className=" lg:rotate-90  origin-center z-50 scale-[60%]">
-                    <div className=" ">
-                      <div className="relative w-10 h-10" />
-                    </div>
+                    <StakeAnimation
+                      animation={animation}
+                      double={double}
+                      runner={keyNames.threeToThirtySix}
+                      stake={stake}
+                      stakeState={stakeState}
+                    />
                   </div>
                 </div>
               </div>

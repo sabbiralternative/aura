@@ -6,10 +6,12 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
   const accordionTab = {
     gameDescription: "gameDescription",
     howToPlay: "howToPlay",
-    main: "main",
-    single: "single",
-    pair: "pair",
+    dozen: "dozen",
+    hilo: "hilo",
+    oddEven: "oddEven",
     color: "color",
+    main: "main",
+    column: "column",
   };
 
   const handleToggleAccordion = (ad) => {
@@ -81,7 +83,7 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
               <div className="flex flex-col h-full gap-2 py-1 overflow-y-auto scrollbar-thin scrollbar-track-white/30 scrollbar-thumb-white markdown-preview">
                 <div data-accordion-component="Accordion" className="accordion">
                   <div className="flex flex-col gap-2 text-white p-2 mb-1 border-2 border-white/10 rounded-lg   ">
-                    <div className="font-medium">RTP 97.50%</div>
+                    <div className="font-medium">RTP 97.30%</div>
                   </div>
                   <div className="flex flex-col gap-2 text-white p-2 border-2 border-white/10 rounded-lg   ">
                     <div className="font-medium">Game version 1.0.0</div>
@@ -91,20 +93,20 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                     className="my-1 text-white border-none"
                   >
                     <div
-                      onClick={() =>
-                        handleToggleAccordion(accordionTab.gameDescription)
-                      }
                       data-accordion-component="AccordionItemHeading"
                       className="p-2 bg-transparent border-2 rounded-lg border-white/10"
                       role="heading"
                       aria-level={3}
+                      onClick={() =>
+                        handleToggleAccordion(accordionTab.gameDescription)
+                      }
                     >
                       <div
                         className="text-base font-medium tracking-wider bg-transparent flex items-center justify-between"
-                        id="accordion__heading-:r6:"
+                        id="accordion__heading-:r0:"
                         aria-disabled="false"
                         aria-expanded="false"
-                        aria-controls="accordion__panel-:r6:"
+                        aria-controls="accordion__panel-:r0:"
                         role="button"
                         tabIndex={0}
                         data-accordion-component="AccordionItemButton"
@@ -137,15 +139,14 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                           ? "block"
                           : "hidden"
                       }`}
-                      id="accordion__panel-:r6:"
+                      id="accordion__panel-:r0:"
                       hidden
                     >
                       <div className="markdown-preview">
                         <p className="mb-4">
-                          Bollywood Casino is a one-card game where players must
-                          predict which section the dealt card will belong to.
-                          The sections are named after popular Bollywood movies
-                          and characters.
+                          Predict which number the ball will land on after the
+                          wheel spins. The wheel has numbers 1–36 and a single 0
+                          (green).
                         </p>
                       </div>
                     </div>
@@ -155,25 +156,25 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                     className="my-1 text-white border-none"
                   >
                     <div
-                      onClick={() =>
-                        handleToggleAccordion(accordionTab.howToPlay)
-                      }
                       data-accordion-component="AccordionItemHeading"
                       className="p-2 bg-transparent border-2 rounded-lg border-white/10"
                       role="heading"
                       aria-level={3}
+                      onClick={() =>
+                        handleToggleAccordion(accordionTab.howToPlay)
+                      }
                     >
                       <div
                         className="text-base font-medium tracking-wider bg-transparent flex items-center justify-between"
-                        id="accordion__heading-:r7:"
+                        id="accordion__heading-:r1:"
                         aria-disabled="false"
                         aria-expanded="false"
-                        aria-controls="accordion__panel-:r7:"
+                        aria-controls="accordion__panel-:r1:"
                         role="button"
                         tabIndex={0}
                         data-accordion-component="AccordionItemButton"
                       >
-                        How to Play
+                        How To Play
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -201,13 +202,13 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                           ? "block"
                           : "hidden"
                       }`}
-                      id="accordion__panel-:r7:"
+                      id="accordion__panel-:r1:"
                       hidden
                     >
                       <div className="markdown-preview">
                         <p className="mb-4">
                           <img
-                            src="https://auraimgs.imgix.net/BOLLYWOOD%20CASINO.png"
+                            src="https://auraimgs.imgix.net/roulette.webp"
                             alt="image"
                           />
                         </p>
@@ -248,13 +249,6 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                             You can pause auto play anytime.
                           </li>
                         </ol>
-                        <p className="mb-4">
-                          <strong className="font-bold">
-                            Please note that any malfunction voids the game
-                            round and all eventual payouts for the round bets
-                            will be returned.
-                          </strong>
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -267,7 +261,7 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                         (For each option)
                       </span>
                     </span>
-                    <span>INR 1500000</span>
+                    <span>INR 598400</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-1">
@@ -285,7 +279,7 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                         (For each option)
                       </span>
                     </span>
-                    <span>INR 75000</span>
+                    <span>INR 200000</span>
                   </div>
                 </div>
                 <div className="flex flex-col gap-2  text-white ">
@@ -299,139 +293,25 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                       className="my-1 text-white border-none"
                     >
                       <div
-                        onClick={() => handleToggleAccordion(accordionTab.main)}
                         data-accordion-component="AccordionItemHeading"
                         className="p-2 bg-transparent border-2 rounded-lg border-white/10"
                         role="heading"
                         aria-level={3}
-                      >
-                        <div
-                          className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
-                          id="accordion__heading-:r8:"
-                          aria-disabled="false"
-                          aria-expanded="false"
-                          aria-controls="accordion__panel-:r8:"
-                          role="button"
-                          tabIndex={0}
-                          data-accordion-component="AccordionItemButton"
-                        >
-                          main
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            aria-hidden="true"
-                            data-slot="icon"
-                            className={`w-5 h-5 ${
-                              accordion === accordionTab.main
-                                ? "rotate-180"
-                                : ""
-                            }`}
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div
-                        data-accordion-component="AccordionItemPanel"
-                        className={`p-2 ${
-                          accordion === accordionTab.main ? "block" : "hidden"
-                        }`}
-                        id="accordion__panel-:r8:"
-                        hidden
-                      >
-                        <div className="flex flex-col gap-1 divide-y divide-white/10">
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">
-                              KisKisoPyaarKaroon Back
-                            </span>
-                            <span>3.85</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">
-                              AmarAkbarAnthony Lay
-                            </span>
-                            <span>5.5</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">
-                              SahibBibiAurGulam Lay
-                            </span>
-                            <span>5.5</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">DharamVeer Back</span>
-                            <span>7.65</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">
-                              AmarAkbarAnthony Back
-                            </span>
-                            <span>5.15</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">Don Lay</span>
-                            <span>21</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">Ghulam Back</span>
-                            <span>5.15</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">
-                              KisKisoPyaarKaroon Lay
-                            </span>
-                            <span>4.15</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">Ghulam Lay</span>
-                            <span>5.5</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">DharamVeer Lay</span>
-                            <span>8.35</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">Don Back</span>
-                            <span>15</span>
-                          </div>
-                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">
-                              SahibBibiAurGulam Back
-                            </span>
-                            <span>5.15</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      data-accordion-component="AccordionItem"
-                      className="my-1 text-white border-none"
-                    >
-                      <div
                         onClick={() =>
-                          handleToggleAccordion(accordionTab.single)
+                          handleToggleAccordion(accordionTab.dozen)
                         }
-                        data-accordion-component="AccordionItemHeading"
-                        className="p-2 bg-transparent border-2 rounded-lg border-white/10"
-                        role="heading"
-                        aria-level={3}
                       >
                         <div
                           className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
-                          id="accordion__heading-:r9:"
+                          id="accordion__heading-:r2:"
                           aria-disabled="false"
                           aria-expanded="false"
-                          aria-controls="accordion__panel-:r9:"
+                          aria-controls="accordion__panel-:r2:"
                           role="button"
                           tabIndex={0}
                           data-accordion-component="AccordionItemButton"
                         >
-                          single
+                          dozens
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -439,7 +319,7 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                             aria-hidden="true"
                             data-slot="icon"
                             className={`w-5 h-5 ${
-                              accordion === accordionTab.single
+                              accordion === accordionTab.dozen
                                 ? "rotate-180"
                                 : ""
                             }`}
@@ -454,16 +334,16 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                       </div>
                       <div
                         data-accordion-component="AccordionItemPanel"
-                        className={`p-2 ${
-                          accordion === accordionTab.single ? "block" : "hidden"
+                        className={`p-2  ${
+                          accordion === accordionTab.dozen ? "block" : "hidden"
                         }`}
-                        id="accordion__panel-:r9:"
+                        id="accordion__panel-:r2:"
                         hidden
                       >
                         <div className="flex flex-col gap-1 divide-y divide-white/10">
                           <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">single</span>
-                            <span>x3.75</span>
+                            <span className="capitalize">dozens</span>
+                            <span>x3</span>
                           </div>
                         </div>
                       </div>
@@ -473,23 +353,23 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                       className="my-1 text-white border-none"
                     >
                       <div
-                        onClick={() => handleToggleAccordion(accordionTab.pair)}
                         data-accordion-component="AccordionItemHeading"
                         className="p-2 bg-transparent border-2 rounded-lg border-white/10"
                         role="heading"
                         aria-level={3}
+                        onClick={() => handleToggleAccordion(accordionTab.hilo)}
                       >
                         <div
                           className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
-                          id="accordion__heading-:ra:"
+                          id="accordion__heading-:r3:"
                           aria-disabled="false"
                           aria-expanded="false"
-                          aria-controls="accordion__panel-:ra:"
+                          aria-controls="accordion__panel-:r3:"
                           role="button"
                           tabIndex={0}
                           data-accordion-component="AccordionItemButton"
                         >
-                          pair
+                          hi_low
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -497,7 +377,7 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                             aria-hidden="true"
                             data-slot="icon"
                             className={`w-5 h-5 ${
-                              accordion === accordionTab.pair
+                              accordion === accordionTab.hilo
                                 ? "rotate-180"
                                 : ""
                             }`}
@@ -512,16 +392,16 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                       </div>
                       <div
                         data-accordion-component="AccordionItemPanel"
-                        className={`p-2 ${
-                          accordion === accordionTab.pair ? "block" : "hidden"
+                        className={`p-2  ${
+                          accordion === accordionTab.hilo ? "block" : "hidden"
                         }`}
-                        id="accordion__panel-:ra:"
+                        id="accordion__panel-:r3:"
                         hidden
                       >
                         <div className="flex flex-col gap-1 divide-y divide-white/10">
                           <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
-                            <span className="capitalize">pair</span>
-                            <span>x1.97</span>
+                            <span className="capitalize">hi low</span>
+                            <span>x2</span>
                           </div>
                         </div>
                       </div>
@@ -531,20 +411,82 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                       className="my-1 text-white border-none"
                     >
                       <div
+                        data-accordion-component="AccordionItemHeading"
+                        className="p-2 bg-transparent border-2 rounded-lg border-white/10"
+                        role="heading"
+                        aria-level={3}
+                        onClick={() =>
+                          handleToggleAccordion(accordionTab.oddEven)
+                        }
+                      >
+                        <div
+                          className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
+                          id="accordion__heading-:r4:"
+                          aria-disabled="false"
+                          aria-expanded="false"
+                          aria-controls="accordion__panel-:r4:"
+                          role="button"
+                          tabIndex={0}
+                          data-accordion-component="AccordionItemButton"
+                        >
+                          oddeven
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            data-slot="icon"
+                            className={`w-5 h-5 ${
+                              accordion === accordionTab.oddEven
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        data-accordion-component="AccordionItemPanel"
+                        className={`p-2  ${
+                          accordion === accordionTab.oddEven
+                            ? "block"
+                            : "hidden"
+                        }`}
+                        id="accordion__panel-:r4:"
+                        hidden
+                      >
+                        <div className="flex flex-col gap-1 divide-y divide-white/10">
+                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
+                            <span className="capitalize">oddeven</span>
+                            <span>x2</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      data-accordion-component="AccordionItem"
+                      className="my-1 text-white border-none"
+                    >
+                      <div
+                        data-accordion-component="AccordionItemHeading"
+                        className="p-2 bg-transparent border-2 rounded-lg border-white/10"
+                        role="heading"
+                        aria-level={3}
                         onClick={() =>
                           handleToggleAccordion(accordionTab.color)
                         }
-                        data-accordion-component="AccordionItemHeading"
-                        className="p-2 bg-transparent border-2 rounded-lg border-white/10"
-                        role="heading"
-                        aria-level={3}
                       >
                         <div
                           className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
-                          id="accordion__heading-:rb:"
+                          id="accordion__heading-:r5:"
                           aria-disabled="false"
                           aria-expanded="false"
-                          aria-controls="accordion__panel-:rb:"
+                          aria-controls="accordion__panel-:r5:"
                           role="button"
                           tabIndex={0}
                           data-accordion-component="AccordionItemButton"
@@ -572,16 +514,134 @@ const HowToPlay = ({ setShowSetting, setShowHowToPlay }) => {
                       </div>
                       <div
                         data-accordion-component="AccordionItemPanel"
-                        className={`p-2 ${
+                        className={`p-2  ${
                           accordion === accordionTab.color ? "block" : "hidden"
                         }`}
-                        id="accordion__panel-:rb:"
+                        id="accordion__panel-:r5:"
                         hidden
                       >
                         <div className="flex flex-col gap-1 divide-y divide-white/10">
                           <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
                             <span className="capitalize">color</span>
-                            <span>x1.97</span>
+                            <span>x2</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      data-accordion-component="AccordionItem"
+                      className="my-1 text-white border-none"
+                    >
+                      <div
+                        data-accordion-component="AccordionItemHeading"
+                        className="p-2 bg-transparent border-2 rounded-lg border-white/10"
+                        role="heading"
+                        aria-level={3}
+                        onClick={() => handleToggleAccordion(accordionTab.main)}
+                      >
+                        <div
+                          className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
+                          id="accordion__heading-:r6:"
+                          aria-disabled="false"
+                          aria-expanded="false"
+                          aria-controls="accordion__panel-:r6:"
+                          role="button"
+                          tabIndex={0}
+                          data-accordion-component="AccordionItemButton"
+                        >
+                          main
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            data-slot="icon"
+                            className={`w-5 h-5 ${
+                              accordion === accordionTab.main
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        data-accordion-component="AccordionItemPanel"
+                        className={`p-2  ${
+                          accordion === accordionTab.main ? "block" : "hidden"
+                        }`}
+                        id="accordion__panel-:r6:"
+                        hidden
+                      >
+                        <div className="flex flex-col gap-1 divide-y divide-white/10">
+                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
+                            <span className="capitalize">main</span>
+                            <span>x35</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      data-accordion-component="AccordionItem"
+                      className="my-1 text-white border-none"
+                    >
+                      <div
+                        data-accordion-component="AccordionItemHeading"
+                        className="p-2 bg-transparent border-2 rounded-lg border-white/10"
+                        role="heading"
+                        aria-level={3}
+                        onClick={() =>
+                          handleToggleAccordion(accordionTab.column)
+                        }
+                      >
+                        <div
+                          className="text-base font-medium tracking-wider bg-transparent capitalize flex items-center justify-between"
+                          id="accordion__heading-:r7:"
+                          aria-disabled="false"
+                          aria-expanded="false"
+                          aria-controls="accordion__panel-:r7:"
+                          role="button"
+                          tabIndex={0}
+                          data-accordion-component="AccordionItemButton"
+                        >
+                          column
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            aria-hidden="true"
+                            data-slot="icon"
+                            className={`w-5 h-5 ${
+                              accordion === accordionTab.column
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div
+                        data-accordion-component="AccordionItemPanel"
+                        className={`p-2  ${
+                          accordion === accordionTab.column ? "block" : "hidden"
+                        }`}
+                        id="accordion__panel-:r7:"
+                        hidden
+                      >
+                        <div className="flex flex-col gap-1 divide-y divide-white/10">
+                          <div className="flex items-center justify-between gap-2 px-4 py-1 text-sm">
+                            <span className="capitalize">column</span>
+                            <span>x3</span>
                           </div>
                         </div>
                       </div>

@@ -15,6 +15,7 @@ import { handleDoubleStake } from "../../utils/handleDoubleStake";
 import { handleUndoStake } from "../../utils/handleUndoStake";
 import AmountSection from "./AmountSection";
 import Setting from "./Setting";
+import { keysArray } from "./const";
 
 const Roulette = () => {
   const [double, setDouble] = useState(false);
@@ -33,28 +34,10 @@ const Roulette = () => {
 
   const firstEvent = data?.result?.[0];
 
-  const initialState = {
-    donBack: { show: false, stake },
-    donLay: { show: false, stake },
-    aaaBack: { show: false, stake },
-    aaaLay: { show: false, stake },
-    sbagBack: { show: false, stake },
-    sbagLay: { show: false, stake },
-    dvBack: { show: false, stake },
-    dvLay: { show: false, stake },
-    kkpkBack: { show: false, stake },
-    kkpkLay: { show: false, stake },
-    gulamBack: { show: false, stake },
-    gulamLay: { show: false, stake },
-    kq: { show: false, stake },
-    ja: { show: false, stake },
-    red: { show: false, stake },
-    black: { show: false, stake },
-    J: { show: false, stake },
-    Q: { show: false, stake },
-    K: { show: false, stake },
-    A: { show: false, stake },
-  };
+  const initialState = keysArray.reduce((acc, key) => {
+    acc[key] = { show: false, stake };
+    return acc;
+  }, {});
 
   const [stakeState, setStakeState] = useState(initialState);
 
