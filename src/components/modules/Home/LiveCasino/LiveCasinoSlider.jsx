@@ -4,6 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const LiveCasinoSlider = ({ data, handleNavigate, setShowAll, title }) => {
   const swiperRef = useRef(null);
 
+  console.log(data);
+
   useEffect(() => {
     // Set the swiper instance on initial render
     if (swiperRef.current && swiperRef.current.swiper) {

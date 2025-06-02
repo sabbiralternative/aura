@@ -4,19 +4,19 @@ import Counter from "../../components/shared/events/Counter";
 import TopHeader from "../../components/shared/events/TopHeader";
 import { Status } from "../../const";
 import { useState } from "react";
-import Setting from "../../components/modules/LuckySeven/Setting";
 import AntMedia from "../../components/shared/Antmedia/Antmedia";
 import BetSlip from "./BetSlip";
 import RecentWinner from "./RecentWinner";
-import Card from "./Card";
+
 import { useSelector } from "react-redux";
 import Toast from "../../components/shared/Toast/Toast";
-import AmountSection from "../../components/shared/events/AmountSection";
-import { handleUndoStake } from "../../utils/handleUndoStake";
-import { handleDoubleStake } from "../../utils/handleDoubleStake";
 import ActionButton from "../../components/modules/LuckySeven/ActionButton";
+import { handleDoubleStake } from "../../utils/handleDoubleStake";
+import { handleUndoStake } from "../../utils/handleUndoStake";
+import AmountSection from "./AmountSection";
+import Setting from "./Setting";
 
-const War = () => {
+const Roulette = () => {
   const [double, setDouble] = useState(false);
   const [animation, setAnimation] = useState([]);
   const [showWinLossResult, setShowWinLossResult] = useState(false);
@@ -26,7 +26,6 @@ const War = () => {
   const [showFullScreen, setShowFullScreen] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
   const { eventTypeId, eventId } = useParams();
-
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
     { pollingInterval: 1000 }
@@ -35,13 +34,28 @@ const War = () => {
   const firstEvent = data?.result?.[0];
 
   const initialState = {
-    player1: { show: false, stake },
-    player2: { show: false, stake },
-    player3: { show: false, stake },
-    player4: { show: false, stake },
-    player5: { show: false, stake },
-    player6: { show: false, stake },
+    donBack: { show: false, stake },
+    donLay: { show: false, stake },
+    aaaBack: { show: false, stake },
+    aaaLay: { show: false, stake },
+    sbagBack: { show: false, stake },
+    sbagLay: { show: false, stake },
+    dvBack: { show: false, stake },
+    dvLay: { show: false, stake },
+    kkpkBack: { show: false, stake },
+    kkpkLay: { show: false, stake },
+    gulamBack: { show: false, stake },
+    gulamLay: { show: false, stake },
+    kq: { show: false, stake },
+    ja: { show: false, stake },
+    red: { show: false, stake },
+    black: { show: false, stake },
+    J: { show: false, stake },
+    Q: { show: false, stake },
+    K: { show: false, stake },
+    A: { show: false, stake },
   };
+
   const [stakeState, setStakeState] = useState(initialState);
 
   const isRepeatTheBet = Object.values(stakeState).find(
@@ -66,11 +80,7 @@ const War = () => {
           <AntMedia />
         </div>
       </div>
-
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
-        {firstEvent?.status === Status.SUSPENDED && (
-          <Card data={data?.result} />
-        )}
         <BetSlip
           initialState={initialState}
           double={double}
@@ -136,4 +146,4 @@ const War = () => {
   );
 };
 
-export default War;
+export default Roulette;

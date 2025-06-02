@@ -15,6 +15,7 @@ import BetHistory from "../pages/BetHistory/BetHistory";
 import Casino from "../pages/Casino/Casino";
 import Originals from "../pages/Originals/Originals";
 import FastGames from "../pages/FastGames/FastGames";
+import Roulette from "../pages/Roulette/Roulette";
 
 export const router = createBrowserRouter(
   [
@@ -42,6 +43,10 @@ export const router = createBrowserRouter(
         {
           path: "/event-details/lucky7/:eventTypeId/:eventId",
           element: <LuckySeven />,
+        },
+        {
+          path: "/event-details/roulette/:eventTypeId/:eventId",
+          element: <Roulette />,
         },
         {
           path: "/event-details/aaa/:eventTypeId/:eventId",
