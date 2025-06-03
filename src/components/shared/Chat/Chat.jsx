@@ -137,15 +137,17 @@ const Chat = ({ setShowChat, setShowSetting }) => {
                 </div>
 
                 <div className="grid grid-cols-12 w-full fixed bottom-5 overflow-hidden">
-                  <input
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full rounded-full outline-none border border-gray-400 bg-transparent py-2 px-2 text-white col-span-9"
-                    type="text"
-                    placeholder="Tap to chat"
-                  />
+                  <div className="w-full col-span-9">
+                    <input
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="rounded-full outline-none border border-gray-400 bg-transparent py-2 px-2 text-white w-full"
+                      type="text"
+                      placeholder="Tap to chat"
+                    />
+                  </div>
                   {message ? (
                     <div className=" w-full col-span-2 flex items-center justify-center ">
-                      <button className="bg-gray-400 rounded-full p-2">
+                      <button className="bg-gray-400 rounded-full p-1">
                         {" "}
                         <IoIosSend size={30} />
                       </button>
