@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import BetHistory from "../../shared/BetHistory/BetHistory";
 import { playClickSound } from "../../../utils/playClickSound";
 import HowToPlay from "../../shared/HowToPlay/HowToPlay";
+import Chat from "../../shared/Chat/Chat";
 
 const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
   const navigate = useNavigate();
   const [showBetHistory, setShowBetHistory] = useState(false);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [showChat, setShowChat] = useState(false);
   const { username, balance } = useSelector((state) => state.auth);
 
   const handleToggleFullScreen = () => {
@@ -44,9 +46,12 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
           setShowHowToPlay={setShowHowToPlay}
         />
       )}
+      {showChat && (
+        <Chat setShowChat={setShowChat} setShowSetting={setShowSetting} />
+      )}
       <div
         className={`scale-y-100 h-[70%] fixed origin-bottom flex   flex-col items-center   bottom-0   w-full  max-w-md  transition-all ease-in-out ${
-          showBetHistory || showHowToPlay ? "invisible" : "visible"
+          showBetHistory || showHowToPlay || showChat ? "invisible" : "visible"
         }`}
         style={{ zIndex: "1000" }}
       >
@@ -174,21 +179,24 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                 <div
                   onClick={() => {
                     playClickSound();
+                    setShowChat(true);
                   }}
                   className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    className="w-10 h-10 "
-                  >
-                    <path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z"></path>
-                    <path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z"></path>
+                  <svg viewBox="0 0 100 100" className="w-10 h-10">
+                    <svg
+                      fill="white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      className="icon--8dcd0"
+                      data-role="menu-item-icon"
+                      height="100%"
+                      y="0%"
+                    >
+                      <path d="M5 4h10.5c.55 0 1 .45 1 1v7c0 .55-.45 1-1 1H10l-3.99 3v-3H5c-.55 0-1-.45-1-1V5c0-.55.45-1 1-1Zm12.99 17v-3H19c.55 0 1-.45 1-1v-7c0-.55-.45-1-1-1h-1v3.5c0 1.1-.9 2-2 2h-5.5l-3 2.31V17c0 .55.45 1 1 1H14l3.99 3Z"></path>
+                    </svg>
                   </svg>
-                  <span className="text-sm font-semibold ">sound off</span>
+                  <span className="text-sm font-semibold ">Chat</span>
                 </div>
                 <div
                   onClick={handleToggleFullScreen}
