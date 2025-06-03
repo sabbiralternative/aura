@@ -190,7 +190,7 @@ const BetSlip = ({
     <>
       <div
         onClick={handleShowSuspendedStatus}
-        className={`absolute h-[70%]  origin-bottom  flex flex-col justify-end items-center px-2 w-full mx-auto gap-1 perspective transition-all ease-in-out duration-1000 bottom-36  lg:bottom-0 scale-[100%] ${
+        className={`absolute h-[70%]  origin-bottom  flex flex-col justify-end items-center px-2 w-full mx-auto gap-1 perspective transition-all ease-in-out duration-1000 bottom-36  lg:bottom-32 scale-[100%] ${
           status === Status.SUSPENDED ? "applyPerspective" : ""
         }`}
       >

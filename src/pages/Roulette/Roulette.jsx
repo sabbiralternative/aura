@@ -63,21 +63,20 @@ const Roulette = () => {
           <AntMedia />
         </div>
       </div>
+      <BetSlip
+        initialState={initialState}
+        double={double}
+        animation={animation}
+        setAnimation={setAnimation}
+        setShowWinLossResult={setShowWinLossResult}
+        setTotalWinAmount={setTotalWinAmount}
+        stakeState={stakeState}
+        setStakeState={setStakeState}
+        setToast={setToast}
+        data={data?.result}
+        status={firstEvent?.status}
+      />
       <div className="bottom-0  flex flex-col w-full gap-4 px-1">
-        <BetSlip
-          initialState={initialState}
-          double={double}
-          animation={animation}
-          setAnimation={setAnimation}
-          setShowWinLossResult={setShowWinLossResult}
-          setTotalWinAmount={setTotalWinAmount}
-          stakeState={stakeState}
-          setStakeState={setStakeState}
-          setToast={setToast}
-          data={data?.result}
-          status={firstEvent?.status}
-        />
-
         <div className="bottom-0 flex flex-col w-full gap-2 px-1">
           <ActionButton
             isRepeatTheBet={isRepeatTheBet}
