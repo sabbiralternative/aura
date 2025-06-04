@@ -3,11 +3,11 @@ import { playClickSound } from "../../../utils/playClickSound";
 import { MdOutlineMoreVert } from "react-icons/md";
 import { useState } from "react";
 
-const Chat = ({ setShowChat, setShowSetting }) => {
+const Chat = ({ setShowChat }) => {
   const [message, setMessage] = useState(null);
   return (
     <div
-      className="scale-y-100 h-[70%] fixed origin-bottom flex   flex-col items-center   bottom-0   w-full  max-w-md  transition-all ease-in-out"
+      className="scale-y-100 h-[70%] absolute left-0 origin-bottom flex   flex-col items-center   bottom-0   w-full  max-w-md  transition-all ease-in-out"
       style={{ zIndex: 1000 }}
     >
       <div className="flex flex-col flex-grow w-full bg-[#1a1a1a] backdrop-blur-md rounded-t-xl z-50">
@@ -16,7 +16,6 @@ const Chat = ({ setShowChat, setShowSetting }) => {
             <span
               onClick={() => {
                 setShowChat(false);
-                setShowSetting(true);
                 playClickSound();
               }}
               className="flex items-center gap-1 text-white cursor-pointer"
@@ -40,7 +39,7 @@ const Chat = ({ setShowChat, setShowSetting }) => {
             <div
               onClick={() => {
                 setShowChat(false);
-                setShowSetting(true);
+
                 playClickSound();
               }}
               className="flex flex-col  text-white cursor-pointer"
@@ -57,7 +56,7 @@ const Chat = ({ setShowChat, setShowSetting }) => {
             <button
               onClick={() => {
                 setShowChat(false);
-                setShowSetting(false);
+
                 playClickSound();
               }}
               className="font-semibold "
