@@ -16,6 +16,8 @@ import Casino from "../pages/Casino/Casino";
 import Originals from "../pages/Originals/Originals";
 import FastGames from "../pages/FastGames/FastGames";
 import Roulette from "../pages/Roulette/Roulette";
+import Sicbo from "../pages/Sicbo/Sicbo";
+import Matka from "../pages/Matka/Matka";
 
 export const router = createBrowserRouter(
   [
@@ -79,6 +81,14 @@ export const router = createBrowserRouter(
         {
           path: "/event-details/war/:eventTypeId/:eventId",
           element: <War />,
+        },
+        {
+          path: "/event-details/sicbo/:eventTypeId/:eventId",
+          element: <Sicbo />,
+        },
+        {
+          path: "/event-details/matka/:eventTypeId/:eventId",
+          element: <Matka />,
         },
         {
           path: "/bet-history",
