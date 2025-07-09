@@ -18,6 +18,7 @@ import FastGames from "../pages/FastGames/FastGames";
 import Roulette from "../pages/Roulette/Roulette";
 import Sicbo from "../pages/Sicbo/Sicbo";
 import Matka from "../pages/Matka/Matka";
+import Poker2020 from "../pages/Poker2020/Poker";
 
 export const router = createBrowserRouter(
   [
@@ -82,6 +83,7 @@ export const router = createBrowserRouter(
           path: "/event-details/war/:eventTypeId/:eventId",
           element: <War />,
         },
+        /* TODO: need to connect with api */
         {
           path: "/event-details/sicbo/:eventTypeId/:eventId",
           element: <Sicbo />,
@@ -90,6 +92,11 @@ export const router = createBrowserRouter(
           path: "/event-details/matka/:eventTypeId/:eventId",
           element: <Matka />,
         },
+        {
+          path: "/event-details/poker2020/:eventTypeId/:eventId",
+          element: <Poker2020 />,
+        },
+        /* need to connect with api */
         {
           path: "/bet-history",
           element: <BetHistory />,
