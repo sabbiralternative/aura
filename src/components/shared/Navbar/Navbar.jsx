@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setShowRightSidebar } from "../../../redux/features/stateSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import Search from "./Search";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { balance, username } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [showSearch, setShowSearch] = useState(false);
 
   return (
     <div
@@ -14,7 +17,12 @@ const Navbar = () => {
       className="fixed top-0 flex flex-col w-full autoAnimate translate-y-0 "
     >
       <div className="left-0 flex flex-col h-fit text-white bg-black/20 backdrop-blur-lg">
-        <div className="flex items-center justify-between w-full gap-2 py-4 px-3 md:px-0">
+        {showSearch && <Search setShowSearch={setShowSearch} />}
+        <div
+          className={` items-center justify-between w-full gap-2 py-4 px-3 md:px-0 ${
+            showSearch ? "hidden" : "flex"
+          }`}
+        >
           <svg
             onClick={() => navigate("/")}
             width={364}
@@ -202,7 +210,10 @@ const Navbar = () => {
             <span className>{username}</span>
           </div>
 
-          <div className="flex items-center justify-between p-2 gap-2 border-gray/20 rounded-lg w-auto h-8 lg:border">
+          <div
+            onClick={() => setShowSearch(true)}
+            className="flex items-center justify-between p-2 gap-2 border-gray/20 rounded-lg w-auto h-8 lg:border cursor-pointer"
+          >
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -220,6 +231,7 @@ const Navbar = () => {
               </svg>
             </span>
           </div>
+
           <div className="flex items-center gap-2">
             <div className="flex flex-wrap items-center flex-grow gap-1 text-sm">
               <span className="ml-auto text-yellow">
@@ -243,6 +255,7 @@ const Navbar = () => {
             </svg>
           </div>
         </div>
+
         <div style={{ zIndex: 999 }} className="w-full ">
           <div className="relative flex w-full bg-black/10  backdrop-blur-3xl">
             <button
@@ -415,6 +428,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+
         <span className="absolute bottom-0 w-full">
           <div
             style={{ zIndex: 1000 }}

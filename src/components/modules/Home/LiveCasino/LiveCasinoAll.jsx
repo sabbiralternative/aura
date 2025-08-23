@@ -155,7 +155,7 @@ const LiveCasinoAll = ({ data, setShowAll, handleNavigate, title }) => {
                       </span>
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     id="gameNameBox-Teen Patti T20"
                     className="relative w-full h-8 overflow-hidden whitespace-nowrap"
                   >
@@ -165,7 +165,7 @@ const LiveCasinoAll = ({ data, setShowAll, handleNavigate, title }) => {
                     >
                       {casino?.name}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             );
