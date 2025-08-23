@@ -7,7 +7,6 @@ import DragonTiger from "../pages/DragonTiger/DragonTiger";
 import TeenPatti2020 from "../pages/TeenPatti2020/TeenPatti2020";
 import TeenPattiOneDay from "../pages/TeenPattiOneDay/TeenPattiOneDay";
 import Muflis from "../pages/Muflis/Muflis";
-import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Bollywood from "../pages/Bollywood/Bollywood";
 import Baccarat from "../pages/Baccarat/Baccarat";
 import War from "../pages/War/War";
@@ -19,17 +18,22 @@ import Roulette from "../pages/Roulette/Roulette";
 import Sicbo from "../pages/Sicbo/Sicbo";
 import Matka from "../pages/Matka/Matka";
 import Poker2020 from "../pages/Poker2020/Poker";
+import Auth from "../pages/Auth/Auth";
 
 export const router = createBrowserRouter(
   [
     {
       path: "/",
       element: <App />,
-      errorElement: <ErrorPage />,
+
       children: [
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: "/:token",
+          element: <Auth />,
         },
         {
           path: "/casino",

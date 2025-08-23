@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/auth";
 
 const RightSidebar = () => {
+  const { mutate: handleAuth } = useAuth();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,7 +17,6 @@ const RightSidebar = () => {
     (state) => state.global
   );
   const { token, username, balance } = useSelector((state) => state.auth);
-  const { mutate: handleAuth } = useAuth();
 
   const sidebarRef = useRef(null);
   useCloseModalClickOutside(sidebarRef, () => {
@@ -25,7 +25,7 @@ const RightSidebar = () => {
 
   useEffect(() => {
     if (token && (pathname === "/" || pathname?.includes("/event-details"))) {
-      handleAuth(pathname);
+      handleAuth(token);
     }
   }, [token, handleAuth, refetchBalance, pathname]);
 
