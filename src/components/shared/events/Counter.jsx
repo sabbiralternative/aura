@@ -12,13 +12,11 @@ const Counter = ({ firstEvent }) => {
 
   const timer = timerDuration - (utcSeconds - lastUpdateTime);
 
-  // console.log(timerDuration);
-
   const [strokeDashoffset, setStrokeDashoffset] = useState(0);
   const [strokeColor, setStrokeColor] = useState("#32d74b");
 
   useEffect(() => {
-    const percentage = (timerDuration / initialValue.current) * 100;
+    const percentage = (timer / timerDuration) * 100;
     const offset = circumference - (percentage / 100) * circumference;
     setStrokeDashoffset(offset);
 
@@ -29,39 +27,10 @@ const Counter = ({ firstEvent }) => {
     } else {
       setStrokeColor("#F70000");
     }
-    if (timerDuration < 4 && timerDuration > 0) {
+    if (timer < 4 && timer > 0) {
       new Audio("/countdown.mp3").play();
     }
-  }, [timerDuration, circumference, initialValue]);
-
-  // const istTimestamp = lastUpdateTime; // timestamp in seconds
-
-  // // Convert seconds → milliseconds
-  // const date = new Date(istTimestamp * 1000);
-
-  // // Calculate IST manually
-  // let hours = date.getUTCHours() + 5; // Add 5 hours for IST
-  // let minutes = date.getUTCMinutes() + 30; // Add 30 minutes for IST
-  // const seconds = date.getUTCSeconds();
-
-  // // Adjust overflow
-  // if (minutes >= 60) {
-  //   minutes -= 60;
-  //   hours += 1;
-  // }
-  // if (hours >= 24) {
-  //   hours -= 24;
-  // }
-
-  // // Format with leading zeros
-  // const istTime2 = `${hours.toString().padStart(2, "0")}:${minutes
-  //   .toString()
-  //   .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
-  // console.log("IST Time:", istTime2);
-
-  // Get current UTC time in milliseconds
-  // Current UTC time in milliseconds
+  }, [timer, timerDuration, circumference, initialValue]);
 
   return (
     <div className="absolute z-50 top-[30%] left-1/2 -translate-x-1/2">
