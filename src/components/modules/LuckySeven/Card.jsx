@@ -1,7 +1,7 @@
 import { CardBack } from "../../../assets/icon";
 
 const Card = ({ data }) => {
-  const indexCard = data?.indexCard[0];
+  const indexCard = data?.indexCard?.[0];
   const cardNumber = indexCard && parseFloat(indexCard.substring(1));
 
   return (
