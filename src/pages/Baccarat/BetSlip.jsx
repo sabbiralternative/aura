@@ -668,7 +668,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-2 row-span-4 bg-gradient-to-b bg-gradient-to-t from-green to-green/70  ${isRunnerActive(
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-2 row-span-2 bg-gradient-to-b bg-gradient-to-t from-green to-green/70  ${isRunnerActive(
             data,
             0,
             2
@@ -796,7 +796,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 h-16 bg-gradient-to-b bg-gradient-to-t from-blue to-blue/70 ${
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-6 h-16 bg-gradient-to-b bg-gradient-to-t from-blue to-blue/70 ${
             isRunnerWinner(data, 1, 0) ? "blink-overlay" : ""
           }  ${isRunnerActive(data, 1, 0)}`}
           id="PLAYER PAIR"
@@ -830,7 +830,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-5 h-16 bg-gradient-to-b bg-gradient-to-t from-red to-red/70 ${
+          className={`relative overflow-clip rounded flex flex-col items-center p-0.5 justify-center col-span-6 h-16 bg-gradient-to-b bg-gradient-to-t from-red to-red/70 ${
             isRunnerWinner(data, 2, 0) ? "blink-overlay" : ""
           }  ${isRunnerActive(data, 2, 0)}`}
           id="BANKER PAIR"

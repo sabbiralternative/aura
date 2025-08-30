@@ -168,7 +168,7 @@ const BetSlip = ({
               marketId: bet?.marketId,
               name: bet?.name,
               stake: bet?.stake,
-               isBack: bet?.isback,
+              isBack: bet?.isback,
             });
           }
 
@@ -765,7 +765,7 @@ const BetSlip = ({
           </span>
         </div>
         {/* Under 7 */}
-        <div
+        {/* <div
           onClick={() =>
             handleStakeChange({
               key: "under7",
@@ -813,9 +813,9 @@ const BetSlip = ({
           )}
 
           <span className="absolute flex items-center justify-center h-4 gap-1 left-1 w-fit top-1" />
-        </div>
+        </div> */}
         {/* Over 7 */}
-        <div
+        {/* <div
           onClick={() =>
             handleStakeChange({
               key: "over7",
@@ -863,7 +863,7 @@ const BetSlip = ({
           )}
 
           <span className="absolute flex items-center justify-center h-4 gap-1 left-1 w-fit top-1" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
