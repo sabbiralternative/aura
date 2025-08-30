@@ -199,7 +199,7 @@ const BetSlip = ({
         }`}
       >
         {showSuspendedWarning && <NextGame />}
-        <div
+        {/* <div
           onClick={() =>
             handleStakeChange({
               key: "top9A",
@@ -2312,7 +2312,7 @@ const BetSlip = ({
               />
             </g>
           </svg>
-        </div>
+        </div> */}
         <div
           onClick={() =>
             handleStakeChange({
@@ -2333,7 +2333,7 @@ const BetSlip = ({
           id="playerA"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white">
-            PlayerA
+            Player A
           </span>
           <StakeAnimation
             animation={animation}
@@ -3390,7 +3390,7 @@ const BetSlip = ({
           id="playerB"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white">
-            PlayerB
+            Player B
           </span>
           <StakeAnimation
             animation={animation}
@@ -4446,7 +4446,7 @@ const BetSlip = ({
           id="baccaratA"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white/60">
-            BaccaratA
+            Baccarat A
           </span>
           <StakeAnimation
             animation={animation}
@@ -5502,7 +5502,7 @@ const BetSlip = ({
           id="baccaratB"
         >
           <span className="absolute top-0 text-xl left-0 flex items-center justify-center w-full h-full font-bold text-white/60">
-            BaccaratB
+            Baccarat B
           </span>
           <StakeAnimation
             animation={animation}

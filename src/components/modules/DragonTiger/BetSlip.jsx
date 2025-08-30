@@ -362,7 +362,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-r from-red to-red/80 col-span-3  row-span-2 h-[130px] perspective ${
+          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-r from-red to-red/80 col-span-3  row-span-2 h-[130px] perspective rounded-tl-md rounded-bl-md ${
             isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
           } ${
             isRunnerActive(data, 0, 0)
@@ -610,7 +610,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-l from-orange to-orange/80 col-span-3 row-span-2 h-[130px] ${
+          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-l from-orange to-orange/80 col-span-3 row-span-2 h-[130px] rounded-tr-md rounded-br-md ${
             isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
           } ${
             isRunnerActive(data, 0, 1)
