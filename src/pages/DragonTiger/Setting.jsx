@@ -79,7 +79,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
               </button>
             </div>
             <div className="relative flex-grow w-full overflow-hidden">
-              <div className="px-6 py-2 text-sm text-white animate__animated animate__faster animate__bounceInLeft">
+              <div className="px-6 py-2 text-sm text-white animate__animated animate__faster ">
                 <div className="flex flex-wrap items-center w-full gap-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                   </span>
                 </div>
               </div>
-              <div className=" animate__animated animate__faster overflow-y-auto p-4  h-full  grid content-start grid-cols-3 gap-1 w-full transition-transform delay-100 ease-in-out animate__bounceInLeft">
+              <div className=" animate__animated animate__faster overflow-y-auto p-4  h-full  grid content-start grid-cols-3 gap-1 w-full transition-transform delay-100 ease-in-out ">
                 <div
                   onClick={() => {
                     navigate("/");
@@ -231,7 +231,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                   <span className="text-sm font-semibold ">Bet History</span>
                 </div>
               </div>
-              <div className="absolute p-4 animate__animated animate__faster overflow-y-auto h-full w-full  top-0 right-0 transition-transform delay-100 ease-in-out animate__bounceOutRight">
+              {/* <div className="absolute p-4 animate__animated animate__faster overflow-y-auto h-full w-full  top-0 right-0 transition-transform delay-100 ease-in-out animate__bounceOutRight">
                 <div className="space-y-4 text-text-primary">
                   <div className="flex items-center gap-1 ">
                     <svg
@@ -311,7 +311,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

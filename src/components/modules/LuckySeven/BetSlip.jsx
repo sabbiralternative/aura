@@ -254,14 +254,14 @@ const BetSlip = ({
               key: "up",
               data,
               dataIndex: 0,
-              runnerIndex: 1,
+              runnerIndex: 0,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-green/80 bg-[#38b142]  ${
-            isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
+            isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 0, 1)
+            isRunnerActive(data, 0, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -287,9 +287,9 @@ const BetSlip = ({
               {stakeState?.up?.show && <Stake stake={stakeState?.up?.stake} />}
             </div>
           </div>
-          {isRunnerActive(data, 0, 1) ? (
+          {isRunnerActive(data, 0, 0) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 0, 1)}
+              {getBackPrice(data, 0, 0)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -351,15 +351,15 @@ const BetSlip = ({
             handleStakeChange({
               key: "diamond",
               data,
-              dataIndex: 5,
-              runnerIndex: 0,
+              dataIndex: 3,
+              runnerIndex: 1,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20  ${
-            isRunnerWinner(data, 5, 0) ? "blink-overlay" : ""
+            isRunnerWinner(data, 3, 1) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 5, 0)
+            isRunnerActive(data, 3, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -399,9 +399,9 @@ const BetSlip = ({
               )}
             </div>
           </div>
-          {isRunnerActive(data, 5, 0) ? (
+          {isRunnerActive(data, 3, 1) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 5, 0)}
+              {getBackPrice(data, 3, 1)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -413,15 +413,15 @@ const BetSlip = ({
             handleStakeChange({
               key: "heart",
               data,
-              dataIndex: 5,
-              runnerIndex: 1,
+              dataIndex: 3,
+              runnerIndex: 0,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
-            isRunnerWinner(data, 5, 1) ? "blink-overlay" : ""
+            isRunnerWinner(data, 3, 0) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 5, 1)
+            isRunnerActive(data, 3, 0)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -462,9 +462,9 @@ const BetSlip = ({
               )}
             </div>
           </div>
-          {isRunnerActive(data, 5, 1) ? (
+          {isRunnerActive(data, 3, 0) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 5, 1)}
+              {getBackPrice(data, 3, 0)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -476,14 +476,14 @@ const BetSlip = ({
               key: "seven",
               data,
               dataIndex: 0,
-              runnerIndex: 2,
+              runnerIndex: 1,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer  col-span-2 border-[#156ed1] bg-[#156ed1] ${
-            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
+            isRunnerWinner(data, 0, 1) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 0, 2)
+            isRunnerActive(data, 0, 1)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -512,9 +512,9 @@ const BetSlip = ({
               )}
             </div>
           </div>
-          {isRunnerActive(data, 0, 2) ? (
+          {isRunnerActive(data, 0, 1) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 0, 2)}
+              {getBackPrice(data, 0, 1)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -525,15 +525,15 @@ const BetSlip = ({
             handleStakeChange({
               key: "spade",
               data,
-              dataIndex: 5,
-              runnerIndex: 2,
+              dataIndex: 3,
+              runnerIndex: 3,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
-            isRunnerWinner(data, 5, 2) ? "blink-overlay" : ""
+            isRunnerWinner(data, 3, 3) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 5, 2)
+            isRunnerActive(data, 3, 3)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -574,9 +574,9 @@ const BetSlip = ({
               )}
             </div>
           </div>
-          {isRunnerActive(data, 5, 2) ? (
+          {isRunnerActive(data, 3, 3) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 5, 2)}
+              {getBackPrice(data, 3, 3)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -587,15 +587,15 @@ const BetSlip = ({
             handleStakeChange({
               key: "club",
               data,
-              dataIndex: 5,
-              runnerIndex: 3,
+              dataIndex: 3,
+              runnerIndex: 2,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false false border-white/20 bg-white/20 ${
-            isRunnerWinner(data, 5, 3) ? "blink-overlay" : ""
+            isRunnerWinner(data, 3, 2) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 5, 3)
+            isRunnerActive(data, 3, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -636,9 +636,9 @@ const BetSlip = ({
               )}
             </div>
           </div>
-          {isRunnerActive(data, 5, 3) ? (
+          {isRunnerActive(data, 3, 2) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 5, 3)}
+              {getBackPrice(data, 3, 2)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />
@@ -726,14 +726,14 @@ const BetSlip = ({
               key: "down",
               data,
               dataIndex: 0,
-              runnerIndex: 0,
+              runnerIndex: 2,
               type: "back",
             })
           }
           className={`relative  h-16 flex flex-col items-center p-0.5 justify-center border border-transparent hover:border-white/80 opacity-100 cursor-pointer false false false false col-span-2 border-[#d83b32] bg-[#d83b32] ${
-            isRunnerWinner(data, 0, 0) ? "blink-overlay" : ""
+            isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
           } ${
-            isRunnerActive(data, 0, 0)
+            isRunnerActive(data, 0, 2)
               ? "cursor-pointer"
               : " cursor-not-allowed pointer-events-none"
           }`}
@@ -761,9 +761,9 @@ const BetSlip = ({
               )}
             </div>
           </div>
-          {isRunnerActive(data, 0, 0) ? (
+          {isRunnerActive(data, 0, 2) ? (
             <span className="absolute bottom-0 text-[10px] text-white left-1">
-              {getBackPrice(data, 0, 0)}
+              {getBackPrice(data, 0, 2)}
             </span>
           ) : (
             <Lock position="bottom-0 left-1" />

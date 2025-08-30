@@ -198,7 +198,7 @@ const BetSlip = ({
         }`}
       >
         {showSuspendedWarning && <NextGame />}
-        <div
+        {/* <div
           onClick={() =>
             handleStakeChange({
               key: "dragonEven",
@@ -349,7 +349,7 @@ const BetSlip = ({
           ) : (
             <Lock position="bottom-1 right-0.5" />
           )}
-        </div>
+        </div> */}
 
         {/* Dragon */}
         <div
@@ -389,25 +389,27 @@ const BetSlip = ({
           ) : (
             <Lock position="right-0.5 bottom-1" />
           )}
-
-          <div className="absolute z-40 h-14 applyPerspective bottom-1 left-1">
-            <div
-              className={`h-full aspect-[5/7] flip-card  ${
-                card1 ? "flip-card" : "cardFadeInAnimation"
-              }`}
-              style={{ zIndex: 999 }}
-            >
-              <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-                <img src={`/cards/${card1}.jpg`} alt="" />
-              </div>
-
+          {firstData?.status === Status.SUSPENDED && (
+            <div className="absolute z-40 h-14 applyPerspective bottom-1 left-1">
               <div
-                className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden  flip-card-back`}
+                className={`h-full aspect-[5/7] flip-card  ${
+                  card1 ? "flip-card" : "cardFadeInAnimation"
+                }`}
+                style={{ zIndex: 999 }}
               >
-                <CardBack />
+                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
+                  <img src={`/cards/${card1}.jpg`} alt="" />
+                </div>
+
+                <div
+                  className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden  flip-card-back`}
+                >
+                  <CardBack />
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
           <svg
             className="absolute w-full h-full p-2 left-0 opacity-50"
             width={870}
@@ -568,7 +570,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-t from-green to-green/80 col-span-2 ${
+          className={`relative overflow-clip h-[4.5rem] flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-t from-green to-green/80 col-span-2 ${
             isRunnerWinner(data, 0, 2) ? "blink-overlay" : ""
           } ${
             isRunnerActive(data, 0, 2)
@@ -635,23 +637,26 @@ const BetSlip = ({
           ) : (
             <Lock position="bottom-1 left-0.5" />
           )}
-          <div className="absolute z-40 h-14 applyPerspective bottom-1 right-1">
-            <div
-              className={`h-full aspect-[5/7] ${
-                card2 ? "flip-card" : "cardFadeInAnimation"
-              }`}
-              style={{ zIndex: 999 }}
-            >
-              <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
-                <img src={`/cards/${card2}.jpg`} alt="" />
-              </div>
+          {firstData?.status === Status.SUSPENDED && (
+            <div className="absolute z-40 h-14 applyPerspective bottom-1 right-1">
               <div
-                className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden flip-card-back`}
+                className={`h-full aspect-[5/7] ${
+                  card2 ? "flip-card" : "cardFadeInAnimation"
+                }`}
+                style={{ zIndex: 999 }}
               >
-                <CardBack />
+                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative flip-card-front">
+                  <img src={`/cards/${card2}.jpg`} alt="" />
+                </div>
+                <div
+                  className={`transition-transform ease-in-out h-full w-full bg-gradient-to-l from-slate-50 to-slate-300 rounded-sm relative  overflow-hidden flip-card-back`}
+                >
+                  <CardBack />
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
           <svg
             className="absolute w-full h-full p-2 left-0 opacity-50"
             width={831}
@@ -721,7 +726,7 @@ const BetSlip = ({
               type: "back",
             })
           }
-          className={`relative overflow-clip h-16 flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-b from-blue to-blue/80 col-span-2 ${
+          className={`relative overflow-clip h-[4.5rem] flex flex-col items-center justify-center cursor-pointer false false false false false false false bg-gradient-to-b from-blue to-blue/80 col-span-2 ${
             isRunnerWinner(data, 0, 3) ? "blink-overlay" : ""
           } ${
             isRunnerActive(data, 0, 3)
@@ -750,7 +755,7 @@ const BetSlip = ({
           )}
         </div>
 
-        <div
+        {/* <div
           onClick={() =>
             handleStakeChange({
               key: "dragonRed",
@@ -1007,7 +1012,7 @@ const BetSlip = ({
           ) : (
             <Lock position="right-0.5 bottom-1" />
           )}
-        </div>
+        </div> */}
         {/* {data?.[6]?.runners?.slice(0, 4)?.map((runner, i) => {
           return (
             <div

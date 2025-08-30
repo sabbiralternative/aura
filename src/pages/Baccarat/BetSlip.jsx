@@ -198,7 +198,7 @@ const BetSlip = ({
         }`}
       >
         {showSuspendedWarning && <NextGame />}
-        <div
+        {/* <div
           onClick={() =>
             handleStakeChange({
               key: "perfectPair",
@@ -566,7 +566,7 @@ const BetSlip = ({
             <Lock position="top-1 left-1" />
           )}
           {isRunnerWinner(data, 6, 0) && <span className="shimmer" />}
-        </div>
+        </div> */}
 
         {/* player */}
         <div
@@ -604,56 +604,58 @@ const BetSlip = ({
             <Lock position="left-1" />
           )}
           {isRunnerWinner(data, 0, 0) && <span className="shimmer" />}
-          <div className="absolute z-40 flex gap-1 bottom-1 flex-row-reverse right-1">
-            <div className>
-              <div
-                className="h-12 aspect-[5/7] flip-card"
-                style={{ zIndex: 999 }}
-              >
-                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
-                  {data?.[0]?.runners?.[0]?.card?.length > 0 ? (
-                    <img
-                      src={`/cards/${data?.[0]?.runners?.[0]?.card[0]}.jpg`}
-                    />
-                  ) : (
-                    <CardBack />
-                  )}
+          {status === Status.SUSPENDED && (
+            <div className="absolute z-40 flex gap-1 bottom-1 flex-row-reverse right-1">
+              <div className>
+                <div
+                  className="h-12 aspect-[5/7] flip-card"
+                  style={{ zIndex: 999 }}
+                >
+                  <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                    {data?.[0]?.runners?.[0]?.card?.length > 0 ? (
+                      <img
+                        src={`/cards/${data?.[0]?.runners?.[0]?.card[0]}.jpg`}
+                      />
+                    ) : (
+                      <CardBack />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className>
+                <div
+                  className="h-12 aspect-[5/7] flip-card"
+                  style={{ zIndex: 999 }}
+                >
+                  <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                    {data?.[0]?.runners?.[0]?.card?.length > 1 ? (
+                      <img
+                        src={`/cards/${data?.[0]?.runners?.[0]?.card[1]}.jpg`}
+                      />
+                    ) : (
+                      <CardBack />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="rotate-90 mx-2">
+                <div
+                  className="h-12 aspect-[5/7] flip-card"
+                  style={{ zIndex: 999 }}
+                >
+                  <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                    {data?.[0]?.runners?.[0]?.card?.length > 2 ? (
+                      <img
+                        src={`/cards/${data?.[0]?.runners?.[0]?.card?.[2]}.jpg`}
+                      />
+                    ) : (
+                      <CardBack />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className>
-              <div
-                className="h-12 aspect-[5/7] flip-card"
-                style={{ zIndex: 999 }}
-              >
-                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
-                  {data?.[0]?.runners?.[0]?.card?.length > 1 ? (
-                    <img
-                      src={`/cards/${data?.[0]?.runners?.[0]?.card[1]}.jpg`}
-                    />
-                  ) : (
-                    <CardBack />
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="rotate-90 mx-2">
-              <div
-                className="h-12 aspect-[5/7] flip-card"
-                style={{ zIndex: 999 }}
-              >
-                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
-                  {data?.[0]?.runners?.[0]?.card?.length > 2 ? (
-                    <img
-                      src={`/cards/${data?.[0]?.runners?.[0]?.card?.[2]}.jpg`}
-                    />
-                  ) : (
-                    <CardBack />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
         {/* player */}
         <div
@@ -728,56 +730,59 @@ const BetSlip = ({
           )}
 
           {/* Banker */}
-          <div className="absolute z-40 flex gap-1 bottom-1 flex-row left-1">
-            <div className>
-              <div
-                className="h-12 aspect-[5/7] flip-card"
-                style={{ zIndex: 999 }}
-              >
-                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
-                  {data?.[0]?.runners?.[1]?.card?.length > 0 ? (
-                    <img
-                      src={`/cards/${data?.[0]?.runners?.[1]?.card?.[0]}.jpg`}
-                    />
-                  ) : (
-                    <CardBack />
-                  )}
+          {status === Status.SUSPENDED && (
+            <div className="absolute z-40 flex gap-1 bottom-1 flex-row left-1">
+              <div className>
+                <div
+                  className="h-12 aspect-[5/7] flip-card"
+                  style={{ zIndex: 999 }}
+                >
+                  <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                    {data?.[0]?.runners?.[1]?.card?.length > 0 ? (
+                      <img
+                        src={`/cards/${data?.[0]?.runners?.[1]?.card?.[0]}.jpg`}
+                      />
+                    ) : (
+                      <CardBack />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className>
+                <div
+                  className="h-12 aspect-[5/7] flip-card"
+                  style={{ zIndex: 999 }}
+                >
+                  <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                    {data?.[0]?.runners?.[1]?.card?.length > 1 ? (
+                      <img
+                        src={`/cards/${data?.[0]?.runners?.[0]?.card?.[1]}.jpg`}
+                      />
+                    ) : (
+                      <CardBack />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="rotate-90 mx-2">
+                <div
+                  className="h-12 aspect-[5/7] flip-card"
+                  style={{ zIndex: 999 }}
+                >
+                  <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
+                    {data?.[0]?.runners?.[1]?.card?.length > 2 ? (
+                      <img
+                        src={`/cards/${data?.[0]?.runners?.[1]?.card?.[2]}.jpg`}
+                      />
+                    ) : (
+                      <CardBack />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className>
-              <div
-                className="h-12 aspect-[5/7] flip-card"
-                style={{ zIndex: 999 }}
-              >
-                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
-                  {data?.[0]?.runners?.[1]?.card?.length > 1 ? (
-                    <img
-                      src={`/cards/${data?.[0]?.runners?.[0]?.card?.[1]}.jpg`}
-                    />
-                  ) : (
-                    <CardBack />
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="rotate-90 mx-2">
-              <div
-                className="h-12 aspect-[5/7] flip-card"
-                style={{ zIndex: 999 }}
-              >
-                <div className="h-full w-full transition-transform ease-in-out bg-gradient-to-l from-slate-50 to-slate-300 rounded relative flip-card-front">
-                  {data?.[0]?.runners?.[1]?.card?.length > 2 ? (
-                    <img
-                      src={`/cards/${data?.[0]?.runners?.[1]?.card?.[2]}.jpg`}
-                    />
-                  ) : (
-                    <CardBack />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
+
           {/* Banker */}
           {isRunnerWinner(data, 0, 1) && <span className="shimmer" />}
         </div>
