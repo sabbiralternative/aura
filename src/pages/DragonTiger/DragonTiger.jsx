@@ -75,7 +75,7 @@ const DragonTiger = () => {
       style={{ minHeight: "100vh", width: "100%" }}
     >
       <TopHeader />
-      {firstEvent?.status === Status.OPEN && firstEvent?.timer > 0 && (
+      {firstEvent?.status === Status.OPEN && (
         <Counter timer={firstEvent?.timer} />
       )}
 

@@ -1,15 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 
-const Counter = ({ timer }) => {
-  const initialValue = useRef(timer);
+const Counter = ({ firstEvent }) => {
+  const initialValue = useRef(firstEvent?.timer);
   const radius = 22;
   const circumference = 2 * Math.PI * radius;
+
+  const timerDuration = firstEvent?.timerDuration;
+  const lastUpdateTime = firstEvent?.lastUpdateTime;
+  const utcMilliseconds = Date.now();
+  const utcSeconds = Math.floor(utcMilliseconds / 1000);
+
+  const timer = timerDuration - (utcSeconds - lastUpdateTime);
+
+  // console.log(timerDuration);
 
   const [strokeDashoffset, setStrokeDashoffset] = useState(0);
   const [strokeColor, setStrokeColor] = useState("#32d74b");
 
   useEffect(() => {
-    const percentage = (timer / initialValue.current) * 100;
+    const percentage = (timerDuration / initialValue.current) * 100;
     const offset = circumference - (percentage / 100) * circumference;
     setStrokeDashoffset(offset);
 
@@ -20,10 +29,39 @@ const Counter = ({ timer }) => {
     } else {
       setStrokeColor("#F70000");
     }
-    if (timer < 4 && timer > 0) {
+    if (timerDuration < 4 && timerDuration > 0) {
       new Audio("/countdown.mp3").play();
     }
-  }, [timer, circumference, initialValue]);
+  }, [timerDuration, circumference, initialValue]);
+
+  // const istTimestamp = lastUpdateTime; // timestamp in seconds
+
+  // // Convert seconds → milliseconds
+  // const date = new Date(istTimestamp * 1000);
+
+  // // Calculate IST manually
+  // let hours = date.getUTCHours() + 5; // Add 5 hours for IST
+  // let minutes = date.getUTCMinutes() + 30; // Add 30 minutes for IST
+  // const seconds = date.getUTCSeconds();
+
+  // // Adjust overflow
+  // if (minutes >= 60) {
+  //   minutes -= 60;
+  //   hours += 1;
+  // }
+  // if (hours >= 24) {
+  //   hours -= 24;
+  // }
+
+  // // Format with leading zeros
+  // const istTime2 = `${hours.toString().padStart(2, "0")}:${minutes
+  //   .toString()
+  //   .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+  // console.log("IST Time:", istTime2);
+
+  // Get current UTC time in milliseconds
+  // Current UTC time in milliseconds
 
   return (
     <div className="absolute z-50 top-[30%] left-1/2 -translate-x-1/2">

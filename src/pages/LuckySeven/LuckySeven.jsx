@@ -62,8 +62,8 @@ const LuckySeven = () => {
       style={{ minHeight: "100vh", width: "100%" }}
     >
       <TopHeader />
-      {firstEvent?.status === Status.OPEN && firstEvent?.timer > 0 && (
-        <Counter timer={firstEvent?.timer} />
+      {firstEvent?.status === Status.OPEN && (
+        <Counter firstEvent={firstEvent} />
       )}
       <Video />
       <div className=" transition-all duration-1000 ease-in-out bottom-48">
