@@ -119,7 +119,9 @@ const Originals = () => {
                   </div>
                   <div className="flex items-center justify-start px-2 autoAnimate ">
                     <span className="flex items-center justify-center w-full gap-[2px] p-1 text-xs  text-white/50">
-                      <span>₹{casino?.min}</span> - <span>₹{casino?.max}</span>
+                      <span>₹{casino?.min}</span> -{" "}
+                      {/* <span>₹{casino?.max}</span> */}
+                      <span>{casino?.name}</span>
                     </span>
                   </div>
                 </div>

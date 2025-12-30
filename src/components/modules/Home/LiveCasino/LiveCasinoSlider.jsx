@@ -131,7 +131,8 @@ const LiveCasinoSlider = ({ data, handleNavigate, setShowAll, title }) => {
                       <div className="absolute bottom-0 z-20 w-full px-2 autoAnimate bg-black/30 backdrop-blur-3xl opacity-100 group-hover:opacity-100">
                         <span className="flex items-center justify-center w-full gap-[2px] p-1 text-xs font-semibold text-yellow">
                           <span>₹{casino?.min}</span> -
-                          <span>₹{casino?.max}</span>
+                          {/* <span>₹{casino?.max}</span> */}
+                          <span>{casino?.name}</span>
                         </span>
                       </div>
                     </div>
