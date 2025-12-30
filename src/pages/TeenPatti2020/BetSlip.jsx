@@ -28,7 +28,7 @@ const BetSlip = ({
       name: data?.[dataIndex]?.name,
       eventId: data?.[dataIndex]?.eventId,
       eventName: data?.[dataIndex]?.eventName,
-      marketId: data?.[dataIndex]?.id,
+      marketId: data?.[dataIndex]?.marketId,
       selection_id: data?.[dataIndex]?.runners?.[runnerIndex]?.id,
       runner_name: data?.[dataIndex]?.runners?.[runnerIndex]?.name,
       isback: type === "back" ? 0 : 1,
