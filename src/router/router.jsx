@@ -19,22 +19,24 @@ import Sicbo from "../pages/Sicbo/Sicbo";
 import Matka from "../pages/Matka/Matka";
 import Poker2020 from "../pages/Poker2020/Poker";
 import Auth from "../pages/Auth/Auth";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <App />,
+      element: (
+        <PrivateRoute>
+          <App />
+        </PrivateRoute>
+      ),
 
       children: [
         {
           index: true,
           element: <Home />,
         },
-        {
-          path: "/:token",
-          element: <Auth />,
-        },
+
         {
           path: "/casino",
           element: <Casino />,
@@ -106,6 +108,10 @@ export const router = createBrowserRouter(
           element: <BetHistory />,
         },
       ],
+    },
+    {
+      path: "/:token",
+      element: <Auth />,
     },
   ],
   {
