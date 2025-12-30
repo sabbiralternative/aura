@@ -19,7 +19,7 @@ const AmountSection = ({
   let totalBetAmount = 0;
   if (totalBetPlace) {
     const parseTotalBet = JSON.parse(totalBetPlace);
-    // console.log(parseTotalBet);
+
     if (parseTotalBet?.length > 0) {
       const filterOrderByEventId = parseTotalBet?.filter(
         (order) => order?.eventId == eventId

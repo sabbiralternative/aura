@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { API } from "../../../api";
 import { useSelector } from "react-redux";
 import { userToken } from "../../../redux/features/auth/authSlice";
-import { Link } from "react-router-dom";
 import { AxiosSecure } from "../../../lib/AxiosSecure";
 
 const Search = ({ setShowSearch }) => {
   const [searchText, setSearchText] = useState("");
   const token = useSelector(userToken);
   const [data, setData] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [, setCategories] = useState([]);
 
   useEffect(() => {
     if (searchText?.length > 2) {
@@ -17,7 +16,7 @@ const Search = ({ setShowSearch }) => {
         const { data } = await AxiosSecure.get(
           `${API.casino}?id=${searchText}`
         );
-        console.log(data);
+
         if (data?.result?.length > 0) {
           setData(data?.result);
         }

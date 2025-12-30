@@ -149,7 +149,7 @@ const BetSlip = ({
     if (status === Status.SUSPENDED && payload?.length > 0) {
       const handleOrder = async () => {
         const res = await addOrder(payload).unwrap();
-        console.log(res);
+
         payload = [];
         if (res?.success) {
           setShowWinLossResult(false);

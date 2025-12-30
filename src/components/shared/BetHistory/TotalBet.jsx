@@ -99,7 +99,7 @@ const TotalBet = ({ betHistories }) => {
                   <h3 className="text-xs tracking-wider">{bet?.round_id}</h3>
                 </div>
               </div>
-              {roundId === bet?.round_id && bets && bets?.length > 0 ? (
+              {roundId === bet?.round_id && bets && bets?.result ? (
                 <MoreDetails bets={bets} setRoundId={setRoundId} />
               ) : (
                 <>
