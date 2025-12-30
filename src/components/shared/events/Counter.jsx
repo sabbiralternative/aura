@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Counter = ({ firstEvent }) => {
-  const initialValue = useRef(firstEvent?.timer);
   const radius = 22;
   const circumference = 2 * Math.PI * radius;
 
@@ -30,7 +29,7 @@ const Counter = ({ firstEvent }) => {
     if (timer < 4 && timer > 0) {
       new Audio("/countdown.mp3").play();
     }
-  }, [timer, timerDuration, circumference, initialValue]);
+  }, [timer, timerDuration, circumference]);
 
   return (
     <>
