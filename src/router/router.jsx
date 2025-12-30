@@ -20,6 +20,7 @@ import Matka from "../pages/Matka/Matka";
 import Poker2020 from "../pages/Poker2020/Poker";
 import Auth from "../pages/Auth/Auth";
 import PrivateRoute from "./PrivateRoute";
+import NotFound from "../pages/NotFound/NotFound";
 
 export const router = createBrowserRouter(
   [
@@ -30,7 +31,7 @@ export const router = createBrowserRouter(
           <App />
         </PrivateRoute>
       ),
-
+      errorElement: <NotFound />,
       children: [
         {
           index: true,

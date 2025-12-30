@@ -95,7 +95,7 @@
   height: 100%;
   justify-content: center;
   left: 0;
-  pointer-events: none;
+
   position: absolute;
   right: 0;
   top: 0;
@@ -159,4 +159,10 @@
 }
 .scrollable--96151.vertical--99fcf {
   overflow: hidden auto;
+}
+body {
+  height: 100%;
+}
+#root {
+  height: 100%;
 }
