@@ -7,6 +7,7 @@ import LiveCasino from "../../components/modules/Home/LiveCasino/LiveCasino";
 // import RecentBigWin from "../../components/modules/Home/RecentBigWin";
 import Navbar from "../../components/shared/Navbar/Navbar";
 import FastGames from "../../components/modules/Home/FastGames";
+import VirtualGames from "../../components/modules/Home/VirtualGames";
 
 const Home = () => {
   return (
@@ -25,6 +26,7 @@ const Home = () => {
             <LiveCasino />
             <Originals />
             <FastGames />
+            <VirtualGames />
           </div>
         </div>
       </div>

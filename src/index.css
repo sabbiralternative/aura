@@ -47,7 +47,9 @@
   pointer-events: none;
   position: absolute;
   text-align: center;
-  transition: transform 0.3s, opacity 0.3s;
+  transition:
+    transform 0.3s,
+    opacity 0.3s;
   white-space: nowrap;
   will-change: transform, opacity;
   z-index: 1000;
@@ -165,4 +167,30 @@ body {
 }
 #root {
   height: 100%;
+}
+
+.button,
+.fabButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.fabButton {
+  z-index: 50;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-color: hsla(0, 0%, 100%, 0.2);
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  --tw-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  --tw-shadow-colored: 0 0 12px var(--tw-shadow-color);
+  box-shadow:
+    var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow);
+  --tw-shadow-color: rgba(34, 197, 94, 0.4);
+  --tw-shadow: var(--tw-shadow-colored);
 }

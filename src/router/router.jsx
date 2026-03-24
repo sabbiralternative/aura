@@ -21,6 +21,7 @@ import Poker2020 from "../pages/Poker2020/Poker";
 import Auth from "../pages/Auth/Auth";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/NotFound/NotFound";
+import TeenPattiT20 from "../pages/VirtualGames/TeenPattiT20/TeenPattiT20";
 
 export const router = createBrowserRouter(
   [
@@ -108,6 +109,12 @@ export const router = createBrowserRouter(
           path: "/bet-history",
           element: <BetHistory />,
         },
+        /*! Virtual Games start  */
+        {
+          path: "/virtual/teen-patti-t-20/:eventTypeId/:eventId",
+          element: <TeenPattiT20 />,
+        },
+        /*! Virtual Games end  */
       ],
     },
     {
@@ -117,5 +124,5 @@ export const router = createBrowserRouter(
   ],
   {
     basename: import.meta.env.BASE_URL ?? "/",
-  }
+  },
 );
