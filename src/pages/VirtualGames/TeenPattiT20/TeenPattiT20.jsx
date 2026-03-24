@@ -1,14 +1,11 @@
 const TeenPattiT20 = () => {
   return (
-    <main className="w-full h-full max-w-xl mx-auto lg:max-w-[1600px] lg:my-auto">
+    <main className="w-full h-full max-w-xl mx-auto ">
       <main
         id="card-games-container"
-        className="__className_575e37 relative flex lg:flex-row flex-col w-full h-dvh overflow-y-auto scrollbar-none"
+        className="__className_575e37 relative flex  flex-col w-full h-dvh overflow-y-auto scrollbar-none"
       >
-        <div
-          id="game-container"
-          className="relative w-full aspect-video lg:w-2/3"
-        >
+        <div id="game-container" className="relative w-full aspect-video ">
           <div className="w-full h-auto flex justify-center items-center aspect-video relative">
             <div className="absolute bottom-10 right-1/2 translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2  w-fit h-fit text-xl text-white z-50 flex justify-center items-center flex">
               <span className="text-white text-xl font-bold">
@@ -946,7 +943,7 @@ const TeenPattiT20 = () => {
         </div>
         <div
           id="bet-options-container"
-          className="flex overflow-y-auto relative flex-col flex-1 gap-2 px-2 py-8 lg:w-1/3 min-h-[260px] scrollbar-none
+          className="flex overflow-y-auto relative flex-col flex-1 gap-2 px-2 py-8  min-h-[260px] scrollbar-none
               opacity-100
               "
           style={{
@@ -1699,7 +1696,7 @@ const TeenPattiT20 = () => {
             </div>
           </div>
         </div>
-        <div className="relative z-50 w-full lg:w-2/3 lg:absolute lg:bottom-0 lg:left-0">
+        <div className="relative z-50 w-full ">
           <div className="flex absolute top-0 right-0 gap-2 justify-center items-center p-1 pl-3 bg-gradient-to-l to-transparent -translate-y-full from-zinc-900 via-zinc-900">
             <span className="text-white">Classic View</span>
             <div
