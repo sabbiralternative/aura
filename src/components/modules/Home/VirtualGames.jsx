@@ -4,8 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const VirtualGames = () => {
   const swiperRef = useRef(null);
   const navigate = useNavigate();
-  const handleNavigate = () => {
-    navigate("/virtual/teen-patti-t-20/1000/1001");
+  const handleNavigate = (name) => {
+    navigate(`/virtual/${name}/1000/1001`);
   };
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const VirtualGames = () => {
           >
             <SwiperSlide>
               {" "}
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -72,7 +72,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -103,7 +103,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("seven-up-down")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -134,7 +134,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -165,7 +165,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("dragon-tiger")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -196,7 +196,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -227,7 +227,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -258,7 +258,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("muflis-teen-patti")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -289,7 +289,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("amar-akbar-anthony")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -320,7 +320,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -351,7 +351,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -382,7 +382,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -413,7 +413,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("bollywood-casino")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -444,7 +444,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -475,7 +475,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -506,7 +506,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -537,7 +537,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -568,7 +568,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -599,7 +599,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
@@ -630,7 +630,7 @@ const VirtualGames = () => {
               </div>
             </SwiperSlide>
             <SwiperSlide>
-              <div onClick={handleNavigate}>
+              <div onClick={() => handleNavigate("teen-patti-t-20")}>
                 <div className="relative cursor-pointer aspect-[1/1.3] select-none group w-fit snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group ">
                   <div
                     className="relative w-36 h-full overflow-clip rounded-md select-none min-[380px]:w-44 "
