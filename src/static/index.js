@@ -50,3 +50,10 @@ export const liveCasino = [
     eventId: "10006",
   },
 ];
+
+export const ModalsName = {
+  settings: "settings",
+  howToPlay: "howToPlay",
+  myBets: "myBets",
+  moreGames: "moreGames",
+};
