@@ -27,6 +27,10 @@ import VirtualDragonTiger from "../pages/VirtualGames/DragonTiger/DragonTiger";
 import MuflisTeenPatti from "../pages/VirtualGames/MuflisTeenPatti/MuflisTeenPatti";
 import VirtualAmarAkbarAnthony from "../pages/VirtualGames/AmarAkbarAnthony/AmarAkbarAnthony";
 import VirtualBollywoodCasino from "../pages/VirtualGames/BollywoodCasino/BollywoodCasino";
+import BallByBall from "../pages/VirtualGames/BallByBall/BallByBall";
+import VirtualPoker2020 from "../pages/VirtualGames/Poker2020/Poker2020";
+import CasinoWar from "../pages/VirtualGames/CasinoWar/CasinoWar";
+import VirtualMatka from "../pages/VirtualGames/VirtualMatke/VirtualMatka";
 
 export const router = createBrowserRouter(
   [
@@ -138,6 +142,22 @@ export const router = createBrowserRouter(
         {
           path: "/virtual/virtualbc/:eventTypeId/:eventId",
           element: <VirtualBollywoodCasino />,
+        },
+        {
+          path: "/virtual/ballbyball/:eventTypeId/:eventId",
+          element: <BallByBall />,
+        },
+        {
+          path: "/virtual/virtualpoker2020/:eventTypeId/:eventId",
+          element: <VirtualPoker2020 />,
+        },
+        {
+          path: "/virtual/virtualcasinowar/:eventTypeId/:eventId",
+          element: <CasinoWar />,
+        },
+        {
+          path: "/virtual/virtualmatka/:eventTypeId/:eventId",
+          element: <VirtualMatka />,
         },
         /*! Virtual Games end  */
       ],
