@@ -116,27 +116,27 @@ export const router = createBrowserRouter(
         },
         /*! Virtual Games start  */
         {
-          path: "/virtual/teen-patti-t-20/:eventTypeId/:eventId",
+          path: "/virtual/virtualtp2020/:eventTypeId/:eventId",
           element: <TeenPattiT20 />,
         },
         {
-          path: "/virtual/seven-up-down/:eventTypeId/:eventId",
+          path: "/virtual/virtualukcy7/:eventTypeId/:eventId",
           element: <SevenUpDown />,
         },
         {
-          path: "/virtual/dragon-tiger/:eventTypeId/:eventId",
+          path: "/virtual/virtualdt/:eventTypeId/:eventId",
           element: <VirtualDragonTiger />,
         },
         {
-          path: "/virtual/muflis-teen-patti/:eventTypeId/:eventId",
+          path: "/virtual/virtualmuflis/:eventTypeId/:eventId",
           element: <MuflisTeenPatti />,
         },
         {
-          path: "/virtual/amar-akbar-anthony/:eventTypeId/:eventId",
+          path: "/virtual/virtualaaa/:eventTypeId/:eventId",
           element: <VirtualAmarAkbarAnthony />,
         },
         {
-          path: "/virtual/bollywood-casino/:eventTypeId/:eventId",
+          path: "/virtual/virtualbc/:eventTypeId/:eventId",
           element: <VirtualBollywoodCasino />,
         },
         /*! Virtual Games end  */

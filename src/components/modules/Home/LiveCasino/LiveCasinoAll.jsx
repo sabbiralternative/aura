@@ -74,7 +74,7 @@ const LiveCasinoAll = ({ data, setShowAll, handleNavigate, title }) => {
             return (
               <div key={casino?.eventId} onClick={() => handleNavigate(casino)}>
                 <div className="relative cursor-pointer select-none group w-full snap-start lg:active:scale-[94%]  transition-all duration-300 ease-in-out group">
-                  <div className="absolute top-0 right-0 z-20 w-20 h-20 translate-x-[30%] -translate-y-[30%] ">
+                  {/* <div className="absolute top-0 right-0 z-20 w-20 h-20 translate-x-[30%] -translate-y-[30%] ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -136,7 +136,7 @@ const LiveCasinoAll = ({ data, setShowAll, handleNavigate, title }) => {
                         </g>
                       </g>
                     </svg>
-                  </div>
+                  </div> */}
                   <div
                     className="relative  overflow-clip rounded-md select-none  w-36 min-[380px]:w-44"
                     style={{ aspectRatio: "0.75 / 1" }}
