@@ -1,5 +1,4 @@
 import { useState } from "react";
-import img from "../../../assets/img";
 
 const Footer = ({ isClassicView, setIsClassicView }) => {
   const [showMyBets, setShowMyBets] = useState(false);
@@ -121,6 +120,7 @@ const Footer = ({ isClassicView, setIsClassicView }) => {
           <span className="flex gap-1 items-center">Ball by Ball Cricket</span>
         </div>
       </div>
+
       <div
         className="flex overflow-x-auto relative gap-1 justify-between items-center px-2 py-1 w-full scrollbar-none"
         style={{
@@ -163,627 +163,555 @@ const Footer = ({ isClassicView, setIsClassicView }) => {
             />
           </svg>
         </div>{" "}
-        <div className="flex flex-grow items-center min-w-fit">
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-l-full">
-            <img
-              alt="1 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>1 Runs -</span>
-            <span className>24%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="4 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>4 Runs -</span>
-            <span className>18%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="0 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>0 Runs -</span>
-            <span className>32%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="Wicket"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>Wicket -</span>
-            <span className>10%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="2 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>2 Runs -</span>
-            <span className>10%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="3 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>3 Runs -</span>
-            <span className>2%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="Extra"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>Extra -</span>
-            <span className>2%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-r-full">
-            <img
-              alt="6 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>6 Runs -</span>
-            <span className>2%</span>
-          </div>
-        </div>{" "}
         <div className="flex items-center gap-0.5 pointer-events-none">
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214927242
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214927051
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926895
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926761
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926591
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926461
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926328
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926196
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">3</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214926042
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214925876
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214925712
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214925524
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214925354
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214925174
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214925008
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214924840
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214924659
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214924504
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214924341
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214924159
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214923967
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214923793
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214923654
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214923506
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214923317
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">E</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214923126
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922961
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922822
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922653
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922497
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922332
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922168
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(72, 138, 36)" }}
             >
-              <span className="text-xs whitespace-nowrap">6</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214922000
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214921815
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214921639
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214921463
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214921263
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214921030
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214920840
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214920686
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214920488
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214920263
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214920041
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214919791
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214919586
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214919424
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214919239
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214918985
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214918754
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Round 214918569
+              </span>
             </div>
           </div>
         </div>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import img from "../../../assets/img";
 
 const Footer = ({ isClassicView, setIsClassicView }) => {
   const [showMyBets, setShowMyBets] = useState(false);
@@ -165,625 +164,743 @@ const Footer = ({ isClassicView, setIsClassicView }) => {
         </div>{" "}
         <div className="flex flex-grow items-center min-w-fit">
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-l-full">
-            <img
-              alt="1 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>1 Runs -</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(59, 130, 246)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>AAA -</span>
             <span className>24%</span>
           </div>
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="4 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>4 Runs -</span>
-            <span className>18%</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(249, 115, 22)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>Ghulam -</span>
+            <span className>12%</span>
           </div>
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="0 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>0 Runs -</span>
-            <span className>32%</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(244, 63, 94)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>KKPK -</span>
+            <span className>26%</span>
           </div>
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="Wicket"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>Wicket -</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(99, 102, 241)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>SBAG -</span>
+            <span className>24%</span>
+          </div>
+          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(139, 92, 246)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>DV -</span>
             <span className>10%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="2 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>2 Runs -</span>
-            <span className>10%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="3 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>3 Runs -</span>
-            <span className>2%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="Extra"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>Extra -</span>
-            <span className>2%</span>
           </div>
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-r-full">
-            <img
-              alt="6 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>6 Runs -</span>
-            <span className>2%</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(16, 185, 129)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>Don -</span>
+            <span className>4%</span>
           </div>
         </div>{" "}
         <div className="flex items-center gap-0.5 pointer-events-none">
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(249, 115, 22)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Ghulam
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(249, 115, 22)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Ghulam
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(249, 115, 22)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Ghulam
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">3</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(139, 92, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                DV
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(249, 115, 22)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Ghulam
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(16, 185, 129)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Don
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(16, 185, 129)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Don
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(139, 92, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">E</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                DV
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(249, 115, 22)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Ghulam
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(72, 138, 36)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">6</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(249, 115, 22)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                Ghulam
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(139, 92, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                DV
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(139, 92, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                DV
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(139, 92, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                DV
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(59, 130, 246)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                AAA
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(244, 63, 94)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                KKPK
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(99, 102, 241)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                SBAG
+              </span>
             </div>
           </div>
         </div>

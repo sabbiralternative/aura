@@ -1,5 +1,4 @@
 import { useState } from "react";
-import img from "../../../assets/img";
 
 const Footer = ({ isClassicView, setIsClassicView }) => {
   const [showMyBets, setShowMyBets] = useState(false);
@@ -165,625 +164,651 @@ const Footer = ({ isClassicView, setIsClassicView }) => {
         </div>{" "}
         <div className="flex flex-grow items-center min-w-fit">
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-l-full">
-            <img
-              alt="1 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>1 Runs -</span>
-            <span className>24%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="4 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>4 Runs -</span>
-            <span className>18%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="0 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>0 Runs -</span>
-            <span className>32%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="Wicket"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>Wicket -</span>
-            <span className>10%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="2 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>2 Runs -</span>
-            <span className>10%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="3 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>3 Runs -</span>
-            <span className>2%</span>
-          </div>
-          <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
-            <img
-              alt="Extra"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>Extra -</span>
-            <span className>2%</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(109, 40, 217)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>B -</span>
+            <span className>44%</span>
           </div>
           <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-r-full">
-            <img
-              alt="6 Runs"
-              loading="lazy"
-              width={100}
-              height={100}
-              decoding="async"
-              data-nimg={1}
-              className="w-4 h-4 p-0.5"
-              src={img.cricket_ball}
-              style={{ color: "transparent" }}
-            />
-            <span>6 Runs -</span>
-            <span className>2%</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="tabler-icon tabler-icon-circle-filled"
+              style={{ color: "rgb(67, 56, 202)" }}
+            >
+              <path
+                d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                fill="currentColor"
+                strokeWidth={0}
+              />
+            </svg>
+            <span>A -</span>
+            <span className>56%</span>
           </div>
         </div>{" "}
         <div className="flex items-center gap-0.5 pointer-events-none">
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">3</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">E</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(72, 138, 36)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">6</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(159, 18, 57)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">W</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(183, 39, 118)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">4</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(67, 56, 202)" }}
             >
-              <span className="text-xs whitespace-nowrap">2</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                A
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">0</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
           <div className="flex items-center gap-1 w-full justify-center">
             <div
               className="flex items-center active:scale-[98%]   justify-center gap-1 py-1 px-2 text-white border-[1px] rounded-full cursor-pointer
-            h-8 w-8
+            w-full
             border-white/20"
-              style={{ backgroundColor: "rgb(30, 64, 175)" }}
+              style={{ backgroundColor: "rgb(109, 40, 217)" }}
             >
-              <span className="text-xs whitespace-nowrap">1</span>
+              <span className="text-xs whitespace-nowrap text-white/50 text-white/50">
+                B
+              </span>
             </div>
           </div>
         </div>
