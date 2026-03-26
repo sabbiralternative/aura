@@ -9,7 +9,7 @@ const BetSlip = ({ setShowBetSlip }) => {
   });
   return (
     <div
-      className="flex inset-y-0 fixed top-0 right-0 flex-col justify-end items-center p-2 w-full lg:w-1/3 lg:justify-center lg:items-end h-dvh bg-black/50"
+      className="scale-y-100 h-screen fixed origin-bottom flex   flex-col items-center justify-end   bottom-0   w-full  max-w-[430px]  transition-all ease-in-out bg-black/50"
       style={{ zIndex: 1000, pointerEvents: "auto" }}
     >
       <div

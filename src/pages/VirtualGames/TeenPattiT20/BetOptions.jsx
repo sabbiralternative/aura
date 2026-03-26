@@ -1,4 +1,4 @@
-const BetOptions = ({ setShowBetSlip }) => {
+const BetOptions = () => {
   return (
     <div
       id="bet-options-container"
@@ -17,7 +17,6 @@ const BetOptions = ({ setShowBetSlip }) => {
         >
           <div className="grid grid-cols-4 sm:grid-cols-4 gap-0.5">
             <div
-              onClick={() => setShowBetSlip(true)}
               className="flex background-style-2 gap-1 flex-col overflow-hidden relative items-center justify-center p-2 pb-4 border-2 rounded-lg cursor-pointer min-h-[60px] border-white/10"
               style={{
                 backgroundColor: "rgb(30, 64, 175)",
@@ -178,7 +177,6 @@ const BetOptions = ({ setShowBetSlip }) => {
               </span>
             </div>
             <div
-              onClick={() => setShowBetSlip(true)}
               className="flex background-style-2 gap-1 flex-col overflow-hidden relative items-center justify-center p-2 pb-4 border-2 rounded-lg cursor-pointer min-h-[60px] border-white/10"
               style={{
                 backgroundColor: "rgb(30, 64, 175)",
@@ -339,7 +337,6 @@ const BetOptions = ({ setShowBetSlip }) => {
               </span>
             </div>
             <div
-              onClick={() => setShowBetSlip(true)}
               className="flex background-style-2 gap-1 flex-col overflow-hidden relative items-center justify-center p-2 pb-4 border-2 rounded-lg cursor-pointer min-h-[60px] border-white/10"
               style={{
                 backgroundColor: "rgb(30, 64, 175)",
@@ -500,7 +497,6 @@ const BetOptions = ({ setShowBetSlip }) => {
               </span>
             </div>
             <div
-              onClick={() => setShowBetSlip(true)}
               className="flex background-style-2 gap-1 flex-col overflow-hidden relative items-center justify-center p-2 pb-4 border-2 rounded-lg cursor-pointer min-h-[60px] border-white/10"
               style={{
                 backgroundColor: "rgb(30, 64, 175)",

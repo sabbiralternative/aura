@@ -50,6 +50,7 @@ const ClassicBetOptions = ({ setShowBetSlip }) => {
             style={{ animationDelay: "0ms" }}
           >
             <button
+              onClick={() => setShowBetSlip(true)}
               id="backButton-66730"
               className="relative transition-all duration-300 ease-linear flex flex-col items-center justify-center h-full border border-blue-600 p-4 overflow-hidden bg-blue-800 shadow-[0_0_6px_rgba(0,0,0,0.3)] shadow-blue-500/40 rounded-l-lg cursor-pointer "
             >
