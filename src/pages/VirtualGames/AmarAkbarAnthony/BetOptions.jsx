@@ -190,6 +190,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               <div className="text-sm font-semibold">Amar</div>
             </div>
             <div
+              onClick={() => setShowBetSlip(true)}
               className="flex background-style flex-col relative items-center gap-1 justify-center p-1 border-2 cursor-pointer rounded-l-lg border-white/5 "
               style={{
                 backgroundColor: "rgb(30, 64, 175)",
@@ -343,6 +344,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               </span>
             </div>
             <div
+              onClick={() => setShowBetSlip(true)}
               className="flex background-style flex-col relative items-center gap-1 justify-center p-1 border-2 cursor-pointer rounded-r-lg border-white/5 "
               style={{
                 backgroundColor: "rgb(159, 18, 57)",

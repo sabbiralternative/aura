@@ -1,33 +1,460 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalsName } from "../../../static";
+import img from "../../../assets/img";
 
 const GameContainer = ({ setModal }) => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
     <div id="game-container" className="relative w-full aspect-video ">
-      <div className="w-full h-auto flex justify-center items-center aspect-video relative">
-        <div className="absolute bottom-10 right-1/2 translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2  w-fit h-fit text-xl text-white z-50 flex justify-center items-center flex">
-          <span className="text-white text-xl font-bold">Place Your Bet</span>
-        </div>
-        <div className="w-full h-full  justify-center items-center absolute top-0 left-0 flex">
-          <video
-            className="w-full h-full object-contain"
-            src="/src/assets/video/ballbyball.mp4"
-            // autoPlay
-            playsInline
-            loop
+      <div
+        className="w-full aspect-video"
+        style={{
+          maskImage:
+            "linear-gradient(black, black, black, black, black, black, black, black, transparent)",
+        }}
+      >
+        <div style={{ width: "100%", height: "100%", position: "relative" }}>
+          <img
+            alt="casino table"
+            loading="lazy"
+            width={1000}
+            height={1000}
+            decoding="async"
+            data-nimg={1}
+            className="object-cover absolute inset-0 w-full h-full"
+            srcSet={img.casino_war}
+            src={img.casino_war}
+            style={{ color: "transparent" }}
           />
-        </div>
-        <div className="w-full h-full flex justify-center items-center">
-          <video
-            className="w-full h-full object-contain"
-            src="/videos/ballbyball.mp4"
-            autoPlay
-            playsInline
-            loop
-          />
+          <div
+            style={{
+              position: "relative",
+              perspective: "1000px",
+              width: "100%",
+              height: "100%",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            <div
+              className="flex absolute top-[30%] flex-col gap-2 justify-center items-center w-full h-[70%]"
+              style={{
+                transformOrigin: "center bottom",
+                transform: "rotateX(40deg)",
+              }}
+            >
+              <div
+                style={{
+                  width: "fit-content",
+                  minWidth: "fit-content",
+                  transform: "scale(1)",
+                }}
+              >
+                <div className=" transition-transform duration-300 z-50 flex items-end px-2 gap-1 ">
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded  from-blue-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                1
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      P1
+                    </span>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded  from-blue-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                2
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      P2
+                    </span>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded  from-blue-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                3
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      P3
+                    </span>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded  from-blue-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                4
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      P4
+                    </span>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded  from-blue-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                5
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      P5
+                    </span>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded  from-blue-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                6
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      P6
+                    </span>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t  to-transparent items-center gap-1 overflow-hidden rounded from-orange-500">
+                    <div className="flex items-center p-0.5 gap-1">
+                      <div className>
+                        <div
+                          className="relative  "
+                          style={{
+                            width: "24px",
+                            height: "32px",
+                            transformStyle: "preserve-3d",
+                            transformOrigin: "center center",
+                            backfaceVisibility: "hidden",
+                          }}
+                        >
+                          <div
+                            className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                            style={{
+                              borderRadius: "2.66667px",
+                              opacity: 1,
+                              zIndex: 1000,
+                            }}
+                          >
+                            <div
+                              className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                              style={{ borderRadius: "0.666667px" }}
+                            >
+                              <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                                D
+                              </span>
+                            </div>
+                          </div>
+                          <div
+                            className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                            style={{
+                              borderRadius: "2.66667px",
+                              transform: "rotateY(180deg)",
+                              opacity: 0,
+                              zIndex: 999,
+                            }}
+                          >
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div
+                              className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                              style={{ fontSize: "0.727273em", color: "black" }}
+                            />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                            <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[0.6rem] text-white px-2  w-full text-center font-medium lg:text-sm text-white bg-white/10">
+                      Dealer
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex absolute top-0 left-0 z-50 flex-col gap-0.5 py-2 px-1">

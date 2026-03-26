@@ -1,12 +1,23 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
 
 const BetSlip = ({ setShowBetSlip }) => {
+  const [stake, setStake] = useState(null);
   const ref = useRef();
 
   useCloseModalClickOutside(ref, () => {
     setShowBetSlip(false);
   });
+
+  const handleChangeStake = (stake) => {
+    if (stake === null) {
+      setStake(stake);
+    }
+    if (stake > 0) {
+      setStake((prev) => prev + stake);
+    }
+  };
+
   return (
     <div
       className="scale-y-100 h-screen fixed origin-bottom flex   flex-col items-center justify-end   bottom-0   w-full  max-w-[430px]  transition-all ease-in-out bg-black/50"
@@ -79,6 +90,8 @@ const BetSlip = ({ setShowBetSlip }) => {
             </div>
             <span className="leading-none whitespace-nowrap">
               <input
+                onChange={(e) => setStake(Number(e.target.value))}
+                value={stake ? stake : ""}
                 placeholder="Min 1 FTN  - Max 10K FTN "
                 className="w-full text-lg font-medium bg-transparent outline-none"
                 type="text"
@@ -108,6 +121,7 @@ const BetSlip = ({ setShowBetSlip }) => {
           </div>
           <div className="grid grid-cols-6 gap-1 w-full">
             <button
+              onClick={() => handleChangeStake(1)}
               value={1}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 2 / span 2" }}
@@ -115,6 +129,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               +1
             </button>
             <button
+              onClick={() => handleChangeStake(2)}
               value={2}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 2 / span 2" }}
@@ -122,6 +137,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               +2
             </button>
             <button
+              onClick={() => handleChangeStake(5)}
               value={5}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 2 / span 2" }}
@@ -129,6 +145,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               +5
             </button>
             <button
+              onClick={() => handleChangeStake(10)}
               value={10}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 2 / span 2" }}
@@ -136,6 +153,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               +10
             </button>
             <button
+              onClick={() => handleChangeStake(50)}
               value={50}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 2 / span 2" }}
@@ -143,6 +161,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               +50
             </button>
             <button
+              onClick={() => handleChangeStake(100)}
               value={100}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 2 / span 2" }}
@@ -150,6 +169,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               +100
             </button>
             <button
+              onClick={() => setStake(null)}
               value
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 3 / span 3" }}
@@ -157,6 +177,7 @@ const BetSlip = ({ setShowBetSlip }) => {
               Reset
             </button>
             <button
+              onClick={() => setStake(10000)}
               value={10000}
               className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
               style={{ gridColumn: "span 3 / span 3" }}

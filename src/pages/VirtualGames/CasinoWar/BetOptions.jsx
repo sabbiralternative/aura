@@ -3,7 +3,7 @@ const BetOptions = ({ setShowBetSlip }) => {
     <div
       id="bet-options-container"
       className="flex overflow-y-auto relative flex-col flex-1 gap-2 px-2 py-8  min-h-[260px] scrollbar-none
-              opacity-50
+       
               "
       style={{
         maskImage:
@@ -13,6 +13,7 @@ const BetOptions = ({ setShowBetSlip }) => {
       <div className="flex items-end w-full h-full lg:items-center">
         <div className="grid grid-cols-3 gap-1 p-1 w-full" style={{ scale: 1 }}>
           <div
+            onClick={() => setShowBetSlip(true)}
             className="relative background-style-3 flex flex-col items-center justify-center p-3 border-2 rounded-lg cursor-pointer border-white/10 "
             style={{
               backgroundColor: "rgb(37, 99, 235)",

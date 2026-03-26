@@ -16,6 +16,7 @@ const BetOptions = ({ setShowBetSlip }) => {
           style={{ scale: 1 }}
         >
           <div
+            onClick={() => setShowBetSlip(true)}
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "rgb(101, 163, 13)",

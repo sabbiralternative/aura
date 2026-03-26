@@ -1,33 +1,209 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalsName } from "../../../static";
+import img from "../../../assets/img";
 
 const GameContainer = ({ setModal }) => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
     <div id="game-container" className="relative w-full aspect-video ">
-      <div className="w-full h-auto flex justify-center items-center aspect-video relative">
-        <div className="absolute bottom-10 right-1/2 translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2  w-fit h-fit text-xl text-white z-50 flex justify-center items-center flex">
-          <span className="text-white text-xl font-bold">Place Your Bet</span>
-        </div>
-        <div className="w-full h-full  justify-center items-center absolute top-0 left-0 flex">
-          <video
-            className="w-full h-full object-contain"
-            src="/src/assets/video/ballbyball.mp4"
-            // autoPlay
-            playsInline
-            loop
+      <div
+        className="w-full aspect-video"
+        style={{
+          maskImage:
+            "linear-gradient(black, black, black, black, black, black, black, black, transparent)",
+        }}
+      >
+        <div style={{ width: "100%", height: "100%", position: "relative" }}>
+          <img
+            alt="casino table"
+            loading="lazy"
+            width={1000}
+            height={1000}
+            decoding="async"
+            data-nimg={1}
+            className="object-cover absolute inset-0 w-full h-full"
+            srcSet={img.dragon_tiger}
+            src={img.dragon_tiger}
+            style={{ color: "transparent" }}
           />
-        </div>
-        <div className="w-full h-full flex justify-center items-center">
-          <video
-            className="w-full h-full object-contain"
-            src="/videos/ballbyball.mp4"
-            autoPlay
-            playsInline
-            loop
-          />
+          <div
+            style={{
+              position: "relative",
+              perspective: "1000px",
+              width: "100%",
+              height: "100%",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            <div
+              className="flex absolute top-[30%] flex-col gap-2 justify-center items-center w-full h-[70%]"
+              style={{
+                transformOrigin: "center bottom",
+                transform: "rotateX(40deg)",
+              }}
+            >
+              <div
+                style={{
+                  width: "fit-content",
+                  minWidth: "fit-content",
+                  transform: "scale(1)",
+                }}
+              >
+                <div className="z-50 grid grid-cols-2 gap-1 ">
+                  <div className="flex flex-col bg-gradient-to-t to-transparent items-center overflow-hidden rounded from-rose-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4 text-[#ffff29]"
+                      style={{ opacity: 0 }}
+                    >
+                      <path
+                        d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
+                        fill="currentColor"
+                        strokeWidth={0}
+                      />
+                    </svg>
+                    <div className="p-1">
+                      <div
+                        className="relative  "
+                        style={{
+                          width: "30px",
+                          height: "40px",
+                          transformStyle: "preserve-3d",
+                          transformOrigin: "center center",
+                          backfaceVisibility: "hidden",
+                        }}
+                      >
+                        <div
+                          className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                          style={{
+                            borderRadius: "3.33333px",
+                            opacity: 1,
+                            zIndex: 1000,
+                          }}
+                        >
+                          <div
+                            className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                            style={{ borderRadius: "1.33333px" }}
+                          >
+                            <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                              D
+                            </span>
+                          </div>
+                        </div>
+                        <div
+                          className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                          style={{
+                            borderRadius: "3.33333px",
+                            transform: "rotateY(180deg)",
+                            opacity: 0,
+                            zIndex: 999,
+                          }}
+                        >
+                          <div
+                            className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                            style={{ fontSize: "0.909091em", color: "black" }}
+                          />
+                          <div
+                            className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                            style={{ fontSize: "0.909091em", color: "black" }}
+                          />
+                          <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                          <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex justify-center gap-1 px-1.5 text-[0.6rem] font-medium lg:text-sm w-full text-white text-white">
+                      Dragon
+                    </div>
+                  </div>
+                  <div className="flex flex-col bg-gradient-to-t to-transparent items-center overflow-hidden rounded from-orange-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width={24}
+                      height={24}
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4 text-[#ffff29]"
+                      style={{ opacity: 0 }}
+                    >
+                      <path
+                        d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
+                        fill="currentColor"
+                        strokeWidth={0}
+                      />
+                    </svg>
+                    <div className="p-1">
+                      <div
+                        className="relative  "
+                        style={{
+                          width: "30px",
+                          height: "40px",
+                          transformStyle: "preserve-3d",
+                          transformOrigin: "center center",
+                          backfaceVisibility: "hidden",
+                        }}
+                      >
+                        <div
+                          className=" relative w-full h-full inset-0 flex items-center justify-center bg-white overflow-hidden"
+                          style={{
+                            borderRadius: "3.33333px",
+                            opacity: 1,
+                            zIndex: 1000,
+                          }}
+                        >
+                          <div
+                            className="absolute flex items-center justify-center top-0.5 bottom-0.5 left-0.5 right-0.5 bg-black/30"
+                            style={{ borderRadius: "1.33333px" }}
+                          >
+                            <span className="__className_7fdbeb text-white text-base lg:text-xl">
+                              T
+                            </span>
+                          </div>
+                        </div>
+                        <div
+                          className="__className_c7a506 absolute delay-[200ms] inset-0 text-xl bg-white shadow-md"
+                          style={{
+                            borderRadius: "3.33333px",
+                            transform: "rotateY(180deg)",
+                            opacity: 0,
+                            zIndex: 999,
+                          }}
+                        >
+                          <div
+                            className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] top-[3%] left-[3%]"
+                            style={{ fontSize: "0.909091em", color: "black" }}
+                          />
+                          <div
+                            className="absolute text-center m-0 p-0 inline-block leading-none w-[40%] h-[60%] bottom-[3%] right-[3%] rotate-180"
+                            style={{ fontSize: "0.909091em", color: "black" }}
+                          />
+                          <div className="absolute h-[50%] flex justify-center items-center w-[36%] top-[3%] right-[3%]" />
+                          <div className="absolute h-[50%] flex justify-center items-center w-[36%] bottom-[3%] left-[3%] rotate-180" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex justify-center gap-1 px-1.5 text-[0.6rem] font-medium lg:text-sm w-full text-white text-white">
+                      Tiger
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex absolute top-0 left-0 z-50 flex-col gap-0.5 py-2 px-1">

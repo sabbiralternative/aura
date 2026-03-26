@@ -26,6 +26,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Player A
             </div>
             <div
+              onClick={() => setShowBetSlip(true)}
               className="flex background-style-6 gap-1 flex-col relative items-center justify-center p-2 border-2 rounded-lg cursor-pointer border-white/10"
               style={{ "--c2": "#4338ca", gridArea: "span 1 / span 2" }}
             >

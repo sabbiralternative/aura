@@ -18,7 +18,10 @@ const BetOptions = ({ setShowBetSlip }) => {
             <div className="flex-grow h-0.5 rounded-full bg-gradient-to-r from-[#C59F39] to-transparent" />
           </div>
           <div className="grid grid-cols-4 gap-1">
-            <div className="flex relative pt-2 pb-3 px-4 rounded-xl bg-gradient-to-br lg:hover:border-white/20 gap-1 text-xs font-medium border items-center justify-center whitespace-nowrap from-white/80 via-white to-white/80 text-black border-white/20">
+            <div
+              onClick={() => setShowBetSlip(true)}
+              className="flex relative pt-2 pb-3 px-4 rounded-xl bg-gradient-to-br lg:hover:border-white/20 gap-1 text-xs font-medium border items-center justify-center whitespace-nowrap from-white/80 via-white to-white/80 text-black border-white/20"
+            >
               Single
               <span className="text-black bg-white text-[0.6rem] leading-none px-2 rounded-t font-medium absolute bottom-0 ">
                 9.5

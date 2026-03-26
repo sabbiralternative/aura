@@ -20,6 +20,7 @@ const BetOptions = ({ setShowBetSlip }) => {
             style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)" }}
           >
             <div
+              onClick={() => setShowBetSlip(true)}
               className="relative background-style-3 flex flex-col items-center justify-center p-3 border-2 rounded cursor-pointer border-yellow-400 winner-animation "
               style={{
                 backgroundColor: "rgb(225, 29, 72)",

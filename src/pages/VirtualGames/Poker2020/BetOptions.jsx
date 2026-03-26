@@ -3,7 +3,7 @@ const BetOptions = ({ setShowBetSlip }) => {
     <div
       id="bet-options-container"
       className="flex overflow-y-auto relative flex-col flex-1 gap-2 px-2 py-8  min-h-[260px] scrollbar-none
-              opacity-50
+ 
               "
       style={{
         maskImage:
@@ -26,6 +26,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Player A
             </div>
             <div
+              onClick={() => setShowBetSlip(true)}
               className="flex background-style-3 flex-col overflow-hidden relative  gap-0.5 p-0.5 border-2 cursor-pointer rounded-lg items-end justify-center border-white/10"
               style={{
                 backgroundColor: "rgb(67, 56, 202)",
@@ -233,6 +234,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Player B
             </div>
             <div
+              onClick={() => setShowBetSlip(true)}
               className="flex background-style-3 flex-col overflow-hidden relative  gap-0.5 p-0.5 border-2 cursor-pointer rounded-lg items-start justify-start border-white/10"
               style={{
                 backgroundColor: "rgb(109, 40, 217)",

@@ -216,3 +216,32 @@ body {
     var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
     var(--tw-backdrop-sepia);
 }
+.buttonInfo {
+  --tw-border-opacity: 1;
+  border-color: rgb(30 64 175 / var(--tw-border-opacity, 1));
+  --tw-gradient-from: #2563eb var(--tw-gradient-from-position);
+  --tw-gradient-to: rgba(37, 99, 235, 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  --tw-gradient-to: rgba(30, 64, 175, 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops:
+    var(--tw-gradient-from), #1e40af var(--tw-gradient-via-position),
+    var(--tw-gradient-to);
+  --tw-gradient-to: #2563eb var(--tw-gradient-to-position);
+}
+
+.buttonInfo,
+.buttonWarning {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+.button {
+  cursor: pointer;
+  gap: 0.25rem;
+  border-radius: 0.75rem;
+  border-width: 1px;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.3s;
+}
