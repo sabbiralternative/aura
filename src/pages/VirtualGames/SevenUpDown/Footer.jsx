@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const Footer = ({ isClassicView, setIsClassicView }) => {
+const Footer = ({ isClassicView, setIsClassicView, data }) => {
+  const { balance, username } = useSelector((state) => state.auth);
   const [showMyBets, setShowMyBets] = useState(false);
+
   return (
     <div className="relative z-50 w-full ">
       <div className="flex absolute top-0 right-0 gap-2 justify-center items-center p-1 pl-3 bg-gradient-to-l to-transparent -translate-y-full from-zinc-900 via-zinc-900">
@@ -90,12 +93,12 @@ const Footer = ({ isClassicView, setIsClassicView }) => {
             Total Bet<span className="text-yellow-400">0 FTN </span>
           </div>
           <div className="flex gap-1 items-center">
-            Balance<span className="text-yellow-400">8766.9 FTN </span>
+            Balance<span className="text-yellow-400">{balance} INR </span>
           </div>
-          <span>@wealthymagpie845</span>
+          <span>{username}</span>
         </div>
         <div className="flex flex-col items-end">
-          <div className="flex gap-0.5 items-center px-0.5 text-white">
+          {/* <div className="flex gap-0.5 items-center px-0.5 text-white">
             <div className>15</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,9 +118,9 @@ const Footer = ({ isClassicView, setIsClassicView }) => {
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
             </svg>
-          </div>
-          <span>Round # 214671598</span>
-          <span className="flex gap-1 items-center">Ball by Ball Cricket</span>
+          </div> */}
+          <span>Round # ${data?.roundId}</span>
+          <span className="flex gap-1 items-center">{data?.eventName}</span>
         </div>
       </div>
       <div

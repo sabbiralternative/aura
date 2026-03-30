@@ -9,11 +9,19 @@ import HowToPlay from "./HowToPlay";
 import Settings from "./Settings";
 import MyBets from "./MyBets";
 import MoreGames from "./MoreGames";
+import { useGetEventDetailsQuery } from "../../../redux/features/events/events";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SevenUpDown = () => {
   const [modal, setModal] = useState({ name: "" });
-  const [showBetSlip, setShowBetSlip] = useState(false);
+  const { placeBetValues } = useSelector((state) => state?.event);
   const [isClassicView, setIsClassicView] = useState(true);
+  const { eventTypeId, eventId } = useParams();
+  const { data } = useGetEventDetailsQuery(
+    { eventTypeId, eventId },
+    { pollingInterval: 1000 },
+  );
 
   return (
     <Fragment>
@@ -30,18 +38,19 @@ const SevenUpDown = () => {
           id="card-games-container"
           className="__className_575e37 relative flex  flex-col w-full h-dvh overflow-y-auto scrollbar-none"
         >
-          <GameContainer setModal={setModal} />
+          <GameContainer firstEvent={data?.result?.[0]} setModal={setModal} />
           {isClassicView ? (
-            <ClassicBetOptions setShowBetSlip={setShowBetSlip} />
+            <ClassicBetOptions data={data?.result} />
           ) : (
-            <BetOptions setShowBetSlip={setShowBetSlip} />
+            <BetOptions data={data?.result} />
           )}
 
           <Footer
+            data={data?.result?.[0]}
             isClassicView={isClassicView}
             setIsClassicView={setIsClassicView}
           />
-          {showBetSlip && <BetSlip setShowBetSlip={setShowBetSlip} />}
+          {placeBetValues && <BetSlip />}
         </main>
       </main>
     </Fragment>

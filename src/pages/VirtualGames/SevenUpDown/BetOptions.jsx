@@ -1,10 +1,31 @@
-const BetOptions = ({ setShowBetSlip }) => {
+import { useDispatch } from "react-redux";
+import { Status } from "../../../const";
+import { setPlaceBetValues } from "../../../redux/features/events/eventSlice";
+
+const BetOptions = ({ data }) => {
+  const dispatch = useDispatch();
+  const handleOpenBetSLip = (game, runner, price, type) => {
+    if (game?.status !== Status.OPEN) return;
+    const payload = {
+      marketId: game.marketId,
+      roundId: game.roundId,
+      name: game.name,
+      eventId: game.eventId,
+      eventName: game.eventName,
+      selection_id: runner?.id,
+      runner_name: runner?.name,
+      isback: type === "back" ? 0 : 1,
+      event_id: game?.eventId,
+      event_type_id: game?.event_type_id,
+      price,
+    };
+    dispatch(setPlaceBetValues(payload));
+  };
   return (
     <div
       id="bet-options-container"
-      className="flex overflow-y-auto relative flex-col flex-1 gap-2 px-2 py-8  min-h-[260px] scrollbar-none
-              opacity-100
-              "
+      className={`flex overflow-y-auto relative flex-col flex-1 gap-2 px-2 py-8  min-h-[260px] scrollbar-none
+               ${data?.[0]?.status === Status.OPEN ? "opacity-100" : "opacity-50"}`}
       style={{
         maskImage:
           "linear-gradient(transparent, black, black, black, black, black, black, black, black, black, black, black, transparent)",
@@ -15,8 +36,16 @@ const BetOptions = ({ setShowBetSlip }) => {
           className="grid w-full origin-bottom grid-cols-12 gap-0.5 p-1"
           style={{ scale: 1 }}
         >
+          {/* border-2 border-yellow-400 winner-animation */}
           <div
-            onClick={() => setShowBetSlip(true)}
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[0],
+                data?.[0]?.runners?.[0],
+                data?.[0]?.runners?.[0]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "rgb(101, 163, 13)",
@@ -31,7 +60,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               7Up
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              2
+              {data?.[0]?.runners?.[0]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -172,6 +201,14 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[0],
+                data?.[0]?.runners?.[1],
+                data?.[0]?.runners?.[1]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "rgb(37, 99, 235)",
@@ -186,7 +223,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               7
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              11.5
+              {data?.[0]?.runners?.[1]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -327,7 +364,15 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-yellow-400 winner-animation "
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[0],
+                data?.[0]?.runners?.[2],
+                data?.[0]?.runners?.[2]?.back?.[0]?.price,
+                "back",
+              )
+            }
+            className="relative background-style-3 flex items-center justify-center p-3  rounded cursor-pointer  "
             style={{
               backgroundColor: "rgb(202, 138, 4)",
               gridArea: "span 1 / span 4",
@@ -341,7 +386,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               7Down
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              2
+              {data?.[0]?.runners?.[2]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -482,6 +527,14 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[1],
+                data?.[1]?.runners?.[1],
+                data?.[1]?.runners?.[1]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "gray",
@@ -496,7 +549,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Odd
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              1.8
+              {data?.[1]?.runners?.[1]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -637,7 +690,15 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-yellow-400 winner-animation "
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[1],
+                data?.[1]?.runners?.[0],
+                data?.[1]?.runners?.[0]?.back?.[0]?.price,
+                "back",
+              )
+            }
+            className="relative background-style-3 flex items-center justify-center p-3  rounded cursor-pointer  "
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 6",
@@ -651,7 +712,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Even
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              2.1
+              {data?.[1]?.runners?.[0]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -792,7 +853,15 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-yellow-400 winner-animation "
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[2],
+                data?.[2]?.runners?.[1],
+                data?.[2]?.runners?.[1]?.back?.[0]?.price,
+                "back",
+              )
+            }
+            className="relative background-style-3 flex items-center justify-center p-3  rounded cursor-pointer  "
             style={{
               backgroundColor: "rgb(39, 39, 42)",
               gridArea: "span 1 / span 6",
@@ -806,7 +875,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Black
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              1.98
+              {data?.[2]?.runners?.[1]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -947,6 +1016,14 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[2],
+                data?.[2]?.runners?.[0],
+                data?.[2]?.runners?.[0]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "rgb(190, 18, 60)",
@@ -961,7 +1038,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               Red
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              1.98
+              {data?.[2]?.runners?.[0]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -1102,7 +1179,15 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-yellow-400 winner-animation "
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[3],
+                data?.[3]?.runners?.[0],
+                data?.[3]?.runners?.[0]?.back?.[0]?.price,
+                "back",
+              )
+            }
+            className="relative background-style-3 flex items-center justify-center p-3 rounded cursor-pointer "
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 3",
@@ -1122,7 +1207,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               <span className="opacity-0">---</span>
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              3.75
+              {data?.[3]?.runners?.[0]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -1263,6 +1348,14 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[3],
+                data?.[3]?.runners?.[1],
+                data?.[3]?.runners?.[1]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "gray",
@@ -1282,7 +1375,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               </span>
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              3.75
+              {data?.[3]?.runners?.[1]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -1423,6 +1516,14 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[3],
+                data?.[3]?.runners?.[2],
+                data?.[3]?.runners?.[2]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "gray",
@@ -1443,7 +1544,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               <span className="opacity-0">♣</span>
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              3.75
+              {data?.[3]?.runners?.[2]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div
@@ -1584,6 +1685,14 @@ const BetOptions = ({ setShowBetSlip }) => {
             </div>
           </div>
           <div
+            onClick={() =>
+              handleOpenBetSLip(
+                data?.[3],
+                data?.[3]?.runners?.[3],
+                data?.[3]?.runners?.[3]?.back?.[0]?.price,
+                "back",
+              )
+            }
             className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
             style={{
               backgroundColor: "gray",
@@ -1603,7 +1712,7 @@ const BetOptions = ({ setShowBetSlip }) => {
               </span>
             </div>
             <span className="text-white font-medium text-[0.6rem] absolute bottom-0 left-1">
-              3.75
+              {data?.[3]?.runners?.[3]?.back?.[0]?.price}
             </span>
             <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
               <div

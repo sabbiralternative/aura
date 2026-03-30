@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalsName } from "../../../static";
 import img from "../../../assets/img";
+import Counter from "../../../components/shared/events/Counter";
+import { Status } from "../../../const";
 
-const GameContainer = ({ setModal }) => {
+const GameContainer = ({ setModal, firstEvent }) => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
@@ -243,48 +245,10 @@ const GameContainer = ({ setModal }) => {
           </svg>
         </button>
       </div>
-      <div className="flex absolute top-2 left-12 z-50 gap-1">
-        <div
-          className="relative rounded-full backdrop-blur-sm ring-[0.5px] ring-white/10 transition-all duration-1000 pointer-events-none bg-zinc-900/40"
-          style={{
-            pointerEvents: "none",
-            opacity: 1,
-            transform: "translateY(0px)",
-            width: "64px",
-            height: "64px",
-          }}
-        >
-          <svg className="w-full h-full -rotate-90">
-            <circle
-              cx={32}
-              cy={32}
-              r={26}
-              fill="transparent"
-              stroke="#ffffff10"
-              strokeWidth={6}
-            />
-            <circle
-              cx={32}
-              cy={32}
-              r={26}
-              fill="transparent"
-              stroke="#ef4444"
-              strokeWidth={6}
-              strokeDasharray="163.36281798666926"
-              strokeDashoffset={143}
-              strokeLinecap="round"
-              style={{ transition: "stroke-dashoffset 1s linear" }}
-            />
-          </svg>
-          <div className="flex absolute top-0 left-0 justify-center items-center w-full h-full">
-            <div
-              className="font-semibold text-white"
-              style={{ fontSize: "26px" }}
-            >
-              3
-            </div>
-          </div>
-        </div>
+      <div className="flex absolute top-12 left-16 z-50 gap-1">
+        {firstEvent?.status !== Status.OPEN && (
+          <Counter firstEvent={firstEvent} />
+        )}
       </div>
       <div className="flex absolute top-0 right-0 z-50 gap-1">
         <div className="relative flex flex-col items-end gap-0.5 pt-2 pb-1">

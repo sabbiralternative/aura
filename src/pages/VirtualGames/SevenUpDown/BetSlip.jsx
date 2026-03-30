@@ -1,12 +1,22 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCloseModalClickOutside from "../../../hooks/closeModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setPlaceBetValues } from "../../../redux/features/events/eventSlice";
+import { useOrderMutation } from "../../../redux/features/events/events";
+import { setBalance } from "../../../redux/features/auth/authSlice";
+import toast from "react-hot-toast";
 
-const BetSlip = ({ setShowBetSlip }) => {
+const BetSlip = () => {
+  const [timer, setTimer] = useState(60);
+  const [addOrder] = useOrderMutation();
+  const { balance } = useSelector((state) => state?.auth);
+  const dispatch = useDispatch();
+  const { placeBetValues } = useSelector((state) => state?.event);
   const [stake, setStake] = useState(null);
   const ref = useRef();
 
   useCloseModalClickOutside(ref, () => {
-    setShowBetSlip(false);
+    dispatch(setPlaceBetValues(null));
   });
 
   const handleChangeStake = (stake) => {
@@ -18,6 +28,57 @@ const BetSlip = ({ setShowBetSlip }) => {
     }
   };
 
+  const handlePlaceBet = async () => {
+    const payload = [
+      {
+        roundId: placeBetValues?.roundId,
+        name: placeBetValues?.name,
+        eventId: placeBetValues?.eventId,
+        eventName: placeBetValues?.eventName,
+        marketId: placeBetValues?.marketId,
+        selection_id: placeBetValues?.selection_id,
+        runner_name: placeBetValues?.runner_name,
+        stake,
+        isback: placeBetValues?.isback,
+        price: placeBetValues?.price,
+      },
+    ];
+
+    const res = await addOrder(payload).unwrap();
+
+    if (res?.success) {
+      const totalBets = [
+        {
+          selection_id: payload.selection_id,
+          price: payload?.price,
+          eventId: payload?.eventId,
+          marketId: payload?.marketId,
+          name: payload?.name,
+          stake: payload?.stake,
+        },
+      ];
+
+      localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
+      dispatch(setBalance(balance - parseFloat(stake)));
+      toast.success(res?.Message);
+      dispatch(setPlaceBetValues(null));
+    } else {
+      toast.error(res?.Message || "Something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    if (timer > 0) {
+      setTimeout(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    }
+
+    if (timer === 0) {
+      dispatch(setPlaceBetValues(null));
+    }
+  }, [timer, dispatch]);
+
   return (
     <div
       className="scale-y-100 h-screen fixed origin-bottom flex   flex-col items-center justify-end   bottom-0   w-full  max-w-[430px]  transition-all ease-in-out bg-black/50"
@@ -25,16 +86,19 @@ const BetSlip = ({ setShowBetSlip }) => {
     >
       <div
         ref={ref}
-        className="__className_575e37 relative flex modal-slide-up via-zinc-900 to-zinc-900 bg-gradient-to-b flex-col w-full rounded-2xl border-zinc-800 border gap-0 text-white from-blue-800 "
+        className={`__className_575e37 relative flex modal-slide-up via-zinc-900 to-zinc-900 bg-gradient-to-b flex-col w-full rounded-2xl border-zinc-800 border gap-0 text-white  ${placeBetValues?.isback === 0 ? "from-blue-800" : "bg-rose-900"}`}
       >
         <span className="absolute top-0 left-1/2 text-2xl font-semibold -translate-x-1/2 -translate-y-full">
-          00:07
+          00:{timer < 10 ? `0${timer}` : timer}
         </span>
         <div className="flex flex-col gap-1 px-3 pt-2 w-full">
           <div className="flex flex-col gap-1 p-1">
-            <span className="text-xl font-semibold leading-none">0 Runs</span>
+            <span className="text-xl font-semibold leading-none">
+              {" "}
+              {placeBetValues?.eventName}
+            </span>
             <span className="text-sm font-light leading-none opacity-50">
-              Bookmaker 1
+              {placeBetValues?.name}
             </span>
           </div>
           <div className="flex justify-between items-center w-full">
@@ -72,13 +136,13 @@ const BetSlip = ({ setShowBetSlip }) => {
               <span className="text-[0.6rem] text-white/50">Odds</span>
               <span className="text-sm">
                 <span className="flex flex-col gap-1">
-                  <span className>3.10</span>
+                  <span className>{placeBetValues?.price}</span>
                 </span>
               </span>
             </div>
             <div className="flex flex-col px-2 pb-1 pt-1.5 leading-none border rounded-lg border-white/5 bg-white/10">
               <span className="text-[0.6rem] text-white/50">Balance</span>
-              <span className="text-sm">2101.92 FTN </span>
+              <span className="text-sm">{balance?.toFixed(2)} INR </span>
             </div>
           </div>
           <div className="flex flex-col px-2 pb-1 pt-1.5 group transition-all duration-300 border rounded-lg focus-within:border-white/50 bg-white/10 border-white/5">
@@ -187,9 +251,11 @@ const BetSlip = ({ setShowBetSlip }) => {
           </div>
         </div>
         <div className="flex gap-1 p-2 w-full border-t border-zinc-800">
-          <button className="w-full button buttonInfo">Place Bet</button>
+          <button onClick={handlePlaceBet} className="w-full button buttonInfo">
+            Place Bet
+          </button>
           <button
-            onClick={() => setShowBetSlip(false)}
+            onClick={() => dispatch(setPlaceBetValues(null))}
             className="buttonOutlined button w-fit"
           >
             <svg
