@@ -46,7 +46,7 @@ const SevenUpDown = () => {
           )}
 
           <Footer
-            data={data?.result?.[0]}
+            firstEvent={data?.result?.[0]}
             isClassicView={isClassicView}
             setIsClassicView={setIsClassicView}
           />

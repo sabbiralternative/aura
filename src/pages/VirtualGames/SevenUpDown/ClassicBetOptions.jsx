@@ -50,11 +50,15 @@ const ClassicBetOptions = ({ data }) => {
               return (
                 <div
                   key={runner?.id}
-                  className="flex relative overflow-hidden items-center transition-all duration-500 border justify-between w-full gap-1 p-1 rounded-xl bg-black/20 border-transparent"
+                  className={`flex relative overflow-hidden items-center transition-all duration-500 border justify-between w-full gap-1 p-1 rounded-xl  ${runner?.status === Status.WINNER ? "border-yellow-500" : "bg-black/20"} border-transparent`}
                 >
                   <div
-                    className="absolute flex items-center origin-center justify-center z-50 p-0.5 text-yellow-500 transition-all duration-500 -translate-x-1/2 -translate-y-1/2 border border-yellow-500 rounded-full left-3/4 top-1/2 bg-yellow-500/10"
-                    style={{ pointerEvents: "none", opacity: 0, scale: "0.5" }}
+                    className="absolute flex items-center origin-center justify-center z-50 p-0.5 text-yellow-500 transition-all duration-500 -translate-x-1/2 -translate-y-1/2 border border-yellow-500 rounded-full left-[72%] lg:left-[73%] top-[35%] bg-yellow-500/10"
+                    style={{
+                      pointerEvents: "none",
+                      opacity: runner?.status === Status.WINNER ? 1 : 0,
+                      scale: "0.5",
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +70,7 @@ const ClassicBetOptions = ({ data }) => {
                       strokeWidth={2}
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="w-6 h-6"
+                      className="w-10 h-10"
                     >
                       <path
                         d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"

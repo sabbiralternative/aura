@@ -60,10 +60,10 @@ const BetSlip = () => {
 
       localStorage.setItem("totalBetPlace", JSON.stringify(totalBets));
       dispatch(setBalance(balance - parseFloat(stake)));
-      toast.success(res?.Message);
+      toast.success(res?.result?.message);
       dispatch(setPlaceBetValues(null));
     } else {
-      toast.error(res?.Message || "Something went wrong");
+      toast.error(res?.result?.message || "Something went wrong");
     }
   };
 
@@ -184,54 +184,20 @@ const BetSlip = () => {
             </span>
           </div>
           <div className="grid grid-cols-6 gap-1 w-full">
-            <button
-              onClick={() => handleChangeStake(1)}
-              value={1}
-              className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
-              style={{ gridColumn: "span 2 / span 2" }}
-            >
-              +1
-            </button>
-            <button
-              onClick={() => handleChangeStake(2)}
-              value={2}
-              className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
-              style={{ gridColumn: "span 2 / span 2" }}
-            >
-              +2
-            </button>
-            <button
-              onClick={() => handleChangeStake(5)}
-              value={5}
-              className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
-              style={{ gridColumn: "span 2 / span 2" }}
-            >
-              +5
-            </button>
-            <button
-              onClick={() => handleChangeStake(10)}
-              value={10}
-              className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
-              style={{ gridColumn: "span 2 / span 2" }}
-            >
-              +10
-            </button>
-            <button
-              onClick={() => handleChangeStake(50)}
-              value={50}
-              className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
-              style={{ gridColumn: "span 2 / span 2" }}
-            >
-              +50
-            </button>
-            <button
-              onClick={() => handleChangeStake(100)}
-              value={100}
-              className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
-              style={{ gridColumn: "span 2 / span 2" }}
-            >
-              +100
-            </button>
+            {[1, 2, 5, 10, 50, 100].map((item) => {
+              return (
+                <button
+                  key={item}
+                  onClick={() => handleChangeStake(item)}
+                  value={1}
+                  className="flex items-center justify-center px-3 py-2 text-sm transition-all duration-300 lg:hover:border-white/50 border rounded-lg active:scale-95 bg-white/10 border-white/5"
+                  style={{ gridColumn: "span 2 / span 2" }}
+                >
+                  +{item}
+                </button>
+              );
+            })}
+
             <button
               onClick={() => setStake(null)}
               value

@@ -46,7 +46,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[0]?.runners?.[0]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "rgb(101, 163, 13)",
               gridArea: "span 1 / span 4",
@@ -209,7 +209,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[0]?.runners?.[1]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "rgb(37, 99, 235)",
               gridArea: "span 1 / span 4",
@@ -372,7 +372,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3  rounded cursor-pointer  "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[0]?.runners?.[2]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "rgb(202, 138, 4)",
               gridArea: "span 1 / span 4",
@@ -535,7 +535,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[1]?.runners?.[1]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 6",
@@ -698,11 +698,11 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3  rounded cursor-pointer  "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[1]?.runners?.[0]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 6",
-              boxShadow: "rgb(250, 204, 21) 0px 0px 6px",
+              // boxShadow: "rgb(250, 204, 21) 0px 0px 6px",
             }}
           >
             <div
@@ -861,11 +861,11 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3  rounded cursor-pointer  "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[2]?.runners?.[1]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "rgb(39, 39, 42)",
               gridArea: "span 1 / span 6",
-              boxShadow: "rgb(250, 204, 21) 0px 0px 6px",
+              // boxShadow: "rgb(250, 204, 21) 0px 0px 6px",
             }}
           >
             <div
@@ -1024,7 +1024,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[2]?.runners?.[0]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "rgb(190, 18, 60)",
               gridArea: "span 1 / span 6",
@@ -1187,7 +1187,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 rounded cursor-pointer "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[3]?.runners?.[0]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 3",
@@ -1356,7 +1356,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[3]?.runners?.[1]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 3",
@@ -1524,7 +1524,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[2]?.runners?.[2]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 3",
@@ -1693,7 +1693,7 @@ const BetOptions = ({ data }) => {
                 "back",
               )
             }
-            className="relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer border-white/10 "
+            className={`relative background-style-3 flex items-center justify-center p-3 border-2 rounded cursor-pointer  ${data?.[3]?.runners?.[3]?.status === Status.WINNER ? "border-yellow-400" : "border-white/10"}`}
             style={{
               backgroundColor: "gray",
               gridArea: "span 1 / span 3",
