@@ -88,7 +88,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="tabler-icon tabler-icon-circle-filled"
-                    style={{ color: "rgb(37, 99, 235)" }}
+                    style={{ color: "rgb(59, 130, 246)" }}
                   >
                     <path
                       d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
@@ -96,8 +96,8 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                       strokeWidth={0}
                     />
                   </svg>
-                  <span>7 -</span>
-                  <span className>4%</span>
+                  <span>AAA -</span>
+                  <span className>24%</span>
                 </div>
                 <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
                   <svg
@@ -111,7 +111,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="tabler-icon tabler-icon-circle-filled"
-                    style={{ color: "rgb(202, 138, 4)" }}
+                    style={{ color: "rgb(249, 115, 22)" }}
                   >
                     <path
                       d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
@@ -119,8 +119,77 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                       strokeWidth={0}
                     />
                   </svg>
-                  <span>7Down -</span>
-                  <span className>40%</span>
+                  <span>Ghulam -</span>
+                  <span className>12%</span>
+                </div>
+                <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={16}
+                    height={16}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="tabler-icon tabler-icon-circle-filled"
+                    style={{ color: "rgb(244, 63, 94)" }}
+                  >
+                    <path
+                      d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                      fill="currentColor"
+                      strokeWidth={0}
+                    />
+                  </svg>
+                  <span>KKPK -</span>
+                  <span className>26%</span>
+                </div>
+                <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={16}
+                    height={16}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="tabler-icon tabler-icon-circle-filled"
+                    style={{ color: "rgb(99, 102, 241)" }}
+                  >
+                    <path
+                      d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                      fill="currentColor"
+                      strokeWidth={0}
+                    />
+                  </svg>
+                  <span>SBAG -</span>
+                  <span className>24%</span>
+                </div>
+                <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={16}
+                    height={16}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="tabler-icon tabler-icon-circle-filled"
+                    style={{ color: "rgb(139, 92, 246)" }}
+                  >
+                    <path
+                      d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
+                      fill="currentColor"
+                      strokeWidth={0}
+                    />
+                  </svg>
+                  <span>DV -</span>
+                  <span className>10%</span>
                 </div>
                 <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-r-full">
                   <svg
@@ -134,7 +203,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="tabler-icon tabler-icon-circle-filled"
-                    style={{ color: "rgb(101, 163, 13)" }}
+                    style={{ color: "rgb(16, 185, 129)" }}
                   >
                     <path
                       d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
@@ -142,10 +211,10 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                       strokeWidth={0}
                     />
                   </svg>
-                  <span>7Up -</span>
-                  <span className>56%</span>
+                  <span>Don -</span>
+                  <span className>4%</span>
                 </div>
-              </div>
+              </div>{" "}
             </div>
             {firstResult?.recent_winner?.map((item, index) => {
               return (
@@ -166,13 +235,19 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
             border-white/20"
                     style={{
                       backgroundColor:
-                        item?.winner === "L"
-                          ? "rgb(202, 138, 4)"
-                          : item?.winner === "7"
-                            ? "rgb(37, 99, 235)"
-                            : item.winner === "H"
-                              ? "rgb(101, 163, 13)"
-                              : "",
+                        item?.winner === "A"
+                          ? "rgb(59, 130, 246)"
+                          : item?.winner === "G"
+                            ? "rgb(249, 115, 22)"
+                            : item.winner === "K"
+                              ? "rgb(244, 63, 94)"
+                              : item.winner === "S"
+                                ? "rgb(99, 102, 241)"
+                                : item.winner === "D"
+                                  ? "rgb(139, 92, 246)"
+                                  : item.winner === "DON"
+                                    ? "rgb(16, 185, 129)"
+                                    : "",
                     }}
                   >
                     <span className="text-xs whitespace-nowrap text-white/50">

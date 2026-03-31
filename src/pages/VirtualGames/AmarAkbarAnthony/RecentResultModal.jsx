@@ -88,7 +88,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="tabler-icon tabler-icon-circle-filled"
-                    style={{ color: "rgb(37, 99, 235)" }}
+                    style={{ color: "rgb(14, 165, 233)" }}
                   >
                     <path
                       d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
@@ -96,7 +96,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                       strokeWidth={0}
                     />
                   </svg>
-                  <span>7 -</span>
+                  <span>AMAR -</span>
                   <span className>4%</span>
                 </div>
                 <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white ">
@@ -111,7 +111,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="tabler-icon tabler-icon-circle-filled"
-                    style={{ color: "rgb(202, 138, 4)" }}
+                    style={{ color: "rgb(59, 130, 246)" }}
                   >
                     <path
                       d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
@@ -119,7 +119,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                       strokeWidth={0}
                     />
                   </svg>
-                  <span>7Down -</span>
+                  <span>AKBAR -</span>
                   <span className>40%</span>
                 </div>
                 <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-r-full">
@@ -134,7 +134,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="tabler-icon tabler-icon-circle-filled"
-                    style={{ color: "rgb(101, 163, 13)" }}
+                    style={{ color: "rgb(99, 102, 241)" }}
                   >
                     <path
                       d="M7 3.34a10 10 0 1 1 -4.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 4.995 -8.336z"
@@ -142,7 +142,7 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
                       strokeWidth={0}
                     />
                   </svg>
-                  <span>7Up -</span>
+                  <span>ANTHONY -</span>
                   <span className>56%</span>
                 </div>
               </div>
@@ -166,12 +166,12 @@ const RecentResultModal = ({ setShowRecentResultModal, firstResult }) => {
             border-white/20"
                     style={{
                       backgroundColor:
-                        item?.winner === "L"
-                          ? "rgb(202, 138, 4)"
-                          : item?.winner === "7"
-                            ? "rgb(37, 99, 235)"
-                            : item.winner === "H"
-                              ? "rgb(101, 163, 13)"
+                        item?.winner === "A"
+                          ? "rgb(14, 165, 233)"
+                          : item?.winner === "B"
+                            ? "rgb(59, 130, 246)"
+                            : item.winner === "C"
+                              ? "rgb(99, 102, 241)"
                               : "",
                     }}
                   >
