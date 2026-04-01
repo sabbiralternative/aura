@@ -22,6 +22,7 @@ const ClassicBetOptions = ({ data }) => {
     };
     dispatch(setPlaceBetValues(payload));
   };
+
   return (
     <div
       id="bet-options-container"
@@ -33,6 +34,7 @@ const ClassicBetOptions = ({ data }) => {
       }}
     >
       {data?.map((game, index) => {
+        if (!game?.runners) return;
         return (
           <div
             key={index}
