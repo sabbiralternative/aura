@@ -49,86 +49,91 @@ const GameContainer = ({ firstEvent }) => {
             >
               <div
                 style={{
-                  width: "fit-content",
-                  minWidth: "fit-content",
+                  width: "100%",
+                  margin: "0 auto",
                   transform: "scale(1)",
                 }}
               >
-                <div className="z-50 grid grid-cols-6 gap-1 ">
-                  {playeraCard &&
-                    playeraCard?.map((card) => (
-                      <div
-                        key={card}
-                        className="flex flex-col bg-gradient-to-t to-transparent items-center overflow-hidden rounded from-rose-500"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={24}
-                          height={24}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="w-4 h-4 text-[#ffff29]"
-                          style={{ opacity: 0 }}
+                <div className="z-50 grid grid-cols-6 gap-1 w-full px-5">
+                  <div className="col-span-3 flex items-start gap-x-0.5 w-full">
+                    {playeraCard &&
+                      playeraCard?.map((card) => (
+                        <div
+                          key={card}
+                          className="flex flex-col bg-gradient-to-t to-transparent items-start overflow-hidden rounded from-rose-500"
                         >
-                          <path
-                            d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
-                            fill="currentColor"
-                            strokeWidth={0}
-                          />
-                        </svg>
-                        <div className="p-1">
-                          <img
-                            className="h-[50px]"
-                            src={`/cards/${card}.jpg`}
-                            alt=""
-                          />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={24}
+                            height={24}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="w-4 h-4 text-[#ffff29]"
+                            style={{ opacity: 0 }}
+                          >
+                            <path
+                              d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
+                              fill="currentColor"
+                              strokeWidth={0}
+                            />
+                          </svg>
+                          <div className="p-1">
+                            <img
+                              className="h-[50px]"
+                              src={`/cards/${card}.jpg`}
+                              alt=""
+                            />
+                          </div>
+                          <div className="flex justify-center gap-1 px-1.5 text-[0.6rem] font-medium lg:text-sm w-full text-white text-white">
+                            {card}
+                          </div>
                         </div>
-                        <div className="flex justify-center gap-1 px-1.5 text-[0.6rem] font-medium lg:text-sm w-full text-white text-white">
-                          {card}
-                        </div>
-                      </div>
-                    ))}
-                  {playerbCard &&
-                    playerbCard?.map((card) => (
-                      <div
-                        key={card}
-                        className="flex flex-col bg-gradient-to-t to-transparent items-center overflow-hidden rounded from-orange-500"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={24}
-                          height={24}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="w-4 h-4 text-[#ffff29]"
-                          style={{ opacity: 0 }}
+                      ))}
+                  </div>
+
+                  <div className="col-span-3 flex items-start gap-x-0.5 w-full">
+                    {playerbCard &&
+                      playerbCard?.map((card) => (
+                        <div
+                          key={card}
+                          className="flex flex-col bg-gradient-to-t to-transparent items-center overflow-hidden rounded from-orange-500"
                         >
-                          <path
-                            d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
-                            fill="currentColor"
-                            strokeWidth={0}
-                          />
-                        </svg>
-                        <div className="p-1">
-                          <img
-                            className="h-[50px]"
-                            src={`/cards/${card}.jpg`}
-                            alt=""
-                          />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={24}
+                            height={24}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="w-4 h-4 text-[#ffff29]"
+                            style={{ opacity: 0 }}
+                          >
+                            <path
+                              d="M17 3a1 1 0 0 1 .993 .883l.007 .117v2.17a3 3 0 1 1 0 5.659v.171a6.002 6.002 0 0 1 -5 5.917v2.083h3a1 1 0 0 1 .117 1.993l-.117 .007h-8a1 1 0 0 1 -.117 -1.993l.117 -.007h3v-2.083a6.002 6.002 0 0 1 -4.996 -5.692l-.004 -.225v-.171a3 3 0 0 1 -3.996 -2.653l-.003 -.176l.005 -.176a3 3 0 0 1 3.995 -2.654l-.001 -2.17a1 1 0 0 1 1 -1h10zm-12 5a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm14 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
+                              fill="currentColor"
+                              strokeWidth={0}
+                            />
+                          </svg>
+                          <div className="p-1">
+                            <img
+                              className="h-[50px]"
+                              src={`/cards/${card}.jpg`}
+                              alt=""
+                            />
+                          </div>
+                          <div className="flex justify-center gap-1 px-1.5 text-[0.6rem] font-medium lg:text-sm w-full text-white text-white">
+                            {card}
+                          </div>
                         </div>
-                        <div className="flex justify-center gap-1 px-1.5 text-[0.6rem] font-medium lg:text-sm w-full text-white text-white">
-                          {card}
-                        </div>
-                      </div>
-                    ))}
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
