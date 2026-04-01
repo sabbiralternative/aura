@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Counter from "../../../components/shared/events/Counter";
 import { Status } from "../../../const";
 import Menu from "../../../components/modules/Virtual/Menu";
+import img from "../../../assets/img";
 
 const GameContainer = ({ firstEvent }) => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const GameContainer = ({ firstEvent }) => {
         }}
       >
         <div style={{ width: "100%", height: "100%", position: "relative" }}>
-          {/* <img
+          <img
             alt="casino table"
             loading="lazy"
             width={1000}
@@ -27,10 +28,10 @@ const GameContainer = ({ firstEvent }) => {
             decoding="async"
             data-nimg={1}
             className="object-cover absolute inset-0 w-full h-full"
-            srcSet={img.dragon_tiger}
-            src={img.dragon_tiger}
+            srcSet={img.lucky7}
+            src={img.lucky7}
             style={{ color: "transparent" }}
-          /> */}
+          />
           <div
             style={{
               position: "relative",
