@@ -36,7 +36,7 @@ const Footer = ({ isClassicView, setIsClassicView, firstEvent }) => {
           <RecentResultButton
             setShowRecentResultModal={setShowRecentResultModal}
           />
-          <div className="flex flex-grow items-center min-w-fit">
+          {/* <div className="flex flex-grow items-center min-w-fit">
             <div className="flex items-center text-xs whitespace-nowrap justify-center gap-1 py-1 px-2 text-white rounded-l-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +106,7 @@ const Footer = ({ isClassicView, setIsClassicView, firstEvent }) => {
               <span>7Up -</span>
               <span className>44%</span>
             </div>
-          </div>{" "}
+          </div>{" "} */}
           <div className="flex items-center gap-0.5 pointer-events-none">
             {firstEvent?.recent_winner?.map((item, index) => {
               return (
