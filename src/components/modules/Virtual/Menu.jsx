@@ -2,8 +2,8 @@ import { Fragment, useState } from "react";
 import { ModalsName } from "../../../static";
 import HowToPlay from "./HowToPlay";
 import Settings from "./Settings";
-import MyBets from "./MyBets";
 import MoreGames from "./MoreGames";
+import MyBetsModal from "./MyBetsModal";
 
 const Menu = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -14,7 +14,7 @@ const Menu = () => {
         <HowToPlay setModal={setModal} />
       )}
       {modal?.name === ModalsName.settings && <Settings setModal={setModal} />}
-      {modal?.name === ModalsName.myBets && <MyBets setModal={setModal} />}
+      {modal?.name === ModalsName.myBets && <MyBetsModal setModal={setModal} />}
       {modal?.name === ModalsName.moreGames && (
         <MoreGames setModal={setModal} />
       )}
@@ -62,7 +62,10 @@ const Menu = () => {
             className={`absolute bottom-0 right-0 origin-right translate-y-full w-64 grid grid-cols-2  gap-0.5 p-1 bg-zinc-900/40 backdrop-blur-sm border-[0.5px] border-r-0 border-white/20 rounded-l-lg transition-all duration-300 ease-in-out  ${showMenu ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}`}
           >
             <button
-              onClick={() => setModal({ name: ModalsName.howToPlay })}
+              onClick={() => {
+                setModal({ name: ModalsName.howToPlay });
+                setShowMenu(false);
+              }}
               className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
             >
               <svg
@@ -86,7 +89,10 @@ const Menu = () => {
               </span>
             </button>
             <button
-              onClick={() => setModal({ name: ModalsName.settings })}
+              onClick={() => {
+                setModal({ name: ModalsName.settings });
+                setShowMenu(false);
+              }}
               className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
             >
               <svg
@@ -109,7 +115,10 @@ const Menu = () => {
               </span>
             </button>
             <button
-              onClick={() => setModal({ name: ModalsName.myBets })}
+              onClick={() => {
+                setModal({ name: ModalsName.myBets });
+                setShowMenu(false);
+              }}
               className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
             >
               <svg
@@ -131,7 +140,10 @@ const Menu = () => {
               </span>
             </button>
             <button
-              onClick={() => setModal({ name: ModalsName.moreGames })}
+              onClick={() => {
+                setModal({ name: ModalsName.moreGames });
+                setShowMenu(false);
+              }}
               className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
             >
               <svg
