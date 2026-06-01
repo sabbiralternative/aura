@@ -30,12 +30,12 @@
       "format": "png"
     },
     "endpoint": {
-      "eventDetails": "https://dream11.dev/api/exchange/encrypted/odds/event",
-      "casino": "https://dream11.dev/api/aura/casino.php",
-      "auth": "https://dream11.dev/api/aura/auth.php",
-      "order": "https://dream11.dev/api/aura/order.php",
-      "pnl": "https://dream11.dev/api/aura/pnl.php",
-      "bets": "https://dream11.dev/api/aura/bets.php"
+      "eventDetails": "https://b2c.bet/api/exchange/encrypted/odds/event",
+      "casino": "https://b2c.bet/api/aura/casino.php",
+      "auth": "https://b2c.bet/api/aura/auth.php",
+      "order": "https://b2c.bet/api/aura/order.php",
+      "pnl": "https://b2c.bet/api/aura/pnl.php",
+      "bets": "https://b2c.bet/api/aura/bets.php"
     }
   },
   "success": true

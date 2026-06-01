@@ -4,8 +4,10 @@ import HowToPlay from "./HowToPlay";
 import Settings from "./Settings";
 import MoreGames from "./MoreGames";
 import MyBetsModal from "./MyBetsModal";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
+  const { lobby } = useSelector((state) => state.global);
   const [showMenu, setShowMenu] = useState(false);
   const [modal, setModal] = useState({ name: "" });
   return (
@@ -139,34 +141,36 @@ const Menu = () => {
                 My Bets
               </span>
             </button>
-            <button
-              onClick={() => {
-                setModal({ name: ModalsName.moreGames });
-                setShowMenu(false);
-              }}
-              className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-8 h-8"
+            {lobby && (
+              <button
+                onClick={() => {
+                  setModal({ name: ModalsName.moreGames });
+                  setShowMenu(false);
+                }}
+                className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
               >
-                <path d="M19 5v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z" />
-                <path d="M8 6h.01" />
-                <path d="M16 18h.01" />
-                <path d="M12 16l-3 -4l3 -4l3 4z" />
-              </svg>
-              <span className="text-xs font-medium whitespace-nowrap">
-                More Games
-              </span>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-8 h-8"
+                >
+                  <path d="M19 5v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z" />
+                  <path d="M8 6h.01" />
+                  <path d="M16 18h.01" />
+                  <path d="M12 16l-3 -4l3 -4l3 4z" />
+                </svg>
+                <span className="text-xs font-medium whitespace-nowrap">
+                  More Games
+                </span>
+              </button>
+            )}
           </div>
         </div>
       </div>

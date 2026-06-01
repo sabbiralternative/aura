@@ -14,7 +14,15 @@ const FastGames = () => {
     const formatLink = `/virtual/${casino?.slug}/${casino?.eventTypeId}/${casino?.eventId}`;
     navigate(formatLink);
   };
+  console.log(data);
 
+  const a = data?.map((item) => ({
+    title: item?.slug,
+    eventId: item?.eventId,
+    eventTypeId: item?.eventTypeId,
+  }));
+
+  console.log(a);
   return (
     <>
       {showAll ? (

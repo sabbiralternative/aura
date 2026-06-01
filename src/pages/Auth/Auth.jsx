@@ -21,9 +21,9 @@ const Auth = () => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          }
+          },
         );
-
+        console.log({ data });
         if (data?.success) {
           sessionStorage.removeItem("errorMessage");
           const result = {

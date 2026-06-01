@@ -10,7 +10,7 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
   const [showBetHistory, setShowBetHistory] = useState(false);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const { username, balance } = useSelector((state) => state.auth);
-
+  const { lobby } = useSelector((state) => state.global);
   const handleToggleFullScreen = () => {
     playClickSound();
     if (showFullScreen) {
@@ -102,30 +102,33 @@ const Setting = ({ setShowSetting, showFullScreen, setShowFullScreen }) => {
                 </div>
               </div>
               <div className=" animate__animated animate__faster overflow-y-auto p-4  h-full  grid content-start grid-cols-3 gap-1 w-full transition-transform delay-100 ease-in-out ">
-                <div
-                  onClick={() => {
-                    navigate("/");
-                    setShowSetting(false);
-                    playClickSound();
-                  }}
-                  className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    data-slot="icon"
-                    className="w-10 h-10 "
+                {lobby && (
+                  <div
+                    onClick={() => {
+                      navigate("/");
+                      setShowSetting(false);
+                      playClickSound();
+                    }}
+                    className="flex flex-col items-center gap-2 py-5 text-white transition-transform ease-in-out delay-100 rounded-lg cursor-pointer active:scale-90 bg-slate-100/20 hover:bg-slate-100/30 h-fit "
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
-                      clipRule="evenodd"
-                    ></path>
-                  </svg>
-                  <span className="text-sm font-semibold ">Lobby</span>
-                </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      data-slot="icon"
+                      className="w-10 h-10 "
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3 6a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3v2.25a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3V6ZM3 15.75a3 3 0 0 1 3-3h2.25a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-2.25Zm9.75 0a3 3 0 0 1 3-3H18a3 3 0 0 1 3 3V18a3 3 0 0 1-3 3h-2.25a3 3 0 0 1-3-3v-2.25Z"
+                        clipRule="evenodd"
+                      ></path>
+                    </svg>
+                    <span className="text-sm font-semibold ">Lobby</span>
+                  </div>
+                )}
+
                 <div
                   onClick={() => {
                     playClickSound();

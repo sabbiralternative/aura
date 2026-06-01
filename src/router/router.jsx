@@ -18,7 +18,7 @@ import Roulette from "../pages/Roulette/Roulette";
 import Sicbo from "../pages/Sicbo/Sicbo";
 import Matka from "../pages/Matka/Matka";
 import Poker2020 from "../pages/Poker2020/Poker";
-import Auth from "../pages/Auth/Auth";
+// import Auth from "../pages/Auth/Auth";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../pages/NotFound/NotFound";
 import TeenPattiT20 from "../pages/VirtualGames/TeenPattiT20/TeenPattiT20";
@@ -162,10 +162,10 @@ export const router = createBrowserRouter(
         /*! Virtual Games end  */
       ],
     },
-    {
-      path: "/:token",
-      element: <Auth />,
-    },
+    // {
+    //   path: "/:token",
+    //   element: <Auth />,
+    // },
   ],
   {
     basename: import.meta.env.BASE_URL ?? "/",

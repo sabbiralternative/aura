@@ -29,7 +29,7 @@ const Roulette = () => {
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
-    { pollingInterval: 1000 }
+    { pollingInterval: 1000 },
   );
 
   const firstEvent = data?.result?.[0];
@@ -42,7 +42,7 @@ const Roulette = () => {
   const [stakeState, setStakeState] = useState(initialState);
 
   const isRepeatTheBet = Object.values(stakeState).find(
-    (item) => item?.selection_id && item?.show === false
+    (item) => item?.selection_id && item?.show === false,
   );
 
   const isPlaceStake = Object.values(stakeState).find((item) => item?.show);
@@ -86,7 +86,7 @@ const Roulette = () => {
                 setDouble,
                 setStakeState,
                 setAnimation,
-                firstEvent
+                firstEvent,
               )
             }
             handleUndoStake={() => handleUndoStake(setStakeState, stakeState)}

@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ModalsName } from "../../../static";
 import img from "../../../assets/img";
+import { useSelector } from "react-redux";
 
 const GameContainer = ({ setModal }) => {
+  const { lobby } = useSelector((state) => state.global);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   return (
@@ -458,23 +460,25 @@ const GameContainer = ({ setModal }) => {
         </div>
       </div>
       <div className="flex absolute top-0 left-0 z-50 flex-col gap-0.5 py-2 px-1">
-        <button onClick={() => navigate("/")} className=" iconButton">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={24}
-            height={24}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4"
-          >
-            <path d="M19 8.71l-5.333 -4.148a2.666 2.666 0 0 0 -3.274 0l-5.334 4.148a2.665 2.665 0 0 0 -1.029 2.105v7.2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7.2c0 -.823 -.38 -1.6 -1.03 -2.105" />
-            <path d="M16 15c-2.21 1.333 -5.792 1.333 -8 0" />
-          </svg>
-        </button>
+        {lobby && (
+          <button onClick={() => navigate("/")} className=" iconButton">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-4 h-4"
+            >
+              <path d="M19 8.71l-5.333 -4.148a2.666 2.666 0 0 0 -3.274 0l-5.334 4.148a2.665 2.665 0 0 0 -1.029 2.105v7.2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-7.2c0 -.823 -.38 -1.6 -1.03 -2.105" />
+              <path d="M16 15c-2.21 1.333 -5.792 1.333 -8 0" />
+            </svg>
+          </button>
+        )}
       </div>
       <div className="flex absolute top-2 left-12 z-50 gap-1">
         <div
@@ -630,31 +634,33 @@ const GameContainer = ({ setModal }) => {
                 My Bets
               </span>
             </button>
-            <button
-              onClick={() => setModal({ name: ModalsName.moreGames })}
-              className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={24}
-                height={24}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-8 h-8"
+            {lobby && (
+              <button
+                onClick={() => setModal({ name: ModalsName.moreGames })}
+                className="flex flex-col gap-1 justify-start items-center p-2 text-white rounded bg-black/50"
               >
-                <path d="M19 5v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z" />
-                <path d="M8 6h.01" />
-                <path d="M16 18h.01" />
-                <path d="M12 16l-3 -4l3 -4l3 4z" />
-              </svg>
-              <span className="text-xs font-medium whitespace-nowrap">
-                More Games
-              </span>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={24}
+                  height={24}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-8 h-8"
+                >
+                  <path d="M19 5v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z" />
+                  <path d="M8 6h.01" />
+                  <path d="M16 18h.01" />
+                  <path d="M12 16l-3 -4l3 -4l3 4z" />
+                </svg>
+                <span className="text-xs font-medium whitespace-nowrap">
+                  More Games
+                </span>
+              </button>
+            )}
           </div>
         </div>
       </div>

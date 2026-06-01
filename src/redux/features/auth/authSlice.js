@@ -11,6 +11,7 @@ const initialState = {
   currency: null,
   language: null,
   timestamp: null,
+  lobby: null,
 };
 
 export const authSlice = createSlice({
@@ -29,6 +30,7 @@ export const authSlice = createSlice({
         currency,
         language,
         timestamp,
+        lobby,
       } = payload;
       state.operatorId = operatorId;
       state.userId = userId;
@@ -40,6 +42,7 @@ export const authSlice = createSlice({
       state.currency = currency;
       state.language = language;
       state.timestamp = timestamp;
+      state.lobby = lobby;
     },
     logout: (state) => {
       localStorage.clear();
@@ -53,6 +56,7 @@ export const authSlice = createSlice({
       state.currency = null;
       state.language = null;
       state.timestamp = null;
+      state.lobby = null;
     },
     setBalance: (state, { payload }) => {
       state.balance = payload;
