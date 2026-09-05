@@ -1,36 +1,33 @@
 import { useEffect, useState } from "react";
 
-const Counter = ({ firstEvent }) => {
+const CounterCopy = ({ firstEvent }) => {
   const radius = 22;
   const circumference = 2 * Math.PI * radius;
 
   const timerDuration = firstEvent?.timerDuration;
-  // const lastUpdateTime = firstEvent?.lastUpdateTime;
-  // const utcMilliseconds = Date.now();
-  // const utcSeconds = Math.floor(utcMilliseconds / 1000);
+  const lastUpdateTime = firstEvent?.lastUpdateTime;
+  const utcMilliseconds = Date.now();
+  const utcSeconds = Math.floor(utcMilliseconds / 1000);
 
-  // const timer = timerDuration - (utcSeconds - lastUpdateTime);
-  const timer = firstEvent?.timer;
+  const timer = timerDuration - (utcSeconds - lastUpdateTime);
 
   const [strokeDashoffset, setStrokeDashoffset] = useState(0);
   const [strokeColor, setStrokeColor] = useState("#32d74b");
 
   useEffect(() => {
-    if (timer > 0) {
-      const percentage = (timer / timerDuration) * 100;
-      const offset = circumference - (percentage / 100) * circumference;
-      setStrokeDashoffset(offset);
+    const percentage = (timer / timerDuration) * 100;
+    const offset = circumference - (percentage / 100) * circumference;
+    setStrokeDashoffset(offset);
 
-      if (timer >= 7) {
-        setStrokeColor("#32d74b");
-      } else if (timer >= 5) {
-        setStrokeColor("#cc980e");
-      } else {
-        setStrokeColor("#F70000");
-      }
-      if (timer < 4 && timer > 1) {
-        new Audio("/countdown.mp3").play();
-      }
+    if (percentage >= 70) {
+      setStrokeColor("#32d74b");
+    } else if (percentage >= 50) {
+      setStrokeColor("#cc980e");
+    } else {
+      setStrokeColor("#F70000");
+    }
+    if (timer < 4 && timer > 0) {
+      new Audio("/countdown.mp3").play();
     }
   }, [timer, timerDuration, circumference]);
 
@@ -67,4 +64,4 @@ const Counter = ({ firstEvent }) => {
   );
 };
 
-export default Counter;
+export default CounterCopy;
