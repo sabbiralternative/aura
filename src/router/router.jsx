@@ -31,6 +31,7 @@ import BallByBall from "../pages/VirtualGames/BallByBall/BallByBall";
 import VirtualPoker2020 from "../pages/VirtualGames/Poker2020/Poker2020";
 import CasinoWar from "../pages/VirtualGames/CasinoWar/CasinoWar";
 import VirtualMatka from "../pages/VirtualGames/VirtualMatke/VirtualMatka";
+// import Auth from "../pages/Auth/Auth";
 
 export const router = createBrowserRouter(
   [

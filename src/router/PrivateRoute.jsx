@@ -58,9 +58,15 @@ const PrivateRoute = ({ children }) => {
             const findEvent = liveCasino.find(
               (item) => item.eventId == eventId,
             );
-            navigate(
-              `/event-details/${findEvent?.title}/1000/${findEvent?.eventId}`,
-            );
+            if (findEvent.isVirtual) {
+              navigate(
+                `/virtual/${findEvent?.title}/1000/${findEvent?.eventId}`,
+              );
+            } else {
+              navigate(
+                `/event-details/${findEvent?.title}/1000/${findEvent?.eventId}`,
+              );
+            }
           }
         } else {
           sessionStorage.setItem("errorMessage", data?.result?.message);
