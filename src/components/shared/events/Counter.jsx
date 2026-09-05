@@ -10,6 +10,9 @@ const Counter = ({ firstEvent }) => {
   const utcSeconds = Math.floor(utcMilliseconds / 1000);
 
   const timer = timerDuration - (utcSeconds - lastUpdateTime);
+  // console.log(firstEvent?.timerDuration);
+  // console.log(firstEvent?.lastUpdateTime);
+  // console.log(timer);
 
   const [strokeDashoffset, setStrokeDashoffset] = useState(0);
   const [strokeColor, setStrokeColor] = useState("#32d74b");

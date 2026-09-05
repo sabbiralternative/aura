@@ -49,7 +49,7 @@ const PrivateRoute = ({ children }) => {
 
           dispatch(setUser({ ...result }));
 
-          if (lobby) {
+          if (lobby === "true") {
             sessionStorage.setItem("lobby", lobby);
             dispatch(setLobby(true));
           }
